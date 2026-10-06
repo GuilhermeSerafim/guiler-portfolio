@@ -1,0 +1,113 @@
+REVISÃO DE CONTEÚDO - GUILHERME SERAFIM / GUILER
+Data: 06/10/2026
+
+Escopo: leitura integral e inspeção visual das duas páginas de public/GuilhermeSerafim_Fullstack.pdf; comparação com o texto de LinkedIn fornecido; alinhamento à estratégia guiler-brand-content. O PDF original foi preservado. Os fatos abaixo foram confirmados nas fontes fornecidas, sem auditoria independente das realizações ou dos números. Links foram extraídos das anotações do PDF; disponibilidade das páginas não foi verificada nesta revisão.
+
+IDENTIDADE E CONTATOS
+
+Nome no currículo: Guilherme Serafim.
+Marca pessoal: Guiler, conforme estratégia de marca.
+Apresentação sugerida no site: Guilherme Serafim / Guiler.
+Localização: São Paulo, SP.
+Atuação: desenvolvimento full stack, modernização de sistemas e IA aplicada.
+Não há base para apresentar experiência profissional como UX designer.
+
+E-mail: guilerstudies@gmail.com
+LinkedIn: https://www.linkedin.com/in/guiserafim/
+GitHub: https://github.com/GuilhermeSerafim
+Portfólio anterior: https://portifolio-guiler.vercel.app/
+GeoRisk - demonstração: https://geo-risk-front.vercel.app/
+GeoRisk - código: https://github.com/GuilhermeSerafim/geo-risk
+Play Senac - demonstração: https://play-senac.vercel.app/
+Play Senac - código: https://github.com/GuilhermeSerafim/play-senac-api
+
+BASE FACTUAL PARA O PORTFÓLIO
+
+Quipux | Desenvolvedor Full Stack Pleno | 04/2025 a 09/2025.
+- Migração de AngularJS para Angular 17+ em sistema de atendimentos governamentais.
+- Otimização de consultas e índices em back-end Spring Boot.
+- O currículo menciona 12+ endpoints REST. Isso não equivale a 12 APIs distintas.
+- Tecnologias declaradas: Java, Spring Boot, Angular, TypeScript, AngularJS, PrimeNG, Tailwind CSS e SQL.
+
+Tokio Marine | Desenvolvedor Full Stack | 08/2023 a 11/2024.
+- Reestruturação de plataforma de cobrança com .NET 7, Onion Architecture, SOLID e Dapper.
+- Otimização de stored procedures e consultas.
+- Modernização da interface com React e Material UI.
+- Tecnologias declaradas: C#, .NET 7, React, EF Core, Dapper, SQL Server, PL/SQL e Material UI.
+
+GeoRisk | Plataforma de análise de risco de alagamento.
+- O usuário e o currículo o apresentam como vencedor do Hackathon OpenAI. A estratégia de marca acrescenta o nome Devs de Impacto. Não foi fornecido nesta revisão um link independente do resultado da premiação.
+- Stack declarada: FastAPI, PostGIS, Next.js e Mapbox.
+- Dados e serviços mencionados: MapBiomas via Google Earth Engine, OpenStreetMap/Overpass e Open-Meteo Elevation API.
+- Pipeline declarado com LangChain, GPT-4o, RAG, embeddings e NumPy; classificações Baixo/Médio/Alto com justificativas.
+- Formulação segura: plataforma que reúne dados geoespaciais e IA para apoiar a análise de risco de alagamento. Uma explicação gerada não demonstra, por si só, validação da qualidade preditiva.
+
+Play Senac | Sistema de gerenciamento e agendamento de quadras.
+- Regras de prioridade, validação de participantes e bloqueio de horários.
+- Back-end Spring Boot, JPA/Hibernate e Bean Validation; front-end Angular e RxJS.
+- Há descrição de painel de disponibilidade em tempo real, mas o currículo não detalha a implementação do transporte de atualizações.
+
+Formação declarada:
+- Senac: Análise e Desenvolvimento de Sistemas, 2024 a 2026, identificado como cursando no PDF. Confirmar o status antes de publicar uma data de conclusão.
+- Etec Abdias do Nascimento: Técnico em Desenvolvimento de Sistemas, 2020 a 2022.
+- Oracle Next Education/Alura e Sementes do Brasil Tech/FIAP, 2023.
+- Inglês intermediário.
+
+AVALIAÇÃO DO CURRÍCULO
+
+O material tem uma base forte: mostra sistemas concretos, decisões de arquitetura, tecnologias e projetos acessíveis por links. A coluna única, os títulos e os links são legíveis. A extração de texto funcionou; isso não constitui uma certificação de compatibilidade com todos os sistemas de recrutamento.
+
+Prioridades de edição:
+1. Corrigir a quebra do GeoRisk. O primeiro tópico começa na página 1 e termina na página 2, que abre no meio da frase. Manter o bloco junto ou iniciar o projeto na segunda página.
+2. Enxugar os tópicos. Vários misturam contexto da empresa, ferramenta, ação, escala e resultado em três ou quatro linhas. Usar uma ação e uma evidência principal por tópico.
+3. Remover receita global e quantidade de países das empresas. Esses dados consomem espaço e não comprovam a contribuição pessoal.
+4. Conciliar os 3+ anos com as datas. Os dois vínculos listados representam aproximadamente 20 a 22 meses, conforme o critério de contagem. Outros projetos podem explicar os três anos, mas precisam ser identificados. Não atualizar o número apenas pelo tempo transcorrido desde o primeiro emprego.
+5. Separar SQL Server de PL/SQL. O primeiro é um banco e o segundo uma linguagem. Se houve trabalho nos dois ambientes, explicitar SQL Server e Oracle e associar as linguagens corretamente. Não acrescentar experiência com um banco só para corrigir a redação.
+6. Especificar o papel no GeoRisk e a composição da equipe. A redação "arquitetei e entreguei do zero" pode sugerir autoria individual de todo o produto. Destacar a contribuição efetiva e creditar o trabalho coletivo quando aplicável.
+7. Reavaliar o resumo "impacto em milhões de usuários". O porte das empresas não demonstra esse alcance direto das entregas descritas.
+8. Tratar .NET 7 e Angular 17 como tecnologias das experiências históricas. Não atualizar versões no currículo sem experiência correspondente.
+
+MÉTRICAS: O QUE ESTÁ DECLARADO E O QUE FALTA DEMONSTRAR
+
+Os números do texto do LinkedIn coincidem em grande parte com o currículo; a repetição em dois textos não é evidência independente.
+
+- Tokio Marine: ciclo de entrega -40%, tempo médio de consultas -40% e tickets de UI -20%. Para sustentar: período, comparação antes/depois, definição da métrica, abrangência e papel do autor.
+- Quipux: 12+ endpoints de aproximadamente 1.200 ms para 600 ms, renderização -30% e 40 dependências removidas. Os valores de latência são mais concretos, mas ainda precisam de cenário de medição, carga e indicação de média/percentil.
+- GeoRisk: "100x mais rápido" precisa especificar tarefa equivalente, tempos comparados e tamanho da amostra. "Redução de incerteza em até 80%" não define o que foi medido; retirar até existir uma definição demonstrável.
+- Play Senac: conflitos -70% e espera -90% precisam de dados de uso. Se vieram de testes ou simulação, dizer isso explicitamente; não apresentar como resultado operacional observado.
+
+Para a primeira versão pública, priorizar escopo, decisões e funcionamento dos projetos. Reintroduzir indicadores com contexto quando houver registros que permitam defendê-los em uma entrevista ou conversa técnica.
+
+AVALIAÇÃO DO TEXTO DO LINKEDIN
+
+"Não escrevo código. Entrego consequência." tem ritmo, mas contradiz a identidade de desenvolvedor e troca clareza por uma formulação abstrata. O melhor argumento do perfil já está nos casos concretos. Uma abertura mais coerente é "Escrevo código para resolver problemas reais." A assinatura de marca "Construo produtos com IA. Em público." também funciona quando houver continuidade visível de projetos e publicações.
+
+O texto ganha força ao ligar cada tecnologia a um problema: cobrança, manutenção de legado, latência e análise geoespacial. Evitar acumular percentuais sem contexto e apresentar o hackathon como uma prova acompanhada do projeto. Preservar a voz direta. Usar "12+ endpoints", conforme o currículo, em lugar de "12+ APIs".
+
+HEADLINE SUGERIDA
+
+Desenvolvedor Full Stack | Produtos com IA, .NET e Java | Vencedor do Hackathon OpenAI
+
+SOBRE SUGERIDO
+
+Escrevo código para resolver problemas reais.
+
+Sou Guilherme Serafim, também conhecido como Guiler. Sou desenvolvedor full stack em São Paulo, com experiência em modernização de sistemas, performance e IA aplicada.
+
+Na Tokio Marine, atuei na reestruturação de uma plataforma de cobrança com .NET, Onion Architecture e SOLID, na otimização de consultas e na modernização da interface com React. Na Quipux, trabalhei na migração de AngularJS para Angular e na otimização de endpoints REST com Spring Boot.
+
+No GeoRisk, projeto vencedor do Hackathon OpenAI, desenvolvi uma plataforma que combina dados geoespaciais e IA para apoiar a análise de risco de alagamento. O projeto conecta FastAPI, PostGIS e Next.js a um pipeline com LangChain e GPT-4o, com justificativas para as classificações apresentadas.
+
+Meu foco é construir produtos com IA e compartilhar decisões, testes e aprendizados ao longo do caminho. Gosto de entender o problema, escolher a solução e acompanhar o que muda quando ela chega às pessoas.
+
+Se você está modernizando um sistema ou construindo um produto com IA, vamos conversar: guilerstudies@gmail.com.
+
+DIREÇÃO DE CONTEÚDO PARA O SITE
+
+Hero: Guilherme Serafim. Desenvolvedor full stack construindo produtos com IA.
+Descrição: Modernização de sistemas, APIs e IA aplicada. Da arquitetura à interface, com foco no problema que o produto precisa resolver.
+Projetos em destaque: GeoRisk e Play Senac, com acesso à demonstração e ao código.
+Experiência: Quipux e Tokio Marine, com datas e contribuições específicas.
+Fotos: usar retratos reais para apresentar Guiler e imagens de eventos como contexto do trabalho. Não atribuir um evento ou prêmio a uma foto sem identificar sua origem.
+CTA principal: Vamos conversar. CTA secundário: Ver projetos.
+Evitar: título de UX designer, empresa própria ou cargo de founder não documentado, métricas ornamentais e depoimentos inventados.

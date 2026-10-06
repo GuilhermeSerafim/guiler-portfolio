@@ -1,0 +1,110 @@
+GUILER PORTFOLIO — COMPONENT RESEARCH AND SELECTION
+Verified: 2026-10-06. Official websites and upstream source repositories.
+
+DIRECTION
+Warm editorial surfaces, oversized typography, cobalt accents, portrait-led
+introduction and large project imagery. Interactions support the content and
+remain usable with keyboard, touch and reduced motion.
+
+IMPLEMENTED SOURCE ADAPTATIONS
+
+React Bits Tilted Card -> TiltedPortrait in src/components/Interactions.tsx
+https://www.reactbits.dev/components/tilted-card
+https://github.com/DavidHDev/react-bits/blob/main/src/content/Components/TiltedCard/TiltedCard.jsx
+The source uses pointer-relative rotation and Motion springs. This adaptation
+caps tilt at four degrees and scale at 1.015; removes moving caption, mobile
+warning and per-pointer React state; adds reduced-motion/coarse-pointer support.
+The portrait retains ordinary image semantics and explicit intrinsic dimensions.
+
+React Bits Magnet -> Magnetic in src/components/Interactions.tsx
+https://www.reactbits.dev/animations/magnet
+https://github.com/DavidHDev/react-bits/blob/main/src/content/Animations/Magnet/Magnet.jsx
+This adaptation retains the pointer-to-element-center attraction idea while
+using local pointer events, spring values, and a maximum five-pixel displacement.
+It does not install the original global mousemove listener per instance.
+
+Both adapted components preserve the full MIT + Commons Clause source notice
+in THIRD-PARTY-NOTICES.txt. This is not the unmodified MIT license.
+https://github.com/DavidHDev/react-bits/blob/main/LICENSE.md
+
+Reveal is original code built with motion/react: opacity plus 24px vertical
+translation, once per viewport entry, visible without motion when reduced
+motion is requested. It is not a copied library component.
+
+OTHER RESEARCHED PATTERNS — INSPIRATION, NOT COPIED COMPONENTS
+
+1. React Bits: Scroll Velocity
+https://www.reactbits.dev/text-animations/scroll-velocity
+https://github.com/DavidHDev/react-bits/blob/main/src/content/TextAnimations/ScrollVelocity/ScrollVelocity.jsx
+Useful as an editorial typographic separator. The original uses motion/react,
+useAnimationFrame, scroll velocity and duplicated text. It was not copied into
+Interactions.tsx. If a marquee is composed independently, stop it offscreen,
+respect reduced motion, and hide duplicate decorative text from screen readers.
+
+2. React Three Fiber: HTML Annotations and Floating Laptop
+https://r3f.docs.pmnd.rs/getting-started/examples
+https://pmndrs.github.io/examples/html-annotations/
+https://github.com/pmndrs/examples/tree/main/examples/html-annotations
+https://pmndrs.github.io/examples/floating-laptop/
+https://github.com/pmndrs/examples/tree/main/examples/floating-laptop
+HTML Annotations combines simple geometry with HTML labels; this is the better
+reference for a small authored 3D experiment. Floating Laptop adds a GLTF model,
+lighting environment, contact shadows and spring animation: expressive for a
+project demo but expensive as ambient decoration. Neither example is included.
+R3F and the official examples repository use MIT licenses.
+https://github.com/pmndrs/react-three-fiber/blob/master/LICENSE
+https://github.com/pmndrs/examples/blob/main/LICENSE
+React 18 requires @react-three/fiber@8; @9 pairs with React 19.
+https://github.com/pmndrs/react-three-fiber
+If added later: isolate in a lazy-loaded chunk, provide an image fallback, keep
+essential text and links in HTML, cap DPR, and render on demand where possible.
+https://r3f.docs.pmnd.rs/advanced/scaling-performance
+
+3. Uiverse: outlined fill button and lift button by cssbuttons-io
+https://uiverse.io/cssbuttons-io/slippery-jellyfish-67
+https://github.com/uiverse-io/galaxy/blob/main/Buttons/cssbuttons-io_slippery-jellyfish-67.html
+https://uiverse.io/cssbuttons-io/friendly-dragon-76
+https://github.com/uiverse-io/galaxy/blob/main/Buttons/cssbuttons-io_friendly-dragon-76.html
+The first fills an outlined button with a circular pseudo-element; the second
+raises the button and expands a fading pseudo-element. Their strongest use is
+restrained feedback on a cobalt CTA, with focus-visible parity. Source uses CSS
+only. No Uiverse source was copied into Interactions.tsx. Uiverse items use MIT;
+preserve the item's author notice if adapting its actual CSS elsewhere.
+https://uiverse.io/
+
+4. 21st.dev: Portfolio Scroll Grid by Ruixen and Project Showcase by Maxim Bortnikov
+https://21st.dev/@ruixen.ui/components/portfolio-scroll-grid
+https://21st.dev/@maxim.bort.devel/components/project-showcase
+The first places oversized sticky typography behind staggered imagery using
+CSS sticky, without JavaScript. Its composition informs the editorial direction;
+the original five-column stock-image collage is not copied. The second pairs
+stacked project images, text and navigation; its declared dependencies include
+Next and framer-motion, making it a less suitable drop-in for this Vite project.
+Both individual pages list MIT. 21st is a source registry with per-item authors
+and dependencies, not a single runtime package. No 21st source is included here.
+
+5. Aceternity UI: Direction Aware Hover and Timeline
+https://ui.aceternity.com/components/direction-aware-hover
+https://ui.aceternity.com/registry/direction-aware-hover.json
+https://ui.aceternity.com/components/timeline
+https://ui.aceternity.com/registry/timeline.json
+Directional hover offsets an image according to the pointer entry edge. It is
+a useful behavior reference for project covers. The upstream version hides
+captions until hover and uses a generic image alt, so those defaults should not
+be carried into a portfolio with essential project titles and links.
+Timeline uses sticky date labels with a scroll-progress line. It fits a compact
+career narrative but should not introduce invented dates or achievements.
+Both registries currently depend on motion. No Aceternity source was copied into
+Interactions.tsx; these are research and behavioral inspiration. Do not assume
+one MIT license across the catalog: Aceternity's published license page covers
+Pro items, while actual imported items may have their own terms.
+https://ui.aceternity.com/licence
+
+DEPENDENCY CHOICE
+Use the existing motion package for shared springs and entry transitions.
+No additional animation package is needed for the selected interactions.
+The portrait and navigation content do not depend on WebGL or pointer motion.
+Source attribution above distinguishes implemented adaptations from research;
+other independently composed app sections should not be described as installed
+components from these libraries merely because they share a visual pattern.
+
