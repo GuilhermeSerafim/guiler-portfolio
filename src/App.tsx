@@ -392,15 +392,17 @@ function App() {
                         <span key={tag}>{tag}</span>
                       ))}
                     </div>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-code"
-                      aria-label={`Código de ${project.name} no GitHub`}
-                    >
-                      <Github size={17} />
-                    </a>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="project-code"
+                        aria-label={`Código de ${project.name} no GitHub`}
+                      >
+                        <Github size={17} />
+                      </a>
+                    )}
                   </div>
                 </motion.article>
               ))}

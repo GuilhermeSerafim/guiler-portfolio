@@ -74,8 +74,8 @@ export function TiltedPortrait({ src, alt, children }: TiltedPortraitProps) {
           className="portrait-image"
           src={src}
           alt={alt}
-          width={840}
-          height={1100}
+          width={611}
+          height={1000}
           loading="eager"
           {...{ fetchpriority: "high" }}
           draggable={false}

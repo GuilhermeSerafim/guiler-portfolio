@@ -86,14 +86,16 @@ export function ProjectDialog({
             >
               Abrir projeto <ArrowUpRight size={18} />
             </a>
-            <a
-              className="text-link"
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Github size={18} /> Ver código <ArrowUpRight size={16} />
-            </a>
+            {project.github && (
+              <a
+                className="text-link"
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Github size={18} /> Ver código <ArrowUpRight size={16} />
+              </a>
+            )}
           </div>
         </div>
       )}

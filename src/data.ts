@@ -11,7 +11,7 @@ export type Project = {
   decisions: string[];
   outcome: string;
   demo: string;
-  github: string;
+  github?: string;
 };
 
 export const projects: Project[] = [
@@ -36,7 +36,6 @@ export const projects: Project[] = [
     outcome:
       "Projeto vencedor do Hackathon OpenAI. A proposta é apoiar a análise com contexto e justificativas; as classificações não substituem uma avaliação técnica do território.",
     demo: "https://geo-risk-front.vercel.app/",
-    github: "https://github.com/GuilhermeSerafim/geo-risk",
   },
   {
     id: "playsenac",
