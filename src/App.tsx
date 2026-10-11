@@ -28,7 +28,12 @@ import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
 
 const email = "guilerstudies@gmail.com";
-const filters = ["Todos", "IA aplicada", "Produto web"] as const;
+const filters = [
+  "Todos",
+  "IA aplicada",
+  "Produto web",
+  "Landing page",
+] as const;
 type Filter = (typeof filters)[number];
 
 function Asterisk({ className = "" }: { className?: string }) {
@@ -311,7 +316,9 @@ function App() {
                     onClick={() => setFilter(item)}
                   >
                     {item}
-                    {item === "Todos" && <span>02</span>}
+                    {item === "Todos" && (
+                      <span>{String(projects.length).padStart(2, "0")}</span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -329,7 +336,7 @@ function App() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: reducedMotion ? 0 : 0.25 }}
-                  className={`project-card project-${project.id}`}
+                  className={`project-card project-${project.id} ${project.id === "mesa" && visibleProjects.length > 1 ? "project-card--wide" : ""}`}
                 >
                   <button
                     className="project-cover"
@@ -356,53 +363,61 @@ function App() {
                       event.currentTarget.style.setProperty("--cover-y", "0px");
                     }}
                   >
-                    <ProjectVisual kind={project.id} />
+                    <ProjectVisual project={project} />
                     <span className="project-cover-action">
                       <ArrowUpRight size={23} />
                     </span>
                   </button>
-                  <div className="project-meta">
-                    <span className="eyebrow">{project.eyebrow}</span>
-                    {project.id === "georisk" ? (
-                      <span className="project-recognition">
-                        <Trophy size={11} /> HACKATHON OPENAI
-                      </span>
-                    ) : (
-                      <span className="eyebrow muted">02</span>
-                    )}
-                  </div>
-                  <div className="project-title-row">
-                    <h3>
-                      <button onClick={() => setSelectedProject(project)}>
-                        {project.name}
-                      </button>
-                    </h3>
-                    <button
-                      className="project-details"
-                      onClick={() => setSelectedProject(project)}
-                      aria-label={`Ver detalhes de ${project.name}`}
-                    >
-                      <ArrowUpRight size={25} strokeWidth={1.5} />
-                    </button>
-                  </div>
-                  <p className="project-description">{project.description}</p>
-                  <div className="project-bottom">
-                    <div className="tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
+                  <div className="project-information">
+                    <div className="project-meta">
+                      <span className="eyebrow">{project.eyebrow}</span>
+                      {project.id === "georisk" ? (
+                        <span className="project-recognition">
+                          <Trophy size={11} /> HACKATHON OPENAI
+                        </span>
+                      ) : (
+                        <span className="eyebrow muted">
+                          {String(
+                            projects.findIndex(
+                              (item) => item.id === project.id,
+                            ) + 1,
+                          ).padStart(2, "0")}
+                        </span>
+                      )}
                     </div>
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-code"
-                        aria-label={`Código de ${project.name} no GitHub`}
+                    <div className="project-title-row">
+                      <h3>
+                        <button onClick={() => setSelectedProject(project)}>
+                          {project.name}
+                        </button>
+                      </h3>
+                      <button
+                        className="project-details"
+                        onClick={() => setSelectedProject(project)}
+                        aria-label={`Ver detalhes de ${project.name}`}
                       >
-                        <Github size={17} />
-                      </a>
-                    )}
+                        <ArrowUpRight size={25} strokeWidth={1.5} />
+                      </button>
+                    </div>
+                    <p className="project-description">{project.description}</p>
+                    <div className="project-bottom">
+                      <div className="tags">
+                        {project.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="project-code"
+                          aria-label={`Código de ${project.name} no GitHub`}
+                        >
+                          <Github size={17} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </motion.article>
               ))}

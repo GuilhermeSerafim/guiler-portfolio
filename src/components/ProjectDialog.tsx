@@ -57,6 +57,19 @@ export function ProjectDialog({
               <span key={tag}>{tag}</span>
             ))}
           </div>
+          {project.preview && (
+            <figure className="case-preview">
+              <img
+                src={project.preview.src}
+                alt={project.preview.alt}
+                width={project.preview.width}
+                height={project.preview.height}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Captura da página publicada</figcaption>
+            </figure>
+          )}
           <section>
             <h3>O problema</h3>
             <p>{project.problem}</p>

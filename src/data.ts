@@ -1,7 +1,7 @@
 export type Project = {
-  id: "georisk" | "playsenac";
+  id: "georisk" | "playsenac" | "mesa";
   name: string;
-  category: "IA aplicada" | "Produto web";
+  category: "IA aplicada" | "Produto web" | "Landing page";
   eyebrow: string;
   title: string;
   description: string;
@@ -12,6 +12,12 @@ export type Project = {
   outcome: string;
   demo: string;
   github?: string;
+  preview?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
 };
 
 export const projects: Project[] = [
@@ -59,6 +65,34 @@ export const projects: Project[] = [
       "Uma experiência centralizada de reserva, com regras explícitas e validações que ajudam a organizar o uso das quadras.",
     demo: "https://play-senac.vercel.app/",
     github: "https://github.com/GuilhermeSerafim/play-senac-api",
+  },
+  {
+    id: "mesa",
+    name: "Mesa de Negócios",
+    category: "Landing page",
+    eyebrow: "FRONT-END / EXPERIÊNCIA COMERCIAL",
+    title: "Da proposta de valor à solicitação de vaga.",
+    description:
+      "Landing page do Grupo SEVEN / Grupo Nakamura para apresentar a metodologia e conectar visitantes ao fluxo de aplicação.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+    problem:
+      "A oferta precisava comunicar sua proposta, critérios de participação e autoridade, com um caminho claro para solicitar uma vaga em diferentes dispositivos.",
+    approach:
+      "Implementei o front-end em React e TypeScript, com Vite 6, Tailwind CSS e shadcn/ui, traduzindo a narrativa comercial em seções reutilizáveis e um fluxo consistente de solicitação de vaga.",
+    decisions: [
+      "Centralizar os CTAs em uma única ação: formulário Respondi em modal no desktop e navegação direta no mobile.",
+      "Carregar seções secundárias e o formulário sob demanda, priorizando o conteúdo inicial.",
+      "Automatizar lint, testes e build com GitHub Actions e integrar o repositório à Vercel.",
+    ],
+    outcome:
+      "Uma landing page publicada em domínio próprio, com apresentação da metodologia, fluxo de aplicação integrado e validação automatizada para apoiar a evolução do site.",
+    demo: "https://dennisnakamura.com/mesa-de-negocios",
+    preview: {
+      src: "/images/mesa-de-negocios.webp",
+      alt: "Página da Mesa de Negócios com a apresentação da metodologia, botão de solicitação de vaga e retrato de Dennis Nakamura.",
+      width: 1440,
+      height: 1000,
+    },
   },
 ];
 

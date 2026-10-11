@@ -1,8 +1,9 @@
 import { useId } from "react";
+import type { Project } from "../data";
 import "./ProjectVisual.css";
 
 type ProjectVisualProps = {
-  kind: "georisk" | "playsenac";
+  project: Project;
 };
 
 const contour =
@@ -367,6 +368,35 @@ function PlaySenacVisual() {
   );
 }
 
-export function ProjectVisual({ kind }: ProjectVisualProps) {
-  return kind === "georisk" ? <GeoRiskVisual /> : <PlaySenacVisual />;
+export function ProjectVisual({ project }: ProjectVisualProps) {
+  if (project.preview) {
+    return (
+      <div className="pv-cover pv-cover--website" aria-hidden="true">
+        <div className="pv-website-frame">
+          <div className="pv-browser-bar">
+            <span className="pv-browser-dots">
+              <i />
+              <i />
+              <i />
+            </span>
+            <span>{new URL(project.demo).hostname}</span>
+            <span>↗</span>
+          </div>
+          <img
+            className="pv-website-image"
+            src={project.preview.src}
+            alt=""
+            width={project.preview.width}
+            height={project.preview.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div className="pv-caption pv-caption--website">
+          <span className="pv-caption-square" /> INTERFACE PUBLICADA
+        </div>
+      </div>
+    );
+  }
+  return project.id === "georisk" ? <GeoRiskVisual /> : <PlaySenacVisual />;
 }
