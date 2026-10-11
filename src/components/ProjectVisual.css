@@ -491,6 +491,13 @@
   color: #495246;
 }
 
+@media (max-width: 700px) {
+  .pv-cover--geo,
+  .pv-cover--play {
+    min-height: 0;
+  }
+}
+
 @container (max-width: 430px) {
   .pv-brand {
     top: 8%;
@@ -499,17 +506,21 @@
   .pv-report {
     right: 6%;
     bottom: 15%;
-    width: 39%;
-    padding: 6% 4% 4%;
+    width: 42%;
+    padding: 5% 3.7% 3.5%;
   }
 
   .pv-report h3,
   .pv-schedule h3 {
-    font-size: 22px;
+    font-size: clamp(17px, 5.2cqw, 22px);
+  }
+
+  .pv-report-kicker {
+    font-size: clamp(5px, 1.55cqw, 6px);
   }
 
   .pv-report h3 {
-    margin-top: 14px;
+    margin-top: 10px;
   }
 
   .pv-report p {
@@ -517,39 +528,43 @@
   }
 
   .pv-report-line {
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .pv-report-footer {
-    margin-top: 9px;
+    margin-top: 7px;
     gap: 5px;
   }
 
   .pv-report-symbol {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .pv-schedule {
-    top: 24%;
+    top: 20%;
     right: 6%;
-    width: 39%;
-    padding: 5% 4% 4%;
+    width: 42%;
+    padding: 4% 3.7% 3.5%;
   }
 
   .pv-schedule h3 {
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .pv-schedule-day {
+    margin-bottom: 5px;
   }
 
   .pv-time-row {
-    min-height: 23px;
+    min-height: 19px;
     gap: 5px;
     padding: 0 7px;
   }
 
   .pv-schedule-note {
-    margin-top: 9px;
-    padding-top: 8px;
+    margin-top: 7px;
+    padding-top: 6px;
   }
 
   .pv-mesa-topline {

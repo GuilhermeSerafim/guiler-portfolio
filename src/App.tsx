@@ -300,8 +300,7 @@ function App() {
             </h2>
             <div className="work-heading-side">
               <p>
-                Problemas diferentes.
-                <br />O mesmo cuidado em cada entrega.
+                Problemas diferentes. <br />O mesmo cuidado em cada entrega.
               </p>
               <div
                 className="project-filters"
@@ -455,7 +454,7 @@ function App() {
                   <h2 id="experience-title">
                     Onde o código
                     <br />
-                    encontra o<br />
+                    encontra o <br />
                     <span>mundo real.</span>
                   </h2>
                   <p>
@@ -569,8 +568,7 @@ function App() {
             <div>
               <span className="eyebrow">MINHA CAIXA DE FERRAMENTAS</span>
               <p>
-                A tecnologia certa
-                <br />
+                A tecnologia certa <br />
                 para cada problema.
               </p>
             </div>

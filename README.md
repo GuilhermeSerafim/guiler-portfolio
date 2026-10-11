@@ -26,7 +26,7 @@ npm run dev
 - `src/styles.css`: identidade visual e layouts responsivos.
 - `src/components/Interactions.tsx`: retrato Tilted Card e CTA Magnetic adaptados do React Bits; Reveal próprio.
 - `src/components/ProjectVisual.tsx`: ilustrações vetoriais de GeoRisk, Play Senac e Mesa de Negócios, identificadas como visuais conceituais.
-- `src/components/ProjectDialog.tsx`: detalhes de projetos em diálogo nativo com navegação por teclado.
+- `src/components/ProjectDialog.tsx`: detalhes em diálogo nativo, com cabeçalho fixo durante a rolagem, navegação por teclado e leitura em tela cheia no celular.
 - `public/images/`: fotos fornecidas e captura da landing page publicada, otimizadas para WebP.
 - `public/GuilhermeSerafim_Fullstack.pdf`: currículo original para download.
 
@@ -47,3 +47,5 @@ A configuração anterior do Sites permanece em `.openai/hosting.json`, com audi
 ## Verificação
 
 Build TypeScript + Vite e navegação real com Playwright. Foram verificados filtros, detalhes dos projetos, fechamento por Escape, restauração de foco, navegação móvel, cópia do e-mail, download do PDF, carregamento das fotos, movimento reduzido e ausência de overflow horizontal em 320, 390, 768, 1024 e 1440 px. O case Mesa de Negócios também teve sua capa conceitual, link público e navegação por teclado conferidos. Capturas em `../output/playwright/`.
+
+A revisão mobile com a skill UI/UX Pro Max prioriza texto principal de 16px, alvos de toque de pelo menos 44px, filtros em duas colunas e legendas das capas visíveis. O modal reinicia a rolagem a cada abertura e mantém o fechamento acessível. A validação usa emulação de toque no Chromium, incluindo orientação horizontal, movimento reduzido e ampliação do texto; não substitui testes em aparelhos físicos.
