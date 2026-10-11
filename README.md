@@ -1,12 +1,19 @@
 # Guiler — portfólio Full Stack
 
-Portfólio de Guilherme Serafim em React, TypeScript e Vite. Projeto independente da aplicação Remotion da pasta superior.
+Portfólio de Guilherme Serafim em React, TypeScript e Vite, com projetos de IA aplicada, arquitetura de software e desenvolvimento Full Stack.
+
+**Site:** https://guiler.vercel.app/
+
+**Código:** https://github.com/GuilhermeSerafim/guiler-portfolio
 
 ## Executar
 
-```powershell
-cd C:\Users\Guiler\Desktop\wks\guiler\portfolio
-npm install
+Requer Node.js 22 e npm.
+
+```sh
+git clone https://github.com/GuilhermeSerafim/guiler-portfolio.git
+cd guiler-portfolio
+npm ci
 npm run dev
 ```
 
@@ -29,7 +36,13 @@ npm run dev
 
 ## Hospedagem
 
-Site estático configurado em `.openai/hosting.json`, com identidade Sites preservada. A audiência inicial é privada. O mesmo `dist/` pode ser hospedado em outro serviço estático. Ao mudar o domínio, atualizar canonical e Open Graph em `index.html`.
+Produção: https://guiler.vercel.app/. Projeto `guiler`, na conta `guilhermeserafims-projects`.
+
+O projeto está configurado para Vercel em `vercel.json`: framework Vite, build `npm run build` e saída `dist/`. A raiz deste repositório é a Root Directory do projeto.
+
+Depois de autenticar a conta e vincular esta pasta ao projeto correto, `npx vercel --prod --scope guilhermeserafims-projects` publica em produção. `.vercel/` e `.env*` ficam fora do Git e do upload; `.vercelignore` também exclui configurações do Sites e documentos de revisão. Canonical e Open Graph em `index.html` usam o domínio de produção.
+
+A configuração anterior do Sites permanece em `.openai/hosting.json`, com audiência inicial privada.
 
 ## Verificação
 

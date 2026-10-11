@@ -1,0 +1,11 @@
+.git/
+.vercel/
+.env*
+.openai/
+.sites-runtime/
+.playwright-cli/
+node_modules/
+dist/
+*.log
+content-review.txt
+library-research.txt
