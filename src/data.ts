@@ -73,8 +73,8 @@ export const projects: Project[] = [
     eyebrow: "FRONT-END / EXPERIÊNCIA COMERCIAL",
     title: "Da proposta de valor à solicitação de vaga.",
     description:
-      "Landing page do Grupo SEVEN / Grupo Nakamura para apresentar a metodologia e conectar visitantes ao fluxo de aplicação.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+      "Landing page do Grupo SEVEN / Grupo Nakamura para apresentar a metodologia Mesa de Negócios e conduzir interessados ao formulário de solicitação de vaga.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui"],
     problem:
       "A oferta precisava comunicar sua proposta, critérios de participação e autoridade, com um caminho claro para solicitar uma vaga em diferentes dispositivos.",
     approach:
@@ -85,7 +85,7 @@ export const projects: Project[] = [
       "Automatizar lint, testes e build com GitHub Actions e integrar o repositório à Vercel.",
     ],
     outcome:
-      "Uma landing page publicada em domínio próprio, com apresentação da metodologia, fluxo de aplicação integrado e validação automatizada para apoiar a evolução do site.",
+      "Uma landing page publicada em domínio próprio, com apresentação da metodologia, formulário de solicitação de vaga integrado e validação automatizada para apoiar a evolução do site.",
     demo: "https://dennisnakamura.com/mesa-de-negocios",
     preview: {
       src: "/images/mesa-de-negocios.webp",
