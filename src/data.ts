@@ -87,12 +87,6 @@ export const projects: Project[] = [
     outcome:
       "Uma landing page publicada em domínio próprio, com apresentação da metodologia, formulário de solicitação de vaga integrado e validação automatizada para apoiar a evolução do site.",
     demo: "https://dennisnakamura.com/mesa-de-negocios",
-    preview: {
-      src: "/images/mesa-de-negocios.webp",
-      alt: "Página da Mesa de Negócios com a apresentação da metodologia, botão de solicitação de vaga e retrato de Dennis Nakamura.",
-      width: 1440,
-      height: 1000,
-    },
   },
 ];
 

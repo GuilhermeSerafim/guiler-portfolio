@@ -300,6 +300,140 @@
   letter-spacing: 0.025em;
 }
 
+.pv-cover--mesa {
+  min-height: 0;
+  background: #1c2e23;
+  color: #eee7d0;
+}
+
+.pv-mesa-brand {
+  position: absolute;
+  top: 7%;
+  left: 6%;
+  display: flex;
+  flex-direction: column;
+  color: #efe8d3;
+  font-family: var(--display, inherit);
+  font-weight: 500;
+  line-height: 0.98;
+}
+
+.pv-mesa-brand-main {
+  font-size: clamp(32px, 7.4cqw, 52px);
+  letter-spacing: -0.06em;
+}
+
+.pv-mesa-brand-sub {
+  margin-top: 4px;
+  font-size: clamp(15px, 3.2cqw, 23px);
+  letter-spacing: -0.045em;
+}
+
+.pv-mesa-brand-sub > span {
+  color: #c3a96d;
+}
+
+.pv-mesa-topline {
+  position: absolute;
+  top: 8%;
+  right: 6%;
+  color: #bcbd9d;
+  font-size: clamp(6px, 1cqw, 8px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+.pv-mesa-paper {
+  position: absolute;
+  right: 7%;
+  top: 25%;
+  width: 34%;
+  padding: 4.6% 3.6% 3.8%;
+  color: #334632;
+  background: #f2eedf;
+  box-shadow:
+    0 22px 40px #07140b40,
+    0 2px 4px #07140b24;
+  transform: rotate(4deg);
+}
+
+.pv-mesa-paper::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #b7a16a;
+}
+
+.pv-mesa-paper-kicker {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #868363;
+  font-size: clamp(5.5px, 0.93cqw, 7px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.pv-mesa-paper h3 {
+  margin: 18px 0 0;
+  font-family: var(--display, inherit);
+  font-size: clamp(19px, 4.4cqw, 32px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+
+.pv-mesa-paper h3 > span {
+  color: #a78a49;
+}
+
+.pv-mesa-method {
+  margin-top: 20px;
+  padding-top: 13px;
+  border-top: 1px solid #d7d4bf;
+}
+
+.pv-mesa-method > span {
+  display: block;
+  color: #8a886b;
+  font-size: clamp(5.5px, 0.93cqw, 7px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+}
+
+.pv-mesa-method > p {
+  margin: 5px 0 0;
+  color: #647056;
+  font-size: clamp(7px, 1.42cqw, 10px);
+  line-height: 1.5;
+}
+
+.pv-mesa-application {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 17px;
+  color: #7f7959;
+  font-size: clamp(6px, 1.25cqw, 9px);
+  line-height: 1.3;
+}
+
+.pv-mesa-application > svg {
+  width: clamp(13px, 2.9cqw, 20px);
+  height: clamp(13px, 2.9cqw, 20px);
+}
+
+.pv-caption--mesa {
+  color: #c4c2a4;
+}
+
 .pv-cover--website {
   min-height: 0;
   background: #e3e5dc;
@@ -416,6 +550,45 @@
   .pv-schedule-note {
     margin-top: 9px;
     padding-top: 8px;
+  }
+
+  .pv-mesa-topline {
+    max-width: 37%;
+    font-size: 6px;
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  .pv-mesa-paper {
+    top: 26%;
+    width: 42%;
+    padding: 5% 3.7% 4%;
+  }
+
+  .pv-mesa-paper h3 {
+    margin-top: 10px;
+    font-size: clamp(17px, 5cqw, 21px);
+  }
+
+  .pv-mesa-paper-kicker {
+    font-size: 5px;
+    letter-spacing: 0.01em;
+  }
+
+  .pv-mesa-method {
+    margin-top: 10px;
+    padding-top: 7px;
+  }
+
+  .pv-mesa-method > p {
+    margin-top: 4px;
+    font-size: 7px;
+  }
+
+  .pv-mesa-application {
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 6.5px;
   }
 
   .pv-coordinate,

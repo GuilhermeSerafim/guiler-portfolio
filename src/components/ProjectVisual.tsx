@@ -368,7 +368,167 @@ function PlaySenacVisual() {
   );
 }
 
+function MesaVisual() {
+  const id = useId().replace(/:/g, "");
+
+  return (
+    <div className="pv-cover pv-cover--mesa" aria-hidden="true">
+      <svg
+        className="pv-art pv-mesa-art"
+        viewBox="0 0 700 460"
+        fill="none"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <radialGradient id={`${id}-mesa-light`} cx="25%" cy="62%" r="80%">
+            <stop stopColor="#384c38" />
+            <stop offset="1" stopColor="#182820" />
+          </radialGradient>
+          <linearGradient
+            id={`${id}-mesa-surface`}
+            x1="90"
+            y1="180"
+            x2="370"
+            y2="370"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#73744f" />
+            <stop offset="1" stopColor="#42533c" />
+          </linearGradient>
+          <pattern
+            id={`${id}-mesa-grid`}
+            width="36"
+            height="36"
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="1" cy="1" r=".6" fill="#d5c598" fillOpacity=".16" />
+          </pattern>
+        </defs>
+
+        <rect width="700" height="460" fill={`url(#${id}-mesa-light)`} />
+        <rect width="700" height="460" fill={`url(#${id}-mesa-grid)`} />
+        <path
+          d="M446-40C331 64 406 143 532 147S688 204 740 294M479-40C364 57 432 122 548 125S713 190 740 255M512-40C400 48 458 99 566 101S714 155 751 218"
+          stroke="#bba778"
+          strokeOpacity=".1"
+        />
+        <path
+          d="M41 153H76M58.5 135.5V170.5M634 78H657M645.5 66.5V89.5"
+          stroke="#c3b17d"
+          strokeOpacity=".6"
+        />
+
+        <g transform="rotate(-17 235 279)">
+          <ellipse cx="237" cy="294" rx="226" ry="148" fill="#102119" fillOpacity=".3" />
+
+          <g fill="#425343" stroke="#819071" strokeWidth="1">
+            <rect x="132" y="133" width="62" height="53" rx="14" />
+            <rect x="263" y="133" width="62" height="53" rx="14" />
+            <rect x="132" y="374" width="62" height="53" rx="14" />
+            <rect x="263" y="374" width="62" height="53" rx="14" />
+            <rect x="-2" y="248" width="53" height="62" rx="14" />
+            <rect x="418" y="248" width="53" height="62" rx="14" />
+          </g>
+          <g stroke="#b5b18c" strokeOpacity=".35">
+            <path d="M142 143H184M273 143H315M142 417H184M273 417H315M8 258V300M461 258V300" />
+          </g>
+
+          <ellipse cx="235" cy="290" rx="191" ry="117" fill="#17291e" />
+          <ellipse
+            cx="235"
+            cy="279"
+            rx="191"
+            ry="117"
+            fill={`url(#${id}-mesa-surface)`}
+            stroke="#b7a573"
+            strokeWidth="1.5"
+          />
+          <ellipse cx="235" cy="279" rx="182" ry="108" stroke="#d1c398" strokeOpacity=".23" />
+          <g stroke="#d1c398" strokeOpacity=".075">
+            <ellipse cx="235" cy="279" rx="172" ry="99" />
+            <ellipse cx="235" cy="279" rx="163" ry="90" />
+            <ellipse cx="235" cy="279" rx="154" ry="81" />
+          </g>
+
+          <g transform="translate(146 193) rotate(8)">
+            <rect x="2" y="3" width="35" height="45" rx="1" fill="#17291e" fillOpacity=".3" />
+            <rect width="35" height="45" rx="1" fill="#e0dbc3" />
+            <path d="M8 11H26M8 17H26M8 23H20M8 34H17" stroke="#8c9377" strokeWidth="1.2" />
+            <path d="M4 0V45" stroke="#bdaa75" />
+          </g>
+          <g transform="translate(275 192) rotate(-8)">
+            <rect x="2" y="3" width="35" height="45" rx="1" fill="#17291e" fillOpacity=".3" />
+            <rect width="35" height="45" rx="1" fill="#ddd8bf" />
+            <path d="M8 11H26M8 17H26M8 23H20M8 34H17" stroke="#8c9377" strokeWidth="1.2" />
+            <path d="M4 0V45" stroke="#bdaa75" />
+          </g>
+          <g transform="translate(153 324) rotate(-7)">
+            <rect x="2" y="3" width="35" height="45" rx="1" fill="#17291e" fillOpacity=".3" />
+            <rect width="35" height="45" rx="1" fill="#d7d3b9" />
+            <path d="M8 11H26M8 17H26M8 23H20M8 34H17" stroke="#8c9377" strokeWidth="1.2" />
+            <path d="M4 0V45" stroke="#bdaa75" />
+          </g>
+          <g transform="translate(286 319) rotate(9)">
+            <rect x="2" y="3" width="35" height="45" rx="1" fill="#17291e" fillOpacity=".3" />
+            <rect width="35" height="45" rx="1" fill="#d7d3b9" />
+            <path d="M8 11H26M8 17H26M8 23H20M8 34H17" stroke="#8c9377" strokeWidth="1.2" />
+            <path d="M4 0V45" stroke="#bdaa75" />
+          </g>
+
+          <g fill="#263a2b" stroke="#acb18a" strokeWidth="1">
+            <circle cx="126" cy="226" r="9" />
+            <circle cx="322" cy="232" r="9" />
+            <circle cx="130" cy="334" r="9" />
+            <circle cx="331" cy="334" r="9" />
+          </g>
+          <g stroke="#d9cc9b" strokeWidth="1.2">
+            <circle cx="235" cy="280" r="28" strokeOpacity=".4" />
+            <path d="m216 291 19-33 19 33h-38ZM235 258v44M216 291l38-22M254 291l-38-22" strokeOpacity=".6" />
+            <circle cx="235" cy="258" r="3" fill="#d9cc9b" />
+            <circle cx="216" cy="291" r="3" fill="#d9cc9b" />
+            <circle cx="254" cy="291" r="3" fill="#d9cc9b" />
+          </g>
+        </g>
+      </svg>
+
+      <div className="pv-mesa-brand">
+        <span className="pv-mesa-brand-main">Mesa</span>
+        <span className="pv-mesa-brand-sub">de Negócios<span>.</span></span>
+      </div>
+      <div className="pv-mesa-topline">PERSPECTIVAS QUE SE ENCONTRAM</div>
+
+      <div className="pv-mesa-paper">
+        <div className="pv-mesa-paper-kicker">
+          <span className="pv-status-dot" /> CONVERSA ESTRATÉGICA
+        </div>
+        <h3>
+          Decisões<br />
+          começam<br />
+          à mesa<span>.</span>
+        </h3>
+        <div className="pv-mesa-method">
+          <span>METODOLOGIA</span>
+          <p>Contexto. Direção. Ação.</p>
+        </div>
+        <div className="pv-mesa-application">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="4" y="3" width="16" height="18" rx="1" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
+          <span>Solicitação de vaga</span>
+        </div>
+      </div>
+
+      <div className="pv-caption pv-caption--mesa">
+        <span className="pv-caption-square" /> VISUAL CONCEITUAL
+      </div>
+    </div>
+  );
+}
+
 export function ProjectVisual({ project }: ProjectVisualProps) {
+  if (project.id === "mesa") return <MesaVisual />;
+
   if (project.preview) {
     return (
       <div className="pv-cover pv-cover--website" aria-hidden="true">

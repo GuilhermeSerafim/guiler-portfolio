@@ -25,7 +25,7 @@ npm run dev
 - `src/App.tsx`: seções, navegação, filtros e contato.
 - `src/styles.css`: identidade visual e layouts responsivos.
 - `src/components/Interactions.tsx`: retrato Tilted Card e CTA Magnetic adaptados do React Bits; Reveal próprio.
-- `src/components/ProjectVisual.tsx`: ilustrações conceituais de GeoRisk e Play Senac e captura real da Mesa de Negócios, identificadas como tal.
+- `src/components/ProjectVisual.tsx`: ilustrações vetoriais de GeoRisk, Play Senac e Mesa de Negócios, identificadas como visuais conceituais.
 - `src/components/ProjectDialog.tsx`: detalhes de projetos em diálogo nativo com navegação por teclado.
 - `public/images/`: fotos fornecidas e captura da landing page publicada, otimizadas para WebP.
 - `public/GuilhermeSerafim_Fullstack.pdf`: currículo original para download.
@@ -46,4 +46,4 @@ A configuração anterior do Sites permanece em `.openai/hosting.json`, com audi
 
 ## Verificação
 
-Build TypeScript + Vite e navegação real com Playwright. Foram verificados filtros, detalhes dos projetos, fechamento por Escape, restauração de foco, navegação móvel, cópia do e-mail, download do PDF, carregamento das fotos, movimento reduzido e ausência de overflow horizontal em 320, 390, 768, 1024 e 1440 px. O case Mesa de Negócios também teve sua captura, link público e navegação por teclado conferidos. Capturas em `../output/playwright/`.
+Build TypeScript + Vite e navegação real com Playwright. Foram verificados filtros, detalhes dos projetos, fechamento por Escape, restauração de foco, navegação móvel, cópia do e-mail, download do PDF, carregamento das fotos, movimento reduzido e ausência de overflow horizontal em 320, 390, 768, 1024 e 1440 px. O case Mesa de Negócios também teve sua capa conceitual, link público e navegação por teclado conferidos. Capturas em `../output/playwright/`.
