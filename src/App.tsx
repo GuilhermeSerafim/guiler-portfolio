@@ -18,6 +18,8 @@ import {
   Github,
   Linkedin,
   Menu,
+  Pause,
+  Play,
   Plus,
   Trophy,
   X,
@@ -50,6 +52,50 @@ function Asterisk({ className = "" }: { className?: string }) {
         strokeWidth="15"
       />
     </svg>
+  );
+}
+
+function ExpertiseStrip() {
+  const [paused, setPaused] = useState(false);
+  const specialties = ["Full Stack", "Arquitetura", "IA aplicada", "Produto"];
+
+  return (
+    <section className="expertise-strip" aria-label="Especialidades">
+      <div className="expertise-window">
+        <div className="expertise-track" data-paused={paused}>
+          {[0, 1].map((copy) => (
+            <ul
+              className="expertise-group"
+              key={copy}
+              aria-hidden={copy === 1 ? true : undefined}
+            >
+              {specialties.map((specialty) => (
+                <li className="expertise-item" key={specialty}>
+                  <span>{specialty}</span>
+                  <Asterisk />
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
+      <button
+        className="expertise-toggle"
+        type="button"
+        aria-label={
+          paused
+            ? "Retomar faixa de especialidades"
+            : "Pausar faixa de especialidades"
+        }
+        onClick={() => setPaused((value) => !value)}
+      >
+        {paused ? (
+          <Play size={16} aria-hidden="true" />
+        ) : (
+          <Pause size={16} aria-hidden="true" />
+        )}
+      </button>
+    </section>
   );
 }
 
@@ -269,19 +315,7 @@ function App() {
           </div>
         </section>
 
-        <div className="expertise-strip" aria-label="Especialidades">
-          <div>
-            <span>Full Stack</span>
-            <Asterisk />
-            <span>Arquitetura</span>
-            <Asterisk />
-            <span>IA aplicada</span>
-            <Asterisk />
-            <span>Produto</span>
-            <Asterisk />
-            <span className="strip-last">Full Stack</span>
-          </div>
-        </div>
+        <ExpertiseStrip />
 
         <section
           id="projetos"
