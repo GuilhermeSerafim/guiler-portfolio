@@ -26,6 +26,7 @@ import { projects, experience, type Project } from "./data";
 import { Magnetic, Reveal, TiltedPortrait } from "./components/Interactions";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
+import { MagneticField } from "./components/MagneticField";
 
 const email = "guilerstudies@gmail.com";
 const filters = [
@@ -81,6 +82,9 @@ function ExpertiseStrip() {
 }
 
 function App() {
+  const [showMagneticField] = useState(
+    () => new URLSearchParams(window.location.search).get("visual") !== "original",
+  );
   const [menuOpen, setMenuOpen] = useState(false);
   const menuToggle = useRef<HTMLButtonElement>(null);
   const [filter, setFilter] = useState<Filter>("Todos");
@@ -229,6 +233,7 @@ function App() {
           className="hero container"
           aria-labelledby="hero-title"
         >
+          {showMagneticField && <MagneticField />}
           <div className="hero-copy">
             <Reveal>
               <p className="eyebrow hero-eyebrow">

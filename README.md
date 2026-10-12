@@ -19,6 +19,8 @@ npm run dev
 
 `npm run build` verifica TypeScript e gera o site estático em `dist/`. `npm run preview` serve esse build localmente.
 
+O hero usa uma malha magnética de pontos que reage ao cursor e fica estática em dispositivos de toque ou com movimento reduzido. O parâmetro `?visual=original` permite comparar o layout sem o efeito. Detalhes em [docs/magnetic-field.md](docs/magnetic-field.md).
+
 ## Editar
 
 - `src/data.ts`: projetos, tecnologias, links e experiências.
