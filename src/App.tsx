@@ -93,6 +93,50 @@ function App() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const navigation = performance.getEntriesByType("navigation")[0] as
+      | PerformanceNavigationTiming
+      | undefined;
+    if (navigation?.type === "back_forward") return;
+
+    let id: string;
+    try {
+      id = decodeURIComponent(hash.slice(1));
+    } catch {
+      return;
+    }
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    let cancelled = false;
+    let frame = 0;
+    const events = ["pointerdown", "wheel", "touchstart", "keydown"] as const;
+    const cancel = () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+      events.forEach((event) => window.removeEventListener(event, cancel));
+    };
+    events.forEach((event) =>
+      window.addEventListener(event, cancel, { passive: true }),
+    );
+
+    // Native fragment navigation can run before React mounts the section.
+    // Wait for fonts to settle its position, without overriding user input.
+    void document.fonts.ready.then(() => {
+      if (cancelled) return;
+      frame = window.requestAnimationFrame(() => {
+        if (!cancelled && window.location.hash === hash) {
+          target.scrollIntoView({ behavior: "instant", block: "start" });
+        }
+        cancel();
+      });
+    });
+
+    return cancel;
+  }, []);
+
+  useEffect(() => {
     if (!menuOpen) return;
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
