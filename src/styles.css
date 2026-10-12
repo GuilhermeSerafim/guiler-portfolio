@@ -490,7 +490,6 @@ h2 {
 }
 .expertise-strip {
   --expertise-gap: 43px;
-  position: relative;
   overflow: hidden;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -498,16 +497,11 @@ h2 {
 }
 .expertise-window {
   overflow: hidden;
-  margin-right: 64px;
-  mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
 }
 .expertise-track {
   display: flex;
   width: max-content;
   animation: expertise-scroll 28s linear infinite;
-}
-.expertise-track[data-paused="true"] {
-  animation-play-state: paused;
 }
 .expertise-group {
   display: flex;
@@ -538,28 +532,6 @@ h2 {
   height: 27px;
   width: 27px;
   color: var(--blue);
-}
-.expertise-toggle {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--muted);
-  background: var(--paper);
-}
-.expertise-toggle:hover,
-.expertise-toggle:active {
-  color: var(--blue);
-  border-color: currentColor;
-}
-.expertise-toggle:focus-visible {
-  outline-offset: 2px;
 }
 @keyframes expertise-scroll {
   to {
@@ -2188,10 +2160,6 @@ h2 {
   .project-cover:hover > div:first-child {
     transform: none !important;
   }
-  .expertise-window {
-    margin-right: 0;
-    mask-image: none;
-  }
   .expertise-track {
     width: 100%;
     transform: none;
@@ -2207,8 +2175,7 @@ h2 {
   .expertise-item {
     gap: 12px;
   }
-  .expertise-group[aria-hidden="true"],
-  .expertise-toggle {
+  .expertise-group[aria-hidden="true"] {
     display: none;
   }
 }

@@ -18,8 +18,6 @@ import {
   Github,
   Linkedin,
   Menu,
-  Pause,
-  Play,
   Plus,
   Trophy,
   X,
@@ -56,13 +54,12 @@ function Asterisk({ className = "" }: { className?: string }) {
 }
 
 function ExpertiseStrip() {
-  const [paused, setPaused] = useState(false);
   const specialties = ["Full Stack", "Arquitetura", "IA aplicada", "Produto"];
 
   return (
     <section className="expertise-strip" aria-label="Especialidades">
       <div className="expertise-window">
-        <div className="expertise-track" data-paused={paused}>
+        <div className="expertise-track">
           {[0, 1].map((copy) => (
             <ul
               className="expertise-group"
@@ -79,22 +76,6 @@ function ExpertiseStrip() {
           ))}
         </div>
       </div>
-      <button
-        className="expertise-toggle"
-        type="button"
-        aria-label={
-          paused
-            ? "Retomar faixa de especialidades"
-            : "Pausar faixa de especialidades"
-        }
-        onClick={() => setPaused((value) => !value)}
-      >
-        {paused ? (
-          <Play size={16} aria-hidden="true" />
-        ) : (
-          <Pause size={16} aria-hidden="true" />
-        )}
-      </button>
     </section>
   );
 }
