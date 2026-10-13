@@ -1,5 +1,6 @@
 import { useId } from "react";
 import type { Project } from "../data";
+import { SevenToolsVisual } from "./SevenToolsVisual";
 import "./ProjectVisual.css";
 
 type ProjectVisualProps = {
@@ -527,6 +528,7 @@ function MesaVisual() {
 }
 
 export function ProjectVisual({ project }: ProjectVisualProps) {
+  if (project.id === "seven-tools") return <SevenToolsVisual />;
   if (project.id === "mesa") return <MesaVisual />;
 
   if (project.preview) {

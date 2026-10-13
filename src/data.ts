@@ -1,11 +1,12 @@
 export type Project = {
-  id: "georisk" | "playsenac" | "mesa";
+  id: "georisk" | "seven-tools" | "playsenac" | "mesa";
   name: string;
   category: "IA aplicada" | "Produto web" | "Landing page";
   eyebrow: string;
   title: string;
   description: string;
   tags: string[];
+  technologies?: string[];
   problem: string;
   approach: string;
   decisions: string[];
@@ -42,6 +43,39 @@ export const projects: Project[] = [
     outcome:
       "Projeto vencedor do Hackathon OpenAI. A proposta é apoiar a análise com contexto e justificativas; as classificações não substituem uma avaliação técnica do território.",
     demo: "https://geo-risk-front.vercel.app/",
+  },
+  {
+    id: "seven-tools",
+    name: "SEVEN Tools",
+    category: "IA aplicada",
+    eyebrow: "FULL STACK / FERRAMENTAS EMPRESARIAIS",
+    title: "IA aplicada à rotina comercial.",
+    description:
+      "Hub do ecossistema SEVEN com IA para criar propostas, diagnosticar a operação comercial e qualificar leads, em uma experiência integrada.",
+    tags: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Bun",
+      "FastAPI",
+      "Python",
+      "Docker",
+      "PostgreSQL",
+      "Alembic",
+    ],
+    problem:
+      "A operação comercial reúne tarefas que exigem contexto: elaborar propostas, identificar gargalos e priorizar oportunidades. O desafio era organizar essas ferramentas em um único ambiente para os membros do ecossistema SEVEN.",
+    approach:
+      "Desenvolvi a interface em React e TypeScript, integrada a uma API em Python com FastAPI e PostgreSQL. O hub organiza os recursos por área de negócio, com foco inicial em Comercial, e reúne ferramentas de IA em uma interface de chat com histórico persistente e acesso restrito a membros aprovados.",
+    decisions: [
+      "Compartilhar a estrutura de chat entre as ferramentas, com configurações e adaptadores próprios para cada agente.",
+      "Orquestrar a IA no backend com chamadas de ferramentas e contexto específico para criar, editar e revisar propostas ou conduzir diagnósticos.",
+      "Separar a interpretação da IA do cálculo de qualificação: o backend pontua os leads com critérios e pesos configuráveis por empresa.",
+    ],
+    outcome:
+      "Uma plataforma que reúne propostas comerciais, diagnósticos e qualificação de leads, com conversas recuperáveis e dados persistidos. A organização por áreas mantém um ponto de acesso comum para as ferramentas do ecossistema SEVEN.",
+    demo: "https://seven-tools.vercel.app/",
   },
   {
     id: "playsenac",

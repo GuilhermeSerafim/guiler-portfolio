@@ -23,11 +23,12 @@ O hero usa uma malha magnética de pontos que reage ao cursor e fica estática e
 
 ## Editar
 
-- `src/data.ts`: projetos, tecnologias, links e experiências.
+- `src/data.ts`: projetos, tecnologias, links e experiências. `tags` destaca tecnologias principais no cartão; `technologies` permite exibir a lista completa no modal.
 - `src/App.tsx`: seções, navegação, filtros e contato.
 - `src/styles.css`: identidade visual e layouts responsivos.
 - `src/components/Interactions.tsx`: retrato Tilted Card e CTA Magnetic adaptados do React Bits; Reveal próprio.
 - `src/components/ProjectVisual.tsx`: ilustrações vetoriais de GeoRisk, Play Senac e Mesa de Negócios, identificadas como visuais conceituais.
+- `src/components/SevenToolsVisual.tsx`: capa conceitual do SEVEN Tools, com as ferramentas de propostas, diagnóstico comercial e qualificação de leads conectadas ao hub.
 - `src/components/ProjectDialog.tsx`: detalhes em diálogo nativo, com cabeçalho fixo durante a rolagem, navegação por teclado e leitura em tela cheia no celular.
 - `public/images/`: fotos fornecidas e captura da landing page publicada, otimizadas para WebP.
 - `public/GuilhermeSerafim_Fullstack.pdf`: currículo original para download.

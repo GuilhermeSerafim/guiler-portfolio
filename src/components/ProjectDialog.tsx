@@ -55,7 +55,7 @@ export function ProjectDialog({
             </h2>
             <p className="case-lead">{project.title}</p>
             <div className="tags">
-              {project.tags.map((tag) => (
+              {(project.technologies ?? project.tags).map((tag) => (
                 <span key={tag}>{tag}</span>
               ))}
             </div>

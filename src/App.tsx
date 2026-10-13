@@ -391,7 +391,7 @@ function App() {
             className={`project-grid ${visibleProjects.length === 1 ? "single-project" : ""}`}
           >
             <AnimatePresence mode="popLayout" initial={false}>
-              {visibleProjects.map((project) => (
+              {visibleProjects.map((project, index) => (
                 <motion.article
                   key={project.id}
                   layout={!reducedMotion}
@@ -399,7 +399,13 @@ function App() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: reducedMotion ? 0 : 0.25 }}
-                  className={`project-card project-${project.id} ${project.id === "mesa" && visibleProjects.length > 1 ? "project-card--wide" : ""}`}
+                  className={`project-card project-${project.id} ${
+                    visibleProjects.length > 1 &&
+                    visibleProjects.length % 2 !== 0 &&
+                    index === visibleProjects.length - 1
+                      ? "project-card--wide"
+                      : ""
+                  }`}
                 >
                   <button
                     className="project-cover"

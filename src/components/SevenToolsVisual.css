@@ -1,0 +1,237 @@
+.pv-cover.pv-cover--seven {
+  min-height: 0;
+  color: #f1eee5;
+  background:
+    linear-gradient(#e9e6dd05 1px, transparent 1px),
+    linear-gradient(90deg, #e9e6dd05 1px, transparent 1px),
+    radial-gradient(ellipse at 64% 65%, #1a2a3b 0, #070d17 72%);
+  background-size: 8.5% 12%, 8.5% 12%, auto;
+}
+
+.pv-seven-brand {
+  position: absolute;
+  top: 7%;
+  left: 6%;
+  display: flex;
+  align-items: baseline;
+  gap: 0.2em;
+  font-family: var(--display, inherit);
+  font-size: clamp(25px, 6.6cqw, 46px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.pv-seven-brand-tools {
+  font-size: 0.8em;
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.pv-seven-brand-tools > span {
+  color: #ff8800;
+}
+
+.pv-seven-edition {
+  position: absolute;
+  top: 8%;
+  right: 6%;
+  padding-left: 1.6cqw;
+  border-left: 1px solid #ff8800;
+  color: #a4abb4;
+  font-family: var(--mono, monospace);
+  font-size: clamp(6px, 1.15cqw, 8px);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.65;
+}
+
+.pv-seven-system {
+  position: absolute;
+  inset: 26% 6% 13%;
+}
+
+.pv-seven-connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  stroke: #bb7641;
+  stroke-width: 1;
+}
+
+.pv-seven-connections > path {
+  vector-effect: non-scaling-stroke;
+}
+
+.pv-seven-connections .pv-seven-guide {
+  stroke: #e0e6ed;
+  stroke-opacity: 0.07;
+  stroke-dasharray: 2 5;
+}
+
+.pv-seven-junctions {
+  fill: #ff8800;
+  stroke: none;
+}
+
+.pv-seven-tool {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 34%;
+  height: 30%;
+  padding: 1.7cqw 2.2cqw 1.8cqw;
+  border: 1px solid #45505d;
+  border-radius: 2px;
+  background: #14202d;
+  box-shadow:
+    0 1.1cqw 0 -0.5cqw #0c131d,
+    0 1.1cqw 0 calc(1px - 0.5cqw) #303e4d,
+    0 2cqw 3cqw #03070d45;
+}
+
+.pv-seven-tool--proposals {
+  top: 25%;
+  left: 0;
+  transform: rotate(-4deg);
+}
+
+.pv-seven-tool--diagnosis {
+  top: 0;
+  right: 0;
+  transform: rotate(4deg);
+}
+
+.pv-seven-tool--leads {
+  top: 70%;
+  left: 10%;
+  transform: rotate(-4deg);
+}
+
+.pv-seven-tool-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: #ff9b35;
+}
+
+.pv-seven-tool-top > svg {
+  width: clamp(12px, 3cqw, 21px);
+  height: clamp(12px, 3cqw, 21px);
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pv-seven-tool-top > span {
+  padding-top: 1px;
+  color: #8894a2;
+  font-family: var(--mono, monospace);
+  font-size: clamp(6px, 1.1cqw, 8px);
+  line-height: 1;
+}
+
+.pv-seven-tool-label {
+  font-family: var(--display, inherit);
+  font-size: clamp(10.5px, 3cqw, 21px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.pv-seven-hub {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  width: 27%;
+  height: 44%;
+}
+
+.pv-seven-hub::before,
+.pv-seven-hub::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  border: 1px solid #756149;
+  border-radius: 2px;
+  background: #34332e;
+  transform: translate(1.1cqw, 1.1cqw);
+}
+
+.pv-seven-hub::after {
+  border-color: #bd9c73;
+  background: #9b8a71;
+  transform: translate(0.55cqw, 0.55cqw);
+}
+
+.pv-seven-hub-face {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6cqw 0.7cqw 1.3cqw;
+  border: 1px solid #f8f4e9;
+  border-radius: 2px;
+  background: #e9e5d9;
+  color: #101a27;
+  box-shadow: 0 2cqw 3cqw #02060b40;
+}
+
+.pv-seven-hub-title {
+  align-self: flex-start;
+  padding-left: 0.8cqw;
+  color: #6c716e;
+  font-family: var(--mono, monospace);
+  font-size: clamp(5.5px, 1cqw, 7px);
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.pv-seven-mark {
+  display: block;
+  width: 52%;
+  min-height: 0;
+  flex: 1;
+  margin: 0.5cqw 0;
+}
+
+.pv-seven-hub-foot {
+  font-family: var(--mono, monospace);
+  font-size: clamp(4px, 0.76cqw, 5.5px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pv-caption--seven {
+  color: #a9b0b8;
+}
+
+.pv-caption--seven .pv-caption-square {
+  border-color: #ff8800;
+}
+
+@container (max-width: 360px) {
+  .pv-seven-edition {
+    font-size: 5.5px;
+    letter-spacing: 0.02em;
+  }
+
+  .pv-seven-tool {
+    padding-top: 1.4cqw;
+    padding-bottom: 1.7cqw;
+  }
+
+  .pv-seven-tool-label {
+    font-size: 10.5px;
+  }
+}
