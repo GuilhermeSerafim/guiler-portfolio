@@ -1,10 +1,10 @@
 # Analytics do portfólio
 
-Estado em 13/10/2026: implementação local preparada, coleta **desativada**. Não há ID Google autorizado, publicação, propriedade configurada ou coleta real comprovada. O teste usa somente transporte fake, sem enviar dados ao Google. O hub mantém uma cópia do mesmo núcleo; alterações de contrato/política precisam ser aplicadas aos dois.
+Estado em 19/10/2026: integração publicada com `VITE_ANALYTICS_ENABLED=true` e ID público real `G-SR6CCMWW7D`. Propriedade `Guiler - Portfolio e Links` (`559695471`) configurada para os dois sites. Consentimento, eventos reais, recebimento no Tempo real, continuidade entre domínios, retirada em duas abas, remoção dos cookies GA próprios e matriz de entradas foram verificados; consulte [evidências e limites de 19/10](validation-analytics-2026-10-19.md). Os testes automatizados usam transporte simulado; a validação em produção usou o SDK real. O hub compartilha a política do núcleo, mas usa contrato v2 para links dinâmicos; preserve as diferenças ao alterar os dois clientes.
 
 ## Configuração
 
-Copie `.env.example` para uma configuração local se necessário. `VITE_ANALYTICS_ENABLED=false` e ID vazio são os padrões seguros. Ativação futura exige `true` literal, ID público válido `G-…`, hostname exato `guiler.vercel.app`, URL de entrada permitida e consentimento válido. Não colocar API secret no frontend. Localhost, previews e configurações de outro site nunca carregam a tag; não há override por query ou modo debug.
+Copie `.env.example` para uma configuração local se necessário. `VITE_ANALYTICS_ENABLED=false` e ID vazio são os padrões seguros. A ativação exige `true` literal, ID público válido `G-…`, hostname exato `guiler.vercel.app`, URL de entrada permitida e consentimento válido. Não colocar API secret no frontend. Localhost, previews e configurações de outro site nunca carregam a tag; não há override por query ou modo debug.
 
 A inicialização ocorre uma vez em `main.tsx`, fora dos efeitos React. A página e os links funcionam sem configuração, sem consentimento, com storage negado ou bloqueador. Ações antes do aceite e durante o carregamento são descartadas. A Google tag só é inserida depois do aceite; nenhum ping de modo avançado é usado.
 
@@ -37,13 +37,13 @@ Página usa origem/caminho canônicos, sem hash e sem dados livres. Referrer usa
 
 Campanhas aceitas são trios completos: `instagram/social/bio`, `linkedin/social/portfolio`, `qr/offline/palestra`. Query, pathname e hash desconhecidos bloqueiam a **ativação inteira**, preservando a URL original e a navegação. Parâmetros de redes sociais como `fbclid` podem, portanto, impedir coleta. `_gl` é preservado na navegação, limitado em tamanho/formato na entrada e omitido dos payloads manuais; esse filtro não valida identidade nem consentimento. Relaxar essas restrições exige inspeção dos payloads completos da tag real, incluindo campos automáticos. Não aplicar UTMs ao trajeto interno hub → portfólio.
 
-## Ativação futura e operação
+## Configuração e operação
 
-1. Usuário fornece ID de uma propriedade GA4 e fluxo Web. Usar o mesmo ID no hub e portfólio, fuso São Paulo, sem publicidade/Signals. Desativar toda a medição otimizada, inclusive histórico, para evitar cliques/downloads/pageviews concorrentes.
+1. ID real configurado: `G-SR6CCMWW7D`, fluxo Web `16161526766`, conta `412582095`, propriedade `559695471`. Os dois sites usam o mesmo ID, fuso São Paulo e BRL. Publicidade/Signals, medição otimizada e detecções opcionais automáticas foram desligados para evitar eventos concorrentes.
 2. Configurar cross-domain com correspondência exata de `iamguiler.vercel.app` e `guiler.vercel.app`. Preservar links nativos e `_gl`. `noreferrer` limita o referrer; a continuidade precisa de consentimento separado em ambos e validação real.
 3. Criar dimensões de evento `site_id`, `link_id`, `ui_location`, `project_id`, `contact_method`, `destination_id`. Marcar `contact_intent` como evento principal. Relatórios são intenção, não leads confirmados.
 4. Ativar env somente no ambiente de produção escolhido e executar rebuild/deploy autorizado. A configuração do painel sozinha não ativa o build.
-5. Validar rede antes/recusa (zero Google), depois do aceite (uma pageview), retirada com tag carregando, duas abas e saída/ocultação da aba. Inspecionar todos os campos de `first_visit`, `session_start`, `user_engagement` e eventos manuais, inclusive campanhas maliciosas e linker. Realtime/DebugView e travessia entre os dois hosts continuam pendentes até acesso/ID reais.
+5. Ao alterar a integração, validar rede antes/recusa (zero Google), depois do aceite (uma pageview), retirada com tag carregando, duas abas e saída/ocultação da aba. Inspecionar os eventos manuais e automáticos, incluindo campanhas e linker. A verificação real desta ativação está em [evidências de 19/10](validation-analytics-2026-10-19.md); DebugView não é habilitado automaticamente.
 6. Registrar separadamente preparado, configurado, publicado e coletando. Rollback: flag `false` + rebuild/redeploy, confirmando navegação. Não declarar coleta a partir de mocks, nem recuperar tráfego nunca medido.
 
 ## Verificação local
