@@ -27,6 +27,9 @@ import { Magnetic, Reveal, TiltedPortrait } from "./components/Interactions";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
 import { MagneticField } from "./components/MagneticField";
+import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
+import { track } from "./analytics/client";
+import type { ProjectOpenLocation } from "./analytics/events";
 
 const email = "guilerstudies@gmail.com";
 const filters = [
@@ -158,9 +161,15 @@ function App() {
     return () => window.clearTimeout(timeout);
   }, [copyStatus]);
 
+  function openProject(project: Project, uiLocation: ProjectOpenLocation) {
+    track({ name: "project_open", params: { project_id: project.id, ui_location: uiLocation } });
+    setSelectedProject(project);
+  }
+
   async function copyEmail() {
     try {
       await navigator.clipboard.writeText(email);
+      track({ name: "contact_intent", params: { contact_method: "email_copy", ui_location: "contact_copy" } });
       setCopyStatus("copied");
     } catch {
       setCopyStatus("error");
@@ -286,6 +295,7 @@ function App() {
                 <a
                   className="resume-link"
                   href="/GuilhermeSerafim_Fullstack.pdf"
+                  onClick={() => track({ name: "resume_download", params: { asset_id: "resume_fullstack", ui_location: "hero" } })}
                   download
                 >
                   Baixar currículo <Download size={17} />
@@ -409,7 +419,7 @@ function App() {
                 >
                   <button
                     className="project-cover"
-                    onClick={() => setSelectedProject(project)}
+                    onClick={() => openProject(project, "project_cover")}
                     aria-label={`Conhecer o projeto ${project.name}`}
                     onPointerEnter={(event) => {
                       if (reducedMotion || event.pointerType !== "mouse")
@@ -456,13 +466,13 @@ function App() {
                     </div>
                     <div className="project-title-row">
                       <h3>
-                        <button onClick={() => setSelectedProject(project)}>
+                        <button onClick={() => openProject(project, "project_title")}>
                           {project.name}
                         </button>
                       </h3>
                       <button
                         className="project-details"
-                        onClick={() => setSelectedProject(project)}
+                        onClick={() => openProject(project, "project_details")}
                         aria-label={`Ver detalhes de ${project.name}`}
                       >
                         <ArrowUpRight size={25} strokeWidth={1.5} />
@@ -478,6 +488,7 @@ function App() {
                       {project.github && (
                         <a
                           href={project.github}
+                          onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_card" } })}
                           target="_blank"
                           rel="noreferrer"
                           className="project-code"
@@ -497,6 +508,7 @@ function App() {
             <a
               className="text-link"
               href="https://github.com/GuilhermeSerafim"
+              onClick={() => track({ name: "link_click", params: { link_id: "github", destination_id: "github_profile", ui_location: "projects_footer" } })}
               target="_blank"
               rel="noreferrer"
             >
@@ -626,6 +638,7 @@ function App() {
               </p>
               <a
                 href="https://www.linkedin.com/in/guiserafim/"
+                onClick={() => track({ name: "link_click", params: { link_id: "linkedin", destination_id: "linkedin_profile", ui_location: "about" } })}
                 className="text-link"
                 target="_blank"
                 rel="noreferrer"
@@ -689,6 +702,7 @@ function App() {
                   <a
                     className="contact-arrow"
                     href={`mailto:${email}`}
+                    onClick={() => track({ name: "contact_intent", params: { contact_method: "email_open", ui_location: "contact_arrow" } })}
                     aria-label="Enviar um e-mail para Guilherme"
                   >
                     <ArrowUpRight strokeWidth={1} />
@@ -704,7 +718,7 @@ function App() {
                   Quero ouvir o que você está construindo.
                 </p>
                 <div className="email-row">
-                  <a href={`mailto:${email}`}>{email}</a>
+                  <a href={`mailto:${email}`} onClick={() => track({ name: "contact_intent", params: { contact_method: "email_open", ui_location: "contact_email" } })}>{email}</a>
                   <button
                     className="copy-button"
                     onClick={copyEmail}
@@ -732,6 +746,7 @@ function App() {
               <div className="contact-socials">
                 <a
                   href="https://github.com/GuilhermeSerafim"
+                  onClick={() => track({ name: "link_click", params: { link_id: "github", destination_id: "github_profile", ui_location: "contact" } })}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -739,12 +754,13 @@ function App() {
                 </a>
                 <a
                   href="https://www.linkedin.com/in/guiserafim/"
+                  onClick={() => track({ name: "link_click", params: { link_id: "linkedin", destination_id: "linkedin_profile", ui_location: "contact" } })}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <Linkedin size={17} /> LinkedIn <ArrowUpRight size={16} />
                 </a>
-                <a href="/GuilhermeSerafim_Fullstack.pdf" download>
+                <a href="/GuilhermeSerafim_Fullstack.pdf" download onClick={() => track({ name: "resume_download", params: { asset_id: "resume_fullstack", ui_location: "contact" } })}>
                   <Download size={17} /> Currículo <ArrowDown size={16} />
                 </a>
               </div>
@@ -760,6 +776,7 @@ function App() {
                 DE VOLTA AO TOPO <ArrowRight size={15} className="up-arrow" />
               </a>
             </footer>
+            <AnalyticsPreferences />
           </div>
         </section>
       </main>

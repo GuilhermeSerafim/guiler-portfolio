@@ -6,22 +6,24 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "test:analytics": "vitest run tests/analytics --maxWorkers=1"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "motion": "^12.23.24",
-    "lucide-react": "^0.468.0",
     "@fontsource-variable/bricolage-grotesque": "^5.2.8",
     "@fontsource-variable/dm-sans": "^5.2.8",
-    "@fontsource/ibm-plex-mono": "^5.2.7"
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "lucide-react": "^0.468.0",
+    "motion": "^12.23.24",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.7.0",
     "typescript": "^5.9.3",
-    "vite": "^6.4.1"
+    "vite": "^6.4.1",
+    "vitest": "4.1.11"
   }
 }

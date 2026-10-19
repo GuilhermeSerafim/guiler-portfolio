@@ -6,6 +6,10 @@ import "@fontsource-variable/dm-sans";
 import "@fontsource/ibm-plex-mono/latin-400.css";
 import App from "./App";
 import "./styles.css";
+import { initializeAnalytics } from "./analytics/client";
+import { publicConfig } from "./analytics/config";
+
+initializeAnalytics(publicConfig);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

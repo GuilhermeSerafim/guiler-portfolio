@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "../data";
+import { track } from "../analytics/client";
 
 export function ProjectDialog({
   project,
@@ -96,6 +97,7 @@ export function ProjectDialog({
               <a
                 className="button button-blue"
                 href={project.demo}
+                onClick={() => track({ name: "project_visit", params: { project_id: project.id, ui_location: "project_dialog" } })}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -105,6 +107,7 @@ export function ProjectDialog({
                 <a
                   className="text-link"
                   href={project.github}
+                  onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_dialog" } })}
                   target="_blank"
                   rel="noreferrer"
                 >

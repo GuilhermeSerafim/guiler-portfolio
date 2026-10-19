@@ -52,3 +52,9 @@ A configuração anterior do Sites permanece em `.openai/hosting.json`, com audi
 Build TypeScript + Vite e navegação real com Playwright. Foram verificados filtros, detalhes dos projetos, fechamento por Escape, restauração de foco, navegação móvel, cópia do e-mail, download do PDF, carregamento das fotos, movimento reduzido e ausência de overflow horizontal em 320, 390, 768, 1024 e 1440 px. O case Mesa de Negócios também teve sua capa conceitual, link público e navegação por teclado conferidos. Capturas em `../output/playwright/`.
 
 A revisão mobile com a skill UI/UX Pro Max prioriza texto principal de 16px, alvos de toque de pelo menos 44px, filtros em duas colunas e legendas das capas visíveis. O modal reinicia a rolagem a cada abertura e mantém o fechamento acessível. A validação usa emulação de toque no Chromium, incluindo orientação horizontal, movimento reduzido e ampliação do texto; não substitui testes em aparelhos físicos.
+
+## Analytics opcional
+
+A preparação local de analytics mantém a coleta desativada: `.env.example` tem ID vazio e `VITE_ANALYTICS_ENABLED=false`. Sem ID válido, habilitação explícita, hostname de produção e aceite, nenhuma Google tag é carregada. Preferências de privacidade estão sempre disponíveis no rodapé.
+
+O [contrato e runbook de analytics](docs/analytics.md) documenta eventos, sanitização, expiração/retirada, testes e ativação futura. `npm run test:analytics` executa os testes com transporte fake. Eles não comprovam coleta real, continuidade entre domínios ou relatórios GA; essas verificações exigem o ID do usuário e publicação autorizada. Vitest 4.1.11 é usado somente em desenvolvimento, mantendo React/Vite existentes.

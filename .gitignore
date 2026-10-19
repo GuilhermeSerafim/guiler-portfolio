@@ -5,3 +5,4 @@ dist/
 .playwright-cli/
 .vercel/
 .env*
+!.env.example
