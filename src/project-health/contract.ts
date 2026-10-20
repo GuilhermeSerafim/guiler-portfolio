@@ -55,7 +55,7 @@ const PROJECT_IDS: ProjectId[] = ["georisk", "seven-tools", "playsenac", "mesa"]
 const STATUSES: HealthStatus[] = ["operational", "degraded", "maintenance", "down", "unknown"];
 const MAX_AGE_MS = 45 * 60 * 1000;
 const CLOCK_SKEW_MS = 5 * 60 * 1000;
-const COVERAGE = "Verificação HTTP da página e do script inicial. Não executa a aplicação nem testa APIs, IA ou envio de formulários.";
+const COVERAGE = "Verificação HTTP da página e do arquivo JavaScript selecionado. Não executa a aplicação nem testa APIs, IA ou envio de formulários.";
 
 function object(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -218,7 +218,7 @@ const LABELS: Record<HealthStatus, string> = {
 
 function messageFor(result: HealthStatus, reasonCode: string): string {
   if (result === "operational" && reasonCode === "ok") {
-    return "A página e o script inicial responderam à última verificação.";
+    return "A página e o arquivo JavaScript selecionado responderam à última verificação.";
   }
   if (result === "degraded" && reasonCode === "intermittent") {
     return "A resposta foi recuperada após uma falha na mesma verificação.";
@@ -226,7 +226,7 @@ function messageFor(result: HealthStatus, reasonCode: string): string {
   if (result === "maintenance" && reasonCode === "scheduled_maintenance") {
     return "Existe uma janela de manutenção informada para este endereço.";
   }
-  return "Resultado limitado à verificação HTTP da página e do script inicial por um observador.";
+  return "Resultado limitado à verificação HTTP da página e do arquivo JavaScript selecionado por um observador.";
 }
 
 function observerFailure(reasonCode: string): boolean {
