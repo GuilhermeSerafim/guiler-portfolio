@@ -1,6 +1,35 @@
 # Estado público das demonstrações
 
-Implementação local, 20/10/2026. Branch `feat/project-health-status`, baseada em `main` (`f3b66aa`). A evolução visual em `curiosity-lab` permanece separada.
+Implementação iniciada localmente em 20/10/2026. Branch `feat/project-health-status`, baseada em `main` (`f3b66aa`). A integração funcional foi publicada após o alinhamento de escopo descrito abaixo. A evolução visual em `curiosity-lab` permanece separada e local.
+
+## Publicação funcional — 20/10/2026
+
+O Manager corrigiu o escopo no brief às 13:25: o pedido de recuperar os projetos em produção e externalizar seu estado já autorizava esta entrega funcional. A revisão local antes de publicar continua aplicável à proposta visual `curiosity-lab`; não bloqueava os links e o consumidor do monitor. As referências a publicação pendente nas seções históricas abaixo registram a etapa local anterior a esse alinhamento.
+
+- Código publicado: `bb791b6b7b1e1645f379160b54a106cbffc22a78`, enviado para `origin/main` por fast-forward de `f3b66aa`, sem force push. O checkout local `main` ficou em `f3b66aa` para preservar o preview de comparação na porta 5190.
+- Projeto e equipe conferidos na Vercel: `guiler`, `prj_wUyeYCfry9rLDtwe8fasGGJtU4WU`, `team_t3l2btRcwn7wsaYoGSYgedD3`.
+- Publicação pelo fluxo CLI existente, pois o projeto não possui conexão Git automática. Build TypeScript/Vite remoto aprovado; nenhum valor de ambiente foi alterado.
+- Deploy: `dpl_8xXKTDpsMTs5wbmNPiQn7iVUXGjR`, estado `READY`, destino `production`, metadado `gitCommitSha` igual ao código publicado.
+- Domínio público: https://guiler.vercel.app/#projetos.
+- URL do deploy: https://guiler-iger1936y-guilhermeserafims-projects.vercel.app.
+- Inspeção: https://vercel.com/guilhermeserafims-projects/guiler/8xXKTDpsMTs5wbmNPiQn7iVUXGjR.
+
+Às **16:33:14Z**, um contexto novo do Chromium verificou a página de produção e o feed público real, sem fixture, relógio simulado ou aceite de estatísticas. Os três botões apontaram para as demos aprovadas de OrbTalus, SEVEN Tools e Play Senac, cada um acompanhado de seu aviso sobre dados sintéticos. Os quatro cards mostraram `operational`/“Resposta confirmada”, com os horários reais do feed: SEVEN às 16:20:11Z e os demais às 16:20:10Z.
+
+A resposta do feed foi HTTP 200, JSON, CORS `*` e cache de 600 segundos. Fonte: `github-actions`, evento **`push`**, execução `39456496221`, commit `1ad9440852e7669bce78d5166406beeec4b1c574`. Os modais explicam a cobertura parcial de HTML e JavaScript selecionado, sem prometer execução de aplicação, API, IA ou formulário. Esta observação não comprova a execução do cron; o aceite de `source.event: schedule` continua pendente nesta sessão.
+
+Analytics permaneceu configurado: o convite de consentimento apareceu, houve **zero requisições Google antes da escolha e após “Recusar”**, e a recusa persistiu. Nenhum consentimento foi concedido, evento de teste enviado ao GA ou ação dentro das demos submetida. A comparação de código confirmou ausência de mudanças em `src/analytics`, `package.json` e `package-lock.json`. O teste não repetiu a ativação completa do GA.
+
+A conferência de produção também passou em 1440 px e 390 px, sem overflow horizontal ou `pageerror`. A expiração com aba aberta/foco mantém a evidência dos testes locais já executados; não foi simulada outra janela de 45 minutos em produção. A consulta dos logs da Vercel do deploy, filtrada por erro nos cinco minutos anteriores a 16:33:41Z, retornou zero registros. A consulta de uma hora excedeu a retenção do plano e não é usada como evidência.
+
+Roteiro e capturas em `<workspace>/output/playwright`:
+
+- `project-health-production-release-qa.js`
+- `project-health-production-captures.js` — confirma também o hero original em produção e a ausência dos componentes da proposta visual.
+- `project-health-production-desktop.png`
+- `project-health-production-mobile.png`
+
+As portas 5190, 5191 e 5192 foram preservadas. Não foi incorporado nenhum commit de `feat/personality-details`/`curiosity-lab`. Este registro posterior de documentação não exige novo deploy.
 
 ## Plano
 
