@@ -5,6 +5,7 @@ import type { HealthTargets } from "./contract";
 // The feed never supplies navigation URLs.
 export const healthTargets: HealthTargets = {
   georisk: { url: projects.find(project => project.id === "georisk")!.demo, role: "demo", coverage: "http-content" },
+  "seven-tools": { url: projects.find(project => project.id === "seven-tools")!.demo, role: "demo", coverage: "http-content" },
   mesa: { url: projects.find(project => project.id === "mesa")!.demo, role: "original", coverage: "http-content" },
 };
 

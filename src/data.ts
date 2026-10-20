@@ -78,7 +78,9 @@ export const projects: Project[] = [
     ],
     outcome:
       "Uma plataforma que reúne propostas comerciais, diagnósticos e qualificação de leads, com conversas recuperáveis e dados persistidos. A organização por áreas mantém um ponto de acesso comum para as ferramentas do ecossistema SEVEN.",
-    demo: "https://seven-tools.vercel.app/",
+    demo: "https://seven-tools-demo.guiler.chatgpt.site/",
+    demoNotice:
+      "Demonstração com cenários e dados sintéticos para explorar os fluxos do hub, separada das contas e dos dados do produto original. A disponibilidade indicada se refere a esta demo.",
   },
   {
     id: "playsenac",
