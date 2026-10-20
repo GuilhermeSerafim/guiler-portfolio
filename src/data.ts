@@ -102,7 +102,9 @@ export const projects: Project[] = [
     ],
     outcome:
       "Uma experiência centralizada de reserva, com regras explícitas e validações que ajudam a organizar o uso das quadras.",
-    demo: "https://play-senac.vercel.app/",
+    demo: "https://play-senac-demo.guiler.chatgpt.site/",
+    demoNotice:
+      "Demonstração com quadras e reservas sintéticas para explorar as regras de agendamento. As operações são locais e não criam reservas reais.",
     github: "https://github.com/GuilhermeSerafim/play-senac-api",
   },
   {
