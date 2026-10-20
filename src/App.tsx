@@ -26,6 +26,7 @@ import { Magnetic, Reveal, TiltedPortrait } from "./components/Interactions";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
 import { MeteorField } from "./components/MeteorField";
+import { EntryStroke, useHeroEntry } from "./components/HeroEntry";
 import { CuriosityNotebook } from "./components/CuriosityNotebook";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { ProjectHealthStatus } from "./components/ProjectHealthStatus";
@@ -88,6 +89,7 @@ function ExpertiseStrip() {
 }
 
 function App() {
+  const { heroRef, entry } = useHeroEntry();
   const projectHealth = useProjectHealth();
   const [showHeroField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
@@ -242,43 +244,47 @@ function App() {
 
       <main id="conteudo">
         <section
+          ref={heroRef}
           id="inicio"
-          className="hero container"
+          className="hero hero-entry container"
+          data-entry={entry}
           aria-labelledby="hero-title"
         >
           {showHeroField && <MeteorField />}
           <div className="hero-copy">
-            <Reveal>
+            <div>
               <p className="eyebrow hero-eyebrow">
                 <span className="status-dot" /> GUILHERME SERAFIM · SÃO PAULO,
                 BR
               </p>
-            </Reveal>
-            <Reveal delay={0.07}>
+            </div>
+            <div>
               <h1 id="hero-title">
-                Código que
+                <span className="entry-title-line">Código que</span>
                 <br />
-                vira{" "}
-                <span className="impact-word">
-                  impacto
-                  <svg
-                    viewBox="0 0 440 24"
-                    preserveAspectRatio="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      pathLength="1"
-                      d="M4 16Q180 0 433 10M30 22Q220 10 407 16"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      fill="none"
-                    />
-                  </svg>
+                <span className="entry-title-line">
+                  vira{" "}
+                  <span className="impact-word">
+                    impacto
+                    <svg
+                      viewBox="0 0 440 24"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        pathLength="1"
+                        d="M4 16Q180 0 433 10M30 22Q220 10 407 16"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        fill="none"
+                      />
+                    </svg>
+                  </span>
+                  <span className="hero-period">.</span>
                 </span>
-                <span className="hero-period">.</span>
               </h1>
-            </Reveal>
-            <Reveal delay={0.14}>
+            </div>
+            <div>
               <div className="hero-intro">
                 <span className="intro-mark" aria-hidden="true">
                   ↳
@@ -289,8 +295,8 @@ function App() {
                   problemas reais em software que faz diferença.
                 </p>
               </div>
-            </Reveal>
-            <Reveal delay={0.21}>
+            </div>
+            <div>
               <div className="hero-actions">
                 <Magnetic>
                   <a className="button button-blue button-trajectory" href="#projetos">
@@ -306,8 +312,8 @@ function App() {
                   Baixar currículo <Download size={17} />
                 </a>
               </div>
-            </Reveal>
-            <Reveal delay={0.26}>
+            </div>
+            <div>
               <div className="hero-proof">
                 <div className="proof-icon">
                   <Trophy size={19} strokeWidth={1.6} />
@@ -319,9 +325,10 @@ function App() {
                   </strong>
                 </div>
               </div>
-            </Reveal>
+            </div>
           </div>
-          <Reveal className="hero-visual" delay={0.15}>
+          <div className="hero-visual">
+            <EntryStroke />
             <div className="portrait-topline eyebrow">
               <span>UM BUILDER, DE PONTA A PONTA.</span>
               <Plus size={14} />
@@ -351,7 +358,7 @@ function App() {
               <span>SOFTWARE ENGINEER</span>
               <span>23°33′ S / 46°38′ W</span>
             </div>
-          </Reveal>
+          </div>
           <div className="hero-bottom eyebrow">
             <span>BOAS IDEIAS MERECEM SAIR DO PAPEL.</span>
             <a href="#projetos">

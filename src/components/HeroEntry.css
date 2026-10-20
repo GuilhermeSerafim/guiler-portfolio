@@ -1,0 +1,123 @@
+.hero-entry {
+  --entry-ease: cubic-bezier(.19, 1, .22, 1);
+}
+
+/* Readable at the first frame. Movement finishes independently of assets. */
+.entry-title-line {
+  display: inline-block;
+}
+.hero-entry[data-entry="animate"] .entry-title-line {
+  animation: entry-title-settle 680ms var(--entry-ease) both;
+}
+.hero-entry[data-entry="animate"] .entry-title-line + br + .entry-title-line {
+  animation-delay: 65ms;
+}
+.hero-entry[data-entry="animate"] .hero-intro {
+  animation: entry-copy-settle 650ms 90ms var(--entry-ease) both;
+}
+.hero-entry[data-entry="animate"] .portrait-surface {
+  animation: entry-aperture 820ms var(--entry-ease) both;
+}
+.hero-entry[data-entry="animate"] .portrait-image {
+  transform-origin: 50% 0;
+  animation: entry-photo-settle 820ms var(--entry-ease) both;
+}
+
+.entry-stroke {
+  position: absolute;
+  z-index: 1;
+  width: 170px;
+  height: auto;
+  top: -40px;
+  left: -112px;
+  overflow: visible;
+  color: var(--blue);
+  pointer-events: none;
+  opacity: .55;
+}
+.entry-stroke path {
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.entry-stroke circle {
+  fill: currentColor;
+}
+.hero-entry[data-entry="animate"] .entry-stroke-line {
+  animation: entry-stroke-draw 1050ms var(--entry-ease) both;
+}
+.hero-entry[data-entry="animate"] .entry-stroke-tip {
+  animation: entry-tip-appear 250ms 550ms ease-out both;
+}
+
+/* Keep the existing underline and meteor field subordinate to one entrance. */
+.hero-entry .impact-word path {
+  animation: none;
+}
+.hero-entry[data-entry="animate"] .impact-word path {
+  animation: impact-draw 500ms 180ms ease-out both;
+}
+.hero-entry[data-entry="animate"] .meteor-travel {
+  animation-delay: calc(var(--meteor-delay) + 1.05s);
+}
+.hero-entry[data-entry="static"] .meteor-travel {
+  animation: none;
+}
+
+@keyframes entry-title-settle {
+  from { transform: translate3d(0, 10px, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes entry-copy-settle {
+  from { transform: translate3d(0, 6px, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes entry-aperture {
+  from { clip-path: polygon(12% 0, 88% 0, 100% 100%, 0 100%); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+@keyframes entry-photo-settle {
+  from { transform: scale(1.035); }
+  to { transform: scale(1); }
+}
+@keyframes entry-stroke-draw {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+@keyframes entry-tip-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 1100px) {
+  .entry-stroke { width: 135px; left: -75px; top: -30px; }
+}
+@media (max-width: 700px) {
+  .entry-stroke { width: 110px; left: -32px; top: -24px; opacity: .45; }
+  .hero-entry[data-entry="animate"] .entry-title-line {
+    animation-duration: 550ms;
+  }
+  .hero-entry[data-entry="animate"] .portrait-surface,
+  .hero-entry[data-entry="animate"] .portrait-image {
+    animation-duration: 700ms;
+  }
+  @keyframes entry-title-settle {
+    from { transform: translate3d(0, 6px, 0); }
+    to { transform: translate3d(0, 0, 0); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-entry[data-entry] .entry-title-line,
+  .hero-entry[data-entry] .hero-intro,
+  .hero-entry[data-entry] .portrait-surface,
+  .hero-entry[data-entry] .portrait-image,
+  .hero-entry[data-entry] .entry-stroke-line,
+  .hero-entry[data-entry] .entry-stroke-tip,
+  .hero-entry[data-entry] .impact-word path {
+    animation: none;
+  }
+}
+@media print {
+  .entry-stroke { display: none; }
+}
