@@ -27,6 +27,14 @@ Layout, fotos, textos, identidade existente, projetos, notebook, navegação, UR
 
 ## Validação
 
-Build local com TypeScript e Vite. Revisão de diffs sem mudanças de dependências. QA visual/teclado/móvel, hash, histórico, alteração dinâmica de movimento reduzido e imagens lentas é conduzido pela sessão principal antes de apresentar a prévia.
+Build local com TypeScript e Vite. Revisão de diffs sem mudanças de dependências. QA Chromium local concluído pela sessão principal em 20/10/2026:
+
+- H1 legível e CTA acionável com animações no instante zero; abertura não bloqueia o clique em Projetos.
+- Larguras 320, 390, 768 e 1440 px sem overflow horizontal. Captura final mobile confirma traço afastado da etiqueta.
+- Clique e acesso direto a `#projetos` chegam ao alvo sem entrada; quatro indicadores de disponibilidade preservados.
+- Movimento reduzido dinâmico encerra efeitos; desativá-lo não reinicia a entrada. Retorno pelo histórico também mostra estado final.
+- Falha simulada do retrato não impede a navegação. Nenhum erro JavaScript ou request Google observado no ambiente local.
+
+Evidências na raiz do workspace: `docs/entry-transitions-local-qa-2026-10-20.md` e `output/playwright/entry-portfolio-*.js/png`. Testes em navegador local, sem alegação de dispositivo físico ou navegador interno do Instagram. Prévia: http://127.0.0.1:5195/.
 
 Esta etapa é local. Nenhum push, merge ou deploy autorizado por este documento.
