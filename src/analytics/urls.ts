@@ -29,8 +29,8 @@ export function sanitizeReferrer(input: string): string {
   } catch { return ""; }
 }
 
-// The tag may derive extra campaign fields itself. Block unreviewed entry data,
-// without changing the navigation URL or its cross-domain linker parameter.
+// This strict guard is also used after loading the tag: removable entry fields
+// must already be absent before Google can inspect the browser URL.
 export function isSafeAnalyticsEntry(site: SiteId, input: string): boolean {
   try {
     const url = new URL(input);
@@ -41,4 +41,14 @@ export function isSafeAnalyticsEntry(site: SiteId, input: string): boolean {
     if (linker !== null && (!/^[A-Za-z0-9*._~-]{1,4096}$/.test(linker) || linker.includes("\n"))) return false;
     return !keys.some(key => url.searchParams.has(key)) || !!campaign(url);
   } catch { return false; }
+}
+
+// Only these entry-only fields may be discarded. Do not widen campaign values
+// or remove unknown fields to make an otherwise blocked entry collectable.
+export function prepareAnalyticsEntry(site: SiteId, input: string): string | undefined {
+  try {
+    const url = new URL(input);
+    for (const key of ["fbclid", "igsh", "utm_content"]) if (url.searchParams.has(key)) url.searchParams.delete(key);
+    return isSafeAnalyticsEntry(site, url.href) ? url.href : undefined;
+  } catch { return undefined; }
 }

@@ -1,7 +1,7 @@
 import { canCollect, SITE_HOSTS, SITE_TITLES, type AnalyticsConfig } from "./config";
 import { CONSENT_KEY, CONSENT_MAX_AGE, parseConsent, type ConsentRecord, type ConsentState } from "./consent";
 import { serializeEvent, type AnalyticsEvent } from "./events";
-import { isSafeAnalyticsEntry, sanitizePageUrl, sanitizeReferrer } from "./urls";
+import { isSafeAnalyticsEntry, prepareAnalyticsEntry, sanitizePageUrl, sanitizeReferrer } from "./urls";
 
 type GoogleWindow = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void; [key: `ga-disable-${string}`]: boolean };
 let config: AnalyticsConfig | undefined;
@@ -35,6 +35,10 @@ export function subscribeConsent(listener: () => void): () => void {
 }
 export function getConsent(): ConsentState { return parseConsent(rawConsent, Date.now()); }
 export function isAnalyticsConfigured(): boolean {
+  return !!config && canCollect(config, window.location.hostname, "granted") && prepareAnalyticsEntry(config.siteId, window.location.href) !== undefined;
+}
+
+function isRuntimeEntrySafe(): boolean {
   return !!config && canCollect(config, window.location.hostname, "granted") && isSafeAnalyticsEntry(config.siteId, window.location.href);
 }
 
@@ -48,7 +52,7 @@ function scheduleExpiry(): void {
 }
 
 function revalidateConsent(): void {
-  if (getConsent() !== "granted" || !isAnalyticsConfigured()) stop(false);
+  if (getConsent() !== "granted" || !isRuntimeEntrySafe()) stop(false);
   scheduleExpiry();
   notify();
 }
@@ -94,6 +98,10 @@ function start(): void {
   if (!config || script || retired || failed || !isAnalyticsConfigured() || getConsent() !== "granted") return;
   const settings = config;
   try {
+    const prepared = prepareAnalyticsEntry(settings.siteId, window.location.href);
+    if (!prepared) return;
+    if (prepared !== window.location.href) window.history.replaceState(window.history.state, "", prepared);
+    if (window.location.href !== prepared || !isRuntimeEntrySafe()) { failed = true; return; }
     const win = googleWindow();
     win[`ga-disable-${settings.measurementId}`] = false;
     win.dataLayer = [];
@@ -129,7 +137,7 @@ function start(): void {
     script.src = `https://www.googletagmanager.com/gtag/js?id=${settings.measurementId}`;
     script.referrerPolicy = "origin";
     script.onload = () => {
-      if (retired || failed || !isAnalyticsConfigured() || getConsent() !== "granted") { stop(false); return; }
+      if (retired || failed || !isRuntimeEntrySafe() || getConsent() !== "granted") { stop(false); return; }
       active = true;
       if (!pageViewed) {
         pageViewed = true;
@@ -178,7 +186,7 @@ export function setConsent(value: "granted" | "denied"): void {
 export function track(event: AnalyticsEvent): void {
   try {
     if (!config || !active || retired || failed) return;
-    if (!isAnalyticsConfigured() || getConsent() !== "granted") { stop(false); return; }
+    if (!isRuntimeEntrySafe() || getConsent() !== "granted") { stop(false); return; }
     const params = serializeEvent(event, config.siteId);
     if (params) googleWindow().gtag?.("event", event.name, params);
   } catch { /* Analytics must never break a control or delay navigation. */ }

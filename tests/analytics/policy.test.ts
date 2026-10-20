@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { parseConsent } from "../../src/analytics/consent";
 import { canCollect, type AnalyticsConfig } from "../../src/analytics/config";
 import { serializeEvent } from "../../src/analytics/events";
-import { isSafeAnalyticsEntry, sanitizePageUrl, sanitizeReferrer } from "../../src/analytics/urls";
+import { isSafeAnalyticsEntry, prepareAnalyticsEntry, sanitizePageUrl, sanitizeReferrer } from "../../src/analytics/urls";
 
 const now = 1_800_000_000_000;
 const config: AnalyticsConfig = { siteId: "portfolio", measurementId: "G-TESTONLY", enabled: true, hostname: "guiler.vercel.app" };
@@ -55,6 +55,38 @@ describe("safe URLs", () => {
     expect(isSafeAnalyticsEntry("portfolio", "https://guiler.vercel.app/?_gl=1.abc&_gl=1.def")).toBe(false);
     expect(isSafeAnalyticsEntry("portfolio", "https://guiler.vercel.app/?utm_source=linkedin&utm_medium=social&utm_campaign=portfolio#projetos")).toBe(true);
     for (const suffix of ["?email=person@example.com", "?utm_term=person@example.com", "?utm_source=unknown", "/person@example.com", "#person@example.com", "?gclid=unreviewed"]) expect(isSafeAnalyticsEntry("portfolio", `https://guiler.vercel.app/${suffix}`)).toBe(false);
+  });
+  it.each(["fbclid=value", "igsh=value", "utm_content=value", "fbclid=first&fbclid=second&igsh=value&utm_content=value", "%66bclid=private%40example.com&%69gsh=private&%75tm_content=private"])("discards only reviewed tracking parameters: %s", query => {
+    const raw = `https://iamguiler.vercel.app/?${query}#links`;
+    expect(isSafeAnalyticsEntry("linkhub", raw)).toBe(false);
+    expect(prepareAnalyticsEntry("linkhub", raw)).toBe("https://iamguiler.vercel.app/#links");
+  });
+  it.each([
+    ["linkhub", "https://iamguiler.vercel.app/", "#links"],
+    ["portfolio", "https://guiler.vercel.app/", "#projetos"],
+  ] as const)("preserves approved campaign, linker and anchor for %s", (site, origin, hash) => {
+    const raw = `${origin}?utm_source=instagram&utm_medium=social&utm_campaign=bio&_gl=1~abc&fbclid=discard${hash}`;
+    const prepared = prepareAnalyticsEntry(site, raw);
+    expect(prepared).toBe(`${origin}?utm_source=instagram&utm_medium=social&utm_campaign=bio&_gl=1%7Eabc${hash}`);
+    expect(new URL(prepared!).searchParams.get("_gl")).toBe("1~abc");
+    expect(sanitizePageUrl(site, prepared!)).toBe(`${origin}?utm_source=instagram&utm_medium=social&utm_campaign=bio`);
+    expect(prepareAnalyticsEntry(site, prepared!)).toBe(prepared);
+  });
+  it("leaves an already clean linker URL byte-for-byte unchanged", () => {
+    const raw = "https://guiler.vercel.app/?_gl=1~abc#projetos";
+    expect(prepareAnalyticsEntry("portfolio", raw)).toBe(raw);
+  });
+  it.each([
+    "/?fbclid=discard&email=private", "/?FBCLID=discard", "/?utm_content=discard&utm_source=instagram",
+    "/?igsh=discard&utm_source=instagram&utm_medium=social&utm_campaign=bio&utm_source=instagram",
+    "/?fbclid=discard&_gl=private%40example.com", "/?igsh=discard&_gl=1.abc&_gl=1.def",
+    "/admin?fbclid=discard", "/?utm_content=discard#private", "/?gclid=discard",
+  ])("does not recover an entry with other invalid data: %s", suffix => {
+    expect(prepareAnalyticsEntry("portfolio", `https://guiler.vercel.app${suffix}`)).toBeUndefined();
+  });
+  it("rejects invalid URLs and foreign origins", () => {
+    expect(prepareAnalyticsEntry("portfolio", "not a URL")).toBeUndefined();
+    expect(prepareAnalyticsEntry("portfolio", "https://foreign.example/?fbclid=discard")).toBeUndefined();
   });
 });
 

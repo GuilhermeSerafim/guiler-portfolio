@@ -35,7 +35,9 @@ Google Analytics usa identificadores pseudônimos de navegador/sessão; a coleta
 
 Página usa origem/caminho canônicos, sem hash e sem dados livres. Referrer usa somente origem HTTP(S), sem credenciais/caminho/query/hash; título é fixo. `set` e `config` também recebem esse contexto seguro e campos de campanha controlados antes de inserir a tag, pois eventos automáticos precisam da mesma proteção.
 
-Campanhas aceitas são trios completos: `instagram/social/bio`, `linkedin/social/portfolio`, `qr/offline/palestra`. Query, pathname e hash desconhecidos bloqueiam a **ativação inteira**, preservando a URL original e a navegação. Parâmetros de redes sociais como `fbclid` podem, portanto, impedir coleta. `_gl` é preservado na navegação, limitado em tamanho/formato na entrada e omitido dos payloads manuais; esse filtro não valida identidade nem consentimento. Relaxar essas restrições exige inspeção dos payloads completos da tag real, incluindo campos automáticos. Não aplicar UTMs ao trajeto interno hub → portfólio.
+Campanhas aceitas são trios completos: `instagram/social/bio`, `linkedin/social/portfolio`, `qr/offline/palestra`. Na entrada, somente `fbclid`, `igsh` e `utm_content` podem ser descartados: todas as ocorrências são removidas da URL por `replaceState` **após consentimento e antes de criar o runtime Google**, preservando `history.state`, o hash permitido, `_gl` e a campanha aprovada. Antes do aceite e após recusa, a URL permanece intacta. Falha de limpeza bloqueia a coleta. `utm_content` não é usado como dimensão ou atribuição.
+
+Outras chaves, pathname/hash desconhecidos, campanhas incompletas/duplicadas e linker inválido continuam bloqueando a **ativação inteira**, sem alterar a navegação. `_gl` é limitado em tamanho/formato e omitido dos payloads manuais; esse filtro não valida identidade nem consentimento. Os guardas após inicialização permanecem estritos. A correção cobre URLs controladas e não comprova o funcionamento de todos os navegadores internos do Instagram. Não aplicar UTMs ao trajeto interno hub → portfólio. Veja [correção e validação](analytics-instagram-2026-10-19.md).
 
 ## Configuração e operação
 
