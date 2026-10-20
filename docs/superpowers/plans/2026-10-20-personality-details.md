@@ -48,11 +48,11 @@
 
 **Files:** criar `src/components/TrajectoryMark.tsx` e `.css`; integrar CTA e sublinhado em `src/App.tsx`.
 
-- [ ] Adicionar seta autoral de trajetória no CTA e desenho breve do sublinhado; foco/hover/press sem alterar ação.
-- [ ] Rodar build, 67 testes de analytics e QA browser de navegação, filtros/modal, reduced motion e responsividade.
-- [ ] Revisão independente da branch e correção de problemas concretos.
-- [ ] Commit `feat(ui): refinar gestos com tracos de trajetoria`.
-- [ ] Registrar evidência, limites e links locais em `docs/research/personality/validation.md`; manter preview aberto, sem publicação.
+- [x] Adicionar seta autoral de trajetória no CTA e desenho breve do sublinhado; foco/hover/press sem alterar ação.
+- [x] Rodar build, 67 testes de analytics e QA browser de navegação, filtros/modal, reduced motion e responsividade.
+- [x] Revisão independente da branch e correção de problemas concretos.
+- [x] Commit `feat(ui): refinar gestos com tracos de trajetoria`.
+- [x] Registrar evidência, limites e links locais em `docs/research/personality/validation.md`; manter preview aberto, sem publicação.
 
 ## Verificação proporcional
 
