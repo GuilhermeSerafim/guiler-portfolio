@@ -12,6 +12,7 @@ export type Project = {
   decisions: string[];
   outcome: string;
   demo: string;
+  demoNotice?: string;
   github?: string;
   preview?: {
     src: string;
@@ -42,7 +43,9 @@ export const projects: Project[] = [
     ],
     outcome:
       "Projeto vencedor do Hackathon OpenAI. A proposta é apoiar a análise com contexto e justificativas; as classificações não substituem uma avaliação técnica do território.",
-    demo: "https://geo-risk-front.vercel.app/",
+    demo: "https://orbtalus-demo.guiler.chatgpt.site/",
+    demoNotice:
+      "OrbTalus é uma demonstração interativa com dados sintéticos e processamento local. Ela apresenta o fluxo da solução; não executa a análise geoespacial e a IA do produto original.",
   },
   {
     id: "seven-tools",
