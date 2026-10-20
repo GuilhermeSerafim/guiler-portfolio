@@ -26,7 +26,7 @@ import { projects, experience, type Project } from "./data";
 import { Magnetic, Reveal, TiltedPortrait } from "./components/Interactions";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
-import { MagneticField } from "./components/MagneticField";
+import { MeteorField } from "./components/MeteorField";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
@@ -85,7 +85,7 @@ function ExpertiseStrip() {
 }
 
 function App() {
-  const [showMagneticField] = useState(
+  const [showHeroField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
   );
   const [menuOpen, setMenuOpen] = useState(false);
@@ -242,7 +242,7 @@ function App() {
           className="hero container"
           aria-labelledby="hero-title"
         >
-          {showMagneticField && <MagneticField />}
+          {showHeroField && <MeteorField />}
           <div className="hero-copy">
             <Reveal>
               <p className="eyebrow hero-eyebrow">

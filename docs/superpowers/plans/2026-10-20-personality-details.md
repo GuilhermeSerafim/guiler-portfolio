@@ -30,10 +30,10 @@
 **Files:** criar `src/components/MeteorField.tsx` e `.css`; alterar import/render em `src/App.tsx`.
 **Interfaces:** `MeteorField()` decorativo sem props, substitui o fundo anterior. `data-active` representa visibilidade; CSS controla movimento.
 
-- [ ] Registrar base e pesquisa. Iniciar preview atual e novo em portas distintas.
-- [ ] Implementar três rastros determinísticos finitos, pontos esparsos, reduced motion e suspensão.
-- [ ] Verificar no browser limite de duração, mobile, preferência alterada e saída de viewport; build TypeScript/Vite.
-- [ ] Capturar evolução do hero; commit `feat(hero): adicionar meteoros ao fundo do portfolio`.
+- [x] Registrar base e pesquisa. Iniciar preview atual e novo em portas distintas.
+- [x] Implementar três rastros determinísticos finitos, pontos esparsos, reduced motion e suspensão.
+- [x] Verificar no browser limite de duração, mobile, preferência alterada e saída de viewport; build TypeScript/Vite.
+- [x] Capturar evolução do hero; commit `feat(hero): adicionar meteoros ao fundo do portfolio`.
 
 ## Task 2: Caderno de curiosidades
 
