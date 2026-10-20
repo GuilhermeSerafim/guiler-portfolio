@@ -40,9 +40,9 @@
 **Files:** criar `src/components/CuriosityNotebook.tsx` e `.css`; integrar em `src/App.tsx`.
 **Interfaces:** `CuriosityNotebook()` autocontido, estado Cosmos inicial e IDs acessíveis por useId.
 
-- [ ] Implementar três abas e ilustrações SVG autorais conforme spec, removendo sticker antigo.
-- [ ] Verificar por browser seleção/toque, ArrowLeft/Right/Home/End, altura estável, reduced motion e movimento finito.
-- [ ] Conferir layout 320/390/768/1440, captura de cada estado; commit `feat(sobre): adicionar caderno de curiosidades`.
+- [x] Implementar três abas e ilustrações SVG autorais conforme spec, removendo sticker antigo.
+- [x] Verificar por browser seleção, ArrowLeft/Right/Home/End, altura estável, reduced motion e movimento finito. Toque será conferido no QA final.
+- [x] Conferir layout 320/390/768/1440, captura de cada estado; commit `feat(sobre): adicionar caderno de curiosidades`.
 
 ## Task 3: Gestos, revisão e entrega local
 

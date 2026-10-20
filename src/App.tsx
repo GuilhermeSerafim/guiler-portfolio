@@ -27,6 +27,7 @@ import { Magnetic, Reveal, TiltedPortrait } from "./components/Interactions";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
 import { MeteorField } from "./components/MeteorField";
+import { CuriosityNotebook } from "./components/CuriosityNotebook";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
@@ -610,11 +611,6 @@ function App() {
                 />
                 <figcaption>Boas ideias crescem em comunidade.</figcaption>
               </figure>
-              <span className="photo-sticker" aria-hidden="true">
-                Sempre
-                <br />
-                construindo. ↗
-              </span>
             </Reveal>
             <Reveal className="about-copy">
               <h2 id="about-title">
@@ -636,6 +632,7 @@ function App() {
                 aplicada. Construo, experimento e compartilho o que aprendo pelo
                 caminho.
               </p>
+              <CuriosityNotebook />
               <a
                 href="https://www.linkedin.com/in/guiserafim/"
                 onClick={() => track({ name: "link_click", params: { link_id: "linkedin", destination_id: "linkedin_profile", ui_location: "about" } })}
