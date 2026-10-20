@@ -1,0 +1,30 @@
+.trajectory-mark {
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.trajectory-origin { fill: currentColor; stroke: none; }
+.button.button-trajectory::before { transition-duration: 220ms; }
+.button-trajectory:hover::before,
+.button-trajectory:focus-visible::before { transform: translateY(-70%); }
+.button-trajectory:is(:hover, :focus-visible) .trajectory-arc {
+  animation: trajectory-draw 380ms ease-out both;
+}
+.button-trajectory:active { transform: translateY(1px); }
+.impact-word path { animation: impact-draw 850ms 250ms ease-out both; }
+@keyframes trajectory-draw {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+@keyframes impact-draw {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .impact-word path,
+  .button-trajectory:is(:hover, :focus-visible) .trajectory-arc { animation: none; }
+  .button-trajectory,
+  .button-trajectory::before { transition: none; }
+  .button-trajectory:active { transform: none; }
+}

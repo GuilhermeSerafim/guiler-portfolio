@@ -8,7 +8,6 @@ import {
 } from "motion/react";
 import {
   ArrowDown,
-  ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
   Check,
@@ -28,6 +27,7 @@ import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
 import { MeteorField } from "./components/MeteorField";
 import { CuriosityNotebook } from "./components/CuriosityNotebook";
+import { TrajectoryMark } from "./components/TrajectoryMark";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
@@ -264,6 +264,7 @@ function App() {
                     aria-hidden="true"
                   >
                     <path
+                      pathLength="1"
                       d="M4 16Q180 0 433 10M30 22Q220 10 407 16"
                       stroke="currentColor"
                       strokeWidth="3"
@@ -289,8 +290,8 @@ function App() {
             <Reveal delay={0.21}>
               <div className="hero-actions">
                 <Magnetic>
-                  <a className="button button-blue" href="#projetos">
-                    Explorar projetos <ArrowDownRight size={20} />
+                  <a className="button button-blue button-trajectory" href="#projetos">
+                    Explorar projetos <TrajectoryMark />
                   </a>
                 </Magnetic>
                 <a
