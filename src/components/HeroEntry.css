@@ -59,7 +59,7 @@
   animation: impact-draw 500ms 180ms ease-out both;
 }
 .hero-entry[data-entry="animate"] .meteor-travel {
-  animation-delay: calc(var(--meteor-delay) + 1.05s);
+  animation-delay: calc(var(--meteor-delay) + .35s);
 }
 .hero-entry[data-entry="static"] .meteor-travel {
   animation: none;
