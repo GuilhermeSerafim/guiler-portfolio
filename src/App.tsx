@@ -26,6 +26,8 @@ import { projects, experience, type Project } from "./data";
 import { Magnetic, Reveal, TiltedPortrait } from "./components/Interactions";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
+import { ProjectHealthStatus } from "./components/ProjectHealthStatus";
+import { useProjectHealth } from "./project-health/useProjectHealth";
 import { MagneticField } from "./components/MagneticField";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { track } from "./analytics/client";
@@ -85,6 +87,7 @@ function ExpertiseStrip() {
 }
 
 function App() {
+  const projectHealth = useProjectHealth();
   const [showMagneticField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
   );
@@ -479,6 +482,7 @@ function App() {
                       </button>
                     </div>
                     <p className="project-description">{project.description}</p>
+                    <ProjectHealthStatus health={projectHealth[project.id]} compact />
                     <div className="project-bottom">
                       <div className="tags">
                         {project.tags.map((tag) => (
@@ -782,6 +786,7 @@ function App() {
       </main>
       <ProjectDialog
         project={selectedProject}
+        health={selectedProject ? projectHealth[selectedProject.id] : undefined}
         onClose={() => setSelectedProject(null)}
       />
     </>
