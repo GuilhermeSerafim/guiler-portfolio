@@ -10,6 +10,7 @@ A referência de hierarquia temporal é [Jhey](https://www.jhey.dev/): conteúdo
 - Texto introdutório assenta 6 px em 650 ms, iniciando após 90 ms. CTAs e informação de reconhecimento não se movem.
 - Retrato abre de um trapézio discreto para seu retângulo final, preservando enquadramento e proporções. Duração de 820 ms no desktop e 700 ms em telas menores. Pequena escala 1.035 → 1 com origem no topo, sem deslocar o recorte final aprovado.
 - Traço orbital azul conduz à fotografia em 1050 ms. A seta conclui em 800 ms. O traço é decorativo, ignorado por leitores de tela e eventos de ponteiro.
+- No mobile, o traço reduz para 64 px e fica junto à margem da foto, abaixo da etiqueta, para não atravessar o texto.
 - Sublinhado existente termina em 680 ms. Meteoros existentes recebem deslocamento de 350 ms na cadência: a primeira passagem acompanha o final da montagem e a última termina em 4650 ms. A abertura completa permanece abaixo de cinco segundos; a cadência global do componente não muda.
 
 ## Ciclo de vida

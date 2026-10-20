@@ -94,7 +94,7 @@
   .entry-stroke { width: 135px; left: -75px; top: -30px; }
 }
 @media (max-width: 700px) {
-  .entry-stroke { width: 110px; left: -32px; top: -24px; opacity: .45; }
+  .entry-stroke { width: 64px; left: -24px; top: 12px; opacity: .4; }
   .hero-entry[data-entry="animate"] .entry-title-line {
     animation-duration: 550ms;
   }
