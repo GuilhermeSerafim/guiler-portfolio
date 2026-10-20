@@ -2,6 +2,10 @@
 
 Data: 20/10/2026. Escopo escolhido pelo usuário: **portfólio guiler primeiro**.
 
+## Autorização de publicação
+
+Em 20/10/2026, após a entrega local, o usuário autorizou: “Pode subir”. A versão visual foi integrada à base funcional `96a0665`, preservando URLs de demonstração, indicadores de disponibilidade e Analytics. Os trechos abaixo documentam a validação local anterior; a restrição de publicação dessa etapa foi substituída por esta autorização. O registro final de produção será acrescentado após a verificação do domínio público.
+
 ## Comparação disponível
 
 - Base: http://127.0.0.1:5190/

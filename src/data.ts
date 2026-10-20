@@ -12,6 +12,7 @@ export type Project = {
   decisions: string[];
   outcome: string;
   demo: string;
+  demoNotice?: string;
   github?: string;
   preview?: {
     src: string;
@@ -42,7 +43,9 @@ export const projects: Project[] = [
     ],
     outcome:
       "Projeto vencedor do Hackathon OpenAI. A proposta é apoiar a análise com contexto e justificativas; as classificações não substituem uma avaliação técnica do território.",
-    demo: "https://geo-risk-front.vercel.app/",
+    demo: "https://orbtalus-demo.guiler.chatgpt.site/",
+    demoNotice:
+      "OrbTalus é uma demonstração interativa com dados sintéticos e processamento local. Ela apresenta o fluxo da solução; não executa a análise geoespacial e a IA do produto original.",
   },
   {
     id: "seven-tools",
@@ -75,7 +78,9 @@ export const projects: Project[] = [
     ],
     outcome:
       "Uma plataforma que reúne propostas comerciais, diagnósticos e qualificação de leads, com conversas recuperáveis e dados persistidos. A organização por áreas mantém um ponto de acesso comum para as ferramentas do ecossistema SEVEN.",
-    demo: "https://seven-tools.vercel.app/",
+    demo: "https://seven-tools-demo.guiler.chatgpt.site/",
+    demoNotice:
+      "Demonstração com cenários e dados sintéticos para explorar os fluxos do hub, separada das contas e dos dados do produto original. A disponibilidade indicada se refere a esta demo.",
   },
   {
     id: "playsenac",
@@ -97,7 +102,9 @@ export const projects: Project[] = [
     ],
     outcome:
       "Uma experiência centralizada de reserva, com regras explícitas e validações que ajudam a organizar o uso das quadras.",
-    demo: "https://play-senac.vercel.app/",
+    demo: "https://play-senac-demo.guiler.chatgpt.site/",
+    demoNotice:
+      "Demonstração com quadras e reservas sintéticas para explorar as regras de agendamento. As operações são locais e não criam reservas reais.",
     github: "https://github.com/GuilhermeSerafim/play-senac-api",
   },
   {

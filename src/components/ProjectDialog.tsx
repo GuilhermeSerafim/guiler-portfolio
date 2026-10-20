@@ -2,12 +2,16 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "../data";
 import { track } from "../analytics/client";
+import { ProjectHealthStatus } from "./ProjectHealthStatus";
+import type { ProjectHealthView } from "../project-health/view";
 
 export function ProjectDialog({
   project,
+  health,
   onClose,
 }: {
   project: Project | null;
+  health?: ProjectHealthView;
   onClose: () => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -93,6 +97,7 @@ export function ProjectDialog({
               <h3>O resultado</h3>
               <p>{project.outcome}</p>
             </section>
+            {project.demoNotice && <p className="case-demo-notice">{project.demoNotice}</p>}
             <div className="case-links">
               <a
                 className="button button-blue"
@@ -101,7 +106,7 @@ export function ProjectDialog({
                 target="_blank"
                 rel="noreferrer"
               >
-                Abrir projeto <ArrowUpRight size={18} />
+                {project.demoNotice ? "Abrir demonstração" : "Abrir projeto"} <ArrowUpRight size={18} />
               </a>
               {project.github && (
                 <a
@@ -115,6 +120,7 @@ export function ProjectDialog({
                 </a>
               )}
             </div>
+            {health && <ProjectHealthStatus health={health} />}
           </div>
         </>
       )}

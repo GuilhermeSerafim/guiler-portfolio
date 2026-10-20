@@ -28,6 +28,8 @@ import { ProjectDialog } from "./components/ProjectDialog";
 import { MeteorField } from "./components/MeteorField";
 import { CuriosityNotebook } from "./components/CuriosityNotebook";
 import { TrajectoryMark } from "./components/TrajectoryMark";
+import { ProjectHealthStatus } from "./components/ProjectHealthStatus";
+import { useProjectHealth } from "./project-health/useProjectHealth";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
@@ -86,6 +88,7 @@ function ExpertiseStrip() {
 }
 
 function App() {
+  const projectHealth = useProjectHealth();
   const [showHeroField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
   );
@@ -481,6 +484,7 @@ function App() {
                       </button>
                     </div>
                     <p className="project-description">{project.description}</p>
+                    <ProjectHealthStatus health={projectHealth[project.id]} compact />
                     <div className="project-bottom">
                       <div className="tags">
                         {project.tags.map((tag) => (
@@ -780,6 +784,7 @@ function App() {
       </main>
       <ProjectDialog
         project={selectedProject}
+        health={selectedProject ? projectHealth[selectedProject.id] : undefined}
         onClose={() => setSelectedProject(null)}
       />
     </>
