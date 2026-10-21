@@ -1,0 +1,143 @@
+.curiosity-sketch {
+  width: 112px;
+  aspect-ratio: 180 / 144;
+  color: var(--blue);
+  opacity: .54;
+  pointer-events: none;
+  user-select: none;
+}
+.sketch-drawing {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  color: inherit;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+  pointer-events: none;
+}
+.sketch-faint { opacity: .4; }
+.sketch-guide { opacity: .32; stroke-dasharray: 2 5; }
+.sketch-center { fill: currentColor; }
+.sketch-planet, .sketch-apple-body { fill: var(--sketch-paper, var(--paper)); }
+.curiosity-sketch[data-play="true"] .sketch-orbiter { animation: sketch-orbit 1.8s ease-in-out both; transform-origin: 90px 72px; }
+.curiosity-sketch[data-play="true"] .sketch-ball { animation: sketch-shot 950ms cubic-bezier(.35, .1, .55, 1) both; }
+.curiosity-sketch[data-play="true"] .sketch-apple { animation: sketch-gravity 800ms ease-in both; }
+.sketch-discharge, .sketch-light-ray { stroke-dasharray: 100; stroke-dashoffset: 0; }
+.sketch-electric-field { transform-origin: 90px 82px; }
+.sketch-wing { transform-origin: 90px 75px; }
+.sketch-spacetime { transform-origin: 96px 85px; }
+.sketch-photon {
+  offset-path: path("M18 34C64 34 83 44 109 67S130 102 160 111");
+  offset-distance: 100%;
+  offset-rotate: 0deg;
+}
+.curiosity-sketch[data-play="true"] .sketch-discharge { animation: sketch-trace 1s ease-out both; }
+.curiosity-sketch[data-play="true"] .sketch-electric-field { animation: sketch-field 1.2s ease-out both; }
+.curiosity-sketch[data-play="true"] .sketch-wing--left { animation: sketch-wing-left 1.4s ease-in-out both; }
+.curiosity-sketch[data-play="true"] .sketch-wing--right { animation: sketch-wing-right 1.4s ease-in-out both; }
+.curiosity-sketch[data-play="true"] .sketch-spacetime { animation: sketch-fabric 1.2s ease-out both; }
+.curiosity-sketch[data-play="true"] .sketch-light-ray { animation: sketch-trace 1.5s linear both; }
+.curiosity-sketch[data-play="true"] .sketch-photon { animation: sketch-light 1.5s linear both; }
+@keyframes sketch-trace { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes sketch-field { from { transform: scale(.82); opacity: .12; } to { transform: scale(1); opacity: .4; } }
+@keyframes sketch-wing-left { 0% { transform: rotate(16deg); } 65% { transform: rotate(-3deg); } 100% { transform: rotate(0); } }
+@keyframes sketch-wing-right { 0% { transform: rotate(-16deg); } 65% { transform: rotate(3deg); } 100% { transform: rotate(0); } }
+@keyframes sketch-fabric { from { transform: scale(.94); opacity: .15; } to { transform: scale(1); opacity: .4; } }
+@keyframes sketch-light { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+@keyframes sketch-orbit { from { transform: rotate(-130deg); } to { transform: rotate(0); } }
+@keyframes sketch-shot {
+  0% { transform: translate(44px, 74px); }
+  48% { transform: translate(33px, -8px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes sketch-gravity {
+  0% { transform: translateY(-30px) rotate(-5deg); }
+  78% { transform: translateY(0) rotate(0); }
+  88% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+/* Each sketch has a reserved margin, separate from copy and controls. */
+.work-section { position: relative; }
+.work-section > .curiosity-sketch--cosmos {
+  position: absolute;
+  top: 16px;
+  right: 26%;
+  width: 94px;
+  transform: rotate(-12deg);
+}
+.work-section .work-footer { position: relative; margin-top: 100px; }
+.work-footer > .curiosity-sketch--quadra {
+  position: absolute;
+  top: -88px;
+  left: 55%;
+  width: 88px;
+  transform: rotate(12deg);
+}
+.experience-section > .container { position: relative; }
+.experience-section .curiosity-sketch {
+  --sketch-paper: #242622;
+  color: #b6c4ff;
+  opacity: .62;
+}
+.experience-intro .curiosity-sketch--tesla {
+  margin-top: 36px;
+  width: 128px;
+  transform: rotate(-6deg);
+}
+.experience-section .curiosity-sketch--newton {
+  position: absolute;
+  right: 13%;
+  bottom: 24px;
+  width: 76px;
+  transform: rotate(8deg);
+}
+.about-photos > .curiosity-sketch--davinci {
+  position: absolute;
+  left: 4px;
+  bottom: 18px;
+  width: 128px;
+  transform: rotate(-16deg);
+}
+.toolkit-intro { position: relative; }
+.toolkit-intro > .curiosity-sketch--einstein {
+  margin-top: 24px;
+  margin-left: 22px;
+  width: 106px;
+  transform: rotate(-8deg);
+}
+@media (max-width: 1100px) {
+  .about-photos > .curiosity-sketch--davinci { width: 102px; left: 0; bottom: 6px; }
+}
+@media (max-width: 960px) {
+  .work-section > .curiosity-sketch--cosmos { width: 72px; top: 6px; }
+  .about-section .about-photos { padding-bottom: 104px; }
+  .about-photos > .curiosity-sketch--davinci { width: 88px; bottom: 8px; }
+}
+@media (max-width: 700px) {
+  .work-section > .curiosity-sketch--cosmos { width: 60px; top: 7px; right: 15px; }
+  .work-section .work-footer { margin-top: 88px; }
+  .work-footer > .curiosity-sketch--quadra { width: 72px; top: -73px; left: auto; right: 18px; }
+  .experience-intro .curiosity-sketch--tesla { width: 92px; margin: 18px 0 0 auto; }
+  .experience-section .curiosity-sketch--newton { width: 57px; right: 10%; bottom: 7px; }
+  .about-section .about-photos { padding-bottom: 38px; }
+  .about-photos > .curiosity-sketch--davinci { width: 96px; bottom: 6px; left: 0; }
+  .toolkit-intro { padding-right: 82px; min-height: 78px; }
+  .toolkit-intro > .curiosity-sketch--einstein {
+    position: absolute;
+    width: 76px;
+    top: 14px;
+    right: 0;
+    margin: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .curiosity-sketch[data-play="true"] * { animation: none; }
+}
+@media print {
+  .curiosity-sketch { display: none; }
+}

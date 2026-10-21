@@ -27,7 +27,7 @@ import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
 import { MeteorField } from "./components/MeteorField";
 import { EntryStroke, useHeroEntry } from "./components/HeroEntry";
-import { CuriosityNotebook } from "./components/CuriosityNotebook";
+import { CuriositySketch } from "./components/CuriositySketch";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { ProjectHealthStatus } from "./components/ProjectHealthStatus";
 import { useProjectHealth } from "./project-health/useProjectHealth";
@@ -373,6 +373,7 @@ function App() {
           className="work-section container section-space"
           aria-labelledby="work-title"
         >
+          <CuriositySketch subject="cosmos" />
           <div className="section-top">
             <span className="eyebrow">01 / TRABALHOS SELECIONADOS</span>
             <span className="eyebrow muted">IDEIA → CÓDIGO → PRODUTO</span>
@@ -516,6 +517,7 @@ function App() {
             </AnimatePresence>
           </div>
           <div className="work-footer">
+            <CuriositySketch subject="quadra" />
             <p>Outras ideias, experimentos e código aberto.</p>
             <a
               className="text-link"
@@ -555,7 +557,7 @@ function App() {
                     Da cobrança de seguros ao atendimento público. Engenharia
                     para operações que precisam funcionar.
                   </p>
-                  <Asterisk className="experience-asterisk" />
+                  <CuriositySketch subject="tesla" />
                 </Reveal>
               </div>
               <div className="timeline">
@@ -585,6 +587,7 @@ function App() {
                 ))}
               </div>
             </div>
+            <CuriositySketch subject="newton" />
           </div>
         </section>
 
@@ -622,6 +625,7 @@ function App() {
                 />
                 <figcaption>Boas ideias crescem em comunidade.</figcaption>
               </figure>
+              <CuriositySketch subject="davinci" />
             </Reveal>
             <Reveal className="about-copy">
               <h2 id="about-title">
@@ -643,7 +647,6 @@ function App() {
                 aplicada. Construo, experimento e compartilho o que aprendo pelo
                 caminho.
               </p>
-              <CuriosityNotebook />
               <a
                 href="https://www.linkedin.com/in/guiserafim/"
                 onClick={() => track({ name: "link_click", params: { link_id: "linkedin", destination_id: "linkedin_profile", ui_location: "about" } })}
@@ -656,12 +659,13 @@ function App() {
             </Reveal>
           </div>
           <div className="toolkit">
-            <div>
+            <div className="toolkit-intro">
               <span className="eyebrow">MINHA CAIXA DE FERRAMENTAS</span>
               <p>
                 A tecnologia certa <br />
                 para cada problema.
               </p>
+              <CuriositySketch subject="einstein" />
             </div>
             <div className="toolkit-groups">
               <div>

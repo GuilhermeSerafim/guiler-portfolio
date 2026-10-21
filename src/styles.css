@@ -804,13 +804,6 @@ h2 {
   margin-top: 28px;
   max-width: 280px;
 }
-.experience-asterisk {
-  width: 104px;
-  height: 104px;
-  color: #c6d6b0;
-  margin-top: 55px;
-  transform: rotate(15deg);
-}
 .timeline {
   border-top: 1px solid #4b4e44;
 }
@@ -1798,14 +1791,6 @@ h2 {
     max-width: 270px;
     margin-top: 22px;
   }
-  .experience-asterisk {
-    position: absolute;
-    width: 62px;
-    height: 62px;
-    right: 15px;
-    bottom: 12px;
-    margin: 0;
-  }
   .experience-item {
     padding: 26px 0 32px;
   }
@@ -2068,9 +2053,6 @@ h2 {
   .portrait-bottomline {
     font-size: 6px;
   }
-  .experience-asterisk {
-    display: none;
-  }
   .contact-heading h2 {
     font-size: 8.4vw;
   }
@@ -2238,7 +2220,6 @@ h2 {
   .about-copy h2 {
     font-size: 32px;
   }
-  .experience-asterisk,
   .about-photos {
     display: none;
   }
