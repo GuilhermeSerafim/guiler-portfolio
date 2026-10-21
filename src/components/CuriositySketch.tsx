@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./CuriositySketch.css";
 
-type Subject = "cosmos" | "quadra" | "newton" | "tesla" | "davinci" | "einstein";
+type Subject = "cosmos" | "newton" | "tesla" | "davinci" | "einstein";
 
 function SketchDrawing({ subject }: { subject: Subject }) {
   return (
-    <svg className={`sketch-drawing sketch-drawing--${subject}`} viewBox="0 0 180 144" fill="none" aria-hidden="true" focusable="false">
+    <svg className={`sketch-drawing sketch-drawing--${subject}`} viewBox={subject === "einstein" ? "16 18 148 116" : "0 0 180 144"} fill="none" aria-hidden="true" focusable="false">
       {subject === "cosmos" && <>
         <path className="sketch-guide" d="M20 72H160M90 17V127" />
         <ellipse className="sketch-faint" cx="90" cy="72" rx="65" ry="36" transform="rotate(-25 90 72)" />
@@ -16,18 +16,6 @@ function SketchDrawing({ subject }: { subject: Subject }) {
           <circle className="sketch-planet" cx="144" cy="42" r="5" />
         </g>
         <path className="sketch-faint" d="M28 115h18m-9-9v18M149 104h8m-4-4v8" />
-      </>}
-      {subject === "quadra" && <>
-        <path className="sketch-faint" d="M25 129V24h130v105H25Z" />
-        <path d="M60 24v63h60V24M60 87a30 30 0 0 0 60 0" />
-        <path className="sketch-faint" d="M34 24v18a56 56 0 0 0 112 0V24M73 129a17 17 0 0 1 34 0" />
-        <path d="M79 32h22M83 42l3 14h8l3-14" />
-        <ellipse cx="90" cy="41" rx="8" ry="2.5" />
-        <path className="sketch-guide" d="M137 114Q147 12 93 40" />
-        <g className="sketch-ball">
-          <circle className="sketch-planet" cx="93" cy="40" r="6" />
-          <path d="M87 40h12M93 34q-5 6 0 12" />
-        </g>
       </>}
       {subject === "newton" && <>
         <path className="sketch-guide" d="M91 14v29M39 121h101" />
@@ -91,15 +79,21 @@ export function CuriositySketch({ subject }: { subject: Subject }) {
     if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches
       || typeof IntersectionObserver === "undefined") return;
 
-    // The drawing is complete by default. Motion is a single, optional accent.
+    // Newton replays on a fresh entrance; the other accents run just once.
+    // Check the ratio too: the observer's initial notification may be below its threshold.
+    const threshold = subject === "newton" ? 0.75 : 0.35;
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
+      if (!entry.isIntersecting) {
+        if (subject === "newton") setPlayed(false);
+        return;
+      }
+      if (entry.intersectionRatio < threshold) return;
       setPlayed(true);
-      observer.disconnect();
-    }, { threshold: 0.35 });
+      if (subject !== "newton") observer.disconnect();
+    }, { threshold: subject === "newton" ? [0, threshold] : threshold });
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [subject]);
 
   return (
     <div

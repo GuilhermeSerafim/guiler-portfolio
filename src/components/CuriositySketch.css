@@ -2,7 +2,7 @@
   width: 112px;
   aspect-ratio: 180 / 144;
   color: var(--blue);
-  opacity: .54;
+  opacity: 1;
   pointer-events: none;
   user-select: none;
 }
@@ -13,19 +13,20 @@
   max-width: 100%;
   color: inherit;
   stroke: currentColor;
-  stroke-width: 1.2;
+  stroke-width: 1.35;
   stroke-linecap: round;
   stroke-linejoin: round;
   overflow: visible;
   pointer-events: none;
 }
-.sketch-faint { opacity: .4; }
-.sketch-guide { opacity: .32; stroke-dasharray: 2 5; }
+.sketch-drawing :is(path, circle, ellipse) { vector-effect: non-scaling-stroke; }
+.sketch-faint { opacity: .6; }
+.sketch-guide { opacity: .42; stroke-dasharray: 2 5; }
 .sketch-center { fill: currentColor; }
 .sketch-planet, .sketch-apple-body { fill: var(--sketch-paper, var(--paper)); }
 .curiosity-sketch[data-play="true"] .sketch-orbiter { animation: sketch-orbit 1.8s ease-in-out both; transform-origin: 90px 72px; }
-.curiosity-sketch[data-play="true"] .sketch-ball { animation: sketch-shot 950ms cubic-bezier(.35, .1, .55, 1) both; }
-.curiosity-sketch[data-play="true"] .sketch-apple { animation: sketch-gravity 800ms ease-in both; }
+.sketch-apple { transform-origin: 91px 80px; }
+.curiosity-sketch[data-play="true"] .sketch-apple { animation: sketch-gravity 1.65s both; }
 .sketch-discharge, .sketch-light-ray { stroke-dasharray: 100; stroke-dashoffset: 0; }
 .sketch-electric-field { transform-origin: 90px 82px; }
 .sketch-wing { transform-origin: 90px 75px; }
@@ -43,22 +44,17 @@
 .curiosity-sketch[data-play="true"] .sketch-light-ray { animation: sketch-trace 1.5s linear both; }
 .curiosity-sketch[data-play="true"] .sketch-photon { animation: sketch-light 1.5s linear both; }
 @keyframes sketch-trace { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
-@keyframes sketch-field { from { transform: scale(.82); opacity: .12; } to { transform: scale(1); opacity: .4; } }
+@keyframes sketch-field { from { transform: scale(.82); opacity: .12; } to { transform: scale(1); opacity: .6; } }
 @keyframes sketch-wing-left { 0% { transform: rotate(16deg); } 65% { transform: rotate(-3deg); } 100% { transform: rotate(0); } }
 @keyframes sketch-wing-right { 0% { transform: rotate(-16deg); } 65% { transform: rotate(3deg); } 100% { transform: rotate(0); } }
-@keyframes sketch-fabric { from { transform: scale(.94); opacity: .15; } to { transform: scale(1); opacity: .4; } }
+@keyframes sketch-fabric { from { transform: scale(.94); opacity: .15; } to { transform: scale(1); opacity: .6; } }
 @keyframes sketch-light { from { offset-distance: 0%; } to { offset-distance: 100%; } }
 @keyframes sketch-orbit { from { transform: rotate(-130deg); } to { transform: rotate(0); } }
-@keyframes sketch-shot {
-  0% { transform: translate(44px, 74px); }
-  48% { transform: translate(33px, -8px); }
-  100% { transform: translate(0, 0); }
-}
 @keyframes sketch-gravity {
-  0% { transform: translateY(-30px) rotate(-5deg); }
-  78% { transform: translateY(0) rotate(0); }
-  88% { transform: translateY(-3px); }
-  100% { transform: translateY(0); }
+  0%, 20% { transform: translateY(-30px) rotate(-7deg); animation-timing-function: cubic-bezier(.55, 0, 1, .45); }
+  65% { transform: translateY(8px) rotate(3deg); animation-timing-function: ease-out; }
+  80% { transform: translateY(-2px) rotate(-2deg); animation-timing-function: ease-in; }
+  92%, 100% { transform: translateY(8px) rotate(0); }
 }
 
 /* Each sketch has a reserved margin, separate from copy and controls. */
@@ -70,19 +66,10 @@
   width: 94px;
   transform: rotate(-12deg);
 }
-.work-section .work-footer { position: relative; margin-top: 100px; }
-.work-footer > .curiosity-sketch--quadra {
-  position: absolute;
-  top: -88px;
-  left: 55%;
-  width: 88px;
-  transform: rotate(12deg);
-}
-.experience-section > .container { position: relative; }
+.experience-section > .container { position: relative; padding-bottom: 170px; }
 .experience-section .curiosity-sketch {
   --sketch-paper: #242622;
-  color: #b6c4ff;
-  opacity: .62;
+  color: #fff;
 }
 .experience-intro .curiosity-sketch--tesla {
   margin-top: 36px;
@@ -91,10 +78,9 @@
 }
 .experience-section .curiosity-sketch--newton {
   position: absolute;
-  right: 13%;
+  left: 0;
   bottom: 24px;
-  width: 76px;
-  transform: rotate(8deg);
+  width: 160px;
 }
 .about-photos > .curiosity-sketch--davinci {
   position: absolute;
@@ -103,15 +89,21 @@
   width: 128px;
   transform: rotate(-16deg);
 }
-.toolkit-intro { position: relative; }
-.toolkit-intro > .curiosity-sketch--einstein {
-  margin-top: 24px;
-  margin-left: 22px;
+.about-section .toolkit {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) 106px;
+  gap: 32px;
+  align-items: center;
+}
+.toolkit > .curiosity-sketch--einstein {
   width: 106px;
-  transform: rotate(-8deg);
+  aspect-ratio: 148 / 116;
+  justify-self: end;
 }
 @media (max-width: 1100px) {
   .about-photos > .curiosity-sketch--davinci { width: 102px; left: 0; bottom: 6px; }
+  .about-section .toolkit { grid-template-columns: minmax(0, 1fr) 96px; gap: 28px; }
+  .toolkit > .curiosity-sketch--einstein { grid-column: 2; grid-row: 1; width: 96px; }
+  .about-section .toolkit-groups { grid-column: 1 / -1; grid-row: 2; }
 }
 @media (max-width: 960px) {
   .work-section > .curiosity-sketch--cosmos { width: 72px; top: 6px; }
@@ -120,24 +112,18 @@
 }
 @media (max-width: 700px) {
   .work-section > .curiosity-sketch--cosmos { width: 60px; top: 7px; right: 15px; }
-  .work-section .work-footer { margin-top: 88px; }
-  .work-footer > .curiosity-sketch--quadra { width: 72px; top: -73px; left: auto; right: 18px; }
   .experience-intro .curiosity-sketch--tesla { width: 92px; margin: 18px 0 0 auto; }
-  .experience-section .curiosity-sketch--newton { width: 57px; right: 10%; bottom: 7px; }
+  .experience-section > .container { padding-bottom: 145px; }
+  .experience-section .curiosity-sketch--newton { width: 132px; bottom: 20px; }
   .about-section .about-photos { padding-bottom: 38px; }
   .about-photos > .curiosity-sketch--davinci { width: 96px; bottom: 6px; left: 0; }
-  .toolkit-intro { padding-right: 82px; min-height: 78px; }
-  .toolkit-intro > .curiosity-sketch--einstein {
-    position: absolute;
-    width: 76px;
-    top: 14px;
-    right: 0;
-    margin: 0;
-  }
+  .about-section .toolkit { grid-template-columns: minmax(0, 1fr) 80px; gap: 24px; }
+  .toolkit > .curiosity-sketch--einstein { width: 80px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .curiosity-sketch[data-play="true"] * { animation: none; }
 }
 @media print {
   .curiosity-sketch { display: none; }
+  .experience-section > .container { padding-bottom: 25px; }
 }

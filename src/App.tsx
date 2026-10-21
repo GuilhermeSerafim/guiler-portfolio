@@ -517,7 +517,6 @@ function App() {
             </AnimatePresence>
           </div>
           <div className="work-footer">
-            <CuriositySketch subject="quadra" />
             <p>Outras ideias, experimentos e código aberto.</p>
             <a
               className="text-link"
@@ -659,13 +658,12 @@ function App() {
             </Reveal>
           </div>
           <div className="toolkit">
-            <div className="toolkit-intro">
+            <div>
               <span className="eyebrow">MINHA CAIXA DE FERRAMENTAS</span>
               <p>
                 A tecnologia certa <br />
                 para cada problema.
               </p>
-              <CuriositySketch subject="einstein" />
             </div>
             <div className="toolkit-groups">
               <div>
@@ -690,6 +688,7 @@ function App() {
                 </p>
               </div>
             </div>
+            <CuriositySketch subject="einstein" />
           </div>
         </section>
 
