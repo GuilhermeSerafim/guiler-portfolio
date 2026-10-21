@@ -542,6 +542,7 @@ function App() {
                 <span className="status-dot" /> SISTEMAS REAIS. RESPONSABILIDADE
                 REAL.
               </span>
+              <CuriositySketch subject="newton" />
             </div>
             <div className="experience-layout">
               <div className="experience-intro">
@@ -721,15 +722,12 @@ function App() {
               </div>
             </Reveal>
             <div className="contact-bottom">
-              <div className="contact-copy">
-                <div className="contact-idea">
-                  <p>
-                    Um produto, um sistema complexo ou uma boa ideia.
-                    <br />
-                    Quero ouvir o que você está construindo.
-                  </p>
-                  <CuriositySketch subject="newton" />
-                </div>
+              <div>
+                <p>
+                  Um produto, um sistema complexo ou uma boa ideia.
+                  <br />
+                  Quero ouvir o que você está construindo.
+                </p>
                 <div className="email-row">
                   <a href={`mailto:${email}`} onClick={() => track({ name: "contact_intent", params: { contact_method: "email_open", ui_location: "contact_email" } })}>{email}</a>
                   <button

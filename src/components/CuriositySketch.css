@@ -79,17 +79,13 @@
   width: 128px;
   transform: rotate(-6deg);
 }
-.contact-copy { flex: 1; min-width: 0; max-width: 640px; }
-.contact-idea {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 110px;
-  align-items: center;
-  gap: 24px;
-}
-.contact-idea > .curiosity-sketch--newton {
-  --sketch-paper: var(--blue);
-  color: #fff;
-  width: 110px;
+.experience-section .section-top { position: relative; }
+.experience-section .section-top > .curiosity-sketch--newton {
+  position: absolute;
+  right: 46%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 84px;
   aspect-ratio: 110 / 120;
 }
 .about-photos > .curiosity-sketch--davinci {
@@ -117,15 +113,14 @@
 }
 @media (max-width: 960px) {
   .work-section > .curiosity-sketch--cosmos { width: 72px; top: 6px; }
+  .experience-section .section-top > .curiosity-sketch--newton { width: 72px; }
   .about-section .about-photos { padding-bottom: 104px; }
   .about-photos > .curiosity-sketch--davinci { width: 88px; bottom: 8px; }
 }
 @media (max-width: 700px) {
   .work-section > .curiosity-sketch--cosmos { width: 60px; top: 7px; right: 15px; }
   .experience-intro .curiosity-sketch--tesla { width: 92px; margin: 18px 0 0 auto; }
-  .contact-copy { width: 100%; }
-  .contact-idea { grid-template-columns: minmax(0, 1fr) 96px; gap: 16px; }
-  .contact-idea > .curiosity-sketch--newton { width: 96px; }
+  .experience-section .section-top > .curiosity-sketch--newton { width: 60px; right: 0; }
   .about-section .about-photos { padding-bottom: 38px; }
   .about-photos > .curiosity-sketch--davinci { width: 96px; bottom: 6px; left: 0; }
   .about-section .toolkit { grid-template-columns: minmax(0, 1fr) 80px; gap: 24px; }
@@ -137,5 +132,4 @@
 }
 @media print {
   .curiosity-sketch { display: none; }
-  .contact-idea { display: block; }
 }
