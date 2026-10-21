@@ -13,7 +13,7 @@
 }
 .notebook-topline .eyebrow { font-size: 8px; letter-spacing: 1.1px; color: #565b57; }
 .notebook-page { color: #73776e; font: 9px var(--mono); }
-.notebook-tabs { display: flex; gap: 26px; margin-top: 5px; }
+.notebook-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 16px; margin-top: 5px; }
 .notebook-tabs button {
   position: relative;
   min-width: 54px;
@@ -24,6 +24,7 @@
   font-size: 12px;
 }
 .notebook-tabs button[aria-selected="true"] { color: var(--blue); font-weight: 600; }
+.notebook-tabs button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 2px; }
 .notebook-tabs button::after {
   content: "";
   position: absolute;
@@ -68,7 +69,29 @@
 .notebook-sheet[data-play="true"] .notebook-orbiter { animation: notebook-orbit 1.8s ease-in-out both; transform-origin: 90px 72px; }
 .notebook-sheet[data-play="true"] .notebook-ball { animation: notebook-shot 950ms cubic-bezier(.35, .1, .55, 1) both; }
 .notebook-sheet[data-play="true"] .notebook-apple { animation: notebook-gravity 800ms ease-in both; }
+.notebook-discharge, .notebook-light-ray { stroke-dasharray: 100; stroke-dashoffset: 0; }
+.notebook-electric-field { transform-origin: 90px 82px; }
+.notebook-wing { transform-origin: 90px 75px; }
+.notebook-spacetime { transform-origin: 96px 85px; }
+.notebook-photon {
+  offset-path: path("M18 34C64 34 83 44 109 67S130 102 160 111");
+  offset-distance: 100%;
+  offset-rotate: 0deg;
+}
+.notebook-sheet[data-play="true"] .notebook-discharge { animation: notebook-trace 1s ease-out both; }
+.notebook-sheet[data-play="true"] .notebook-electric-field { animation: notebook-field 1.2s ease-out both; }
+.notebook-sheet[data-play="true"] .notebook-wing--left { animation: notebook-wing-left 1.4s ease-in-out both; }
+.notebook-sheet[data-play="true"] .notebook-wing--right { animation: notebook-wing-right 1.4s ease-in-out both; }
+.notebook-sheet[data-play="true"] .notebook-spacetime { animation: notebook-fabric 1.2s ease-out both; }
+.notebook-sheet[data-play="true"] .notebook-light-ray { animation: notebook-trace 1.5s linear both; }
+.notebook-sheet[data-play="true"] .notebook-photon { animation: notebook-light 1.5s linear both; }
 @keyframes notebook-ink { from { opacity: .3; } to { opacity: 1; } }
+@keyframes notebook-trace { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes notebook-field { from { transform: scale(.82); opacity: .12; } to { transform: scale(1); opacity: .4; } }
+@keyframes notebook-wing-left { 0% { transform: rotate(16deg); } 65% { transform: rotate(-3deg); } 100% { transform: rotate(0); } }
+@keyframes notebook-wing-right { 0% { transform: rotate(-16deg); } 65% { transform: rotate(3deg); } 100% { transform: rotate(0); } }
+@keyframes notebook-fabric { from { transform: scale(.94); opacity: .15; } to { transform: scale(1); opacity: .4; } }
+@keyframes notebook-light { from { offset-distance: 0%; } to { offset-distance: 100%; } }
 @keyframes notebook-orbit { from { transform: rotate(-130deg); } to { transform: rotate(0); } }
 @keyframes notebook-shot {
   0% { transform: translate(44px, 74px); }
@@ -83,7 +106,6 @@
 }
 @media (max-width: 700px) {
   .curiosity-notebook { max-width: none; margin-top: 28px; }
-  .notebook-tabs { gap: 30px; }
   .notebook-tabs button { min-width: 60px; font-size: 14px; }
   .notebook-sheet { grid-template-columns: 105px minmax(0, 1fr); gap: 10px; min-height: 174px; }
   .notebook-drawing { width: 105px; }
@@ -94,7 +116,7 @@
   .notebook-sheet { grid-template-columns: 84px minmax(0, 1fr); gap: 8px; min-height: 190px; }
   .notebook-drawing { width: 84px; }
   .notebook-topline .eyebrow { font-size: 7px; }
-  .notebook-tabs { gap: 24px; }
+  .notebook-tabs { column-gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .notebook-sheet[data-play="true"] * { animation: none; }
