@@ -25,7 +25,11 @@
 .sketch-center { fill: currentColor; }
 .sketch-planet, .sketch-apple-body { fill: var(--sketch-paper, var(--paper)); }
 .curiosity-sketch[data-play="true"] .sketch-orbiter { animation: sketch-orbit 1.8s ease-in-out both; transform-origin: 90px 72px; }
-.sketch-apple { transform-origin: 91px 80px; }
+.sketch-apple {
+  transform-origin: 91px 80px;
+  /* Start in the same pose as the first frame, without a jump at the visibility threshold. */
+  transform: translateY(-30px) rotate(-7deg);
+}
 .curiosity-sketch[data-play="true"] .sketch-apple { animation: sketch-gravity 1.65s both; }
 .sketch-discharge, .sketch-light-ray { stroke-dasharray: 100; stroke-dashoffset: 0; }
 .sketch-electric-field { transform-origin: 90px 82px; }
@@ -66,7 +70,6 @@
   width: 94px;
   transform: rotate(-12deg);
 }
-.experience-section > .container { position: relative; padding-bottom: 170px; }
 .experience-section .curiosity-sketch {
   --sketch-paper: #242622;
   color: #fff;
@@ -76,11 +79,18 @@
   width: 128px;
   transform: rotate(-6deg);
 }
-.experience-section .curiosity-sketch--newton {
-  position: absolute;
-  left: 0;
-  bottom: 24px;
-  width: 160px;
+.contact-copy { flex: 1; min-width: 0; max-width: 640px; }
+.contact-idea {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px;
+  align-items: center;
+  gap: 24px;
+}
+.contact-idea > .curiosity-sketch--newton {
+  --sketch-paper: var(--blue);
+  color: #fff;
+  width: 110px;
+  aspect-ratio: 110 / 120;
 }
 .about-photos > .curiosity-sketch--davinci {
   position: absolute;
@@ -113,8 +123,9 @@
 @media (max-width: 700px) {
   .work-section > .curiosity-sketch--cosmos { width: 60px; top: 7px; right: 15px; }
   .experience-intro .curiosity-sketch--tesla { width: 92px; margin: 18px 0 0 auto; }
-  .experience-section > .container { padding-bottom: 145px; }
-  .experience-section .curiosity-sketch--newton { width: 132px; bottom: 20px; }
+  .contact-copy { width: 100%; }
+  .contact-idea { grid-template-columns: minmax(0, 1fr) 96px; gap: 16px; }
+  .contact-idea > .curiosity-sketch--newton { width: 96px; }
   .about-section .about-photos { padding-bottom: 38px; }
   .about-photos > .curiosity-sketch--davinci { width: 96px; bottom: 6px; left: 0; }
   .about-section .toolkit { grid-template-columns: minmax(0, 1fr) 80px; gap: 24px; }
@@ -122,8 +133,9 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .curiosity-sketch[data-play="true"] * { animation: none; }
+  .sketch-apple { transform: translateY(8px); }
 }
 @media print {
   .curiosity-sketch { display: none; }
-  .experience-section > .container { padding-bottom: 25px; }
+  .contact-idea { display: block; }
 }

@@ -586,7 +586,6 @@ function App() {
                 ))}
               </div>
             </div>
-            <CuriositySketch subject="newton" />
           </div>
         </section>
 
@@ -722,12 +721,15 @@ function App() {
               </div>
             </Reveal>
             <div className="contact-bottom">
-              <div>
-                <p>
-                  Um produto, um sistema complexo ou uma boa ideia.
-                  <br />
-                  Quero ouvir o que você está construindo.
-                </p>
+              <div className="contact-copy">
+                <div className="contact-idea">
+                  <p>
+                    Um produto, um sistema complexo ou uma boa ideia.
+                    <br />
+                    Quero ouvir o que você está construindo.
+                  </p>
+                  <CuriositySketch subject="newton" />
+                </div>
                 <div className="email-row">
                   <a href={`mailto:${email}`} onClick={() => track({ name: "contact_intent", params: { contact_method: "email_open", ui_location: "contact_email" } })}>{email}</a>
                   <button

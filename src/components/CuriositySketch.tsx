@@ -5,7 +5,7 @@ type Subject = "cosmos" | "newton" | "tesla" | "davinci" | "einstein";
 
 function SketchDrawing({ subject }: { subject: Subject }) {
   return (
-    <svg className={`sketch-drawing sketch-drawing--${subject}`} viewBox={subject === "einstein" ? "16 18 148 116" : "0 0 180 144"} fill="none" aria-hidden="true" focusable="false">
+    <svg className={`sketch-drawing sketch-drawing--${subject}`} viewBox={subject === "einstein" ? "16 18 148 116" : subject === "newton" ? "36 10 110 120" : "0 0 180 144"} fill="none" aria-hidden="true" focusable="false">
       {subject === "cosmos" && <>
         <path className="sketch-guide" d="M20 72H160M90 17V127" />
         <ellipse className="sketch-faint" cx="90" cy="72" rx="65" ry="36" transform="rotate(-25 90 72)" />
