@@ -11,6 +11,7 @@ A referência de hierarquia temporal é [Jhey](https://www.jhey.dev/): conteúdo
 - Retrato abre de um trapézio discreto para seu retângulo final, preservando enquadramento e proporções. Duração de 820 ms no desktop e 700 ms em telas menores. Pequena escala 1.035 → 1 com origem no topo, sem deslocar o recorte final aprovado.
 - Traço orbital azul conduz à fotografia em 1050 ms. A seta conclui em 800 ms. O traço é decorativo, ignorado por leitores de tela e eventos de ponteiro.
 - No mobile, o traço reduz para 64 px e fica junto à margem da foto, abaixo da etiqueta, para não atravessar o texto.
+- Ajuste solicitado após revisão: deslocamento adicional à esquerda de 52 px no desktop, 57 px no tablet e 8 px no mobile. As posições finais são -164, -132 e -32 px, respectivamente. O traço não cruza a etiqueta “UM BUILDER, DE PONTA A PONTA.”.
 - Sublinhado existente termina em 680 ms. Meteoros existentes recebem deslocamento de 350 ms na cadência: a primeira passagem acompanha o final da montagem e a última termina em 4650 ms. A abertura completa permanece abaixo de cinco segundos; a cadência global do componente não muda.
 
 ## Ciclo de vida
@@ -31,6 +32,7 @@ Build local com TypeScript e Vite. Revisão de diffs sem mudanças de dependênc
 
 - H1 legível e CTA acionável com animações no instante zero; abertura não bloqueia o clique em Projetos.
 - Larguras 320, 390, 768 e 1440 px sem overflow horizontal. Captura final mobile confirma traço afastado da etiqueta.
+- Rechecagem do deslocamento em 320, 390, 768, 1024 e 1440 px: nenhum caminho SVG sobrepõe a etiqueta e não há overflow horizontal. Capturas em `output/playwright/entry-stroke-left-{390,768,1440}.png` na raiz do workspace.
 - Clique e acesso direto a `#projetos` chegam ao alvo sem entrada; quatro indicadores de disponibilidade preservados.
 - Movimento reduzido dinâmico encerra efeitos; desativá-lo não reinicia a entrada. Retorno pelo histórico também mostra estado final.
 - Falha simulada do retrato não impede a navegação. Nenhum erro JavaScript ou request Google observado no ambiente local.
