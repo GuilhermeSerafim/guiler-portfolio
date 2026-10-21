@@ -542,7 +542,6 @@ function App() {
                 <span className="status-dot" /> SISTEMAS REAIS. RESPONSABILIDADE
                 REAL.
               </span>
-              <CuriositySketch subject="newton" />
             </div>
             <div className="experience-layout">
               <div className="experience-intro">
@@ -557,7 +556,10 @@ function App() {
                     Da cobrança de seguros ao atendimento público. Engenharia
                     para operações que precisam funcionar.
                   </p>
-                  <CuriositySketch subject="tesla" />
+                  <div className="experience-sketches">
+                    <CuriositySketch subject="tesla" />
+                    <CuriositySketch subject="newton" />
+                  </div>
                 </Reveal>
               </div>
               <div className="timeline">
