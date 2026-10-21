@@ -996,9 +996,16 @@ h2 {
   margin-inline: 8px;
 }
 .contact-section {
+  position: relative;
+  isolation: isolate;
   background: var(--blue);
   color: white;
   padding-top: 65px;
+}
+.contact-section .meteor-field {
+  --meteor-color: #dce3ff;
+  --meteor-tail-start: #e2e8ffb3;
+  --meteor-tail-middle: #c8d4ff35;
 }
 .contact-section .section-top {
   opacity: 0.72;

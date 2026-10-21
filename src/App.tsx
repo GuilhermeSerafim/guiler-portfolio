@@ -91,7 +91,7 @@ function ExpertiseStrip() {
 function App() {
   const { heroRef, entry } = useHeroEntry();
   const projectHealth = useProjectHealth();
-  const [showHeroField] = useState(
+  const [showMeteorField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
   );
   const [menuOpen, setMenuOpen] = useState(false);
@@ -250,7 +250,6 @@ function App() {
           data-entry={entry}
           aria-labelledby="hero-title"
         >
-          {showHeroField && <MeteorField />}
           <div className="hero-copy">
             <div>
               <p className="eyebrow hero-eyebrow">
@@ -775,6 +774,7 @@ function App() {
               </div>
             </div>
             <footer className="site-footer">
+              {showMeteorField && <MeteorField />}
               <a className="wordmark" href="#inicio">
                 guiler.
               </a>

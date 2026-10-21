@@ -51,18 +51,12 @@
   animation: entry-tip-appear 250ms 550ms ease-out both;
 }
 
-/* Keep the existing underline and meteor field subordinate to one entrance. */
+/* Keep the underline coordinated with the hero entrance. */
 .hero-entry .impact-word path {
   animation: none;
 }
 .hero-entry[data-entry="animate"] .impact-word path {
   animation: impact-draw 500ms 180ms ease-out both;
-}
-.hero-entry[data-entry="animate"] .meteor-travel {
-  animation-delay: calc(var(--meteor-delay) + .35s);
-}
-.hero-entry[data-entry="static"] .meteor-travel {
-  animation: none;
 }
 
 @keyframes entry-title-settle {

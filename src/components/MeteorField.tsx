@@ -13,7 +13,7 @@ const trails = [
   { left: "92%", top: "15%", delay: "2.65s", duration: "1.65s" },
 ];
 
-/** A finite opening gesture; never a recurring background loop. */
+/** A finite gesture when the footer becomes visible, never a recurring loop. */
 export function MeteorField() {
   const field = useRef<HTMLDivElement>(null);
 

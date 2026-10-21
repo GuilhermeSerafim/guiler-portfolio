@@ -12,7 +12,13 @@ A referência de hierarquia temporal é [Jhey](https://www.jhey.dev/): conteúdo
 - Traço orbital azul conduz à fotografia em 1050 ms. A seta conclui em 800 ms. O traço é decorativo, ignorado por leitores de tela e eventos de ponteiro.
 - No mobile, o traço reduz para 64 px e fica junto à margem da foto, abaixo da etiqueta, para não atravessar o texto.
 - Ajuste solicitado após revisão: deslocamento adicional à esquerda de 52 px no desktop, 57 px no tablet e 8 px no mobile. As posições finais são -164, -132 e -32 px, respectivamente. O traço não cruza a etiqueta “UM BUILDER, DE PONTA A PONTA.”.
-- Sublinhado existente termina em 680 ms. Meteoros existentes recebem deslocamento de 350 ms na cadência: a primeira passagem acompanha o final da montagem e a última termina em 4650 ms. A abertura completa permanece abaixo de cinco segundos; a cadência global do componente não muda.
+- Sublinhado existente termina em 680 ms. Após revisão do usuário, meteoros e estrelas foram retirados do hero e movidos para a área azul do rodapé. A entrada do hero já não controla esse efeito.
+
+## Meteoros no rodapé
+
+A única instância de `MeteorField` fica dentro de `.site-footer`, posicionada sobre a área azul `.contact-section`. O contexto isolado mantém os rastros atrás do conteúdo e acima do fundo, sem bloquear cliques ou alterar os controles fixos de privacidade. Tons claros substituem o azul dos rastros para contraste; a máscara suaviza as bordas da área final.
+
+A animação permanece pausada até a área azul entrar na tela, para não ser consumida enquanto o visitante está no início. São três passagens finitas em 4,3 segundos de atividade no desktop, duas no mobile, sem loop. Movimento reduzido oculta os rastros. A impressão omite o campo decorativo.
 
 ## Ciclo de vida
 
@@ -24,7 +30,7 @@ O atributo de inspeção é `#inicio[data-entry="animate"]` ou `#inicio[data-ent
 
 ## Escopo preservado
 
-Layout, fotos, textos, identidade existente, projetos, notebook, navegação, URLs, consentimento e Analytics não foram alterados. O componente `Reveal` continua igual para outras seções; apenas os grupos do hero passam a usar wrappers comuns.
+Fotos, textos, identidade existente, projetos, notebook, navegação, URLs, consentimento e Analytics não foram alterados. O componente `Reveal` continua igual para outras seções; apenas os grupos do hero passam a usar wrappers comuns. O campo de meteoros mudou para o rodapé, preservando as dimensões do conteúdo.
 
 ## Validação
 
@@ -36,6 +42,7 @@ Build local com TypeScript e Vite. Revisão de diffs sem mudanças de dependênc
 - Clique e acesso direto a `#projetos` chegam ao alvo sem entrada; quatro indicadores de disponibilidade preservados.
 - Movimento reduzido dinâmico encerra efeitos; desativá-lo não reinicia a entrada. Retorno pelo histórico também mostra estado final.
 - Falha simulada do retrato não impede a navegação. Nenhum erro JavaScript ou request Google observado no ambiente local.
+- Mudança dos meteoros: build passou; QA local em 320/390/1440 px confirmou ausência do efeito no hero, pausa antes do rodapé, ativação ao chegar, limites do campo restritos à área azul, movimento reduzido, retorno ao topo e ausência de overflow/erros JS. Capturas `output/playwright/footer-meteors-{390,1440}.png` e script `footer-meteors-qa.js` na raiz do workspace. As capturas pausam a animação em um instante visível para inspeção.
 
 Evidências na raiz do workspace: `docs/entry-transitions-local-qa-2026-10-20.md` e `output/playwright/entry-portfolio-*.js/png`. Testes em navegador local, sem alegação de dispositivo físico ou navegador interno do Instagram. Prévia: http://127.0.0.1:5195/.
 
