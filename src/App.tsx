@@ -29,6 +29,7 @@ import { MeteorField } from "./components/MeteorField";
 import { EntryStroke, useHeroEntry } from "./components/HeroEntry";
 import { CuriositySketch } from "./components/CuriositySketch";
 import { TechnologyCatalog } from "./components/TechnologyCatalog";
+import { TechText } from "./components/TechText";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { ProjectHealthStatus } from "./components/ProjectHealthStatus";
 import { useProjectHealth } from "./project-health/useProjectHealth";
@@ -676,7 +677,7 @@ function App() {
                 <h2 id="contact-title">
                   Tem um desafio?
                   <br />
-                  <span>Vamos construir.</span>
+                  <span>Vamos <TechText>construir.</TechText></span>
                 </h2>
                 <Magnetic className="contact-arrow-wrap">
                   <a

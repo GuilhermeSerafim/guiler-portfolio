@@ -15,6 +15,13 @@ original tooltip and mobile warning. Reveal is an original Motion composition.
 The complete upstream source license follows verbatim:
 https://github.com/DavidHDev/react-bits/blob/main/LICENSE.md
 
+TechText in src/components/TechText.tsx adapts the Canvas 2D glyph sprites,
+dashed outlines, and selection-frame interaction from React Bits Tech Text:
+https://github.com/DavidHDev/react-bits/blob/14330e6963f6c5ddd773ee2af844d0630c22b958/src/ts-default/TextAnimations/TechText/TechText.tsx
+Adapted on 2026-10-22 with HTML text preserved, local fonts, demand-driven
+hover rendering, and static fallbacks for touch and reduced motion.
+The license below includes the upstream notice current on this date.
+
 MIT + Commons Clause License Condition v1.0
 
 Copyright (c) 2026 David Haz
@@ -30,6 +37,10 @@ copies or substantial portions of the Software.
 ## Commons Clause Restriction
 
 You may use this Software, including for any commercial purpose, **so long as you do not sell, sublicense, or redistribute the components themselves-whether alone, in a bundle, or as a ported version.**
+
+The same restriction covers the React Bits tools (Background Studio, Texture Lab, Shape Magic, Center Stage, Sound Lab and any tools added later) and the sounds in the sound library. **You may not sell, sublicense, or redistribute the tools or the sounds themselves, or offer the tools or a substantially similar copy of them as a hosted service-whether alone, in a bundle, or as a ported version.**
+
+What you make with the tools is yours to use. You can use exported code, images, videos, and audio files in any personal or commercial application, website, or product, including paid ones. **You may not sell or redistribute the exports on their own, either individually or as the product itself, such as a sound, texture, background, or template pack.**
 
 ## No Warranty
 
