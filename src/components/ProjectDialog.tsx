@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "../data";
 import { track } from "../analytics/client";
-import { ProjectHealthStatus } from "./ProjectHealthStatus";
+import { ProjectHealthNotice, ProjectHealthStatus } from "./ProjectHealthStatus";
 import { ProjectResult } from "./ProjectResult";
 import type { ProjectHealthView } from "../project-health/view";
 
@@ -101,37 +101,40 @@ export function ProjectDialog({
               <p>{project.outcome}</p>
             </section>
             {project.demoNotice && <p className="case-demo-notice">{project.demoNotice}</p>}
-            <div className="case-links">
-              <a
-                className="button button-blue"
-                href={project.demo}
-                onClick={() => track({ name: "project_visit", params: { project_id: project.id, ui_location: "project_dialog" } })}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {project.demoNotice ? "Explorar demonstração" : "Abrir projeto"} <ArrowUpRight size={18} />
-              </a>
-              {project.github && (
-                <div className="case-repositories">
-                  {[
-                    ...(project.frontendGithub ? [{ label: "Frontend", url: project.frontendGithub }] : []),
-                    { label: project.frontendGithub ? "Backend" : "Ver código", url: project.github },
-                  ].map((repository) => (
-                    <a
-                      key={repository.url}
-                      className="text-link"
-                      href={repository.url}
-                      onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_dialog" } })}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Github size={18} /> {repository.label} <ArrowUpRight size={16} />
-                    </a>
-                  ))}
-                </div>
-              )}
+            <div className="case-access">
+              {health && <ProjectHealthNotice health={health} />}
+              <div className="case-links">
+                <a
+                  className="button button-blue"
+                  href={project.demo}
+                  onClick={() => track({ name: "project_visit", params: { project_id: project.id, ui_location: "project_dialog" } })}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {project.demoNotice ? "Explorar demonstração" : "Abrir projeto"} <ArrowUpRight size={18} />
+                </a>
+                {project.github && (
+                  <div className="case-repositories">
+                    {[
+                      ...(project.frontendGithub ? [{ label: "Frontend", url: project.frontendGithub }] : []),
+                      { label: project.frontendGithub ? "Backend" : "Ver código", url: project.github },
+                    ].map((repository) => (
+                      <a
+                        key={repository.url}
+                        className="text-link"
+                        href={repository.url}
+                        onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_dialog" } })}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Github size={18} /> {repository.label} <ArrowUpRight size={16} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {health && <ProjectHealthStatus health={health} />}
             </div>
-            {health && <ProjectHealthStatus health={health} />}
           </div>
         </>
       )}

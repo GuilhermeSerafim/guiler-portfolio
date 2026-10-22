@@ -1,5 +1,7 @@
 # Revisão dos quatro cases e trajetória
 
+**Atualização posterior de 22/10:** Tech Text (`249b5a1`) foi publicado isoladamente após aprovação. A revisão dos cases continua local e recebeu [resumos concisos e disponibilidade contextual](project-cards-ux-2026-10-22.md): estágio e resultados aparecem somente nos detalhes. O registro abaixo preserva a primeira entrega desta revisão.
+
 Briefing `BRIEF-MELHORIAS-PORTFOLIO.md`, de 22/10/2026, lido integralmente e executado no checkout ativo. Base local `249b5a1` (Tech Text); `origin/main` confirmado em `dda4a78` (Órbita publicada). Branch desta revisão: `feat/case-storytelling`.
 
 O Tech Text continua preservado e local, aguardando revisão visual. Esta revisão também não foi enviada ao remoto ou publicada. Nenhum checkout antigo foi usado para substituir o conteúdo atual.

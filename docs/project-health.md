@@ -1,5 +1,9 @@
 # Estado público das demonstrações
 
+## Revisão de UX — 22/10/2026, local
+
+O estado e o horário foram retirados dos cards. A verificação fica recolhida no modal, com avisos de falha, instabilidade ou manutenção junto ao CTA quando aplicáveis. Contrato e validade continuam iguais. A revisão e os testes estão em [Cards concisos e disponibilidade contextual](project-cards-ux-2026-10-22.md); o histórico abaixo descreve a apresentação anterior.
+
 Implementação iniciada localmente em 20/10/2026. Branch `feat/project-health-status`, baseada em `main` (`f3b66aa`). A integração funcional foi publicada após o alinhamento de escopo descrito abaixo. A evolução visual em `curiosity-lab` recebeu autorização posterior do usuário e foi integrada a esta base; seu estado de publicação está em [validação visual](research/personality/validation.md).
 
 ## Atualização do agendamento — 20/10/2026

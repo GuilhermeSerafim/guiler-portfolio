@@ -37,7 +37,7 @@ export const projects: Project[] = [
     eyebrow: "IA APLICADA / GEOTECNOLOGIA",
     title: "Dados do território. Decisões mais claras.",
     description:
-      "Desenvolvi um protótipo que reúne dados geoespaciais e apresenta um índice de risco de alagamento com mapa e explicação. Next.js, FastAPI, PostGIS e LangChain conectam interface, regras de cálculo e histórico.",
+      "Análise de risco de alagamento com mapas e explicações para apoiar decisões sobre o território.",
     stage: "Protótipo de análise geoespacial",
     tags: ["Next.js", "Python", "PostGIS", "LangChain"],
     problem:
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     eyebrow: "FULL STACK / FERRAMENTAS EMPRESARIAIS",
     title: "IA aplicada à rotina comercial.",
     description:
-      "Desenvolvi funcionalidades para propostas, diagnóstico comercial e qualificação de leads em um hub para membros SEVEN. Integrei React e TypeScript a APIs em FastAPI, PostgreSQL e modelos de IA, com histórico de conversas.",
+      "Hub de ferramentas com IA para propostas, diagnóstico comercial e qualificação de leads.",
     stage: "Projeto profissional · implementação parcial",
     tags: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
     technologies: [
@@ -104,7 +104,7 @@ export const projects: Project[] = [
     eyebrow: "PRODUTO WEB / AGENDAMENTO",
     title: "Reservas e horários, no mesmo fluxo.",
     description:
-      "Em equipe, contribuí para um sistema de reservas de quadras com Angular e Spring Boot. Desenvolvi interfaces, integração com a API, formulários validados e feedback de carregamento e erros para os fluxos de reserva.",
+      "Sistema de reservas de quadras para organizar agendamentos, horários e bloqueios.",
     stage: "Projeto em equipe",
     tags: ["Java", "Spring Boot", "Angular", "SQL"],
     problem:
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     eyebrow: "FRONT-END / EXPERIÊNCIA COMERCIAL",
     title: "Da proposta de valor à solicitação de vaga.",
     description:
-      "Desenvolvi e evoluí a landing da Mesa de Negócios em React e TypeScript, com páginas de materiais e captação via Respondi. Adaptei o formulário ao desktop e ao mobile e otimizei o JavaScript de entrada.",
+      "Página de apresentação da Mesa de Negócios, com um caminho direto para solicitar uma vaga.",
     stage: "Landing page publicada",
     tags: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui"],
     problem:

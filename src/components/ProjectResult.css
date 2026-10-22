@@ -1,12 +1,7 @@
-.project-stage,
 .case-stage {
   color: var(--muted);
   font-size: 11px;
   line-height: 1.6;
-}
-
-.project-stage {
-  margin-top: 4px;
 }
 
 .case-stage {
