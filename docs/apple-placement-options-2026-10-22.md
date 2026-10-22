@@ -9,7 +9,7 @@ O usuário rejeitou a composição ao lado de Tesla e solicitou dez cenários co
 | /__preview/maca/01 | No lugar da seta da apresentação no hero | 64 / 48 px |
 | /__preview/maca/02 | Entre as legendas abaixo do retrato | 80 / 60 px |
 | /__preview/maca/03 | Ao lado da introdução dos projetos | 88 / 64 px |
-| /__preview/maca/04 | Encerramento dos projetos e convite ao GitHub | 88 / 64 px |
+| /__preview/maca/04 | Centro do encerramento dos projetos e convite ao GitHub | 72 / 52 px |
 | /__preview/maca/05 | Entre as duas experiências, na margem direita da timeline | 76 / 60 px |
 | /__preview/maca/06 | Abertura de Sobre | 72 / 56 px |
 | /__preview/maca/07 | Assinatura do texto pessoal, junto ao LinkedIn | 88 / 64 px |
@@ -40,3 +40,9 @@ Newton usa azul sobre papel e branco nas seções escuras. A mesma arte vetorial
 Scripts na raiz do workspace: `output/playwright/apple-options-qa.js` e `apple-options-final-qa.js`. Capturas: `output/playwright/apple-option-{01..10}-{390,1440}.png`. Não houve teste em dispositivo físico.
 
 Sem push ou deploy. A escolha da composição fica com o usuário.
+
+## Refinamento da opção 04
+
+A pedido do usuário, a opção 04 foi centralizada e reduzida em aproximadamente 18%: de 88 para 72 px no desktop e de 64 para 52 px no celular. No desktop, colunas laterais simétricas mantêm a maçã no centro da faixa, independentemente do comprimento do texto e do link. No celular, texto, maçã e GitHub ficam empilhados e centralizados.
+
+Validação em 320/390/700/701/768/1440 px: diferença entre o centro da maçã e da faixa igual a zero, sem colisões ou overflow. Animação preservada, zero erros JavaScript, revisão visual desktop/celular e revisão estática independente aprovadas. Build TypeScript/Vite aprovado com os mesmos arquivos de produção. Script `output/playwright/apple-four-centered-qa.js`; capturas `apple-four-centered-{390,1440}.png`. Continua disponível na mesma URL `/__preview/maca/04`, somente localmente.

@@ -8,7 +8,7 @@ const options = [
   { id: "01", title: "Uma ideia no hero", area: "Apresentação", description: "A maçã substitui a pequena seta ao lado da apresentação.", target: ".hero-intro", after: null, size: "64 / 48 px" },
   { id: "02", title: "Assinatura do retrato", area: "Apresentação", description: "Centralizada sob a foto, entre as duas legendas.", target: ".portrait-bottomline", after: ":scope > span:first-child", size: "80 / 60 px" },
   { id: "03", title: "Ideias em construção", area: "Projetos", description: "Ao lado do texto introdutório, acima dos filtros.", target: ".work-heading-side", after: ":scope > p", size: "88 / 64 px" },
-  { id: "04", title: "Mais experimentos", area: "Projetos", description: "No encerramento dos projetos, junto ao convite para explorar.", target: ".work-footer", after: ":scope > p", size: "88 / 64 px" },
+  { id: "04", title: "Mais experimentos", area: "Projetos", description: "Centralizada no encerramento dos projetos, com desenho menor.", target: ".work-footer", after: ":scope > p", size: "72 / 52 px" },
   { id: "05", title: "Uma pausa na trajetória", area: "Experiência", description: "Na margem direita entre Quipux e Tokio Marine, em branco.", target: ".timeline", after: ":scope > div:first-child", size: "76 / 60 px" },
   { id: "06", title: "Além do editor", area: "Sobre", description: "Um detalhe na abertura da seção, antes das fotos e do texto.", target: ".about-section > .section-top", after: ":scope > span:first-child", size: "72 / 56 px" },
   { id: "07", title: "Curioso por natureza", area: "Sobre", description: "Como assinatura do texto pessoal, junto ao link do LinkedIn.", target: ".about-copy", after: ":scope > p:last-of-type", size: "88 / 64 px" },

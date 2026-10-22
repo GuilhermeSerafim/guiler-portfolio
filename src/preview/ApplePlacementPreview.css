@@ -24,8 +24,9 @@ body[data-apple-preview="03"] .project-filters { grid-column: 1 / -1; margin-top
 .apple-preview-slot--03 { --apple-width: 88px; }
 
 /* 04 — experiment sign-off, outside the project cards and their controls. */
-body[data-apple-preview="04"] .work-footer { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 28px; }
-.apple-preview-slot--04 { --apple-width: 88px; }
+body[data-apple-preview="04"] .work-footer { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 28px; }
+body[data-apple-preview="04"] .work-footer .text-link { justify-self: end; }
+.apple-preview-slot--04 { --apple-width: 72px; justify-self: center; }
 
 /* 05 — independent pause in the timeline; no sticky or absolute positioning. */
 .apple-preview-slot--05 { --apple-width: 76px; margin: 14px 12px 18px auto; }
@@ -91,13 +92,15 @@ body[data-apple-preview="10"] .site-footer > span { justify-self: center; }
   body[data-apple-preview="08"] .contact-section .section-top > span:last-child { display: none; }
   .apple-preview-slot--01 { --apple-width: 48px; }
   .apple-preview-slot--02 { --apple-width: 60px; }
-  .apple-preview-slot--03, .apple-preview-slot--04, .apple-preview-slot--07, .apple-preview-slot--08 { --apple-width: 64px; }
+  .apple-preview-slot--03, .apple-preview-slot--07, .apple-preview-slot--08 { --apple-width: 64px; }
+  .apple-preview-slot--04 { --apple-width: 52px; }
   .apple-preview-slot--05 { --apple-width: 60px; margin-right: 0; }
   .apple-preview-slot--06 { --apple-width: 56px; }
   .apple-preview-slot--09 { --apple-width: 72px; }
   .apple-preview-slot--10 { --apple-width: 44px; }
-  body[data-apple-preview="04"] .work-footer { grid-template-columns: minmax(0, 1fr) auto; gap: 16px 24px; align-items: center; }
-  body[data-apple-preview="04"] .work-footer .text-link { grid-column: 1 / -1; justify-self: start; }
+  body[data-apple-preview="04"] .work-footer { grid-template-columns: minmax(0, 1fr); gap: 14px; justify-items: center; text-align: center; }
+  body[data-apple-preview="04"] .work-footer p { max-width: 260px; }
+  body[data-apple-preview="04"] .work-footer .text-link { justify-self: center; }
   body[data-apple-preview="07"] .about-copy { column-gap: 16px; }
   body[data-apple-preview="09"] .contact-socials { width: 100%; gap: 4px 24px; }
   body[data-apple-preview="10"] .site-footer { grid-template-columns: auto auto minmax(0, 1fr); gap: 12px 16px; }
