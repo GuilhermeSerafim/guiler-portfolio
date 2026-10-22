@@ -1,8 +1,8 @@
 # Dez posições locais para Newton
 
-O usuário rejeitou a composição ao lado de Tesla e solicitou dez cenários com URLs diferentes para escolher. Este estudo é temporário: nenhuma opção foi adotada como versão final e nenhuma publicação foi realizada.
+O usuário rejeitou a composição ao lado de Tesla e solicitou dez cenários com URLs diferentes para escolher. Após refinar a opção 04, escolheu essa composição e autorizou a publicação. A maçã centralizada foi integrada ao código definitivo e o comparador temporário foi removido.
 
-Índice: http://127.0.0.1:5195/__preview/maca
+As URLs abaixo são o registro histórico do estudo; foram encerradas após a escolha. O comparador permanece recuperável no commit `18a8454`.
 
 | URL local | Composição | Largura desktop / celular |
 | --- | --- | --- |
@@ -39,10 +39,16 @@ Newton usa azul sobre papel e branco nas seções escuras. A mesma arte vetorial
 
 Scripts na raiz do workspace: `output/playwright/apple-options-qa.js` e `apple-options-final-qa.js`. Capturas: `output/playwright/apple-option-{01..10}-{390,1440}.png`. Não houve teste em dispositivo físico.
 
-Sem push ou deploy. A escolha da composição fica com o usuário.
+As verificações acima descrevem a fase local de comparação, anterior à escolha e à autorização de publicação.
 
 ## Refinamento da opção 04
 
 A pedido do usuário, a opção 04 foi centralizada e reduzida em aproximadamente 18%: de 88 para 72 px no desktop e de 64 para 52 px no celular. No desktop, colunas laterais simétricas mantêm a maçã no centro da faixa, independentemente do comprimento do texto e do link. No celular, texto, maçã e GitHub ficam empilhados e centralizados.
 
-Validação em 320/390/700/701/768/1440 px: diferença entre o centro da maçã e da faixa igual a zero, sem colisões ou overflow. Animação preservada, zero erros JavaScript, revisão visual desktop/celular e revisão estática independente aprovadas. Build TypeScript/Vite aprovado com os mesmos arquivos de produção. Script `output/playwright/apple-four-centered-qa.js`; capturas `apple-four-centered-{390,1440}.png`. Continua disponível na mesma URL `/__preview/maca/04`, somente localmente.
+Validação em 320/390/700/701/768/1440 px: diferença entre o centro da maçã e da faixa igual a zero, sem colisões ou overflow. Animação preservada, zero erros JavaScript, revisão visual desktop/celular e revisão estática independente aprovadas. Build TypeScript/Vite aprovado com os mesmos arquivos de produção. Script `output/playwright/apple-four-centered-qa.js`; capturas `apple-four-centered-{390,1440}.png`. Na fase de comparação, esta versão usou a URL `/__preview/maca/04`.
+
+## Integração aprovada
+
+A composição escolhida agora está diretamente em `App.tsx`, no encerramento de Projetos, com CSS em `CuriositySketch.css`: 72 px no desktop e 52 px no celular. Tesla voltou a ser independente. Removidos o módulo de prévias e sua importação de desenvolvimento; `main.tsx` volta à forma anterior ao estudo. As outras quatro artes aprovadas permanecem distribuídas pelo portfólio, sem o caderno de abas.
+
+O processo de publicação verifica o mesmo commit no GitHub e na Vercel, sem alterações nos dados dos projetos, no Analytics ou no monitoramento de disponibilidade.

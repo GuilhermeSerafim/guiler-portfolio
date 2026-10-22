@@ -18,8 +18,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </MotionConfig>
   </React.StrictMode>,
 );
-
-// Temporary local comparison routes. Vite excludes this module from production.
-if (import.meta.env.DEV && /^\/__preview\/maca(?:\/|$)/.test(location.pathname)) {
-  void import("./preview/ApplePlacementPreview").then(({ mountApplePreview }) => mountApplePreview());
-}

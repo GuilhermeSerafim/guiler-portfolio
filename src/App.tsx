@@ -516,8 +516,9 @@ function App() {
               ))}
             </AnimatePresence>
           </div>
-          <div className="work-footer">
+          <div className="work-footer work-footer--with-newton">
             <p>Outras ideias, experimentos e código aberto.</p>
+            <CuriositySketch subject="newton" />
             <a
               className="text-link"
               href="https://github.com/GuilhermeSerafim"
@@ -556,10 +557,7 @@ function App() {
                     Da cobrança de seguros ao atendimento público. Engenharia
                     para operações que precisam funcionar.
                   </p>
-                  <div className="experience-sketches">
-                    <CuriositySketch subject="tesla" />
-                    <CuriositySketch subject="newton" />
-                  </div>
+                  <CuriositySketch subject="tesla" />
                 </Reveal>
               </div>
               <div className="timeline">

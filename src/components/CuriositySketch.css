@@ -70,26 +70,25 @@
   width: 94px;
   transform: rotate(-12deg);
 }
+.work-footer.work-footer--with-newton {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 28px;
+}
+.work-footer--with-newton > .text-link { justify-self: end; }
+.work-footer--with-newton > .curiosity-sketch--newton {
+  width: 72px;
+  aspect-ratio: 110 / 120;
+  justify-self: center;
+}
 .experience-section .curiosity-sketch {
   --sketch-paper: #242622;
   color: #fff;
 }
-.experience-sketches {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  width: max-content;
-  max-width: 100%;
+.experience-intro .curiosity-sketch--tesla {
   margin-top: 36px;
-}
-.experience-sketches > .curiosity-sketch { flex-shrink: 0; }
-.experience-sketches > .curiosity-sketch--tesla {
   width: 128px;
   transform: rotate(-6deg);
-}
-.experience-sketches > .curiosity-sketch--newton {
-  width: 84px;
-  aspect-ratio: 110 / 120;
 }
 .about-photos > .curiosity-sketch--davinci {
   position: absolute;
@@ -116,15 +115,16 @@
 }
 @media (max-width: 960px) {
   .work-section > .curiosity-sketch--cosmos { width: 72px; top: 6px; }
-  .experience-sketches > .curiosity-sketch--newton { width: 76px; }
   .about-section .about-photos { padding-bottom: 104px; }
   .about-photos > .curiosity-sketch--davinci { width: 88px; bottom: 8px; }
 }
 @media (max-width: 700px) {
   .work-section > .curiosity-sketch--cosmos { width: 60px; top: 7px; right: 15px; }
-  .experience-sketches { gap: 24px; margin: 18px 0 0 auto; }
-  .experience-sketches > .curiosity-sketch--tesla { width: 92px; }
-  .experience-sketches > .curiosity-sketch--newton { width: 64px; }
+  .work-footer.work-footer--with-newton { grid-template-columns: minmax(0, 1fr); gap: 14px; justify-items: center; align-items: center; text-align: center; }
+  .work-footer--with-newton > p { max-width: 260px; }
+  .work-footer--with-newton > .text-link { justify-self: center; }
+  .work-footer--with-newton > .curiosity-sketch--newton { width: 52px; }
+  .experience-intro .curiosity-sketch--tesla { width: 92px; margin: 18px 0 0 auto; }
   .about-section .about-photos { padding-bottom: 38px; }
   .about-photos > .curiosity-sketch--davinci { width: 96px; bottom: 6px; left: 0; }
   .about-section .toolkit { grid-template-columns: minmax(0, 1fr) 80px; gap: 24px; }
@@ -135,5 +135,6 @@
   .sketch-apple { transform: translateY(8px); }
 }
 @media print {
-  .curiosity-sketch, .experience-sketches { display: none; }
+  .curiosity-sketch { display: none; }
+  .work-footer.work-footer--with-newton { display: flex; }
 }
