@@ -28,6 +28,7 @@ import { ProjectDialog } from "./components/ProjectDialog";
 import { MeteorField } from "./components/MeteorField";
 import { EntryStroke, useHeroEntry } from "./components/HeroEntry";
 import { CuriositySketch } from "./components/CuriositySketch";
+import { TechnologyCatalog } from "./components/TechnologyCatalog";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { ProjectHealthStatus } from "./components/ProjectHealthStatus";
 import { useProjectHealth } from "./project-health/useProjectHealth";
@@ -657,39 +658,7 @@ function App() {
               </a>
             </Reveal>
           </div>
-          <div className="toolkit">
-            <div>
-              <span className="eyebrow">MINHA CAIXA DE FERRAMENTAS</span>
-              <p>
-                A tecnologia certa <br />
-                para cada problema.
-              </p>
-            </div>
-            <div className="toolkit-groups">
-              <div>
-                <span className="eyebrow muted">INTERFACE</span>
-                <p>
-                  React <span>·</span> Next.js <span>·</span> Angular{" "}
-                  <span>·</span> TypeScript
-                </p>
-              </div>
-              <div>
-                <span className="eyebrow muted">SISTEMAS</span>
-                <p>
-                  Java <span>·</span> Spring Boot <span>·</span> C#{" "}
-                  <span>·</span> .NET
-                </p>
-              </div>
-              <div>
-                <span className="eyebrow muted">DADOS & IA</span>
-                <p>
-                  Python <span>·</span> FastAPI <span>·</span> PostgreSQL{" "}
-                  <span>·</span> LangChain
-                </p>
-              </div>
-            </div>
-            <CuriositySketch subject="einstein" />
-          </div>
+          <TechnologyCatalog />
         </section>
 
         <section

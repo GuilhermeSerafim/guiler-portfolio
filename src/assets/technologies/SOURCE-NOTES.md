@@ -1,6 +1,6 @@
-# Technology preview assets
+# Technology catalog assets
 
-Local assets for portfolio prototypes only. These files do not change the production interface.
+Local assets used by the portfolio's technology catalog in `src/components/TechnologyCatalog.tsx`.
 
 Downloaded on 2026-10-22 from fixed upstream versions. All SVGs are preserved byte-for-byte: no geometry, colors, metadata, or formatting were changed. No script elements were present.
 

@@ -949,45 +949,6 @@ h2 {
   margin-top: 25px;
   font-size: 12px;
 }
-.toolkit {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 40px;
-  border-top: 1px solid var(--line);
-  margin-top: 30px;
-  padding-top: 35px;
-}
-.toolkit > div > p {
-  font-family: var(--display);
-  font-size: 22px;
-  line-height: 1.2;
-  letter-spacing: -0.7px;
-  margin-top: 14px;
-}
-.toolkit > div > .eyebrow {
-  font-size: 8px;
-}
-.toolkit-groups {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.toolkit-groups > div {
-  display: grid;
-  grid-template-columns: 115px 1fr;
-  align-items: baseline;
-  gap: 25px;
-}
-.toolkit-groups .eyebrow {
-  font-size: 8px;
-}
-.toolkit-groups p {
-  font-size: 14px;
-}
-.toolkit-groups p span {
-  color: #a5a69d;
-  margin-inline: 8px;
-}
 .contact-section {
   position: relative;
   isolation: isolate;
@@ -1312,9 +1273,6 @@ h2 {
   .contact-socials {
     gap: 16px;
   }
-  .toolkit-groups p span {
-    margin-inline: 4px;
-  }
   .expertise-strip {
     --expertise-gap: 32px;
   }
@@ -1475,17 +1433,6 @@ h2 {
   }
   .about-photo-main figcaption {
     font-size: 5px;
-  }
-  .toolkit {
-    grid-template-columns: 0.8fr 1.6fr;
-    gap: 20px;
-  }
-  .toolkit-groups p {
-    font-size: 12px;
-  }
-  .toolkit-groups > div {
-    grid-template-columns: 85px 1fr;
-    gap: 12px;
   }
   .contact-heading h2 {
     font-size: 8vw;
@@ -1852,31 +1799,6 @@ h2 {
   }
   .about-copy .text-link {
     font-size: 14px;
-  }
-  .toolkit {
-    grid-template-columns: 1fr;
-    margin-top: 40px;
-    padding-top: 28px;
-    gap: 28px;
-  }
-  .toolkit > div > p {
-    font-size: 23px;
-  }
-  .toolkit > div > p br {
-    display: none;
-  }
-  .toolkit-groups > div {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
-  .toolkit-groups {
-    gap: 18px;
-  }
-  .toolkit-groups p {
-    font-size: 1rem;
-  }
-  .toolkit-groups p span {
-    margin-inline: 5px;
   }
   .contact-section {
     padding-top: 40px;

@@ -97,21 +97,8 @@
   width: 128px;
   transform: rotate(-16deg);
 }
-.about-section .toolkit {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) 106px;
-  gap: 32px;
-  align-items: center;
-}
-.toolkit > .curiosity-sketch--einstein {
-  width: 106px;
-  aspect-ratio: 148 / 116;
-  justify-self: end;
-}
 @media (max-width: 1100px) {
   .about-photos > .curiosity-sketch--davinci { width: 102px; left: 0; bottom: 6px; }
-  .about-section .toolkit { grid-template-columns: minmax(0, 1fr) 96px; gap: 28px; }
-  .toolkit > .curiosity-sketch--einstein { grid-column: 2; grid-row: 1; width: 96px; }
-  .about-section .toolkit-groups { grid-column: 1 / -1; grid-row: 2; }
 }
 @media (max-width: 960px) {
   .work-section > .curiosity-sketch--cosmos { width: 72px; top: 6px; }
@@ -127,8 +114,6 @@
   .experience-intro .curiosity-sketch--tesla { width: 92px; margin: 18px 0 0 auto; }
   .about-section .about-photos { padding-bottom: 38px; }
   .about-photos > .curiosity-sketch--davinci { width: 96px; bottom: 6px; left: 0; }
-  .about-section .toolkit { grid-template-columns: minmax(0, 1fr) 80px; gap: 24px; }
-  .toolkit > .curiosity-sketch--einstein { width: 80px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .curiosity-sketch[data-play="true"] * { animation: none; }

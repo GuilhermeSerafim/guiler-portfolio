@@ -1,5 +1,13 @@
 # Estudo local — tecnologias com ícones e movimento
 
+## Estado atual — integração aprovada em 22/10/2026
+
+O usuário escolheu C e autorizou a publicação. A opção agora é o componente definitivo `src/components/TechnologyCatalog.tsx`, integrado ao App. Os ícones, origens e licenças estão em `src/assets/technologies/`. O comparador e suas rotas experimentais foram retirados; as seções abaixo preservam o histórico da pesquisa e dos protótipos, não descrevem a interface atual.
+
+Validação da integração: build TypeScript/Vite concluído; QA local em 320, 390, 768 e 1440 px com 12 ícones carregados, três categorias, sem overflow/cortes/colisões, cinco artes científicas preservadas, nenhuma ação redundante, movimento de scroll limitado a ±12 px e seção estática com movimento reduzido. Navegação a `#projetos` funcionou. Zero erros JavaScript e zero requests Google antes de consentimento. Capturas desktop/celular inspecionadas. Roteiro: `output/playwright/catalog-release-qa.js` no workspace raiz. Publicação e evidência final serão registradas em `docs/technology-catalog-release-2026-10-22.md` no workspace raiz após a promoção.
+
+## Histórico do estudo
+
 ## Pedido e escopo
 
 Pesquisar modelos em bibliotecas e portfólios, propor alternativas e testá-las localmente. Estes são **protótipos para comparação**, não um design final aprovado. Não houve push nem deploy deste estudo.
