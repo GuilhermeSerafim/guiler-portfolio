@@ -498,18 +498,6 @@ function App() {
                           <span key={tag}>{tag}</span>
                         ))}
                       </div>
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_card" } })}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="project-code"
-                          aria-label={`Código de ${project.name} no GitHub`}
-                        >
-                          <Github size={17} />
-                        </a>
-                      )}
                     </div>
                   </div>
                 </motion.article>

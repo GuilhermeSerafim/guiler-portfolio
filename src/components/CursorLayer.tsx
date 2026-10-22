@@ -10,7 +10,7 @@ const controlSelector = "a[href], button, [role='button'], [role='link'], input,
 const dialogSelector = "dialog[open], [role='dialog'][aria-modal='true']:not([hidden]):not([aria-hidden='true'])";
 const creamSelector = [
   ".experience-section", ".contact-section", ".button-blue",
-  ".builder-seal", ".project-filters .active", ".project-code:hover",
+  ".builder-seal", ".project-filters .active",
   ".project-cover-action", ".pv-cover--mesa", ".pv-website-image",
   ".pv-cover--seven", ".cursor-preview-bar [aria-current='page']",
 ].join(", ");
