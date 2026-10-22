@@ -272,8 +272,17 @@ function App() {
                       aria-hidden="true"
                     >
                       <path
+                        className="impact-stroke"
                         pathLength="1"
-                        d="M4 16Q180 0 433 10M30 22Q220 10 407 16"
+                        d="M4 16Q180 0 433 10"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        fill="none"
+                      />
+                      <path
+                        className="impact-stroke-echo"
+                        pathLength="1"
+                        d="M30 22Q220 10 407 16"
                         stroke="currentColor"
                         strokeWidth="3"
                         fill="none"

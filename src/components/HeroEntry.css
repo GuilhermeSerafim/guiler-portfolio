@@ -45,18 +45,23 @@
   fill: currentColor;
 }
 .hero-entry[data-entry="animate"] .entry-stroke-line {
-  animation: entry-stroke-draw 1050ms var(--entry-ease) both;
+  /* Spread the drawing across the entrance instead of finishing 84% in its first quarter. */
+  animation: entry-stroke-draw 900ms cubic-bezier(.35, .1, .65, .9) both;
 }
 .hero-entry[data-entry="animate"] .entry-stroke-tip {
-  animation: entry-tip-appear 250ms 550ms ease-out both;
+  animation: entry-tip-appear 180ms 820ms ease-out both;
 }
 
 /* Keep the underline coordinated with the hero entrance. */
 .hero-entry .impact-word path {
   animation: none;
 }
-.hero-entry[data-entry="animate"] .impact-word path {
-  animation: impact-draw 500ms 180ms ease-out both;
+.hero-entry[data-entry="animate"] .impact-stroke {
+  animation: entry-stroke-draw 440ms 180ms linear both;
+}
+.hero-entry[data-entry="animate"] .impact-stroke-echo {
+  /* Separate paths give each stroke its own draw timing. */
+  animation: entry-stroke-draw 300ms 580ms linear both;
 }
 
 @keyframes entry-title-settle {
