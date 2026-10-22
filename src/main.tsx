@@ -11,10 +11,19 @@ import { publicConfig } from "./analytics/config";
 
 initializeAnalytics(publicConfig);
 
+// Local design comparison only; excluded from production by Vite.
+const CursorPreview = import.meta.env.DEV && /^\/__preview\/cursor\/[abc]\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/CursorPreview"))
+  : null;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MotionConfig reducedMotion="user">
-      <App />
+      {CursorPreview ? (
+        <React.Suspense fallback={null}>
+          <CursorPreview />
+        </React.Suspense>
+      ) : <App />}
     </MotionConfig>
   </React.StrictMode>,
 );

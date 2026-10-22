@@ -1,0 +1,142 @@
+/* This overlay never changes the browser's native cursor. */
+.portfolio-cursor {
+  --cursor-ink: var(--blue, #2546ef);
+  --cursor-paper: var(--paper, #f7f6f2);
+  --cursor-size: 28px;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 1000;
+  color: var(--cursor-ink);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.portfolio-cursor,
+.portfolio-cursor * {
+  pointer-events: none !important;
+}
+.portfolio-cursor[data-tone="cream"] {
+  --cursor-ink: var(--paper, #f7f6f2);
+  --cursor-paper: var(--blue, #2546ef);
+}
+.portfolio-cursor[data-enabled="true"][data-visible="true"] {
+  opacity: 1;
+}
+.portfolio-cursor-dot,
+.portfolio-cursor-follower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  will-change: transform;
+}
+.portfolio-cursor-dot > span {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+.portfolio-cursor-ring,
+.portfolio-cursor-plus,
+.portfolio-cursor-reticle,
+.portfolio-cursor-label {
+  display: none;
+}
+.portfolio-cursor-ring,
+.portfolio-cursor-reticle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  transform: translate(-50%, -50%);
+  transition: width 140ms ease, height 140ms ease;
+}
+
+/* A — Órbita editorial: a precise dot and a soft, delayed outline. */
+.portfolio-cursor[data-variant="a"] .portfolio-cursor-ring {
+  display: block;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: .66;
+}
+.portfolio-cursor[data-variant="a"][data-target="interactive"],
+.portfolio-cursor[data-variant="a"][data-target="project"] {
+  --cursor-size: 34px;
+}
+.portfolio-cursor[data-variant="a"][data-target="project-cover"] {
+  --cursor-size: 40px;
+}
+.portfolio-cursor[data-variant="a"][data-target="project-cover"] .portfolio-cursor-dot {
+  opacity: 0;
+}
+.portfolio-cursor[data-variant="a"][data-target="project-cover"] .portfolio-cursor-plus {
+  display: block;
+}
+.portfolio-cursor-plus {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+}
+.portfolio-cursor-plus::before,
+.portfolio-cursor-plus::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.portfolio-cursor-plus::before { width: 10px; height: 1px; top: 4.5px; left: 0; }
+.portfolio-cursor-plus::after { width: 1px; height: 10px; left: 4.5px; top: 0; }
+
+/* B — Contextual: the label appears only on controls that open a project. */
+.portfolio-cursor[data-variant="b"] .portfolio-cursor-dot {
+  display: none;
+}
+.portfolio-cursor[data-variant="b"] .portfolio-cursor-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 126px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 18px;
+  background: var(--cursor-ink);
+  color: var(--cursor-paper);
+  white-space: nowrap;
+  font: 500 11px / 1 var(--display, sans-serif);
+  letter-spacing: -.1px;
+  box-shadow: 0 2px 12px #0000000d;
+}
+.portfolio-cursor-label > span { font-size: 16px; line-height: 1; }
+
+/* C — Mira técnica: quiet corners, with a restrained expansion on controls. */
+.portfolio-cursor[data-variant="c"] { --cursor-size: 26px; }
+.portfolio-cursor[data-variant="c"][data-target="interactive"],
+.portfolio-cursor[data-variant="c"][data-target="project"] { --cursor-size: 34px; }
+.portfolio-cursor[data-variant="c"][data-target="project-cover"] { --cursor-size: 38px; }
+.portfolio-cursor[data-variant="c"] .portfolio-cursor-reticle { display: block; }
+.portfolio-cursor-reticle > i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: solid currentColor;
+  opacity: .8;
+}
+.portfolio-cursor-reticle > i:nth-child(1) { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.portfolio-cursor-reticle > i:nth-child(2) { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.portfolio-cursor-reticle > i:nth-child(3) { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+.portfolio-cursor-reticle > i:nth-child(4) { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .portfolio-cursor { display: block; }
+}
+@media print {
+  .portfolio-cursor { display: none !important; }
+}
