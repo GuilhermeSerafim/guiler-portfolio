@@ -383,7 +383,7 @@ function App() {
           </div>
           <div className="section-heading">
             <h2 id="work-title">
-              Construir.
+              <TechText>Construir.</TechText>
               <br />
               <span className="muted">Fazer acontecer.</span>
             </h2>
@@ -598,7 +598,7 @@ function App() {
               <h2 id="about-title">
                 Curioso por natureza.
                 <br />
-                <span className="muted">Builder por escolha.</span>
+                <span className="muted"><TechText>Builder</TechText> por escolha.</span>
               </h2>
               <p>
                 Sou Guilherme Serafim. Pode me chamar de <strong>Guiler</strong>
