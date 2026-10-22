@@ -2,7 +2,7 @@ import { useEffect, useRef, type RefObject, type MutableRefObject } from "react"
 
 type Action = MutableRefObject<() => void>;
 
-/** Shared local-study triggers. Photos stay visible when animation is disabled. */
+/** Photos stay visible when animation is disabled or outside the viewport. */
 export function usePhotoPlayback(scene: RefObject<HTMLDivElement>, replayToken: number, playRef: Action, finishRef: Action) {
   const trigger = useRef<() => void>(() => {});
   const previousToken = useRef(replayToken);

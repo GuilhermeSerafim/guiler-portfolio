@@ -32,6 +32,7 @@ import { TechText } from "./components/TechText";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { ResumeDownloadLink } from "./components/ResumeDownloadLink";
+import { PhotoDepth } from "./components/photos/PhotoDepth";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
 
@@ -580,29 +581,7 @@ function App() {
           </div>
           <div className="about-layout">
             <Reveal className="about-photos">
-              <figure className="about-photo-main">
-                <img
-                  src="/images/building.webp"
-                  width="1100"
-                  height="733"
-                  loading="lazy"
-                  alt="Guilherme trabalhando no computador durante um evento de desenvolvimento"
-                />
-                <figcaption className="eyebrow">
-                  <span>APRENDER. CONSTRUIR. COMPARTILHAR.</span>
-                  <Plus size={13} />
-                </figcaption>
-              </figure>
-              <figure className="about-photo-secondary">
-                <img
-                  src="/images/community.webp"
-                  width="1200"
-                  height="800"
-                  loading="lazy"
-                  alt="Guilherme com participantes no palco do evento Devs de Impacto"
-                />
-                <figcaption>Boas ideias crescem em comunidade.</figcaption>
-              </figure>
+              <PhotoDepth />
               <CuriositySketch subject="davinci" />
             </Reveal>
             <Reveal className="about-copy">

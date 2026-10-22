@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { PhotoScene } from './PhotoScene';
-import { usePhotoPlayback } from './usePhotoPlayback';
+import { PhotoScene } from '../../components/photos/PhotoScene';
+import { usePhotoPlayback } from '../../components/photos/usePhotoPlayback';
 import './PhotoAperture.css';
 
 export function PhotoAperture({ replayToken = 0 }: { replayToken?: number }) {
@@ -74,5 +74,5 @@ export function PhotoAperture({ replayToken = 0 }: { replayToken?: number }) {
 
   usePhotoPlayback(sceneRef, replayToken, playRef, finishRef);
 
-  return <PhotoScene variant="aperture" sceneRef={sceneRef} />;
+  return <PhotoScene variant="aperture" sceneRef={sceneRef} withShutters />;
 }

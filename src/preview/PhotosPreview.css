@@ -13,7 +13,7 @@
 .photo-lab-footnote { margin-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 11px; color: #62655d; line-height: 1.7; }
 .photo-lab-footnote a { color: var(--blue); }
 .photo-lab--context #sobre { scroll-margin-top: calc(var(--photo-lab-toolbar-height) + 24px); }
-.photo-lab--context .about-photos > figure { display: none; }
+.photo-lab--context .about-photos > .photo-scene { display: none; }
 @media (max-width: 1000px) and (min-width: 761px) {
   .photo-lab-card { padding-inline: 12px; }
 }

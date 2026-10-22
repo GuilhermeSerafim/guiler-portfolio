@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { createScope, createTimeline } from 'animejs';
-import { PhotoScene } from './PhotoScene';
-import { usePhotoPlayback } from './usePhotoPlayback';
+import { PhotoScene } from '../../components/photos/PhotoScene';
+import { usePhotoPlayback } from '../../components/photos/usePhotoPlayback';
 import './PhotoMemories.css';
 
 export function PhotoMemories({ replayToken = 0 }: { replayToken?: number }) {

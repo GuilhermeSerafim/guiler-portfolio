@@ -37,3 +37,24 @@ Evidências: `C:/Users/Guiler/Desktop/wks/guiler/output/playwright/photos-qa-res
 - [Motion: animação com mola](https://motion.dev/docs/react-use-spring)
 - [GSAP: timelines](https://gsap.com/docs/v3/GSAP/Timeline/)
 - [Anime.js: timelines](https://animejs.com/documentation/timeline/)
+
+## Escolha A aplicada localmente
+
+Após a comparação, Guiler escolheu **A — Profundidade** para a seção principal. Implementação na branch `feat/about-photo-depth`, baseada no feedback local do currículo (`5148838`). Sem push ou deploy.
+
+- `PhotoDepth`, `PhotoScene` e o controle de reprodução foram promovidos de `src/preview/photos` para `src/components/photos`; `App.tsx` agora usa a opção A na seção `#sobre`.
+- Fotos, legendas, texto e desenho de Leonardo da Vinci preservados. Movimento breve de entrada, inclinação suave pelo mouse e reprodução por toque ou teclado; repouso estático e respeito à preferência de movimento reduzido.
+- Atualizações do ponteiro agrupadas por frame, consultas de mídia reutilizadas e callbacks pendentes cancelados ao sair ou desmontar. Máscaras exclusivas da opção B não são renderizadas na seção principal.
+- Comparações locais A/B/C continuam disponíveis, exibindo somente uma alternativa por vez. GSAP e Anime.js permanecem usados apenas pelas prévias; a opção escolhida usa Motion, já existente no projeto.
+- Feedback local do download do currículo preservado. Nenhuma alteração no hub, nas URLs de projetos ou no Analytics.
+
+### Verificação da integração
+
+- Build final e TypeScript aprovados: `index-DQOGsowK.js` (408,32 kB; gzip 134,71 kB) e `index-DyYyWPbQ.css` (65,67 kB; gzip 14,32 kB). O resultado anterior sem alterações no bundle corresponde apenas à etapa de comparação acima.
+- Build servido localmente em `5207`: verificados 1440, 768, 390 e 320 px, duas imagens carregadas, uma cena, desenho preservado, nenhum controle de comparação na página principal e nenhum overflow horizontal.
+- Hover e teclado ativam o movimento; a animação retorna ao repouso. Movimento reduzido ativado durante a interação mantém as fotos estáticas.
+- Contexto móvel emulado com toque: reprodução por toque e bloqueio do movimento com preferência reduzida aprovados. Sem teste em aparelho físico.
+- Zero erros de página e zero requests ao Google ou ao monitor de disponibilidade nos cenários observados. Smoke das três prévias locais aprovado.
+- Capturas de desktop e celular inspecionadas. Evidências em `C:/Users/Guiler/Desktop/wks/guiler/output/playwright/photos-applied-qa-result.json`, script `photos-applied-qa.js` e capturas `photos-applied-1440.png` / `photos-applied-390.png`.
+
+Revisão local: http://127.0.0.1:5195/#sobre.

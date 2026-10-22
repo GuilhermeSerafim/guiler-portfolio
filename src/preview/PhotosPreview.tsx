@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { ArrowUpRight, RotateCcw } from "lucide-react";
 import App from "../App";
 import { OrbitCursor } from "../components/OrbitCursor";
-import { PhotoDepth } from "./photos/PhotoDepth";
+import { PhotoDepth } from "../components/photos/PhotoDepth";
 import { PhotoAperture } from "./photos/PhotoAperture";
 import { PhotoMemories } from "./photos/PhotoMemories";
 import "./TrophyPreview.css";
@@ -63,7 +63,7 @@ export default function PhotosPreview() {
     </aside>
     {option ? <>
       <App />
-      {target && Component && createPortal(<Component replayToken={replayToken} />, target)}
+      {target && Component && createPortal(<div className="photo-lab-live-preview"><Component replayToken={replayToken} /></div>, target)}
       <OrbitCursor />
     </> : <main className="trophy-lab-gallery photo-lab-gallery">
       <div className="trophy-lab-intro">
