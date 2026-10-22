@@ -351,12 +351,53 @@ h2 {
   outline-offset: 5px;
 }
 .resume-link {
+  position: relative;
   display: flex;
   align-items: center;
+  min-height: 44px;
   gap: 10px;
   font-size: 12px;
   padding: 10px 0;
   border-bottom: 1px solid #c9c9c1;
+}
+.resume-link::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease-out;
+}
+.resume-download-icon {
+  flex-shrink: 0;
+  transition: transform 220ms ease-out;
+}
+.resume-link:focus-visible::after,
+.resume-link:active::after {
+  transform: scaleX(1);
+}
+.resume-download:focus-visible .resume-download-icon,
+.resume-download:active .resume-download-icon {
+  transform: translateY(3px);
+}
+@media (hover: hover) and (pointer: fine) {
+  .resume-link:hover::after {
+    transform: scaleX(1);
+  }
+  .resume-download:hover .resume-download-icon {
+    transform: translateY(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .resume-link::after,
+  .resume-download-icon {
+    transition: none;
+  }
+  .resume-download:is(:hover, :focus-visible, :active) .resume-download-icon {
+    transform: none;
+  }
 }
 .hero-proof {
   display: flex;
