@@ -49,7 +49,7 @@ export function ProjectHealthStatus({
         {status}
         {checkedAt && (
           <span className="project-health-time">
-            Verificação em{" "}
+            Última verificação em{" "}
             <time
               dateTime={checkedAt.toISOString()}
               aria-label={absoluteDate.format(checkedAt)}

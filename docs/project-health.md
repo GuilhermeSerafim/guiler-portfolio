@@ -35,6 +35,14 @@ Roteiro e capturas em `<workspace>/output/playwright`:
 
 As portas 5190, 5191 e 5192 foram preservadas. Não foi incorporado nenhum commit de `feat/personality-details`/`curiosity-lab`. Este registro posterior de documentação não exige novo deploy.
 
+## Diagnóstico de 22/10/2026 — horário antigo na interface
+
+Ao receber o relato “Disponibilidade não confirmada / Verificação em 22/10, 11:37”, a leitura pública às 14:08 de Brasília confirmou HTTP 200 no feed, mas observações feitas às 11:37, com validade até 12:22. Os quatro destinos responderam HTTP 200 nessa última coleta; isso não constitui confirmação atual de operação. O frontend corretamente expira a observação após 45 minutos e conserva o horário histórico.
+
+O workflow público estava ativo, com cron `3,18,33,48 * * * *`; os últimos runs observados ocorreram aproximadamente às 01:10, 06:26 e 11:37 de Brasília. A [execução mais recente conferida](https://github.com/GuilhermeSerafim/portfolio-health/actions/runs/39797229376) terminou coleta e publicação com sucesso. A cadência efetiva não estava mantendo as observações válidas; a causa dos intervalos do agendador não foi determinada. Não há evidência aqui de queda dos quatro projetos nem de falha de publicação do feed.
+
+A única mudança de apresentação foi trocar “Verificação em” por “Última verificação em”. TTL, tratamento de estados desconhecidos, rede e alvos permanecem intactos. Não renomeamos todo `unknown` como “expirado”, pois rede, contrato e outros motivos também levam a esse estado. Nenhuma alteração no repositório do monitor, contas, agendador ou infraestrutura foi realizada.
+
 ## Plano
 
 - [x] Isolar o trabalho e ler o contrato v1 e `status.schema.json` do workspace `portfolio-health`.
