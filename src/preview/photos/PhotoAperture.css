@@ -1,0 +1,40 @@
+.photo-scene--aperture .photo-study-viewport {
+  isolation: isolate;
+}
+
+.photo-scene--aperture .photo-study-image {
+  transform-origin: 50% 48%;
+}
+
+.photo-scene--aperture .photo-study-shutter {
+  position: absolute;
+  z-index: 1;
+  inset-block: 0;
+  box-sizing: border-box;
+  width: 50.5%;
+  background: #f7f6f2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photo-scene--aperture .photo-study-shutter--left {
+  left: 0;
+  right: auto;
+  border-right: 1px solid rgb(39 63 245 / 12%);
+}
+
+.photo-scene--aperture .photo-study-shutter--right {
+  left: auto;
+  right: 0;
+  border-left: 1px solid rgb(39 63 245 / 12%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-scene--aperture .photo-study-image {
+    transform: none !important;
+  }
+
+  .photo-scene--aperture .photo-study-shutter {
+    opacity: 0 !important;
+  }
+}

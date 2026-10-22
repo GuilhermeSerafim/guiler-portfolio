@@ -21,10 +21,18 @@ const TrophyPreview = import.meta.env.DEV && /^\/__preview\/trophy(?:\/[abc])?\/
   ? React.lazy(() => import("./preview/TrophyPreview"))
   : null;
 
+const PhotosPreview = import.meta.env.DEV && /^\/__preview\/photos(?:\/[abc])?\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/PhotosPreview"))
+  : null;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MotionConfig reducedMotion="user">
-      {TrophyPreview ? (
+      {PhotosPreview ? (
+        <React.Suspense fallback={null}>
+          <PhotosPreview />
+        </React.Suspense>
+      ) : TrophyPreview ? (
         <React.Suspense fallback={null}>
           <TrophyPreview />
         </React.Suspense>

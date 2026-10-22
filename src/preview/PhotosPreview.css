@@ -1,0 +1,34 @@
+.photo-lab { --photo-lab-toolbar-height: 110px; }
+.photo-lab-toolbar { position: sticky; top: 0; z-index: 120; }
+.photo-lab-gallery { padding-top: 48px; }
+.photo-lab-gallery .trophy-lab-intro { margin-bottom: 36px; max-width: none; display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px 48px; }
+.photo-lab-gallery .trophy-lab-eyebrow { grid-column: 1 / -1; margin-bottom: 0; }
+.photo-lab-gallery .trophy-lab-intro > p:last-child { margin-top: 0; align-self: end; padding-bottom: 6px; max-width: 410px; }
+.photo-lab-gallery .trophy-lab-intro h1 { font-size: clamp(38px, 4.4vw, 62px); }
+.photo-lab-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.photo-lab-card { min-width: 0; padding: 22px 24px 24px; border-bottom: 1px solid var(--line); }
+.photo-lab-card + .photo-lab-card { border-left: 1px solid var(--line); }
+.photo-lab-stage { margin: 26px 0 16px; }
+.photo-lab-card > p { font-size: 13px; line-height: 1.7; color: #62655d; min-height: 88px; }
+.photo-lab-footnote { margin-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 11px; color: #62655d; line-height: 1.7; }
+.photo-lab-footnote a { color: var(--blue); }
+.photo-lab--context #sobre { scroll-margin-top: calc(var(--photo-lab-toolbar-height) + 24px); }
+.photo-lab--context .about-photos > figure { display: none; }
+@media (max-width: 1000px) and (min-width: 761px) {
+  .photo-lab-card { padding-inline: 12px; }
+}
+@media (max-width: 760px) {
+  .photo-lab .trophy-lab-toolbar nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .photo-lab .trophy-lab-toolbar nav a { justify-content: flex-start; padding-left: 12px; }
+  .photo-lab-gallery { padding-top: 36px; }
+  .photo-lab-gallery .trophy-lab-intro { display: block; }
+  .photo-lab-gallery .trophy-lab-eyebrow { margin-bottom: 20px; }
+  .photo-lab-gallery .trophy-lab-intro > p:last-child { margin-top: 20px; }
+  .photo-lab-grid { grid-template-columns: 1fr; }
+  .photo-lab-card { padding-inline: 0; }
+  .photo-lab-card + .photo-lab-card { border-left: 0; }
+  .photo-lab-stage { max-width: 440px; margin-inline: auto; }
+  .photo-lab-card > p { min-height: 0; }
+  .photo-lab-toolbar p { font-size: 11px; }
+  .photo-lab--context .about-photos { padding-bottom: 12px; }
+}

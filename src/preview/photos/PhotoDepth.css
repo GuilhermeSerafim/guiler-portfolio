@@ -1,0 +1,3 @@
+.photo-scene--depth .photo-study-card { box-shadow: 0 12px 26px #2027190b; backface-visibility: hidden; }
+.photo-scene--depth .photo-study-hit { cursor: crosshair; }
+.photo-scene--depth .photo-study-caption > svg { color: #273ff5; }
