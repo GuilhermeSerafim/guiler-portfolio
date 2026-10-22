@@ -28,25 +28,31 @@ Estrutura e comportamento dos portfólios foram conferidos em código público. 
 | --- | --- | --- |
 | A — Faixa contínua | http://127.0.0.1:5195/__preview/tecnologias/a#tecnologias | Uma única faixa, nomes maiores, menor altura. Leitura menos imediata de quais ferramentas pertencem a cada área. |
 | B — Trilhos por área | http://127.0.0.1:5195/__preview/tecnologias/b#tecnologias | Categorias fixas e três trilhos; Sistemas segue no sentido oposto. Melhor equilíbrio proposto entre movimento e organização; ocupa mais altura que A. |
-| C — Catálogo em movimento | http://127.0.0.1:5195/__preview/tecnologias/c#tecnologias | Todas as tecnologias disponíveis sem esperar o loop; deslocamento mínimo ligado ao scroll. Mais tranquilo e legível, menos próximo da barra contínua pedida. |
+| C — Catálogo em movimento | http://127.0.0.1:5195/__preview/tecnologias/c#tecnologias | **Escolha atual.** As 12 tecnologias visíveis, sem botão “Ver todas”; deslocamento sutil ligado ao scroll. |
 
-Recomendação inicial: B. O usuário escolheu **A** e pediu ícones coloridos e uma seção mais minimalista, sem categorias repetidas. A interface de comparação fica em uma barra no topo das rotas de estudo. O link Atual leva ao site local sem substituição.
+Recomendação inicial: B. O usuário primeiro escolheu **A** e pediu ícones coloridos e uma seção mais minimalista, sem categorias repetidas. Depois, ao dizer “Gostei mais da 3”, mudou a preferência para **C — Catálogo em movimento**. A escolha anterior de A permanece registrada abaixo como histórico. A interface de comparação fica em uma barra no topo das rotas de estudo. O link Atual leva ao site local sem substituição.
+
+## Escolha atual — C
+
+O refinamento local de C mantém as cores dos ícones e o cabeçalho enxuto “Minha caixa de ferramentas.”, com Einstein discreto à direita. As 12 tecnologias ficam visíveis no catálogo, sem “Ver todas”; o movimento acompanha a rolagem com deslocamento limitado a ±12 px. As frases do rodapé da seção foram removidas.
+
+Esta é a direção escolhida para o protótipo local. QA após o refinamento aprovado em 320, 390, 768 e 1440 px: ícones carregados, sem overflow ou colisão do título com Einstein, movimento reduzido respeitado e zero erros JavaScript. As alternativas A/B também passaram na regressão da mesma sessão. Capturas atualizadas `technology-c-{390,1440}.png` inspecionadas; TypeScript e diff verificados. Roteiro: `output/playwright/technology-studies-qa.js` no workspace raiz. Os registros mais abaixo preservam as rodadas anteriores.
 
 ## Implementação experimental
 
 - `src/preview/TechnologyPreview.tsx` e `.css`: protótipos isolados. Montagem temporária por portal na posição da seção atual, preservando `App.tsx`.
 - `src/main.tsx`: carregamento condicionado a `import.meta.env.DEV` e às três rotas explícitas. O build de produção elimina os protótipos; não há impacto no bundle publicado.
 - 12 SVGs locais, sem fonte de ícones ou CDN em runtime: Devicon v2.17.0 (11) e Simple Icons 13.0.0 (LangChain). Origem, hashes e licenças em `src/preview/technology-assets/SOURCE-NOTES.md`.
-- Nenhuma dependência nova. Após a escolha de A, os SVGs usam as variantes com cores originais permanentemente, sem filtro monocromático. Marcas originalmente monocromáticas foram preservadas. Texto continua visível.
+- Nenhuma dependência nova. Após a escolha anterior de A, os SVGs passaram a usar as variantes com cores originais permanentemente, sem filtro monocromático; essas cores foram mantidas no refinamento atual de C. Marcas originalmente monocromáticas foram preservadas. Texto continua visível.
 - A/B: CSS `transform`, grupos de largura idêntica, duplicatas com `aria-hidden`, nenhum elemento focável duplicado, suspensão fora da área visível.
-- “Ver todas” substitui os trilhos por uma lista estática; permite leitura completa e interrompe o movimento sem exigir hover. “Ver em movimento” restaura o loop.
+- Em A/B, “Ver todas” substitui os trilhos por uma lista estática; permite leitura completa e interrompe o movimento sem exigir hover. “Ver em movimento” restaura o loop. C apresenta todas as 12 tecnologias diretamente, sem esses controles.
 - `prefers-reduced-motion`: lista estática automática, nenhum deslocamento em C. Este tratamento segue a orientação de [Pause, Stop, Hide do W3C](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html).
 
-## Validação
+## Validação anterior dos três protótipos
 
 Build TypeScript/Vite concluído. JS `index-B5T2Dzbd.js` e CSS `index-BK39wZpG.css` permaneceram idênticos ao build local da versão aprovada anterior: protótipos e SVGs não foram incluídos na saída de produção.
 
-QA final aprovado em sessão dedicada `technology-final`, com `output/playwright/technology-studies-qa.js` no workspace raiz:
+Na rodada anterior, o QA foi aprovado em sessão dedicada `technology-final`, com `output/playwright/technology-studies-qa.js` no workspace raiz:
 
 - A/B/C em 320, 390, 768 e 1440 px: sem overflow, sem colisão entre título e Einstein, ícones carregados.
 - Grupos dos loops têm exatamente um terço da largura da faixa completa, preservando a continuidade entre cópias.
@@ -58,7 +64,7 @@ QA final aprovado em sessão dedicada `technology-final`, com `output/playwright
 
 Uma execução inicial observou visibilidade desatualizada após mudanças rápidas de largura. A causa exata desse episódio não foi capturada. A revisão identificou que o callback só considerava a primeira observação de um lote; agora aplica a mais recente por `time` e ignora callbacks após cleanup, conforme a [semântica documentada da API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#intersection_change_callbacks). Oito recarregamentos com redimensionamento e a suíte final sem instrumentação passaram depois do ajuste. Não se alega teste em aparelho físico.
 
-## Refinamento da opção A escolhida
+## Histórico — refinamento da opção A
 
 - Cabeçalho reduzido a “Minha caixa de ferramentas.”, com Einstein discreto à direita e acesso a “Ver todas”.
 - Removidos os dois conjuntos de categorias, contador de ferramentas e frases do rodapé da seção.
@@ -69,4 +75,4 @@ Uma execução inicial observou visibilidade desatualizada após mudanças rápi
 
 ## Próximo passo
 
-A continua disponível localmente para revisão do refinamento. A futura integração definitiva deve eliminar o comparador e ser validada antes de uma publicação autorizada. Nenhum push ou deploy foi feito nesta etapa.
+Concluir e validar localmente o refinamento de **C**, a escolha atual, mantendo A/B disponíveis para comparação. Não há resultado de QA desta nova rodada registrado ainda. Uma futura integração definitiva deve eliminar o comparador e ser validada antes de uma publicação autorizada. Nenhum push ou deploy foi feito nesta etapa.

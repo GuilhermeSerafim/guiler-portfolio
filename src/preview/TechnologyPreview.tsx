@@ -79,10 +79,10 @@ function TechnologyStudy({ variant }: { variant: Variant }) {
     observer.observe(element);
     return () => { active = false; observer.disconnect(); };
   }, []);
-  return <section id="tecnologias" ref={root} aria-labelledby="tech-study-title" className={`tech-study tech-study--${variant}`} data-static={staticMode} data-visible={visible}>
+  return <section id="tecnologias" ref={root} aria-labelledby="tech-study-title" className={`tech-study tech-study--${variant}${variant !== "b" ? " tech-study--compact" : ""}`} data-static={staticMode} data-visible={visible}>
     <header className="tech-study-header">
       <div>
-        {variant === "a" ? <h3 id="tech-study-title">Minha caixa de ferramentas.</h3> : <>
+        {variant !== "b" ? <h3 id="tech-study-title">Minha caixa de ferramentas.</h3> : <>
           <span className="eyebrow">MINHA CAIXA DE FERRAMENTAS</span>
           <h3 id="tech-study-title">A tecnologia certa<br /><span>para cada problema.</span></h3>
         </>}
@@ -100,7 +100,7 @@ function TechnologyStudy({ variant }: { variant: Variant }) {
       <Rail items={area.items} reverse={index === 1} duration={34 + index * 5} />
     </div>)}</div>}
     {variant === "c" && <div className="tech-catalog">{areas.map((area, index) => <CatalogRow key={area.name} area={area} index={index} />)}</div>}
-    {variant !== "a" && <div className="tech-study-footnote"><span>Ferramentas mudam. O critério fica.</span><span className="eyebrow">ENGENHARIA + CURIOSIDADE <ArrowUpRight size={13} /></span></div>}
+    {variant === "b" && <div className="tech-study-footnote"><span>Ferramentas mudam. O critério fica.</span><span className="eyebrow">ENGENHARIA + CURIOSIDADE <ArrowUpRight size={13} /></span></div>}
   </section>;
 }
 

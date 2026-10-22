@@ -29,10 +29,10 @@
 .tech-rail-group li { flex-shrink: 0; }
 .tech-item { display: inline-flex; gap: 13px; align-items: center; white-space: nowrap; font-size: 18px; font-family: var(--display); letter-spacing: -.35px; }
 .tech-item img { width: 28px; height: 28px; object-fit: contain; }
-.tech-study--a .tech-study-header { margin-bottom: 18px; }
-.tech-study--a .tech-study-header h3 { font-size: clamp(24px, 2.5vw, 32px); letter-spacing: -.8px; margin: 0; }
-.tech-study--a .tech-study-aside { flex-direction: row; align-items: center; gap: 28px; }
-.tech-study--a .tech-study-aside .curiosity-sketch--einstein { width: 80px; }
+.tech-study--compact .tech-study-header { margin-bottom: 18px; }
+.tech-study--compact .tech-study-header h3 { font-size: clamp(24px, 2.5vw, 32px); letter-spacing: -.8px; margin: 0; }
+.tech-study--compact .tech-study-aside { flex-direction: row; align-items: center; gap: 28px; }
+.tech-study--compact .tech-study-aside .curiosity-sketch--einstein { width: 80px; }
 .tech-study--a > .tech-rail-window { border-bottom: 1px solid var(--line); padding-block: 18px 26px; }
 .tech-study--a .tech-item { font-size: 22px; gap: 12px; }
 .tech-study--a .tech-item img { width: 28px; height: 28px; }
@@ -81,10 +81,10 @@
   .tech-study-header h3 { font-size: clamp(23px,5.8vw,32px); letter-spacing: -.8px; margin-top: 12px; }
   .tech-study-aside .curiosity-sketch--einstein { width: 74px; }
   .tech-view-button { font-size: 10px; padding-left: 0; gap: 5px; }
-  .tech-study--a .tech-study-header { align-items: center; margin-bottom: 12px; gap: 20px; }
-  .tech-study--a .tech-study-header h3 { max-width: 230px; line-height: 1.15; }
-  .tech-study--a .tech-study-aside { flex-direction: column; gap: 4px; }
-  .tech-study--a .tech-study-aside .curiosity-sketch--einstein { width: 64px; }
+  .tech-study--compact .tech-study-header { align-items: center; margin-bottom: 12px; gap: 20px; }
+  .tech-study--compact .tech-study-header h3 { max-width: 230px; line-height: 1.15; }
+  .tech-study--compact .tech-study-aside { flex-direction: column; gap: 4px; }
+  .tech-study--compact .tech-study-aside .curiosity-sketch--einstein { width: 64px; }
   .tech-study--a > .tech-rail-window { padding-block: 16px 24px; }
   .tech-study--a .tech-item { font-size: 20px; }
   .tech-area-row, .tech-catalog-row { grid-template-columns: minmax(0,1fr); }
