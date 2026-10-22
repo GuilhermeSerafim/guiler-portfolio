@@ -33,6 +33,7 @@ import { TrajectoryMark } from "./components/TrajectoryMark";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { ResumeDownloadLink } from "./components/ResumeDownloadLink";
 import { PhotoDepth } from "./components/photos/PhotoDepth";
+import { TrophyCelebrate } from "./components/TrophyCelebrate";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
 
@@ -308,7 +309,7 @@ function App() {
             <div>
               <div className="hero-proof">
                 <div className="proof-icon">
-                  <Trophy size={19} strokeWidth={1.6} />
+                  <TrophyCelebrate />
                 </div>
                 <div>
                   <span>Ideias testadas. Trabalho reconhecido.</span>

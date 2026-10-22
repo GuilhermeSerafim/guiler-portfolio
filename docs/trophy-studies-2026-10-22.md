@@ -39,3 +39,18 @@ Evidências em `C:/Users/Guiler/Desktop/wks/guiler/output/playwright/`: `trophy-
 - [Motion: animação em React](https://motion.dev/docs/react-animation)
 - [GSAP: contexto e limpeza](https://gsap.com/docs/v3/GSAP/gsap.context()/)
 - [Anime.js: uso com React](https://animejs.com/documentation/getting-started/using-with-react/)
+
+## Escolha C e preparação da publicação
+
+Guiler escolheu **C — Conquista** e autorizou publicar o conjunto local: troféu C, fotos A em `03 / ALÉM DO EDITOR` e feedback de solicitação do currículo.
+
+- `TrophyCelebrate.tsx/.css` promovidos para `src/components` e integrados ao hero. O contêiner mede 52 × 52 px, sem borda duplicada e sem encolher no mobile.
+- Preservados elevação, brilho e seis faíscas, entrada única quando visível e repetição por mouse, teclado ou toque. Animação finita, interrompida ao sair da tela/ocultar a aba e desativada com movimento reduzido.
+- `animejs` 4.5.0 movido para dependências de produção; GSAP e as comparações continuam fora do bundle público. Galeria local adaptada para ocultar o troféu padrão ao comparar alternativas.
+- Build e TypeScript aprovados: JS `index-yLGb614V.js` 452,41 kB (gzip 151,51 kB); CSS `index-CwE8OraE.css` 67,25 kB (gzip 14,65 kB). Incremento da integração C: 16,80 kB gzip de JavaScript sobre a integração local das fotos A. Nenhum asset de imagem alterado.
+- 67 testes de Analytics aprovados em quatro arquivos. Revisão independente do lifecycle e da integração sem bloqueios.
+- QA do build local em 1440, 390 e 320 px: um troféu, uma cena das fotos A, dois links de currículo, sem overflow horizontal ou controles aninhados. Hover, teclado, toque emulado e movimento reduzido aprovados; sem teste em aparelho físico.
+- Quatro downloads reais (hero/contato, desktop/mobile), com feedback solicitado e dimensões estáveis. PDF idêntico ao original: SHA-256 `F2D85743D548B95BD372B41247AF6A39C2637BDD3CBA7DEC257CC412F7EA0591`.
+- Zero erros de página e zero requests ao Google/monitor de disponibilidade nos cenários locais sem consentimento observados. Fotos A carregadas e interativas, desenho de Leonardo preservado. Comparações A/B/C exibem apenas um troféu por vez.
+
+Evidências da preparação em `C:/Users/Guiler/Desktop/wks/guiler/output/playwright/motion-local-qa-result.json`, script `portfolio-motion-release-qa.js` e capturas `motion-*`. Os registros anteriores deste documento descrevem a fase somente local, antes da escolha e da autorização de publicação.

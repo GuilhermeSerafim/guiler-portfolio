@@ -408,10 +408,9 @@ h2 {
 .proof-icon {
   display: grid;
   place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  width: 37px;
-  height: 37px;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
 }
 .hero-proof span {
   display: block;

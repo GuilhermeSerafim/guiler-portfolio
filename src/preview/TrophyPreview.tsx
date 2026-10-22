@@ -5,7 +5,7 @@ import App from "../App";
 import { OrbitCursor } from "../components/OrbitCursor";
 import { TrophySpring } from "./trophy/TrophySpring";
 import { TrophyTrace } from "./trophy/TrophyTrace";
-import { TrophyCelebrate } from "./trophy/TrophyCelebrate";
+import { TrophyCelebrate } from "../components/TrophyCelebrate";
 import "./TrophyPreview.css";
 
 const options: { id: string; name: string; library: string; description: string; component: ComponentType<{ replayToken?: number }> }[] = [
@@ -43,7 +43,7 @@ export default function TrophyPreview() {
       </aside>
       {option ? <>
         <App />
-        {target && Component && createPortal(<Component replayToken={replayToken} />, target)}
+        {target && Component && createPortal(<div className="trophy-lab-live-preview"><Component replayToken={replayToken} /></div>, target)}
         <OrbitCursor />
       </> : (
         <main className="trophy-lab-gallery">
