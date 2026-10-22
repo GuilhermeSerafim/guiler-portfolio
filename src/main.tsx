@@ -11,10 +11,19 @@ import { publicConfig } from "./analytics/config";
 
 initializeAnalytics(publicConfig);
 
+// Temporary local comparison; Vite removes this branch from production builds.
+const TechnologyPreview = import.meta.env.DEV && /^\/__preview\/tecnologias\/[abc]\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/TechnologyPreview"))
+  : null;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MotionConfig reducedMotion="user">
-      <App />
+      {TechnologyPreview ? (
+        <React.Suspense fallback={null}>
+          <TechnologyPreview />
+        </React.Suspense>
+      ) : <App />}
     </MotionConfig>
   </React.StrictMode>,
 );
