@@ -1,0 +1,21 @@
+.trophy-spring {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid #d6d8ce;
+  border-radius: 50%;
+  color: #273ff5;
+  background: #f7f6f2;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.trophy-spring:hover { border-color: #a5adf0; }
+.trophy-spring:focus-visible { outline: 2px solid #273ff5; outline-offset: 5px; }
+.trophy-spring-cup { display: grid; place-items: center; transform-origin: 50% 80%; }
+.trophy-spring-halo { position: absolute; width: 56px; height: 56px; inset: -3px; pointer-events: none; }
+.trophy-spring-dot { position: absolute; top: 1px; right: 8px; pointer-events: none; }

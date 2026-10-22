@@ -1,0 +1,101 @@
+.trophy-trace {
+  appearance: none;
+  position: relative;
+  display: inline-grid;
+  flex: 0 0 52px;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid rgba(23, 25, 22, 0.14);
+  border-radius: 13px;
+  background: #f7f6f2;
+  color: #171916;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.trophy-trace:focus-visible {
+  outline: 2px solid #273ff5;
+  outline-offset: 4px;
+}
+
+.trophy-trace:active {
+  border-color: rgba(39, 63, 245, 0.6);
+  background: #eeeff8;
+}
+
+.trophy-trace .trophy-trace__art {
+  display: block;
+  width: 50px;
+  height: 50px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.trophy-trace__outline {
+  stroke: #273ff5;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trophy-trace__outline path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.trophy-trace__stem,
+.trophy-trace__base {
+  stroke: #171916;
+}
+
+.trophy-trace__cup-tint {
+  fill: #273ff5;
+  fill-opacity: 0.11;
+}
+
+.trophy-trace__cup-light {
+  stroke: #f7f6f2;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.trophy-trace__registration {
+  stroke: #171916;
+  stroke-width: 0.75;
+  stroke-linecap: square;
+  opacity: 0.28;
+}
+
+.trophy-trace__guides {
+  stroke: #273ff5;
+  stroke-width: 0.6;
+  stroke-dasharray: 1.5 2.5;
+  opacity: 0;
+}
+
+.trophy-trace__glint {
+  stroke: #273ff5;
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trophy-trace:hover {
+    border-color: rgba(39, 63, 245, 0.38);
+    background: #f0f0f8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trophy-trace {
+    transition: none;
+  }
+}

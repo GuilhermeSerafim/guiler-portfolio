@@ -17,10 +17,18 @@ const CursorPreview = import.meta.env.DEV && /^\/__preview\/cursor\/[abc]\/?$/.t
   ? React.lazy(() => import("./preview/CursorPreview"))
   : null;
 
+const TrophyPreview = import.meta.env.DEV && /^\/__preview\/trophy(?:\/[abc])?\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/TrophyPreview"))
+  : null;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MotionConfig reducedMotion="user">
-      {CursorPreview ? (
+      {TrophyPreview ? (
+        <React.Suspense fallback={null}>
+          <TrophyPreview />
+        </React.Suspense>
+      ) : CursorPreview ? (
         <React.Suspense fallback={null}>
           <CursorPreview />
         </React.Suspense>

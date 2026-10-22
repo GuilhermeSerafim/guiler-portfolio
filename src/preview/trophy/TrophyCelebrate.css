@@ -1,0 +1,112 @@
+.trophy-celebrate {
+  display: inline-grid;
+  flex: 0 0 52px;
+  place-items: center;
+  box-sizing: border-box;
+  width: 52px;
+  height: 52px;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgb(39 63 245 / 15%);
+  border-radius: 50%;
+  background: #f7f6f2;
+  color: #273ff5;
+  cursor: pointer;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.trophy-celebrate:hover {
+  border-color: rgb(39 63 245 / 35%);
+}
+
+.trophy-celebrate:focus-visible {
+  outline: 2px solid #273ff5;
+  outline-offset: 4px;
+}
+
+.trophy-celebrate .trophy-celebrate__art {
+  display: block;
+  width: 50px;
+  height: 50px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.trophy-celebrate__trophy,
+.trophy-celebrate__shadow,
+.trophy-celebrate__halo,
+.trophy-celebrate__spark {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.trophy-celebrate__trophy {
+  transform-origin: 50% 85%;
+}
+
+.trophy-celebrate__outline,
+.trophy-celebrate__cup {
+  stroke: #273ff5;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trophy-celebrate__outline {
+  fill: none;
+}
+
+.trophy-celebrate__cup {
+  fill: #ede3ca;
+}
+
+.trophy-celebrate__crest {
+  fill: #273ff5;
+}
+
+.trophy-celebrate__shine {
+  fill: #fffefa;
+  opacity: 0;
+}
+
+.trophy-celebrate__shadow {
+  fill: #273ff5;
+  opacity: 0.12;
+}
+
+.trophy-celebrate__halo {
+  fill: none;
+  stroke: #273ff5;
+  stroke-width: 0.6;
+  opacity: 0;
+}
+
+.trophy-celebrate__spark {
+  fill: #273ff5;
+  stroke: #273ff5;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.trophy-celebrate__spark--gold {
+  fill: #b98a39;
+  stroke: #b98a39;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trophy-celebrate__trophy,
+  .trophy-celebrate__shadow {
+    transform: none !important;
+  }
+
+  .trophy-celebrate__spark,
+  .trophy-celebrate__shine,
+  .trophy-celebrate__halo {
+    opacity: 0 !important;
+  }
+}
