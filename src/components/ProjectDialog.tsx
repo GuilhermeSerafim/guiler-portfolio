@@ -3,6 +3,7 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "../data";
 import { track } from "../analytics/client";
 import { ProjectHealthStatus } from "./ProjectHealthStatus";
+import { ProjectResult } from "./ProjectResult";
 import type { ProjectHealthView } from "../project-health/view";
 
 export function ProjectDialog({
@@ -59,6 +60,7 @@ export function ProjectDialog({
               <span aria-hidden="true">↗</span>
             </h2>
             <p className="case-lead">{project.title}</p>
+            <p className="case-stage">{project.stage}</p>
             <div className="tags">
               {(project.technologies ?? project.tags).map((tag) => (
                 <span key={tag}>{tag}</span>
@@ -95,6 +97,7 @@ export function ProjectDialog({
             </section>
             <section>
               <h3>O resultado</h3>
+              <ProjectResult project={project} />
               <p>{project.outcome}</p>
             </section>
             {project.demoNotice && <p className="case-demo-notice">{project.demoNotice}</p>}
@@ -106,18 +109,26 @@ export function ProjectDialog({
                 target="_blank"
                 rel="noreferrer"
               >
-                {project.demoNotice ? "Abrir demonstração" : "Abrir projeto"} <ArrowUpRight size={18} />
+                {project.demoNotice ? "Explorar demonstração" : "Abrir projeto"} <ArrowUpRight size={18} />
               </a>
               {project.github && (
-                <a
-                  className="text-link"
-                  href={project.github}
-                  onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_dialog" } })}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Github size={18} /> Ver código <ArrowUpRight size={16} />
-                </a>
+                <div className="case-repositories">
+                  {[
+                    ...(project.frontendGithub ? [{ label: "Frontend", url: project.frontendGithub }] : []),
+                    { label: project.frontendGithub ? "Backend" : "Ver código", url: project.github },
+                  ].map((repository) => (
+                    <a
+                      key={repository.url}
+                      className="text-link"
+                      href={repository.url}
+                      onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_dialog" } })}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Github size={18} /> {repository.label} <ArrowUpRight size={16} />
+                    </a>
+                  ))}
+                </div>
               )}
             </div>
             {health && <ProjectHealthStatus health={health} />}

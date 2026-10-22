@@ -32,6 +32,7 @@ import { TechnologyCatalog } from "./components/TechnologyCatalog";
 import { TechText } from "./components/TechText";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { ProjectHealthStatus } from "./components/ProjectHealthStatus";
+import { ProjectResult } from "./components/ProjectResult";
 import { useProjectHealth } from "./project-health/useProjectHealth";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { track } from "./analytics/client";
@@ -492,7 +493,9 @@ function App() {
                         <ArrowUpRight size={25} strokeWidth={1.5} />
                       </button>
                     </div>
+                    <p className="project-stage">{project.stage}</p>
                     <p className="project-description">{project.description}</p>
+                    <ProjectResult project={project} />
                     <ProjectHealthStatus health={projectHealth[project.id]} compact />
                     <div className="project-bottom">
                       <div className="tags">

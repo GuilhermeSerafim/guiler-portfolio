@@ -5,15 +5,22 @@ export type Project = {
   eyebrow: string;
   title: string;
   description: string;
+  stage: string;
   tags: string[];
   technologies?: string[];
   problem: string;
   approach: string;
   decisions: string[];
   outcome: string;
+  resultHighlight?: {
+    value: string;
+    label: string;
+    context: string;
+  };
   demo: string;
   demoNotice?: string;
   github?: string;
+  frontendGithub?: string;
   preview?: {
     src: string;
     alt: string;
@@ -30,19 +37,20 @@ export const projects: Project[] = [
     eyebrow: "IA APLICADA / GEOTECNOLOGIA",
     title: "Dados do território. Decisões mais claras.",
     description:
-      "Inteligência artificial e dados geoespaciais juntos para apoiar a análise de risco de alagamento.",
+      "Desenvolvi um protótipo que reúne dados geoespaciais e apresenta um índice de risco de alagamento com mapa e explicação. Next.js, FastAPI, PostGIS e LangChain conectam interface, regras de cálculo e histórico.",
+    stage: "Protótipo de análise geoespacial",
     tags: ["Next.js", "Python", "PostGIS", "LangChain"],
     problem:
       "Analisar risco de alagamento exige reunir informações de fontes diferentes e tornar o raciocínio compreensível para quem precisa decidir.",
     approach:
-      "Desenvolvi uma plataforma que conecta uma experiência de mapa a um pipeline de dados geoespaciais e IA. FastAPI e PostGIS sustentam a análise; Next.js e Mapbox tornam o território explorável.",
+      "Desenvolvi o fluxo que parte de uma área no mapa, reúne dados do território, calcula os componentes do risco e apresenta a classificação com uma explicação. Next.js conecta a interface à API FastAPI e ao PostGIS. OrbTalus é a demonstração pública desse fluxo.",
     decisions: [
-      "Integrar dados de cobertura do solo, localização e elevação ao contexto da análise.",
-      "Usar LangChain e GPT-4o para apresentar justificativas junto às classificações de risco.",
-      "Conectar a camada geoespacial ao produto, da consulta de dados à visualização no mapa.",
+      "Calcular um índice heurístico: regras em Python combinam topografia, frequência histórica de água e permeabilidade com pesos fixos.",
+      "Separar o cálculo de risco da explicação: LangChain e OpenAI apresentam o contexto dos resultados calculados.",
+      "Exibir os componentes do índice junto à classificação e ao mapa. O índice apoia a análise; não representa uma probabilidade validada de alagamento.",
     ],
     outcome:
-      "Projeto vencedor do Hackathon OpenAI. A proposta é apoiar a análise com contexto e justificativas; as classificações não substituem uma avaliação técnica do território.",
+      "Estruturei a análise em três componentes rastreáveis — topografia, frequência histórica de água e permeabilidade —, combinando consultas espaciais, regras em Python e explicações com LangChain/OpenAI. Projeto vencedor do Hackathon OpenAI. As classificações não substituem uma avaliação técnica do território.",
     demo: "https://orbtalus-demo.guiler.chatgpt.site/",
     demoNotice:
       "OrbTalus é uma demonstração interativa com dados sintéticos e processamento local. Ela apresenta o fluxo da solução; não executa a análise geoespacial e a IA do produto original.",
@@ -54,7 +62,8 @@ export const projects: Project[] = [
     eyebrow: "FULL STACK / FERRAMENTAS EMPRESARIAIS",
     title: "IA aplicada à rotina comercial.",
     description:
-      "Hub do ecossistema SEVEN com IA para criar propostas, diagnosticar a operação comercial e qualificar leads, em uma experiência integrada.",
+      "Desenvolvi funcionalidades para propostas, diagnóstico comercial e qualificação de leads em um hub para membros SEVEN. Integrei React e TypeScript a APIs em FastAPI, PostgreSQL e modelos de IA, com histórico de conversas.",
+    stage: "Projeto profissional · implementação parcial",
     tags: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
     technologies: [
       "React",
@@ -70,14 +79,20 @@ export const projects: Project[] = [
     problem:
       "A operação comercial reúne tarefas que exigem contexto: elaborar propostas, identificar gargalos e priorizar oportunidades. O desafio era organizar essas ferramentas em um único ambiente para os membros do ecossistema SEVEN.",
     approach:
-      "Desenvolvi a interface em React e TypeScript, integrada a uma API em Python com FastAPI e PostgreSQL. O hub organiza os recursos por área de negócio, com foco inicial em Comercial, e reúne ferramentas de IA em uma interface de chat com histórico persistente e acesso restrito a membros aprovados.",
+      "Implementei interfaces, APIs e integrações para as frentes de propostas, diagnóstico comercial e qualificação de leads, com React/TypeScript, Python/FastAPI e PostgreSQL. O hub compartilha uma interface de chat com histórico persistido e acesso de membros aprovados.",
     decisions: [
-      "Compartilhar a estrutura de chat entre as ferramentas, com configurações e adaptadores próprios para cada agente.",
-      "Orquestrar a IA no backend com chamadas de ferramentas e contexto específico para criar, editar e revisar propostas ou conduzir diagnósticos.",
-      "Separar a interpretação da IA do cálculo de qualificação: o backend pontua os leads com critérios e pesos configuráveis por empresa.",
+      "Reunir usuário e empresa em uma única resposta de sessão, eliminando a chamada HTTP redundante na inicialização autenticada.",
+      "Carregar módulos por rota e manter os providers de autenticação e favoritos fora da página pública.",
+      "Persistir o histórico das conversas e separar a interpretação da IA do cálculo de qualificação dos leads, executado no backend com critérios por empresa.",
+      "Arquitetar e implementar a elegibilidade do Seven Plus via ClickUp: aprovar cadastros cujo e-mail corresponde ao contato da empresa na base de membros e encaminhar os demais para revisão.",
     ],
     outcome:
-      "Uma plataforma que reúne propostas comerciais, diagnósticos e qualificação de leads, com conversas recuperáveis e dados persistidos. A organização por áreas mantém um ponto de acesso comum para as ferramentas do ecossistema SEVEN.",
+      "Reduzi de duas para uma as chamadas à API para carregar usuário e empresa na inicialização da sessão autenticada, consolidando ambos em uma resposta. Também implementei a integração de elegibilidade com o ClickUp, com aprovação por correspondência de e-mail e revisão dos demais cadastros.",
+    resultHighlight: {
+      value: "2 → 1",
+      label: "chamadas de sessão",
+      context: "Usuário e empresa no início da sessão autenticada.",
+    },
     demo: "https://seven-tools-demo.guiler.chatgpt.site/",
     demoNotice:
       "Demonstração com cenários e dados sintéticos para explorar os fluxos do hub, separada das contas e dos dados do produto original. A disponibilidade indicada se refere a esta demo.",
@@ -87,25 +102,27 @@ export const projects: Project[] = [
     name: "Play Senac",
     category: "Produto web",
     eyebrow: "PRODUTO WEB / AGENDAMENTO",
-    title: "Menos conflito de horário. Mais jogo.",
+    title: "Reservas e horários, no mesmo fluxo.",
     description:
-      "Uma plataforma para organizar reservas de quadras, participantes e disponibilidade em um só lugar.",
+      "Em equipe, contribuí para um sistema de reservas de quadras com Angular e Spring Boot. Desenvolvi interfaces, integração com a API, formulários validados e feedback de carregamento e erros para os fluxos de reserva.",
+    stage: "Projeto em equipe",
     tags: ["Java", "Spring Boot", "Angular", "SQL"],
     problem:
-      "Agendar uma quadra envolve mais do que escolher um horário: é preciso respeitar prioridades, evitar conflitos e validar quem participa.",
+      "A gestão de quadras precisa reunir disponibilidade, reservas e bloqueios administrativos, com informações claras para quem agenda e para quem organiza os horários.",
     approach:
-      "Construí um sistema de gerenciamento e agendamento com Angular na interface e Spring Boot no back-end, trazendo as regras da operação para o fluxo de reserva.",
+      "Trabalhei no frontend Angular de um sistema desenvolvido em equipe, integrado à API Spring Boot. Minha contribuição inclui interfaces de reserva e administração, formulários, diálogos, responsividade e comunicação HTTP. O backend da equipe concentra as regras de conflito, bloqueios e persistência.",
     decisions: [
-      "Modelar regras de prioridade e bloqueio de horários no back-end.",
-      "Validar participantes e reservas com Bean Validation e persistência JPA/Hibernate.",
-      "Organizar a interface com Angular e RxJS para consultar disponibilidade e acompanhar agendamentos.",
+      "Integrar criação, consulta, alteração e exclusão de reservas à API, mantendo contratos tipados no frontend.",
+      "Usar formulários validados, diálogos e feedback de carregamento e erro para orientar o fluxo de reserva.",
+      "Atualizar as listas de forma reativa com RxJS e paginar a visualização administrativa das reservas.",
     ],
     outcome:
-      "Uma experiência centralizada de reserva, com regras explícitas e validações que ajudam a organizar o uso das quadras.",
+      "Integrei as operações de gestão de reservas ao frontend Angular, conectando a API a formulários validados e à atualização reativa das listas. O sistema da equipe reúne reservas, administração de quadras e bloqueios de horários.",
     demo: "https://play-senac-demo.guiler.chatgpt.site/",
     demoNotice:
       "Demonstração com quadras e reservas sintéticas para explorar as regras de agendamento. As operações são locais e não criam reservas reais.",
     github: "https://github.com/GuilhermeSerafim/play-senac-api",
+    frontendGithub: "https://github.com/GuilhermeSerafim/play-senac",
   },
   {
     id: "mesa",
@@ -114,30 +131,51 @@ export const projects: Project[] = [
     eyebrow: "FRONT-END / EXPERIÊNCIA COMERCIAL",
     title: "Da proposta de valor à solicitação de vaga.",
     description:
-      "Landing page do Grupo SEVEN / Grupo Nakamura para apresentar a metodologia Mesa de Negócios e conduzir interessados ao formulário de solicitação de vaga.",
+      "Desenvolvi e evoluí a landing da Mesa de Negócios em React e TypeScript, com páginas de materiais e captação via Respondi. Adaptei o formulário ao desktop e ao mobile e otimizei o JavaScript de entrada.",
+    stage: "Landing page publicada",
     tags: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui"],
     problem:
       "A oferta precisava comunicar sua proposta, critérios de participação e autoridade, com um caminho claro para solicitar uma vaga em diferentes dispositivos.",
     approach:
-      "Implementei o front-end em React e TypeScript, com Vite 6, Tailwind CSS e shadcn/ui, traduzindo a narrativa comercial em seções reutilizáveis e um fluxo consistente de solicitação de vaga.",
+      "Desenvolvi e evoluí a landing do Grupo SEVEN / Grupo Nakamura em React e TypeScript, com Tailwind CSS e shadcn/ui. Organizei a narrativa comercial, as páginas de materiais e o caminho até a solicitação de vaga, com formulário Respondi adaptado a cada dispositivo.",
     decisions: [
       "Centralizar os CTAs em uma única ação: formulário Respondi em modal no desktop e navegação direta no mobile.",
-      "Carregar seções secundárias e o formulário sob demanda, priorizando o conteúdo inicial.",
+      "Dividir o código, carregar o formulário sob demanda e adiar a montagem de seções secundárias para reduzir o arquivo JavaScript de entrada.",
       "Automatizar lint, testes e build com GitHub Actions e integrar o repositório à Vercel.",
     ],
     outcome:
-      "Uma landing page publicada em domínio próprio, com apresentação da metodologia, formulário de solicitação de vaga integrado e validação automatizada para apoiar a evolução do site.",
+      "Reduzi em 52,4% o tamanho do arquivo JavaScript de entrada, de 540,93 para 257,50 kB, aplicando divisão de código, carregamento sob demanda e montagem adiada de componentes em React. A medição considera o arquivo de entrada dos dois builds registrados em 15/05/2026.",
+    resultHighlight: {
+      value: "−52,4%",
+      label: "JavaScript de entrada",
+      context: "540,93 → 257,50 kB entre dois builds de 15/05/2026.",
+    },
     demo: "https://dennisnakamura.com/mesa-de-negocios",
   },
 ];
 
 export const experience = [
   {
+    company: "Naka&Co",
+    role: "Desenvolvedor Full Stack",
+    period: "FEV — AGO 2026",
+    field: "FERRAMENTAS COMERCIAIS / IA",
+    number: "01",
+    description:
+      "Interfaces, APIs e integrações para ferramentas comerciais com IA e evolução de páginas de aquisição.",
+    contributions: [
+      "Redução de 52,4% no JavaScript de entrada da Mesa de Negócios entre builds.",
+      "Inicialização da sessão no SEVEN Tools com uma chamada à API em vez de duas.",
+      "Funcionalidades para propostas, diagnóstico comercial e qualificação de leads.",
+    ],
+    stack: "React / TypeScript / Python / FastAPI / PostgreSQL / SQLAlchemy / Alembic / OpenAI API",
+  },
+  {
     company: "Quipux",
     role: "Desenvolvedor Full Stack Pleno",
     period: "ABR — SET 2025",
     field: "E-GOVERNMENT",
-    number: "01",
+    number: "02",
     description:
       "Modernização de sistemas que fazem parte da rotina de atendimento público.",
     contributions: [
@@ -152,7 +190,7 @@ export const experience = [
     role: "Desenvolvedor Full Stack",
     period: "AGO 2023 — NOV 2024",
     field: "SEGUROS",
-    number: "02",
+    number: "03",
     description:
       "Arquitetura e performance em uma plataforma de cobrança de seguros.",
     contributions: [
