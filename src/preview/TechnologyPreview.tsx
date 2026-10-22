@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowDown, ArrowUpRight, Grid2X2, MoveRight } from "lucide-react";
+import { ArrowUpRight, Grid2X2, MoveRight } from "lucide-react";
 import App from "../App";
 import { CuriositySketch } from "../components/CuriositySketch";
 import "./TechnologyPreview.css";
@@ -23,7 +23,7 @@ const areas = [
 ];
 const all = areas.flatMap(area => area.items);
 const variants = {
-  a: { title: "Faixa contínua", description: "Uma linha fluindo. Ícones e nomes em uma composição mais enxuta." },
+  a: { title: "Faixa contínua", description: "Ícones nas cores das tecnologias. Uma faixa enxuta, sem categorias ou frases repetidas." },
   b: { title: "Trilhos por área", description: "Três trilhos, três áreas. Movimento com a organização da sua stack." },
   c: { title: "Catálogo em movimento", description: "Todas as tecnologias à vista. O deslocamento sutil acompanha a rolagem." },
 } as const;
@@ -82,8 +82,10 @@ function TechnologyStudy({ variant }: { variant: Variant }) {
   return <section id="tecnologias" ref={root} aria-labelledby="tech-study-title" className={`tech-study tech-study--${variant}`} data-static={staticMode} data-visible={visible}>
     <header className="tech-study-header">
       <div>
-        <span className="eyebrow">MINHA CAIXA DE FERRAMENTAS</span>
-        <h3 id="tech-study-title">A tecnologia certa<br /><span>para cada problema.</span></h3>
+        {variant === "a" ? <h3 id="tech-study-title">Minha caixa de ferramentas.</h3> : <>
+          <span className="eyebrow">MINHA CAIXA DE FERRAMENTAS</span>
+          <h3 id="tech-study-title">A tecnologia certa<br /><span>para cada problema.</span></h3>
+        </>}
       </div>
       <div className="tech-study-aside">
         <CuriositySketch subject="einstein" />
@@ -92,17 +94,13 @@ function TechnologyStudy({ variant }: { variant: Variant }) {
         </button>}
       </div>
     </header>
-    {variant === "a" && <>
-      <div className="tech-single-label"><span className="eyebrow">INTERFACE / SISTEMAS / DADOS & IA</span><span className="eyebrow">12 FERRAMENTAS <ArrowDown size={12} /></span></div>
-      <Rail items={all} duration={64} />
-      <div className="tech-area-index">{areas.map((area, index) => <span key={area.name}><i>0{index + 1}</i>{area.name}</span>)}</div>
-    </>}
+    {variant === "a" && <Rail items={all} duration={64} />}
     {variant === "b" && <div className="tech-area-rails">{areas.map((area, index) => <div className="tech-area-row" key={area.name}>
       <div className="tech-area-label"><span className="tech-area-number">0{index + 1}</span><div><h4>{area.name}</h4><p>{area.note}</p></div></div>
       <Rail items={area.items} reverse={index === 1} duration={34 + index * 5} />
     </div>)}</div>}
     {variant === "c" && <div className="tech-catalog">{areas.map((area, index) => <CatalogRow key={area.name} area={area} index={index} />)}</div>}
-    <div className="tech-study-footnote"><span>Ferramentas mudam. O critério fica.</span><span className="eyebrow">ENGENHARIA + CURIOSIDADE <ArrowUpRight size={13} /></span></div>
+    {variant !== "a" && <div className="tech-study-footnote"><span>Ferramentas mudam. O critério fica.</span><span className="eyebrow">ENGENHARIA + CURIOSIDADE <ArrowUpRight size={13} /></span></div>}
   </section>;
 }
 

@@ -21,8 +21,6 @@
 .tech-study-aside .curiosity-sketch--einstein { width: 106px; }
 .tech-view-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: transparent; padding: 10px 0 10px 12px; font-size: 11px; min-height: 44px; border-bottom: 1px solid var(--line); }
 .tech-view-button:hover { color: var(--blue); }
-.tech-single-label { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 16px; }
-.tech-single-label span:last-child { display: flex; align-items: center; gap: 10px; }
 .tech-study ul { margin: 0; padding: 0; list-style: none; }
 .tech-rail-window { min-width: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 22px, #000 calc(100% - 22px), transparent); }
 .tech-rail-track { width: max-content; display: flex; animation: tech-rail-loop var(--rail-duration) linear infinite; animation-direction: var(--rail-direction); animation-play-state: paused; }
@@ -30,14 +28,14 @@
 .tech-rail-group { display: flex; align-items: center; flex-shrink: 0; gap: 48px; padding-right: 48px !important; }
 .tech-rail-group li { flex-shrink: 0; }
 .tech-item { display: inline-flex; gap: 13px; align-items: center; white-space: nowrap; font-size: 18px; font-family: var(--display); letter-spacing: -.35px; }
-.tech-item img { width: 28px; height: 28px; object-fit: contain; filter: grayscale(1) brightness(.35); }
-.tech-item:hover img { filter: none; }
-.tech-study--a > .tech-rail-window { border-block: 1px solid var(--line); padding-block: 34px; }
-.tech-study--a .tech-item { font-size: 27px; gap: 15px; }
-.tech-study--a .tech-item img { width: 34px; height: 34px; }
-.tech-area-index { display: flex; gap: 40px; margin-top: 18px; }
-.tech-area-index > span { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
-.tech-area-index i { font: normal 9px var(--mono); color: var(--blue); }
+.tech-item img { width: 28px; height: 28px; object-fit: contain; }
+.tech-study--a .tech-study-header { margin-bottom: 18px; }
+.tech-study--a .tech-study-header h3 { font-size: clamp(24px, 2.5vw, 32px); letter-spacing: -.8px; margin: 0; }
+.tech-study--a .tech-study-aside { flex-direction: row; align-items: center; gap: 28px; }
+.tech-study--a .tech-study-aside .curiosity-sketch--einstein { width: 80px; }
+.tech-study--a > .tech-rail-window { border-bottom: 1px solid var(--line); padding-block: 18px 26px; }
+.tech-study--a .tech-item { font-size: 22px; gap: 12px; }
+.tech-study--a .tech-item img { width: 28px; height: 28px; }
 .tech-area-row { display: grid; grid-template-columns: 240px minmax(0, 1fr); align-items: center; border-top: 1px solid var(--line); min-height: 108px; }
 .tech-area-row:last-child { border-bottom: 1px solid var(--line); }
 .tech-area-label { display: flex; gap: 18px; align-items: baseline; padding-block: 22px; }
@@ -83,13 +81,12 @@
   .tech-study-header h3 { font-size: clamp(23px,5.8vw,32px); letter-spacing: -.8px; margin-top: 12px; }
   .tech-study-aside .curiosity-sketch--einstein { width: 74px; }
   .tech-view-button { font-size: 10px; padding-left: 0; gap: 5px; }
-  .tech-single-label { display: block; }
-  .tech-single-label .eyebrow { font-size: 8px; }
-  .tech-single-label span:last-child { display: none; }
-  .tech-study--a > .tech-rail-window { padding-block: 28px; }
-  .tech-study--a .tech-item { font-size: 24px; }
-  .tech-area-index { gap: 20px; flex-wrap: wrap; }
-  .tech-area-index > span { font-size: 10px; }
+  .tech-study--a .tech-study-header { align-items: center; margin-bottom: 12px; gap: 20px; }
+  .tech-study--a .tech-study-header h3 { max-width: 230px; line-height: 1.15; }
+  .tech-study--a .tech-study-aside { flex-direction: column; gap: 4px; }
+  .tech-study--a .tech-study-aside .curiosity-sketch--einstein { width: 64px; }
+  .tech-study--a > .tech-rail-window { padding-block: 16px 24px; }
+  .tech-study--a .tech-item { font-size: 20px; }
   .tech-area-row, .tech-catalog-row { grid-template-columns: minmax(0,1fr); }
   .tech-area-label { padding-block: 18px 8px; gap: 12px; }
   .tech-area-label > div { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }

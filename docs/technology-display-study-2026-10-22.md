@@ -30,14 +30,14 @@ Estrutura e comportamento dos portfólios foram conferidos em código público. 
 | B — Trilhos por área | http://127.0.0.1:5195/__preview/tecnologias/b#tecnologias | Categorias fixas e três trilhos; Sistemas segue no sentido oposto. Melhor equilíbrio proposto entre movimento e organização; ocupa mais altura que A. |
 | C — Catálogo em movimento | http://127.0.0.1:5195/__preview/tecnologias/c#tecnologias | Todas as tecnologias disponíveis sem esperar o loop; deslocamento mínimo ligado ao scroll. Mais tranquilo e legível, menos próximo da barra contínua pedida. |
 
-Recomendação inicial: **B**, a confirmar pela escolha do usuário. A interface de comparação fica em uma barra no topo das rotas de estudo. O link Atual leva ao site local sem substituição.
+Recomendação inicial: B. O usuário escolheu **A** e pediu ícones coloridos e uma seção mais minimalista, sem categorias repetidas. A interface de comparação fica em uma barra no topo das rotas de estudo. O link Atual leva ao site local sem substituição.
 
 ## Implementação experimental
 
 - `src/preview/TechnologyPreview.tsx` e `.css`: protótipos isolados. Montagem temporária por portal na posição da seção atual, preservando `App.tsx`.
 - `src/main.tsx`: carregamento condicionado a `import.meta.env.DEV` e às três rotas explícitas. O build de produção elimina os protótipos; não há impacto no bundle publicado.
 - 12 SVGs locais, sem fonte de ícones ou CDN em runtime: Devicon v2.17.0 (11) e Simple Icons 13.0.0 (LangChain). Origem, hashes e licenças em `src/preview/technology-assets/SOURCE-NOTES.md`.
-- Nenhuma dependência nova. Símbolos monocromáticos, com cores originais no hover. Texto continua visível.
+- Nenhuma dependência nova. Após a escolha de A, os SVGs usam as variantes com cores originais permanentemente, sem filtro monocromático. Marcas originalmente monocromáticas foram preservadas. Texto continua visível.
 - A/B: CSS `transform`, grupos de largura idêntica, duplicatas com `aria-hidden`, nenhum elemento focável duplicado, suspensão fora da área visível.
 - “Ver todas” substitui os trilhos por uma lista estática; permite leitura completa e interrompe o movimento sem exigir hover. “Ver em movimento” restaura o loop.
 - `prefers-reduced-motion`: lista estática automática, nenhum deslocamento em C. Este tratamento segue a orientação de [Pause, Stop, Hide do W3C](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html).
@@ -58,6 +58,15 @@ QA final aprovado em sessão dedicada `technology-final`, com `output/playwright
 
 Uma execução inicial observou visibilidade desatualizada após mudanças rápidas de largura. A causa exata desse episódio não foi capturada. A revisão identificou que o callback só considerava a primeira observação de um lote; agora aplica a mais recente por `time` e ignora callbacks após cleanup, conforme a [semântica documentada da API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#intersection_change_callbacks). Oito recarregamentos com redimensionamento e a suíte final sem instrumentação passaram depois do ajuste. Não se alega teste em aparelho físico.
 
+## Refinamento da opção A escolhida
+
+- Cabeçalho reduzido a “Minha caixa de ferramentas.”, com Einstein discreto à direita e acesso a “Ver todas”.
+- Removidos os dois conjuntos de categorias, contador de ferramentas e frases do rodapé da seção.
+- Ícones e nomes menores, menos espaço vertical. A faixa contínua preserva as 12 tecnologias.
+- O filtro monocromático foi removido das três propostas; oito fontes Devicon passaram à variante original (FastAPI já tinha bytes iguais). Origens e hashes atualizados junto aos assets.
+- QA `output/playwright/technology-a-minimal-qa.js` aprovado em 320, 390, 768 e 1440 px: zero overflow, sem colisões, 12 tecnologias, cores sem depender do hover, lista estática e movimento reduzido funcionando, zero erros JavaScript.
+- Altura medida da seção: 197 px no desktop e 214 px no celular. Capturas `technology-a-minimal-{390,1440}.png` inspecionadas. TypeScript e verificação de diff passaram.
+
 ## Próximo passo
 
-Escolher A, B ou C (ou ajustar uma composição). Só então integrar o design escolhido ao componente definitivo, eliminar o comparador e validar novamente antes de uma futura publicação autorizada.
+A continua disponível localmente para revisão do refinamento. A futura integração definitiva deve eliminar o comparador e ser validada antes de uma publicação autorizada. Nenhum push ou deploy foi feito nesta etapa.
