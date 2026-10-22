@@ -1207,13 +1207,30 @@ h2 {
   padding-left: 6px;
   margin-block: 8px;
 }
+.case-access {
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+  padding-top: 25px;
+}
+.case-access-summary {
+  margin-top: 12px;
+  color: #63675d;
+  font-size: 14px;
+  line-height: 1.7;
+}
 .case-links {
   display: flex;
   align-items: center;
   gap: 28px;
-  margin-top: 32px;
-  border-top: 1px solid var(--line);
-  padding-top: 25px;
+  margin-top: 20px;
+}
+.case-demo-notice {
+  margin-top: 18px;
+  padding-left: 14px;
+  border-left: 2px solid var(--line);
+  color: #63675d;
+  font-size: 13px;
+  line-height: 1.7;
 }
 .case-links .text-link {
   font-size: 12px;

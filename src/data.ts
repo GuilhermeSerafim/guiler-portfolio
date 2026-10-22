@@ -95,7 +95,7 @@ export const projects: Project[] = [
     },
     demo: "https://seven-tools-demo.guiler.chatgpt.site/",
     demoNotice:
-      "Demonstração com cenários e dados sintéticos para explorar os fluxos do hub, separada das contas e dos dados do produto original. A disponibilidade indicada se refere a esta demo.",
+      "Esta demonstração usa cenários e dados de exemplo, separados das contas e dos dados do produto original.",
   },
   {
     id: "playsenac",

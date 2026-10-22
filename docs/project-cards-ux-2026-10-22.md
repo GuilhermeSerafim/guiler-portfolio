@@ -1,5 +1,9 @@
 # Cards concisos e disponibilidade contextual
 
+**Decisão posterior do usuário:** a verificação foi removida também do modal e o consumidor HTTP deixou de ser montado na página. Os projetos são cases da implementação original; demos ficam identificadas somente na área de acesso, com contexto e limites. Os itens abaixo registram a etapa intermediária, substituída antes da publicação. O ícone isolado de GitHub também saiu dos cards; links de código permanecem no modal.
+
+Validação da decisão final: build aprovado (`index-caWpwScZ.js`, 396,74 kB / 130,78 kB gzip), 153 testes em seis arquivos aprovados. Browser em 1440, 390 e 320 px: 12 modais, resumos curtos, resultados internos, destinos e repositórios preservados, nenhum estado público ou request ao monitor, nenhum erro JavaScript ou request Google sem consentimento. Dois downloads do currículo e feedback de hover/movimento reduzido aprovados. Roteiro de release: `<workspace>/output/playwright/portfolio-cases-release-qa.js`; resultado local `cases-local-qa-result.json`. A publicação foi autorizada após a remoção do ícone isolado e a clarificação da UX foi incorporada antes dela.
+
 Revisão local solicitada em 22/10/2026, sobre `ac93cf0`. Sem publicação nesta etapa.
 
 ## Hierarquia

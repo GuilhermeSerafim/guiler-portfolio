@@ -67,7 +67,7 @@ describe("portfolio action controls", () => {
     expect(recorded.mock.calls).toEqual([[{name:"contact_intent",params:{contact_method:"email_copy",ui_location:"contact_copy"}}]]);
     recorded.mockClear(); writeText.mockRejectedValue(Error("denied")); await copy.props.onClick(); expect(recorded).not.toHaveBeenCalled();
   });
-  it("identifies the social links and the project card repository", () => {
+  it("identifies the social links", () => {
     const nodes=elements(App());
     const expectations = [
       ["https://github.com/GuilhermeSerafim", "github", "github_profile", ["projects_footer","contact"]],
@@ -76,7 +76,5 @@ describe("portfolio action controls", () => {
     for(const [href,link_id,destination_id,locations] of expectations) nodes.filter(n=>n.type==="a"&&n.props.href===href).forEach((element,index)=>{
       recorded.mockClear(); element.props.onClick(); expect(recorded.mock.calls).toEqual([[{name:"link_click",params:{link_id,destination_id,ui_location:locations[index]}}]]);
     });
-    recorded.mockClear(); nodes.find(n=>n.props.className==="project-code")!.props.onClick();
-    expect(recorded.mock.calls).toEqual([[{name:"link_click",params:{link_id:"project_code",destination_id:"project_repository",project_id:"playsenac",ui_location:"project_card"}}]]);
   });
 });

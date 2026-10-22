@@ -31,7 +31,6 @@ import { CuriositySketch } from "./components/CuriositySketch";
 import { TechnologyCatalog } from "./components/TechnologyCatalog";
 import { TechText } from "./components/TechText";
 import { TrajectoryMark } from "./components/TrajectoryMark";
-import { useProjectHealth } from "./project-health/useProjectHealth";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
@@ -91,7 +90,6 @@ function ExpertiseStrip() {
 
 function App() {
   const { heroRef, entry } = useHeroEntry();
-  const projectHealth = useProjectHealth();
   const [showMeteorField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
   );
@@ -750,7 +748,6 @@ function App() {
       </main>
       <ProjectDialog
         project={selectedProject}
-        health={selectedProject ? projectHealth[selectedProject.id] : undefined}
         onClose={() => setSelectedProject(null)}
       />
     </>

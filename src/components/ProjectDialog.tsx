@@ -2,17 +2,13 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "../data";
 import { track } from "../analytics/client";
-import { ProjectHealthNotice, ProjectHealthStatus } from "./ProjectHealthStatus";
 import { ProjectResult } from "./ProjectResult";
-import type { ProjectHealthView } from "../project-health/view";
 
 export function ProjectDialog({
   project,
-  health,
   onClose,
 }: {
   project: Project | null;
-  health?: ProjectHealthView;
   onClose: () => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -100,9 +96,14 @@ export function ProjectDialog({
               <ProjectResult project={project} />
               <p>{project.outcome}</p>
             </section>
-            {project.demoNotice && <p className="case-demo-notice">{project.demoNotice}</p>}
             <div className="case-access">
-              {health && <ProjectHealthNotice health={health} />}
+              <h3>Acesso ao projeto</h3>
+              {project.demoNotice && (
+                <p className="case-access-summary">
+                  Enquanto a aplicação original não está disponível publicamente,
+                  você pode conhecer seus fluxos em uma demonstração interativa.
+                </p>
+              )}
               <div className="case-links">
                 <a
                   className="button button-blue"
@@ -111,7 +112,7 @@ export function ProjectDialog({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {project.demoNotice ? "Explorar demonstração" : "Abrir projeto"} <ArrowUpRight size={18} />
+                  {project.demoNotice ? "Explorar demonstração" : "Visitar site"} <ArrowUpRight size={18} />
                 </a>
                 {project.github && (
                   <div className="case-repositories">
@@ -133,7 +134,7 @@ export function ProjectDialog({
                   </div>
                 )}
               </div>
-              {health && <ProjectHealthStatus health={health} />}
+              {project.demoNotice && <p className="case-demo-notice">{project.demoNotice}</p>}
             </div>
           </div>
         </>

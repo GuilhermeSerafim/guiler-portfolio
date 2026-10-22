@@ -1,5 +1,9 @@
 # Estado público das demonstrações
 
+## Decisão posterior de 22/10/2026 — monitor fora da apresentação pública
+
+Após a revisão de UX, o usuário esclareceu que os cases são implementações reais e que as demos são versões acessíveis enquanto as aplicações originais não estão públicas. Status, horários e disclosure foram retirados de toda a página; `App` também deixa de montar o consumidor HTTP. O monitor externo e seu contrato permanecem intactos, mas o visitante não consulta esse feed. O acesso distingue a demonstração interativa do site original da Mesa, preservando destinos e avisos sobre dados de exemplo. As seções seguintes são histórico das etapas anteriores.
+
 ## Revisão de UX — 22/10/2026, local
 
 O estado e o horário foram retirados dos cards. A verificação fica recolhida no modal, com avisos de falha, instabilidade ou manutenção junto ao CTA quando aplicáveis. Contrato e validade continuam iguais. A revisão e os testes estão em [Cards concisos e disponibilidade contextual](project-cards-ux-2026-10-22.md); o histórico abaixo descreve a apresentação anterior.
