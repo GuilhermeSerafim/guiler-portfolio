@@ -1,0 +1,18 @@
+.resume-download-label { display: inline-grid; align-items: center; white-space: nowrap; }
+.resume-download-label > span { grid-area: 1 / 1; transition: opacity 140ms ease-out; }
+.resume-download-label-requested { opacity: 0; }
+.resume-download[data-feedback-state="requested"] .resume-download-label-default { opacity: 0; }
+.resume-download[data-feedback-state="requested"] .resume-download-label-requested { opacity: 1; }
+.resume-link[data-feedback-state="requested"] { color: var(--blue); }
+.resume-link[data-feedback-state="requested"]::after { transform: scaleX(1); }
+.resume-download-arrow--requested { animation: resume-request-arrow 360ms ease-out both; }
+.resume-feedback-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@keyframes resume-request-arrow {
+  0% { transform: translateY(0); }
+  45% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .resume-download-label > span { transition: none; }
+  .resume-download-arrow--requested { animation: none; transform: none; }
+}

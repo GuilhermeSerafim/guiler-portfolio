@@ -13,7 +13,6 @@ import {
   Check,
   Code2,
   Copy,
-  Download,
   Github,
   Linkedin,
   Menu,
@@ -32,6 +31,7 @@ import { TechnologyCatalog } from "./components/TechnologyCatalog";
 import { TechText } from "./components/TechText";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
+import { ResumeDownloadLink } from "./components/ResumeDownloadLink";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
 
@@ -301,14 +301,7 @@ function App() {
                     Explorar projetos <TrajectoryMark />
                   </a>
                 </Magnetic>
-                <a
-                  className="resume-link resume-download"
-                  href="/GuilhermeSerafim_Fullstack.pdf"
-                  onClick={() => track({ name: "resume_download", params: { asset_id: "resume_fullstack", ui_location: "hero" } })}
-                  download="Guilherme_Serafim_Fullstack.pdf"
-                >
-                  Baixar currículo <Download className="resume-download-icon" size={17} aria-hidden="true" />
-                </a>
+                <ResumeDownloadLink location="hero" />
               </div>
             </div>
             <div>
@@ -725,9 +718,7 @@ function App() {
                 >
                   <Linkedin size={17} /> LinkedIn <ArrowUpRight size={16} />
                 </a>
-                <a className="resume-download" href="/GuilhermeSerafim_Fullstack.pdf" download="Guilherme_Serafim_Fullstack.pdf" onClick={() => track({ name: "resume_download", params: { asset_id: "resume_fullstack", ui_location: "contact" } })}>
-                  <Download className="resume-download-icon" size={17} aria-hidden="true" /> Currículo <ArrowDown size={16} aria-hidden="true" />
-                </a>
+                <ResumeDownloadLink location="contact" />
               </div>
             </div>
             <footer className="site-footer">
