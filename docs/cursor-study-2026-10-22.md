@@ -1,5 +1,7 @@
 # Cursores — pesquisa e comparação local
 
+**Escolha atual:** A — Órbita, integrada à página principal por solicitação do usuário em 22/10/2026. Implementação disponível localmente; ainda sem push/deploy desta alteração. O registro abaixo preserva a pesquisa e a comparação anteriores.
+
 ## Escopo
 
 O usuário autorizou publicar o catálogo C e, depois, estudar o cursor com inspiração em https://tamalsen.dev/. Catálogo publicado no commit `e4e7e9f`. Os cursores abaixo são protótipos locais para escolha, sem push/deploy. Base React 18, Motion 12, Vite 6; nenhuma dependência nova.
@@ -25,7 +27,7 @@ Não copiamos código dessas bibliotecas nem instalamos seus pacotes. Implementa
 | A — Órbita editorial | http://127.0.0.1:5195/__preview/cursor/a | Ponto e aro fino com pequeno atraso; sinal de mais nas capas. Mais próxima de Tamal, nas cores do portfólio. |
 | B — Contextual | http://127.0.0.1:5195/__preview/cursor/b | Apenas uma etiqueta Ver projeto junto ao mouse sobre capa, título e seta que abrem o case. |
 | C — Mira técnica | http://127.0.0.1:5195/__preview/cursor/c | Quatro cantos discretos; expansão em controles, sem mover os controles nem rotacionar continuamente. |
-| Atual | http://127.0.0.1:5195/ | Versão publicada, sem cursor experimental. |
+| Portfólio com Órbita | http://127.0.0.1:5195/ | Página principal local com a opção A aplicada. |
 
 Recomendação inicial: A para a personalidade desejada e proximidade com a referência; B caso a prioridade seja máxima discrição. A escolha depende da comparação real do usuário.
 
@@ -51,3 +53,20 @@ Recomendação inicial: A para a personalidade desejada e proximidade com a refe
 - A primeira automação movia o mouse antes de terminar a rolagem/layout da página, acionando o bloqueio de scroll previsto. O roteiro foi ajustado para esperar estabilidade e mover novamente o mouse; a sequência completa passou. Nenhuma mudança no comportamento do produto para contornar esse teste.
 
 Limites: testes Chromium automatizados e revisão visual, sem dispositivo físico ou leitor de tela. Não se afirma uma medição de FPS. Os efeitos continuam locais, aguardando escolha; nada deste estudo foi enviado a origin/main ou ao Vercel.
+
+## Implementação da escolha A
+
+`main.tsx` monta `OrbitCursor` junto ao App somente no ramo normal, evitando duplicação no comparador. O controller existente foi extraído para `CursorLayer`, compartilhando os handlers já validados; a Órbita contém apenas aro e sinal de mais. Os estilos e o markup de B/C permanecem no comparador DEV.
+
+Preservados o ponto de 4 px, aro de 28 px, expansão para 34 px nos controles e 40 px nas capas, contorno de 1 px com opacidade 0,66 e acompanhamento de 80 ms. Não foram alterados App, projetos, handlers de clique, analytics ou dependências. Nenhum loop contínuo foi adicionado: o RAF termina quando o aro alcança a posição do mouse.
+
+Verificação da integração:
+
+- TypeScript/Vite aprovado: JS `index-BJB_jrh0.js` (398,02 kB; gzip 131,40 kB) e CSS `index-jfnn1v_v.css` (62,30 kB; gzip 13,63 kB). O CSS contém a Órbita e exclui reticle, label e estilos da barra comparadora.
+- Build de produção servido localmente em `http://127.0.0.1:5207/`, além do dev em 5195. Uma instância na raiz; ausência de barra local no build público.
+- Navegador: hero, capas, títulos, setas, textos, repositório e contato; contraste azul/creme; abertura dos cases por clique e Enter; fechamento por Escape/botão; suspensão em diálogos e Tab, mantendo outline.
+- Reduced motion antes da carga e alternado durante a sessão desliga o efeito. Emulações touch de 390 e 1440 px mantêm o cursor decorativo desligado e os cases funcionais, sem overflow.
+- Os três previews continuam com uma única instância. Zero erros JavaScript e requests Google na execução de QA concluída.
+- A primeira execução do roteiro reabria o case antes do evento de fechamento concluir a atualização React. O roteiro passou a aguardar também a remoção de `#case-title`; nenhum handler do produto foi modificado para esse ajuste.
+
+Evidências no workspace raiz: `output/playwright/orbit-public-qa.js`, `orbit-public-qa-result.json` e capturas `orbit-public-*.png`. Validação Chromium; sem ensaio em aparelho físico ou nova medição de PageSpeed. Publicação permanece pendente.

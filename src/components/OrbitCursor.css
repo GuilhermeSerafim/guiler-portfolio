@@ -1,0 +1,48 @@
+.portfolio-cursor-ring,
+.portfolio-cursor-plus {
+  display: none;
+}
+.portfolio-cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  transform: translate(-50%, -50%);
+  transition: width 140ms ease, height 140ms ease;
+}
+
+/* A — Órbita editorial: a precise dot and a soft, delayed outline. */
+.portfolio-cursor[data-variant="a"] .portfolio-cursor-ring {
+  display: block;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: .66;
+}
+.portfolio-cursor[data-variant="a"][data-target="interactive"],
+.portfolio-cursor[data-variant="a"][data-target="project"] {
+  --cursor-size: 34px;
+}
+.portfolio-cursor[data-variant="a"][data-target="project-cover"] {
+  --cursor-size: 40px;
+}
+.portfolio-cursor[data-variant="a"][data-target="project-cover"] .portfolio-cursor-dot {
+  opacity: 0;
+}
+.portfolio-cursor[data-variant="a"][data-target="project-cover"] .portfolio-cursor-plus {
+  display: block;
+}
+.portfolio-cursor-plus {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+}
+.portfolio-cursor-plus::before,
+.portfolio-cursor-plus::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.portfolio-cursor-plus::before { width: 10px; height: 1px; top: 4.5px; left: 0; }
+.portfolio-cursor-plus::after { width: 1px; height: 10px; left: 4.5px; top: 0; }

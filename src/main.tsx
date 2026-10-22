@@ -5,6 +5,7 @@ import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/dm-sans";
 import "@fontsource/ibm-plex-mono/latin-400.css";
 import App from "./App";
+import { OrbitCursor } from "./components/OrbitCursor";
 import "./styles.css";
 import { initializeAnalytics } from "./analytics/client";
 import { publicConfig } from "./analytics/config";
@@ -23,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <React.Suspense fallback={null}>
           <CursorPreview />
         </React.Suspense>
-      ) : <App />}
+      ) : <><App /><OrbitCursor /></>}
     </MotionConfig>
   </React.StrictMode>,
 );
