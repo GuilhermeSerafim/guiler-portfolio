@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { projects } from "../../data";
 import GlobeField from "./GlobeField";
 import SystemPlane from "./SystemPlane";
+import EngineeringExamples from "./EngineeringExamples";
 import "./GlobeStory.css";
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
@@ -9,41 +9,12 @@ const smooth = (from: number, to: number, progress: number) => {
   const p = clamp((progress - from) / (to - from));
   return p * p * (3 - 2 * p);
 };
-const mesa = projects.find(project => project.id === "mesa")!;
-const seven = projects.find(project => project.id === "seven-tools")!;
-
-function EvidenceCards() {
-  return <div className="globe-evidence" aria-label="Resultados dos projetos">
-    <article className="globe-evidence-card globe-evidence-card--mesa">
-      <span className="globe-evidence-name">MESA DE NEGÓCIOS</span>
-      <strong>{mesa.resultHighlight?.value}</strong>
-      <p>{mesa.resultHighlight?.label}</p>
-      <div className="globe-comparison" aria-hidden="true">
-        <div><span>ANTES</span><i className="globe-bar-before" /><b>540,93 kB</b></div>
-        <div><span>DEPOIS</span><i className="globe-bar-after" /><b>257,50 kB</b></div>
-      </div>
-      <small>{mesa.resultHighlight?.context}</small>
-    </article>
-    <article className="globe-evidence-card globe-evidence-card--seven">
-      <span className="globe-evidence-name">SEVEN TOOLS</span>
-      <strong>{seven.resultHighlight?.value}</strong>
-      <p>{seven.resultHighlight?.label}</p>
-      <svg className="globe-request-flow" viewBox="0 0 210 38" aria-hidden="true">
-        <path d="M19 10H64L91 19H144M19 28H64L91 19" fill="none" stroke="currentColor" strokeOpacity=".3" />
-        <circle cx="19" cy="10" r="4" fill="currentColor" opacity=".4" /><circle cx="19" cy="28" r="4" fill="currentColor" opacity=".4" />
-        <path className="globe-request-pulse" d="M19 10H64L91 19H164" pathLength="100" fill="none" stroke="#a7b9ff" strokeWidth="2" />
-        <circle cx="164" cy="19" r="6" fill="#a7b9ff" /><circle cx="164" cy="19" r="12" fill="none" stroke="#a7b9ff" strokeOpacity=".4" />
-      </svg>
-      <small>{seven.resultHighlight?.context}</small>
-    </article>
-  </div>;
-}
-
 /** Focused local study: one continuous field, no photographic reveal. */
 export default function GlobeStory() {
   const root = useRef<HTMLElement>(null);
   const progress = useRef(0);
   const [active, setActive] = useState(false);
+  const [examplesVisible, setExamplesVisible] = useState(false);
   const [reduced, setReduced] = useState(() => matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [height, setHeight] = useState(innerHeight);
   useEffect(() => {
@@ -81,7 +52,11 @@ export default function GlobeStory() {
       set("end-y", `${(1 - smooth(.80, .93, p)) * 22}px`);
       set("veil-opacity", smooth(.82, 1, p) * .28);
       set("hint-opacity", 1 - smooth(.05, .14, p));
-      section.dataset.metrics = String(p >= .68);
+      const showExamples = p >= .68;
+      if (section.dataset.examples !== String(showExamples)) {
+        section.dataset.examples = String(showExamples);
+        setExamplesVisible(showExamples);
+      }
       section.dataset.phase = p < .25 ? "globe" : p < .58 ? "field" : "system";
     };
     const stop = () => { cancelAnimationFrame(frame); frame = 0; lastTime = 0; };
@@ -132,8 +107,8 @@ export default function GlobeStory() {
       <div className="globe-story-bridge" aria-hidden="true"><span className="globe-eyebrow">02 / CONEXÕES</span><p>Chegar perto.<br />Encontrar as conexões.</p></div>
       <div className="globe-system-plane" aria-hidden="true"><SystemPlane /></div>
       <div className="globe-end-veil" aria-hidden="true" />
-      <div className="globe-story-end"><span className="globe-eyebrow">03 / ENGENHARIA</span><p>Dar estrutura.<br />Gerar resultado<span>.</span></p></div>
-      <EvidenceCards />
+      <div className="globe-story-end"><span className="globe-eyebrow">03 / PRINCÍPIOS EM AÇÃO</span><p>Dar estrutura.<br />Gerar resultado<span>.</span></p><span className="globe-end-note">Demonstrações interativas.</span></div>
+      <EngineeringExamples visible={reduced || examplesVisible} />
       <span className="globe-story-hint" aria-hidden="true">CONTINUE PARA EXPLORAR <b>↓</b></span>
     </div>
   </section>;
