@@ -79,18 +79,17 @@ export function CuriositySketch({ subject }: { subject: Subject }) {
     if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches
       || typeof IntersectionObserver === "undefined") return;
 
-    // Newton replays on a fresh entrance; the other accents run just once.
+    // Replay on a fresh entrance, resetting only after the sketch fully leaves view.
     // Check the ratio too: the observer's initial notification may be below its threshold.
     const threshold = subject === "newton" ? 0.75 : 0.35;
     const observer = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting) {
-        if (subject === "newton") setPlayed(false);
+        setPlayed(false);
         return;
       }
       if (entry.intersectionRatio < threshold) return;
       setPlayed(true);
-      if (subject !== "newton") observer.disconnect();
-    }, { threshold: subject === "newton" ? [0, threshold] : threshold });
+    }, { threshold: [0, threshold] });
     observer.observe(node);
     return () => observer.disconnect();
   }, [subject]);
