@@ -43,3 +43,9 @@ No workspace pai, `C:/Users/Guiler/Desktop/wks/guiler/output/playwright/`:
 - `portfolio-ux-390-case.png`, `portfolio-ux-390-consent.png`, `portfolio-ux-390-footer-consent.png` e `portfolio-ux-1440-motion.png`: referências visuais.
 
 A próxima publicação deve fazer um build novo com as variáveis de produção; não publicar o `dist` usado pela QA.
+
+## Ajuste posterior: alinhamento do prêmio
+
+Em resposta à revisão do usuário, a frase “Ideias testadas. Trabalho reconhecido.” e o nome do prêmio foram agrupados no mesmo botão. Isso remove o espaço criado pela centralização da segunda linha em um alvo de 44 px. O troféu continua sendo um controle separado.
+
+QA local em 320, 390, 768 e 1440 px: separação visual de 3 px entre as linhas, sem corte horizontal; alvo de 44 px ou maior quando o texto quebra. Abertura do GeoRisk por teclado e retorno do foco após Escape passaram nas quatro larguras. Os seis testes existentes de controles/eventos passaram. Artefatos no workspace pai: `output/playwright/hero-award-spacing-qa.json` e `hero-award-{before,after}-{width}.png`.

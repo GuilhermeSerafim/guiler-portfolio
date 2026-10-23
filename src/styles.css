@@ -425,10 +425,15 @@ h2 {
   font-size: 11px;
   font-weight: 500;
 }
+.hero-proof-copy {
+  min-width: 0;
+}
 .hero-award-link {
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
   min-height: 44px;
   padding: 0;
   border: 0;
@@ -436,12 +441,17 @@ h2 {
   color: inherit;
   font: inherit;
   text-align: left;
+}
+.hero-award-link > strong {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--line);
 }
-.hero-award-link:hover,
-.hero-award-link:focus-visible {
+.hero-award-link > strong > svg {
+  flex-shrink: 0;
+}
+.hero-award-link:hover > strong,
+.hero-award-link:focus-visible > strong {
   color: var(--blue);
   text-decoration-color: currentColor;
 }

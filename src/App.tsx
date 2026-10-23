@@ -321,20 +321,25 @@ function App() {
                 <div className="proof-icon">
                   <TrophyCelebrate />
                 </div>
-                <div>
-                  <span>Ideias testadas. Trabalho reconhecido.</span>
-                  <strong>
-                    {hackathonProject ? (
-                      <button
-                        type="button"
-                        className="hero-award-link"
-                        aria-label="Conhecer o GeoRisk, vencedor do Hackathon OpenAI"
-                        onClick={() => openProject(hackathonProject, "hero_award")}
-                      >
+                <div className="hero-proof-copy">
+                  {hackathonProject ? (
+                    <button
+                      type="button"
+                      className="hero-award-link"
+                      aria-label="Conhecer o GeoRisk, vencedor do Hackathon OpenAI"
+                      onClick={() => openProject(hackathonProject, "hero_award")}
+                    >
+                      <span>Ideias testadas. Trabalho reconhecido.</span>
+                      <strong>
                         Vencedor do Hackathon OpenAI <ArrowUpRight size={13} aria-hidden="true" />
-                      </button>
-                    ) : "Vencedor do Hackathon OpenAI"}
-                  </strong>
+                      </strong>
+                    </button>
+                  ) : (
+                    <>
+                      <span>Ideias testadas. Trabalho reconhecido.</span>
+                      <strong>Vencedor do Hackathon OpenAI</strong>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
