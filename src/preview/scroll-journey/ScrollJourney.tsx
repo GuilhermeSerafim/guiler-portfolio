@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { NotebookDrawing, OrbitDrawing } from "./JourneyArtwork";
+import { NotebookDrawing } from "./JourneyArtwork";
+import RotatingOrbit from "./RotatingOrbit";
 import notebook960 from "../scroll-expand/assets/notebook-960.webp";
 import notebook1600 from "../scroll-expand/assets/notebook-1600.webp";
 import notebook2200 from "../scroll-expand/assets/notebook-2200.webp";
 import "./ScrollJourney.css";
 
-const staticQuery = "(max-width: 700px), (max-height: 500px) and (pointer: coarse), (prefers-reduced-motion: reduce)";
+const staticQuery = "(prefers-reduced-motion: reduce)";
 const srcSet = `${notebook960} 960w, ${notebook1600} 1600w, ${notebook2200} 2200w`;
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 const ease = (from: number, to: number, progress: number) => {
@@ -13,11 +14,12 @@ const ease = (from: number, to: number, progress: number) => {
   return t * t * (3 - 2 * t);
 };
 
-/** Local art direction study: original SVG layers, native scroll, no WebGL. */
+/** Local art direction study: projected globe, original drawing and native scroll. */
 export default function ScrollJourney() {
   const root = useRef<HTMLElement>(null);
   const [staticMode, setStaticMode] = useState(() => matchMedia(staticQuery).matches);
   const [size, setSize] = useState({ width: innerWidth, height: innerHeight });
+  const [orbitRunning, setOrbitRunning] = useState(false);
 
   useEffect(() => {
     const query = matchMedia(staticQuery);
@@ -49,6 +51,12 @@ export default function ScrollJourney() {
     let current = 0;
     let target = 0;
     let visible = false;
+    let running = false;
+    const updateOrbit = (next: boolean) => {
+      if (running === next) return;
+      running = next;
+      setOrbitRunning(next);
+    };
     const set = (name: string, value: number | string) => section.style.setProperty(`--journey-${name}`, String(value));
     const draw = (p: number) => {
       const approach = ease(0, .43, p);
@@ -70,7 +78,9 @@ export default function ScrollJourney() {
       set("middle-y", `${(1 - ease(.27, .39, p)) * 24 - ease(.53, .66, p) * 24}px`);
       set("end-opacity", ease(.86, .95, p));
       set("hint-opacity", 1 - ease(.08, .20, p));
+      set("photo-atmosphere", ease(.64, .87, p));
       section.dataset.phase = p < .30 ? "orbit" : p < .66 ? "blueprint" : "photo";
+      updateOrbit(visible && !document.hidden && p < .45);
     };
     const stop = () => { cancelAnimationFrame(frame); frame = 0; lastTime = 0; };
     const read = () => clamp(-section.getBoundingClientRect().top / (size.height * 1.8));
@@ -95,18 +105,18 @@ export default function ScrollJourney() {
     const reconcile = () => { stop(); target = read(); current = target; draw(current); };
     const onVisibility = () => {
       section.dataset.active = String(visible && !document.hidden);
-      if (document.hidden) stop(); else reconcile();
+      if (document.hidden) { stop(); updateOrbit(false); } else reconcile();
     };
     const observer = new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting;
       section.dataset.active = String(visible && !document.hidden);
-      if (visible) reconcile(); else stop();
+      if (visible) reconcile(); else { stop(); updateOrbit(false); }
     });
     reconcile();
     observer.observe(section);
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
-    return () => { stop(); observer.disconnect(); window.removeEventListener("scroll", onScroll); document.removeEventListener("visibilitychange", onVisibility); };
+    return () => { stop(); updateOrbit(false); observer.disconnect(); window.removeEventListener("scroll", onScroll); document.removeEventListener("visibilitychange", onVisibility); };
   }, [staticMode, size]);
 
   const planeWidth = Math.max(size.width, size.height * 1600 / 1068);
@@ -125,13 +135,21 @@ export default function ScrollJourney() {
       <div className="journey-ambient" aria-hidden="true" />
       <div className="journey-grid" aria-hidden="true" />
       <div className="journey-orbit-layer" aria-hidden="true">
-        <div className="journey-orbit-position"><div className="journey-orbit-drift"><OrbitDrawing /></div></div>
+        <div className="journey-orbit-position"><RotatingOrbit active={orbitRunning} /></div>
       </div>
       <div className="journey-blueprint-layer" aria-hidden="true">
         <div className="journey-media-plane"><NotebookDrawing /></div>
       </div>
       <div className="journey-photo-layer">
-        <img src={notebook1600} srcSet={srcSet} sizes={`${Math.ceil(planeWidth)}px`} width={1600} height={1068} alt="Guilherme Serafim concentrado diante do notebook, no ambiente real por trás dos projetos." loading="lazy" decoding="async" />
+        <div className="journey-camera"><img src={notebook1600} srcSet={srcSet} sizes={`${Math.ceil(planeWidth * 1.06)}px`} width={1600} height={1068} alt="Guilherme Serafim concentrado diante do notebook, no ambiente real por trás dos projetos." loading="lazy" decoding="async" /></div>
+        <div className="journey-photo-atmosphere" aria-hidden="true" />
+        <svg className="journey-photo-orbits" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g className="journey-photo-orbit-lines" stroke="#aebeff" strokeWidth=".8">
+            <ellipse cx="-90" cy="520" rx="410" ry="660" transform="rotate(-26 -90 520)" />
+            <ellipse cx="-90" cy="520" rx="480" ry="700" transform="rotate(-26 -90 520)" opacity=".4" />
+            <path className="journey-photo-signal" d="M-180 110C440 225 600 700 205 1030" stroke="#8da7ff" strokeWidth="2" pathLength="100" strokeDasharray="3 97" />
+          </g>
+        </svg>
       </div>
       <div className="journey-caption journey-caption--intro" aria-hidden="true">
         <span className="journey-eyebrow">01 / EXPLORAR</span>

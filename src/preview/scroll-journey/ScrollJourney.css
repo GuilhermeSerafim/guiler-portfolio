@@ -14,6 +14,7 @@
   --journey-middle-y: 24px;
   --journey-end-opacity: 0;
   --journey-hint-opacity: 1;
+  --journey-photo-atmosphere: 0;
   position: relative;
   height: calc(var(--journey-height) * 2.8);
   background: #0d151b;
@@ -25,15 +26,18 @@
 .journey-grid { position: absolute; inset: 0; opacity: var(--journey-grid-opacity); background-image: linear-gradient(#b8c9cc55 1px, transparent 1px), linear-gradient(90deg, #b8c9cc55 1px, transparent 1px); background-size: 64px 64px; }
 .journey-orbit-layer { position: absolute; inset: 0; transform-origin: 68% 53%; transform: scale(var(--journey-orbit-scale)) rotate(var(--journey-orbit-rotation)); opacity: var(--journey-orbit-opacity); will-change: transform, opacity; }
 .journey-orbit-position { position: absolute; width: min(70vw, 112vh); left: 68%; top: 51%; transform: translate(-50%, -50%); }
-.journey-orbit-drift { animation: journey-drift 32s ease-in-out infinite alternate; animation-play-state: paused; }
-.scroll-journey[data-active="true"] .journey-orbit-drift { animation-play-state: running; }
-.scroll-journey[data-phase="photo"] .journey-orbit-drift { animation-play-state: paused; }
-.journey-orbit-position svg { display: block; width: 100%; height: auto; color: #c8d3d1; }
+.journey-orbit-position canvas { display: block; width: 100%; height: auto; }
 .journey-blueprint-layer { position: absolute; inset: 0; transform-origin: 60% 65%; transform: scale(var(--journey-drawing-scale)); opacity: var(--journey-drawing-opacity); will-change: transform, opacity; }
 .journey-media-plane { position: absolute; width: var(--journey-plane-width); left: var(--journey-plane-left); top: 0; aspect-ratio: 1600 / 1068; }
 .journey-media-plane svg { display: block; width: 100%; height: 100%; color: #d4ddd8; }
 .journey-photo-layer { position: absolute; inset: 0; opacity: var(--journey-photo-opacity); clip-path: circle(var(--journey-photo-radius) at 62% 66%); will-change: opacity, clip-path; }
-.journey-photo-layer img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% 0%; transform-origin: 62% 66%; transform: scale(var(--journey-photo-scale)); }
+.journey-camera { position: absolute; inset: 0; transform-origin: 60% 0%; animation: journey-camera-move 14s linear infinite alternate; animation-play-state: paused; will-change: transform; }
+.journey-photo-layer img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% 0%; transform-origin: 62% 0%; transform: scale(var(--journey-photo-scale)); filter: saturate(.82) contrast(1.03); }
+.journey-photo-atmosphere { position: absolute; inset: 0; opacity: var(--journey-photo-atmosphere); background: linear-gradient(100deg, #0b1b33a8, transparent 46%, #07131b1a); }
+.journey-photo-orbits { position: absolute; inset: 0; width: 100%; height: 100%; opacity: calc(var(--journey-photo-atmosphere) * .35); pointer-events: none; }
+.journey-photo-orbit-lines { transform-origin: 0 60%; animation: journey-orbit-breathe 16s ease-in-out infinite alternate; animation-play-state: paused; }
+.journey-photo-signal { animation: journey-signal 8s linear infinite; animation-play-state: paused; }
+.scroll-journey[data-active="true"][data-phase="photo"] :is(.journey-camera, .journey-photo-orbit-lines, .journey-photo-signal) { animation-play-state: running; }
 .journey-caption { position: absolute; left: max(56px, calc((100vw - 1320px) / 2)); top: 32%; max-width: 58%; }
 .journey-caption--intro { opacity: var(--journey-intro-opacity); transform: translateY(var(--journey-intro-y)); }
 .journey-caption--middle { top: 17%; opacity: var(--journey-middle-opacity); transform: translateY(var(--journey-middle-y)); }
@@ -49,7 +53,9 @@
 .journey-static { margin: 0; }
 .journey-static img { display: block; width: 100%; height: auto; }
 .journey-static figcaption { padding: 24px 20px; text-align: center; color: #b7cacd; font: 11px/1.6 var(--mono); }
-@keyframes journey-drift { from { transform: rotate(-3deg) translateY(-5px); } to { transform: rotate(4deg) translateY(7px); } }
+@keyframes journey-camera-move { from { transform: translateX(-.3%) scale(1.015); } to { transform: translateX(.3%) scale(1.06); } }
+@keyframes journey-orbit-breathe { from { transform: rotate(-3deg); } to { transform: rotate(4deg); } }
+@keyframes journey-signal { to { stroke-dashoffset: -100; } }
 @media (max-width: 960px) {
   .journey-caption { left: 32px; max-width: 85%; top: 18%; }
   .journey-caption p { font-size: clamp(48px, 7.3vw, 70px); }
@@ -58,4 +64,22 @@
   .journey-scroll-hint { left: 32px; }
   .journey-end { padding-inline: 32px; }
 }
-@media (prefers-reduced-motion: reduce) { .journey-orbit-drift { animation: none; } }
+@media (max-width: 700px) {
+  .journey-caption { left: 24px; right: 20px; max-width: none; top: 13%; }
+  .journey-caption p { margin-top: 20px; font-size: clamp(36px, 10.2vw, 54px); }
+  .journey-caption small { max-width: 270px; font-size: 13px; margin-top: 22px; }
+  .journey-orbit-position { width: 138vw; left: 55%; top: 65%; }
+  .journey-caption--middle { top: 12%; }
+  .journey-scroll-hint { left: 24px; bottom: 28px; }
+  .journey-end { padding: 72px 24px 28px; }
+  .journey-end p { font-size: 17px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .journey-caption { top: 18%; max-width: 55%; }
+  .journey-caption p { font-size: 38px; margin-top: 12px; }
+  .journey-caption small { font-size: 12px; margin-top: 14px; }
+  .journey-orbit-position { width: 70vw; left: 72%; top: 52%; }
+  .journey-scroll-hint { bottom: 20px; }
+  .journey-end { padding-block: 56px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .scroll-journey :is(.journey-camera, .journey-photo-orbit-lines, .journey-photo-signal) { animation: none; } }

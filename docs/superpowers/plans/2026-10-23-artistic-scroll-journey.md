@@ -51,3 +51,17 @@ Evidências locais: `output/playwright/scroll-journey-review.js`, capturas `jour
 Resultado: cinco cenários em Chromium (1440×900, 768×1024, celular 390×844, celular paisagem 844×390 e movimento reduzido), sem erros de execução ou requisições Google na prévia. Build passou e manteve os hashes de produção anteriores (`index-BnmMZcOv.js` e `index-30s1P9BW.css`), confirmando que o experimento não entra na distribuição. A revisão independente sugeriu evitar medições fora da tela e pausar a órbita já invisível; ambos foram ajustados. Follow-up `scroll-journey-followup.js/.json` confirmou pausa e retorno, e TypeScript passou novamente.
 
 Ainda é necessário Guiler comparar a passagem artística com A e decidir a direção. Integração permanente e publicação ficam para depois dessa escolha. Inspeção em Chromium local não equivale a teste de Safari/iOS físico nem a garantia de FPS ou pontuação PageSpeed.
+
+## Revisão após feedback: movimento contínuo
+
+Guiler relatou que o globo parecia parado e a foto estática interrompia a estética. A medição anterior confirmou que a geometria do SVG não mudava, a inclinação variava quase imperceptivelmente (7° em 32s) e a foto terminava com matriz identidade. No celular, a regra anterior removia toda a animação.
+
+A nova revisão local substitui a esfera estática por geometria 3D reprojetada em Canvas 2D, com meridianos girando e pontos orbitais móveis. Sem WebGL ou dependências novas; buffers pré-calculados e DPR limitado a 1,5. A rotação continua sem rolagem enquanto a esfera está visível, pausa quando a foto assume a cena ou a aba fica oculta, e retoma do ângulo anterior.
+
+Para o desfecho, a proposta atual mantém a foto com movimento contínuo de câmera (deslocamento lateral e aproximação discreta), tratamento de cor em CSS e linhas orbitais sutis que continuam a linguagem do início. Não foi gerado movimento facial nem alterado o arquivo original da fotografia. A escolha entre manter essa foto ou terminar apenas no desenho foi perguntada ao usuário; não há resposta registrada até esta revisão.
+
+Mobile também recebe o movimento e um layout adaptado. Apenas `prefers-reduced-motion` mantém a versão estática. A versão A e o site publicado continuam preservados.
+
+Evidências desta revisão no workspace pai: `journey-motion-before.js`, `journey-live-motion-qa.js/.json` e capturas `journey-live-*` em `output/playwright/`. A checagem de movimento compara pixels do canvas e transformações da câmera em intervalos sem rolagem; screenshots isolados não comprovam movimento.
+
+Validação final da revisão: desktop 1440×900, mobile 390×844 e paisagem 844×390 confirmaram movimento do globo e da câmera sem rolagem, pausa do globo invisível, retomada ao voltar, ausência de bordas vazias/overflow e fallback ao alternar movimento reduzido. Nenhum erro de execução nesses contextos. A aba é explicitamente trazida para frente antes das medições para testar animação visível. Build passou, mantendo os hashes da distribuição anterior; TypeScript passou novamente após a instrumentação declarativa `data-active` do canvas.
