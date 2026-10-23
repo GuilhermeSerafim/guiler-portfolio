@@ -1,0 +1,15 @@
+.swarm-preview-toolbar { position: fixed; z-index: 1100; left: 24px; right: 24px; top: 16px; display: flex; align-items: center; gap: 24px; padding: 12px 18px; border: 1px solid #a7b9ff35; border-radius: 12px; color: #eaf0ff; background: #0c141cf5; box-shadow: 0 8px 30px #0002; font: 11px/1.4 var(--mono); }
+.swarm-preview-caption { display: grid; gap: 3px; }
+.swarm-preview-caption > span { color: #a2b2c1; font-size: 8px; letter-spacing: .1em; }
+.swarm-preview-caption strong { font-weight: 500; }
+.swarm-preview-toolbar nav { display: flex; gap: 6px; }
+.swarm-preview-toolbar a { display: inline-flex; align-items: center; min-height: 36px; padding: 8px 12px; border-radius: 6px; color: #b3c0d0; text-decoration: none; border: 1px solid transparent; }
+.swarm-preview-toolbar a[aria-current="page"] { color: #edf2ff; background: #8da7ff1f; border-color: #8da7ff5c; }
+.swarm-preview-toolbar a:hover { color: white; background: #8da7ff2b; }
+.swarm-preview-toolbar a:focus-visible { outline: 2px solid #a7b9ff; outline-offset: 2px; }
+.swarm-preview-instruction { margin-left: auto; color: #a2b2c1; font-size: 10px; }
+.swarm-preview-effect { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.swarm-preview-effect * { pointer-events: none !important; }
+html[data-swarm-preview-active="true"] .portfolio-cursor { opacity: 0 !important; }
+@media (max-width: 850px) { .swarm-preview-toolbar { left: 10px; right: 10px; top: 10px; padding: 10px; gap: 10px; } .swarm-preview-instruction { display: none; } .swarm-preview-toolbar nav { margin-left: auto; } }
+@media (max-width: 500px) { .swarm-preview-toolbar { flex-wrap: wrap; gap: 6px; } .swarm-preview-caption { display: none; } .swarm-preview-toolbar nav { margin: auto; } .swarm-preview-toolbar a { min-height: 40px; padding: 8px 9px; font-size: 10px; } }

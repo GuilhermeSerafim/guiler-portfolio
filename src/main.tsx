@@ -33,10 +33,18 @@ const ScrollJourneyPreview = import.meta.env.DEV && /^\/__preview\/(?:scroll-jou
   ? React.lazy(() => import("./preview/ScrollJourneyPreview"))
   : null;
 
+const SwarmPreview = import.meta.env.DEV && /^\/__preview\/swarm\/[ab]\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/SwarmPreview"))
+  : null;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MotionConfig reducedMotion="user">
-      {ScrollJourneyPreview ? (
+      {SwarmPreview ? (
+        <React.Suspense fallback={null}>
+          <SwarmPreview />
+        </React.Suspense>
+      ) : ScrollJourneyPreview ? (
         <React.Suspense fallback={null}>
           <ScrollJourneyPreview />
         </React.Suspense>
