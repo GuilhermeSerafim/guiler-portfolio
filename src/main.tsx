@@ -29,10 +29,18 @@ const ScrollExpandPreview = import.meta.env.DEV && /^\/__preview\/scroll-expand(
   ? React.lazy(() => import("./preview/ScrollExpandPreview"))
   : null;
 
+const ScrollJourneyPreview = import.meta.env.DEV && /^\/__preview\/scroll-journey\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/ScrollJourneyPreview"))
+  : null;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MotionConfig reducedMotion="user">
-      {ScrollExpandPreview ? (
+      {ScrollJourneyPreview ? (
+        <React.Suspense fallback={null}>
+          <ScrollJourneyPreview />
+        </React.Suspense>
+      ) : ScrollExpandPreview ? (
         <React.Suspense fallback={null}>
           <ScrollExpandPreview />
         </React.Suspense>

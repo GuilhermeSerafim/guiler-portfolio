@@ -1,0 +1,3 @@
+.journey-preview-toolbar { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; min-height: 64px; padding: 8px 32px; background: var(--ink); color: var(--paper); font: 10px/1.6 var(--mono); letter-spacing: .04em; }
+.journey-preview-toolbar a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid #ffffff55; border-radius: 5px; }
+.journey-preview-toolbar a:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
