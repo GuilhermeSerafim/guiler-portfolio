@@ -34,7 +34,6 @@
 .sketch-discharge, .sketch-light-ray { stroke-dasharray: 100; stroke-dashoffset: 0; }
 .sketch-electric-field { transform-origin: 90px 82px; }
 .sketch-wing { transform-origin: 90px 75px; }
-.sketch-spacetime { transform-origin: 96px 85px; }
 .sketch-photon {
   offset-path: path("M18 34C64 34 83 44 109 67S130 102 160 111");
   offset-distance: 100%;
@@ -44,14 +43,12 @@
 .curiosity-sketch[data-play="true"] .sketch-electric-field { animation: sketch-field 1.2s ease-out both; }
 .curiosity-sketch[data-play="true"] .sketch-wing--left { animation: sketch-wing-left 1.4s ease-in-out both; }
 .curiosity-sketch[data-play="true"] .sketch-wing--right { animation: sketch-wing-right 1.4s ease-in-out both; }
-.curiosity-sketch[data-play="true"] .sketch-spacetime { animation: sketch-fabric 1.2s ease-out both; }
 .curiosity-sketch[data-play="true"] .sketch-light-ray { animation: sketch-trace 1.5s linear both; }
 .curiosity-sketch[data-play="true"] .sketch-photon { animation: sketch-light 1.5s linear both; }
 @keyframes sketch-trace { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
 @keyframes sketch-field { from { transform: scale(.82); opacity: .12; } to { transform: scale(1); opacity: .6; } }
 @keyframes sketch-wing-left { 0% { transform: rotate(16deg); } 65% { transform: rotate(-3deg); } 100% { transform: rotate(0); } }
 @keyframes sketch-wing-right { 0% { transform: rotate(-16deg); } 65% { transform: rotate(3deg); } 100% { transform: rotate(0); } }
-@keyframes sketch-fabric { from { transform: scale(.94); opacity: .15; } to { transform: scale(1); opacity: .6; } }
 @keyframes sketch-light { from { offset-distance: 0%; } to { offset-distance: 100%; } }
 @keyframes sketch-orbit { from { transform: rotate(-130deg); } to { transform: rotate(0); } }
 @keyframes sketch-gravity {

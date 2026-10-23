@@ -3,7 +3,47 @@ import "./CuriositySketch.css";
 
 type Subject = "cosmos" | "newton" | "tesla" | "davinci" | "einstein";
 
-function SketchDrawing({ subject }: { subject: Subject }) {
+const spacetimePaths = (curvature: number) => [
+  `M22 32h136M22 52q74 ${4 * curvature} 136 0M22 72q74 ${30 * curvature} 136 0M22 92q74 ${36 * curvature} 136 0M22 112q74 ${15 * curvature} 136 0`,
+  `M34 22v101M62 22q${-7 * curvature} 68 0 106M90 22q${-26 * curvature} 65 0 108M118 22q${17 * curvature} 67 0 106M146 22v101`,
+];
+
+function SpacetimeGrid({ played }: { played: boolean }) {
+  const grid = useRef<SVGGElement>(null);
+  useEffect(() => {
+    const paths = grid.current?.querySelectorAll("path");
+    if (!paths) return;
+    const preference = matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    const draw = (curvature: number) => spacetimePaths(curvature).forEach((d, index) => paths[index].setAttribute("d", d));
+    const start = () => {
+      cancelAnimationFrame(frame);
+      if (preference.matches) { draw(1); return; }
+      draw(0);
+      if (!played) return;
+      let started: number | undefined;
+      const tick = (time: number) => {
+        started ??= time;
+        const progress = Math.min(1, (time - started) / 1600);
+        // Bend the control points, with a slight settling motion around the mass.
+        const curvature = progress < .75
+          ? 1.1 * (1 - Math.cos(Math.PI * progress / .75)) / 2
+          : 1 + .1 * (1 + Math.cos(Math.PI * (progress - .75) / .25)) / 2;
+        draw(curvature);
+        if (progress < 1) frame = requestAnimationFrame(tick);
+      };
+      frame = requestAnimationFrame(tick);
+    };
+    start();
+    preference.addEventListener("change", start);
+    return () => { cancelAnimationFrame(frame); preference.removeEventListener("change", start); };
+  }, [played]);
+  return <g ref={grid} className="sketch-spacetime sketch-faint">
+    {spacetimePaths(1).map((d, index) => <path key={index} d={d} />)}
+  </g>;
+}
+
+function SketchDrawing({ subject, played }: { subject: Subject; played: boolean }) {
   return (
     <svg className={`sketch-drawing sketch-drawing--${subject}`} viewBox={subject === "einstein" ? "16 18 148 116" : subject === "newton" ? "36 10 110 120" : "0 0 180 144"} fill="none" aria-hidden="true" focusable="false">
       {subject === "cosmos" && <>
@@ -55,10 +95,7 @@ function SketchDrawing({ subject }: { subject: Subject }) {
         <path className="sketch-faint" d="M26 15h30m-30-3v6m30-6v6M125 117h24m-12-4v8" />
       </>}
       {subject === "einstein" && <>
-        <g className="sketch-spacetime sketch-faint">
-          <path d="M22 32h136M22 52q74 4 136 0M22 72q74 30 136 0M22 92q74 36 136 0M22 112q74 15 136 0" />
-          <path d="M34 22v101M62 22q-7 68 0 106M90 22q-26 65 0 108M118 22q17 67 0 106M146 22v101" />
-        </g>
+        <SpacetimeGrid played={played} />
         <circle className="sketch-planet" cx="96" cy="85" r="12" />
         <path className="sketch-faint" d="M89 78q10-5 14 5M87 87q8 9 16 2" />
         <path className="sketch-guide" d="M18 34h40" />
@@ -76,9 +113,10 @@ export function CuriositySketch({ subject }: { subject: Subject }) {
 
   useEffect(() => {
     const node = element.current;
-    if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      || typeof IntersectionObserver === "undefined") return;
+    if (!node || typeof IntersectionObserver === "undefined") return;
 
+    // Keep visibility current even under reduced motion, so enabling motion later works.
+    // CSS and SpacetimeGrid independently honor the motion preference.
     // Replay on a fresh entrance, resetting only after the sketch fully leaves view.
     // Check the ratio too: the observer's initial notification may be below its threshold.
     const threshold = subject === "newton" ? 0.75 : 0.35;
@@ -101,7 +139,7 @@ export function CuriositySketch({ subject }: { subject: Subject }) {
       data-play={played}
       aria-hidden="true"
     >
-      <SketchDrawing subject={subject} />
+      <SketchDrawing subject={subject} played={played} />
     </div>
   );
 }
