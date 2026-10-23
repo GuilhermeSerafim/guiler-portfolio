@@ -25,10 +25,18 @@ const PhotosPreview = import.meta.env.DEV && /^\/__preview\/photos(?:\/[abc])?\/
   ? React.lazy(() => import("./preview/PhotosPreview"))
   : null;
 
+const ScrollExpandPreview = import.meta.env.DEV && /^\/__preview\/scroll-expand(?:\/[ab])?\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/ScrollExpandPreview"))
+  : null;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MotionConfig reducedMotion="user">
-      {PhotosPreview ? (
+      {ScrollExpandPreview ? (
+        <React.Suspense fallback={null}>
+          <ScrollExpandPreview />
+        </React.Suspense>
+      ) : PhotosPreview ? (
         <React.Suspense fallback={null}>
           <PhotosPreview />
         </React.Suspense>

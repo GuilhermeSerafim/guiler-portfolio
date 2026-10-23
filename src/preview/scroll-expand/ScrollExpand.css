@@ -1,0 +1,47 @@
+/* ScrollExpand, adapted from David Haz (2026). License notice in ScrollExpand.tsx. */
+
+.scroll-expand {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.scroll-expand__track {
+  position: relative;
+  width: 100%;
+  height: var(--scroll-expand-track-height);
+}
+
+.scroll-expand__stage {
+  position: sticky;
+  top: var(--scroll-expand-sticky-top);
+  width: 100%;
+  height: var(--scroll-expand-stage-height);
+  overflow: hidden;
+}
+
+.scroll-expand__frame {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(
+    var(--scroll-expand-inset-y) var(--scroll-expand-inset-x)
+    var(--scroll-expand-inset-y) var(--scroll-expand-inset-x)
+    round var(--scroll-expand-start-radius)
+  );
+  will-change: clip-path;
+}
+
+.scroll-expand__media {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  transform: scale(var(--scroll-expand-media-zoom));
+  transform-origin: center;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
+}
