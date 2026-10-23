@@ -49,3 +49,9 @@ A próxima publicação deve fazer um build novo com as variáveis de produção
 Em resposta à revisão do usuário, a frase “Ideias testadas. Trabalho reconhecido.” e o nome do prêmio foram agrupados no mesmo botão. Isso remove o espaço criado pela centralização da segunda linha em um alvo de 44 px. O troféu continua sendo um controle separado.
 
 QA local em 320, 390, 768 e 1440 px: separação visual de 3 px entre as linhas, sem corte horizontal; alvo de 44 px ou maior quando o texto quebra. Abertura do GeoRisk por teclado e retorno do foco após Escape passaram nas quatro larguras. Os seis testes existentes de controles/eventos passaram. Artefatos no workspace pai: `output/playwright/hero-award-spacing-qa.json` e `hero-award-{before,after}-{width}.png`.
+
+## Ajuste posterior: relatividade e título das ferramentas
+
+O cabeçalho do catálogo passa a alinhar as bordas superiores do título e do desenho. Antes, o alinhamento central fazia o desenho de 64 px começar 15–19 px acima do título de uma linha. A caixa de Einstein usa agora a proporção 148/116 do próprio SVG; larguras e posição à direita preservadas.
+
+QA em 320, 390, 768 e 1440 px: diferença entre os topos de 0 px, sem overflow, distância de 12/18 px até a lista preservada. Nenhum erro de execução. Capturas e medidas em `output/playwright/relativity-before.json`, `relativity-after.json` e `relativity-{before,after}-{width}.png` no workspace pai. Revisão estática independente sem achados.

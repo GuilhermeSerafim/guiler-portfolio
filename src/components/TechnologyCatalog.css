@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 18px;
 }
 .technology-catalog-header h3 {
@@ -28,6 +28,7 @@
 }
 .technology-catalog-aside .curiosity-sketch--einstein {
   width: 80px;
+  aspect-ratio: 148 / 116;
 }
 .technology-catalog ul {
   margin: 0;
