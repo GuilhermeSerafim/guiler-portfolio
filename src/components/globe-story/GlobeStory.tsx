@@ -5,20 +5,22 @@ import EngineeringExamples from "./EngineeringExamples";
 import "./GlobeStory.css";
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
+// Short, narrow windows (including browser zoom) need the same readable flow.
+const staticLayoutQuery = "(prefers-reduced-motion: reduce), (max-width: 640px) and (max-height: 500px)";
 const smooth = (from: number, to: number, progress: number) => {
   const p = clamp((progress - from) / (to - from));
   return p * p * (3 - 2 * p);
 };
-/** Focused local study: one continuous field, no photographic reveal. */
+/** A continuous field connecting curiosity to interactive engineering examples. */
 export default function GlobeStory() {
   const root = useRef<HTMLElement>(null);
   const progress = useRef(0);
   const [active, setActive] = useState(false);
   const [examplesVisible, setExamplesVisible] = useState(false);
-  const [reduced, setReduced] = useState(() => matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const [reduced, setReduced] = useState(() => matchMedia(staticLayoutQuery).matches);
   const [height, setHeight] = useState(innerHeight);
   useEffect(() => {
-    const query = matchMedia("(prefers-reduced-motion: reduce)");
+    const query = matchMedia(staticLayoutQuery);
     const preference = () => setReduced(query.matches);
     const resize = () => setHeight(innerHeight);
     query.addEventListener("change", preference);
@@ -84,7 +86,7 @@ export default function GlobeStory() {
       if (playing) reconcile(); else stop();
     };
     const observer = new IntersectionObserver(entries => {
-      // The preview jump can queue both exit and entry in one delivery.
+      // A direct anchor jump can queue both exit and entry in one delivery.
       // Use the latest observation, otherwise the whole scene stays paused.
       visible = entries[entries.length - 1].isIntersecting;
       syncVisibility();
@@ -100,14 +102,14 @@ export default function GlobeStory() {
       {!reduced && <GlobeField active={active} progressRef={progress} />}
       <div className="globe-scene-shade" aria-hidden="true" />
       <div className="globe-story-intro">
-        <span className="globe-eyebrow">01 / CURIOSIDADE</span>
+        <span className="globe-eyebrow">CURIOSIDADE</span>
         <h2 id="globe-story-heading">Olhar além.<br />Entender por dentro<span>.</span></h2>
         <p>O que conecta uma ideia a algo que funciona?</p>
       </div>
-      <div className="globe-story-bridge" aria-hidden="true"><span className="globe-eyebrow">02 / CONEXÕES</span><p>Chegar perto.<br />Encontrar as conexões.</p></div>
+      <div className="globe-story-bridge" aria-hidden="true"><span className="globe-eyebrow">CONEXÕES</span><p>Chegar perto.<br />Encontrar as conexões.</p></div>
       <div className="globe-system-plane" aria-hidden="true"><SystemPlane /></div>
       <div className="globe-end-veil" aria-hidden="true" />
-      <div className="globe-story-end"><span className="globe-eyebrow">03 / PRINCÍPIOS EM AÇÃO</span><p>Dar estrutura.<br />Gerar resultado<span>.</span></p><span className="globe-end-note">Demonstrações interativas.</span></div>
+      <div className="globe-story-end"><span className="globe-eyebrow">PRINCÍPIOS EM AÇÃO</span><p>Dar estrutura.<br />Gerar resultado<span>.</span></p><span className="globe-end-note">Demonstrações interativas.</span></div>
       <EngineeringExamples visible={reduced || examplesVisible} />
       <span className="globe-story-hint" aria-hidden="true">CONTINUE PARA EXPLORAR <b>↓</b></span>
     </div>

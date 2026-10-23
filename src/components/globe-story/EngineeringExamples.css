@@ -27,7 +27,7 @@
   .engineering-example--evolve { left: 32px; }
   .engineering-example--continuity { right: 32px; }
 }
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .globe-end-note { max-width: 260px; margin-top: 12px; font-size: 12px; }
   .engineering-example { width: calc(50% - 24px); padding: 13px; bottom: 5%; border-radius: 7px; }
   .engineering-example--evolve { left: 16px; }

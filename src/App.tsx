@@ -34,6 +34,7 @@ import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { ResumeDownloadLink } from "./components/ResumeDownloadLink";
 import { PhotoDepth } from "./components/photos/PhotoDepth";
 import { TrophyCelebrate } from "./components/TrophyCelebrate";
+import GlobeStory from "./components/globe-story/GlobeStory";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
 
@@ -594,6 +595,8 @@ function App() {
             </div>
           </div>
         </section>
+
+        <GlobeStory />
 
         <section
           id="sobre"
