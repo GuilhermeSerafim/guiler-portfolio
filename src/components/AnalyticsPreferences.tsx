@@ -26,9 +26,9 @@ export function AnalyticsPreferences() {
     setOpen(false);
   }
 
-  const choices = (
+  const choices = (compact = false) => (
     <div className="analytics-actions">
-      <button type="button" onClick={() => choose("granted")}>Aceitar estatísticas</button>
+      <button type="button" aria-label="Aceitar estatísticas" onClick={() => choose("granted")}>{compact ? "Aceitar" : "Aceitar estatísticas"}</button>
       <button type="button" onClick={() => choose("denied")}>{consent === "granted" ? "Retirar autorização" : "Recusar"}</button>
     </div>
   );
@@ -37,10 +37,10 @@ export function AnalyticsPreferences() {
     <div className={`analytics-preferences${configured && consent === "unknown" && !dismissed ? " analytics-preferences--inviting" : ""}`}>
       {configured && consent === "unknown" && !dismissed && (
         <aside className="analytics-invite" aria-label="Escolha de estatísticas">
-          <p>Posso usar estatísticas para entender quais links e projetos ajudam mais? A medição só começa se você aceitar.</p>
-          {choices}
+          <p>Posso medir visitas e cliques para melhorar o portfólio? Só com sua autorização.</p>
+          {choices(true)}
           <div className="analytics-invite-footer">
-            <button className="analytics-text-button" type="button" onClick={() => setOpen(true)}>Como funciona a privacidade</button>
+            <button className="analytics-text-button" type="button" aria-label="Como funciona a privacidade" onClick={() => setOpen(true)}>Privacidade</button>
             <button className="analytics-text-button" type="button" onClick={() => setDismissed(true)}>Agora não</button>
           </div>
         </aside>
@@ -54,7 +54,7 @@ export function AnalyticsPreferences() {
         </div>
         <p role="status">{!configured ? "Estatísticas desativadas neste ambiente" : consent === "granted" ? "Você permitiu estatísticas. Retirar a autorização recarrega a página." : consent === "denied" ? "Você recusou estatísticas." : "Estatísticas aguardam sua escolha."}</p>
         {!configured && consent === "granted" && <p>Há uma autorização salva neste navegador. Você pode retirá-la mesmo com a coleta indisponível nesta página.</p>}
-        {configured ? choices : consent === "granted" && <div className="analytics-actions"><button type="button" onClick={() => choose("denied")}>Retirar autorização</button></div>}
+        {configured ? choices() : consent === "granted" && <div className="analytics-actions"><button type="button" onClick={() => choose("denied")}>Retirar autorização</button></div>}
         <PrivacyNotice />
       </dialog>
     </div>
