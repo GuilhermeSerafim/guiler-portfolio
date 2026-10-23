@@ -15,8 +15,8 @@ Todo evento usa `site_id=portfolio`, `schema_version=1` e `ui_location` de enume
 | Evento | Controles e parâmetros |
 | --- | --- |
 | `page_view` | Uma por documento após consentimento; `ui_location=page`, URL/referrer sanitizados, título fixo |
-| `project_open` | Capa, título ou seta; `project_id=georisk|seven-tools|playsenac|mesa`, posição `project_cover|project_title|project_details` |
-| `project_visit` | Demo do modal; `project_id`, `ui_location=project_dialog` |
+| `project_open` | Capa, título, seta ou prêmio do hero; `project_id=georisk|seven-tools|playsenac|mesa`, posição `project_cover|project_title|project_details|hero_award`. `hero_award` aceita somente `project_id=georisk` |
+| `project_visit` | Demonstração ou site no modal; `project_id`, `ui_location=project_dialog` |
 | `link_click` | GitHub (`projects_footer|contact`), LinkedIn (`about|contact`), código público (`project_card|project_dialog`); `link_id`, `destination_id`, `project_id` somente para código de projeto |
 | `resume_download` | Currículo em `hero|contact`, `asset_id=resume_fullstack` |
 | `contact_intent` | Mailto em `contact_arrow|contact_email`, método `email_open`; cópia em `contact_copy`, método `email_copy`, somente após Clipboard concluir |

@@ -24,6 +24,13 @@ beforeEach(() => {
 afterEach(()=>vi.unstubAllGlobals());
 
 describe("portfolio action controls", () => {
+  it("opens the GeoRisk award case with one dedicated event", () => {
+    const award = elements(App()).find(n => n.props["aria-label"] === "Conhecer o GeoRisk, vencedor do Hackathon OpenAI");
+    expect(award).toBeDefined();
+    expect(award!.type).toBe("button");
+    award!.props.onClick();
+    expect(recorded.mock.calls).toEqual([[{ name: "project_open", params: { project_id: "georisk", ui_location: "hero_award" } }]]);
+  });
   it("records each of the three project open controls with the preserved project ID", () => {
     const nodes=elements(App());
     for(const project of projects) {

@@ -38,6 +38,7 @@ import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
 
 const email = "guilerstudies@gmail.com";
+const hackathonProject = projects.find(project => project.id === "georisk");
 const filters = [
   "Todos",
   "IA aplicada",
@@ -300,8 +301,8 @@ function App() {
                 </span>
                 <p>
                   Sou Guiler, desenvolvedor <strong>Full Stack</strong>.<br />
-                  Conecto arquitetura, interfaces e IA para transformar
-                  problemas reais em software que faz diferença.
+                  Construo interfaces, APIs e produtos com IA, com experiência
+                  em seguros, serviços públicos e ferramentas comerciais.
                 </p>
               </div>
             </div>
@@ -323,7 +324,16 @@ function App() {
                 <div>
                   <span>Ideias testadas. Trabalho reconhecido.</span>
                   <strong>
-                    Vencedor do Hackathon OpenAI <ArrowUpRight size={13} />
+                    {hackathonProject ? (
+                      <button
+                        type="button"
+                        className="hero-award-link"
+                        aria-label="Conhecer o GeoRisk, vencedor do Hackathon OpenAI"
+                        onClick={() => openProject(hackathonProject, "hero_award")}
+                      >
+                        Vencedor do Hackathon OpenAI <ArrowUpRight size={13} aria-hidden="true" />
+                      </button>
+                    ) : "Vencedor do Hackathon OpenAI"}
                   </strong>
                 </div>
               </div>

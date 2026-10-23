@@ -2,7 +2,7 @@ import { SITE_HOSTS, SITE_TITLES, type SiteId } from "./config";
 import { sanitizePageUrl, sanitizeReferrer } from "./urls";
 
 export type ProjectId = "georisk" | "seven-tools" | "playsenac" | "mesa";
-export type ProjectOpenLocation = "project_cover" | "project_title" | "project_details";
+export type ProjectOpenLocation = "project_cover" | "project_title" | "project_details" | "hero_award";
 type LinkParams =
   | { link_id: "projects"; destination_id: "portfolio_projects"; ui_location: "link_grid" }
   | { link_id: "hackathon"; destination_id: "georisk_story"; ui_location: "link_grid" }
@@ -48,7 +48,8 @@ export function serializeEvent(event: AnalyticsEvent, site: SiteId): Record<stri
         return { ...result, page_location: sanitizePageUrl(site, p.page_location), page_referrer: sanitizeReferrer(p.page_referrer), page_title: SITE_TITLES[site] };
       case "project_open":
       case "project_visit":
-        if (!projects.includes(p.project_id as string) || !(event.name === "project_open" ? ["project_cover", "project_title", "project_details"] : ["project_dialog"]).includes(location)) return null;
+        if (!projects.includes(p.project_id as string) || !(event.name === "project_open" ? ["project_cover", "project_title", "project_details", "hero_award"] : ["project_dialog"]).includes(location)) return null;
+        if (location === "hero_award" && p.project_id !== "georisk") return null;
         return { ...result, project_id: p.project_id as string };
       case "resume_download":
         return p.asset_id === "resume_fullstack" && ["hero", "contact"].includes(location) ? { ...result, asset_id: "resume_fullstack" } : null;

@@ -91,6 +91,12 @@ describe("safe URLs", () => {
 });
 
 describe("runtime event allowlist", () => {
+  it("allows only the fixed GeoRisk award entry and strips unrelated data", () => {
+    expect(serializeEvent({ name: "project_open", params: { project_id: "georisk", ui_location: "hero_award", email: "private" } } as never, "portfolio"))
+      .toEqual({ site_id: "portfolio", schema_version: 1, project_id: "georisk", ui_location: "hero_award" });
+    expect(serializeEvent({ name: "project_open", params: { project_id: "mesa", ui_location: "hero_award" } } as never, "portfolio")).toBeNull();
+    expect(serializeEvent({ name: "project_visit", params: { project_id: "georisk", ui_location: "hero_award" } } as never, "portfolio")).toBeNull();
+  });
   it("strips PII and unrelated extra fields", () => {
     const event = { name:"project_open", params:{project_id:"georisk",ui_location:"project_cover",email:"private",phone:"private",user_id:"private",page_location:"private"} };
     expect(serializeEvent(event as never,"portfolio")).toEqual({site_id:"portfolio",schema_version:1,project_id:"georisk",ui_location:"project_cover"});

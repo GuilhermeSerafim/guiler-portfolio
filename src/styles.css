@@ -425,6 +425,26 @@ h2 {
   font-size: 11px;
   font-weight: 500;
 }
+.hero-award-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+.hero-award-link:hover,
+.hero-award-link:focus-visible {
+  color: var(--blue);
+  text-decoration-color: currentColor;
+}
 .hero-visual {
   position: relative;
   align-self: start;
@@ -1370,7 +1390,7 @@ h2 {
     margin-top: 27px;
   }
   .hero-intro p {
-    font-size: 12px;
+    font-size: 15px;
   }
   .hero-actions {
     gap: 15px;
@@ -1382,7 +1402,7 @@ h2 {
     min-height: 47px;
   }
   .resume-link {
-    font-size: 10px;
+    font-size: 14px;
     gap: 6px;
   }
   .hero-proof {
@@ -1432,13 +1452,13 @@ h2 {
     font-size: 32px;
   }
   .project-description {
-    font-size: 12px;
+    font-size: 15px;
   }
   .project-bottom {
     gap: 3px;
   }
   .tags span {
-    font-size: 8px;
+    font-size: 10px;
     padding: 5px 6px;
   }
   .experience-layout {
@@ -1465,7 +1485,7 @@ h2 {
     font-size: 34px;
   }
   .about-copy > p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .photo-sticker {
     width: 80px;
