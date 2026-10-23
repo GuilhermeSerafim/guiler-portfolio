@@ -1,3 +1,7 @@
+.globe-swarm { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.globe-swarm * { pointer-events: none !important; }
+html[data-globe-swarm-active="true"] .portfolio-cursor { opacity: 0 !important; }
+
 .subtle-swarm-preview {
   position: absolute;
   inset: 0;

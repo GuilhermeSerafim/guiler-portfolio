@@ -9,6 +9,7 @@ License: **MIT + Commons Clause License Condition v1.0**. The complete official 
 Local changes to `SwarmCursor.tsx`:
 
 - Added the optional `interactionRoot?: HTMLElement` prop. Target hit-testing uses this element when supplied, allowing the pointer-transparent canvas to outline sibling controls within the same section. Omitting the prop retains the upstream container scope.
+- Added the optional `onReady` callback. It reports `true` after WebGL, program, buffers, and renderer setup succeed, and `false` before initialization and during cleanup. Failed vertex array or buffer allocation is cleaned up. The subtle wrapper uses readiness with pointer eligibility to preserve the normal decorative cursor when WebGL is unavailable, without restarting pointer tracking.
 - Removed the explicit `WEBGL_lose_context.loseContext()` cleanup call because React StrictMode replays the effect on the same canvas. Animation frames, listeners, observers, buffers, vertex array, and shader program still clean up on unmount.
 
 The CSS, particle simulation, shaders, effects, and default visual parameters are unchanged. The full wrapper uses the original white appearance and keeps the native cursor visible. It mounts this component only while the host enables it.

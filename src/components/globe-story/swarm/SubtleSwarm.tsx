@@ -33,19 +33,28 @@ const smooth = (from: number, to: number, progress: number) => {
   return value * value * (3 - 2 * value);
 };
 
-/** Preview-only, sphere-clipped tuning of the unmodified Swarm Cursor. */
+/** Approved subtle variant: sphere-clipped tuning of the shared Swarm Cursor. */
 export default function SubtleSwarm({ stage, enabled, onActiveChange }: SubtleSwarmProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const activeCallback = useRef(onActiveChange);
   const [running, setRunning] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [pointerEligible, setPointerEligible] = useState(false);
   activeCallback.current = onActiveChange;
+
+  // Renderer availability must not restart pointer tracking or scroll easing.
+  useEffect(() => {
+    const active = enabled && ready && pointerEligible;
+    if (overlayRef.current) overlayRef.current.dataset.active = String(active);
+    activeCallback.current(active);
+  }, [enabled, ready, pointerEligible]);
 
   useEffect(() => {
     const overlay = overlayRef.current;
     const section = stage.closest<HTMLElement>(".globe-story");
     if (!overlay || !section) return;
 
-    let active = false;
+    let present = false;
     let ticking = false;
     let frame = 0;
     let exitTimer = 0;
@@ -58,11 +67,10 @@ export default function SubtleSwarm({ stage, enabled, onActiveChange }: SubtleSw
     let clientX = 0;
     let clientY = 0;
 
-    const reportActive = (next: boolean) => {
-      if (active === next) return;
-      active = next;
-      overlay.dataset.active = String(next);
-      activeCallback.current(next);
+    const reportPresence = (next: boolean) => {
+      if (present === next) return;
+      present = next;
+      setPointerEligible(next);
     };
     const stopParticles = () => {
       window.clearTimeout(exitTimer);
@@ -73,7 +81,7 @@ export default function SubtleSwarm({ stage, enabled, onActiveChange }: SubtleSw
     const setPresence = (presence: number, immediate = false) => {
       const next = presence > 0;
       overlay.style.setProperty("--subtle-pointer-opacity", String(presence));
-      reportActive(next);
+      reportPresence(next);
       if (next) {
         window.clearTimeout(exitTimer);
         exitTimer = 0;
@@ -93,6 +101,7 @@ export default function SubtleSwarm({ stage, enabled, onActiveChange }: SubtleSw
     overlay.style.setProperty("--subtle-phase-opacity", "0");
     overlay.style.setProperty("--subtle-pointer-opacity", "0");
     setRunning(false);
+    setPointerEligible(false);
 
     if (!enabled) {
       activeCallback.current(false);
@@ -205,6 +214,7 @@ export default function SubtleSwarm({ stage, enabled, onActiveChange }: SubtleSw
       document.removeEventListener("visibilitychange", onVisibility);
       overlay.style.setProperty("--subtle-phase-opacity", "0");
       overlay.style.setProperty("--subtle-pointer-opacity", "0");
+      setPointerEligible(false);
       activeCallback.current(false);
     };
   }, [stage, enabled]);
@@ -214,6 +224,7 @@ export default function SubtleSwarm({ stage, enabled, onActiveChange }: SubtleSw
       {...PARTICLES}
       className="subtle-swarm-preview__field"
       enabled={running}
+      onReady={setReady}
       shape="dot"
       targets=""
       idle="hide"

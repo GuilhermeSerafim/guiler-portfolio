@@ -25,7 +25,7 @@ export default function ScrollJourneyPreview() {
       <span>GUI / ESTUDO LOCAL · GLOBO → CONEXÕES → ENGENHARIA</span>
       <a href="/__preview/scroll-expand/a">Comparar com a versão A ↗</a>
     </aside>
-    <App />
+    <App globeSwarm={false} />
     <OrbitCursor />
   </div>;
 }

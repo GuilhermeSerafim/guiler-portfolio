@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import App from "../App";
 import { OrbitCursor } from "../components/OrbitCursor";
 import FullSwarm from "./swarm/FullSwarm";
-import SubtleSwarm from "./swarm/SubtleSwarm";
+import SubtleSwarm from "../components/globe-story/swarm/SubtleSwarm";
 import "./SwarmPreview.css";
 
 /** Local A/B experiment; this module is excluded from production. */
@@ -66,7 +66,7 @@ export default function SwarmPreview() {
       </nav>
       <span className="swarm-preview-instruction">{mouseAvailable ? variant === "a" ? "Mova, clique e explore os botões." : "Mova o mouse sobre o globo." : "Use um mouse e movimento ativado para comparar."}</span>
     </aside>
-    <App />
+    <App globeSwarm={false} />
     {stage && createPortal(<div className="swarm-preview-effect" data-variant={variant} aria-hidden="true"><Effect stage={stage} enabled={enabled} onActiveChange={setCursorActive} /></div>, stage)}
     <OrbitCursor />
   </div>;

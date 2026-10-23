@@ -23,6 +23,8 @@ export interface SwarmCursorProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   targets?: string;
   /** Optional interaction scope for a canvas rendered as a sibling overlay. */
   interactionRoot?: HTMLElement;
+  /** Reports whether the WebGL renderer initialized successfully. */
+  onReady?: (ready: boolean) => void;
   idle?: SwarmIdle;
   clickEffect?: SwarmClickEffect;
   hideCursor?: boolean;
@@ -216,6 +218,7 @@ const SwarmCursor = ({
   depth = 0.7,
   targets = 'a, button, [data-swarm-target]',
   interactionRoot,
+  onReady,
   idle = 'roam',
   clickEffect = 'burst',
   hideCursor = false,
@@ -231,6 +234,8 @@ const SwarmCursor = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wakeRef = useRef<(() => void) | null>(null);
+  const readyCallback = useRef(onReady);
+  readyCallback.current = onReady;
   const ink = lightMode ? '#18181b' : '#ffffff';
   const settings: Settings = {
     count: Math.round(clamp(count, 1, MAX_PARTICLES)),
@@ -259,6 +264,7 @@ const SwarmCursor = ({
   settingsRef.current = settings;
 
   useEffect(() => {
+    readyCallback.current?.(false);
     const container = containerRef.current;
     const canvas = canvasRef.current;
     const gl = canvas?.getContext('webgl2', {
@@ -275,8 +281,14 @@ const SwarmCursor = ({
 
     const slots = MAX_PARTICLES + 1;
     const vao = gl.createVertexArray();
-    gl.bindVertexArray(vao);
     const cornerBuffer = gl.createBuffer();
+    if (!vao || !cornerBuffer) {
+      gl.deleteVertexArray(vao);
+      gl.deleteBuffer(cornerBuffer);
+      gl.deleteProgram(shader.program);
+      return undefined;
+    }
+    gl.bindVertexArray(vao);
     gl.bindBuffer(gl.ARRAY_BUFFER, cornerBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     gl.enableVertexAttribArray(0);
@@ -286,6 +298,7 @@ const SwarmCursor = ({
     const extraData = new Float32Array(slots * 2);
     const instanced = (location: number, width: number, data: Float32Array) => {
       const buffer = gl.createBuffer();
+      if (!buffer) return null;
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
       gl.bufferData(gl.ARRAY_BUFFER, data.byteLength, gl.DYNAMIC_DRAW);
       gl.enableVertexAttribArray(location);
@@ -297,6 +310,15 @@ const SwarmCursor = ({
     const lookBuffer = instanced(2, 4, lookData);
     const extraBuffer = instanced(3, 2, extraData);
     gl.bindVertexArray(null);
+    if (!agentBuffer || !lookBuffer || !extraBuffer) {
+      gl.deleteBuffer(cornerBuffer);
+      gl.deleteBuffer(agentBuffer);
+      gl.deleteBuffer(lookBuffer);
+      gl.deleteBuffer(extraBuffer);
+      gl.deleteVertexArray(vao);
+      gl.deleteProgram(shader.program);
+      return undefined;
+    }
 
     const probe = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
     const colorCache = new Map<string, number[]>();
@@ -969,8 +991,10 @@ const SwarmCursor = ({
     document.addEventListener('visibilitychange', onVisibility);
     resize();
     wakeRef.current = wake;
+    readyCallback.current?.(true);
 
     return () => {
+      readyCallback.current?.(false);
       cancelAnimationFrame(raf);
       wakeRef.current = null;
       setHidden(false);

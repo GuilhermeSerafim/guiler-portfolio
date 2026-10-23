@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import SwarmCursor from "./vendor/SwarmCursor";
+import SwarmCursor from "../../components/globe-story/swarm/vendor/SwarmCursor";
 
 type FullSwarmProps = {
   stage: HTMLElement;

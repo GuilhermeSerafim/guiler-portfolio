@@ -92,7 +92,7 @@ function ExpertiseStrip() {
   );
 }
 
-function App() {
+function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
   const { heroRef, entry } = useHeroEntry();
   const [showMeteorField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
@@ -596,7 +596,7 @@ function App() {
           </div>
         </section>
 
-        <GlobeStory />
+        <GlobeStory swarm={globeSwarm} />
 
         <section
           id="sobre"

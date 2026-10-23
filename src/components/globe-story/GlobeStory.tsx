@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
 import GlobeField from "./GlobeField";
 import SystemPlane from "./SystemPlane";
 import EngineeringExamples from "./EngineeringExamples";
 import "./GlobeStory.css";
 
+const GlobeSwarm = lazy(() => import("./swarm/GlobeSwarm"));
+const finePointerQuery = "(hover: hover) and (pointer: fine)";
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 // Short, narrow windows (including browser zoom) need the same readable flow.
 const staticLayoutQuery = "(prefers-reduced-motion: reduce), (max-width: 640px) and (max-height: 500px)";
@@ -12,20 +14,25 @@ const smooth = (from: number, to: number, progress: number) => {
   return p * p * (3 - 2 * p);
 };
 /** A continuous field connecting curiosity to interactive engineering examples. */
-export default function GlobeStory() {
+export default function GlobeStory({ swarm = true }: { swarm?: boolean }) {
   const root = useRef<HTMLElement>(null);
+  const [stage, setStage] = useState<HTMLDivElement | null>(null);
   const progress = useRef(0);
   const [active, setActive] = useState(false);
   const [examplesVisible, setExamplesVisible] = useState(false);
   const [reduced, setReduced] = useState(() => matchMedia(staticLayoutQuery).matches);
   const [height, setHeight] = useState(innerHeight);
+  const [finePointer, setFinePointer] = useState(() => matchMedia(finePointerQuery).matches);
   useEffect(() => {
     const query = matchMedia(staticLayoutQuery);
+    const pointer = matchMedia(finePointerQuery);
+    const pointerPreference = () => setFinePointer(pointer.matches);
     const preference = () => setReduced(query.matches);
     const resize = () => setHeight(innerHeight);
     query.addEventListener("change", preference);
+    pointer.addEventListener("change", pointerPreference);
     window.addEventListener("resize", resize);
-    return () => { query.removeEventListener("change", preference); window.removeEventListener("resize", resize); };
+    return () => { query.removeEventListener("change", preference); pointer.removeEventListener("change", pointerPreference); window.removeEventListener("resize", resize); };
   }, []);
 
   useEffect(() => {
@@ -98,7 +105,7 @@ export default function GlobeStory() {
   }, [height, reduced]);
 
   return <section ref={root} className="globe-story" data-reduced={reduced} style={{"--globe-height":`${height}px`} as CSSProperties} aria-labelledby="globe-story-heading">
-    <div className="globe-story-stage">
+    <div ref={setStage} className="globe-story-stage">
       {!reduced && <GlobeField active={active} progressRef={progress} />}
       <div className="globe-scene-shade" aria-hidden="true" />
       <div className="globe-story-intro">
@@ -112,6 +119,7 @@ export default function GlobeStory() {
       <div className="globe-story-end"><span className="globe-eyebrow">PRINCÍPIOS EM AÇÃO</span><p>Dar estrutura.<br />Gerar resultado<span>.</span></p><span className="globe-end-note">Demonstrações interativas.</span></div>
       <EngineeringExamples visible={reduced || examplesVisible} />
       <span className="globe-story-hint" aria-hidden="true">CONTINUE PARA EXPLORAR <b>↓</b></span>
+      {swarm && active && !reduced && finePointer && stage && <Suspense fallback={null}><GlobeSwarm stage={stage} /></Suspense>}
     </div>
   </section>;
 }
