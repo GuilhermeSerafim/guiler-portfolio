@@ -1,0 +1,9 @@
+.case-content > .case-access {
+  margin: 20px 0 28px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.case-access > .case-links {
+  margin-top: 14px;
+}

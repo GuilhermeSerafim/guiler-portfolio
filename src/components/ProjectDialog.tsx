@@ -3,6 +3,7 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "../data";
 import { track } from "../analytics/client";
 import { ProjectResult } from "./ProjectResult";
+import "./ProjectDialog.css";
 
 export function ProjectDialog({
   project,
@@ -57,6 +58,46 @@ export function ProjectDialog({
             </h2>
             <p className="case-lead">{project.title}</p>
             <p className="case-stage">{project.stage}</p>
+            <div className="case-access">
+              <h3>Acesso ao projeto</h3>
+              {project.demoNotice && (
+                <p className="case-access-summary">
+                  Explore os principais fluxos deste projeto em uma demonstração interativa.
+                </p>
+              )}
+              <div className="case-links">
+                <a
+                  className="button button-blue"
+                  href={project.demo}
+                  aria-describedby={project.demoNotice ? "case-demo-notice" : undefined}
+                  onClick={() => track({ name: "project_visit", params: { project_id: project.id, ui_location: "project_dialog" } })}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {project.demoNotice ? "Explorar demonstração" : "Visitar site"} <ArrowUpRight size={18} />
+                </a>
+                {project.github && (
+                  <div className="case-repositories">
+                    {[
+                      ...(project.frontendGithub ? [{ label: "Frontend", url: project.frontendGithub }] : []),
+                      { label: project.frontendGithub ? "Backend" : "Ver código", url: project.github },
+                    ].map((repository) => (
+                      <a
+                        key={repository.url}
+                        className="text-link"
+                        href={repository.url}
+                        onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_dialog" } })}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Github size={18} /> {repository.label} <ArrowUpRight size={16} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {project.demoNotice && <p id="case-demo-notice" className="case-demo-notice">{project.demoNotice}</p>}
+            </div>
             <div className="tags">
               {(project.technologies ?? project.tags).map((tag) => (
                 <span key={tag}>{tag}</span>
@@ -96,46 +137,6 @@ export function ProjectDialog({
               <ProjectResult project={project} />
               <p>{project.outcome}</p>
             </section>
-            <div className="case-access">
-              <h3>Acesso ao projeto</h3>
-              {project.demoNotice && (
-                <p className="case-access-summary">
-                  Enquanto a aplicação original não está disponível publicamente,
-                  você pode conhecer seus fluxos em uma demonstração interativa.
-                </p>
-              )}
-              <div className="case-links">
-                <a
-                  className="button button-blue"
-                  href={project.demo}
-                  onClick={() => track({ name: "project_visit", params: { project_id: project.id, ui_location: "project_dialog" } })}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {project.demoNotice ? "Explorar demonstração" : "Visitar site"} <ArrowUpRight size={18} />
-                </a>
-                {project.github && (
-                  <div className="case-repositories">
-                    {[
-                      ...(project.frontendGithub ? [{ label: "Frontend", url: project.frontendGithub }] : []),
-                      { label: project.frontendGithub ? "Backend" : "Ver código", url: project.github },
-                    ].map((repository) => (
-                      <a
-                        key={repository.url}
-                        className="text-link"
-                        href={repository.url}
-                        onClick={() => track({ name: "link_click", params: { link_id: "project_code", destination_id: "project_repository", project_id: project.id, ui_location: "project_dialog" } })}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Github size={18} /> {repository.label} <ArrowUpRight size={16} />
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {project.demoNotice && <p className="case-demo-notice">{project.demoNotice}</p>}
-            </div>
           </div>
         </>
       )}
