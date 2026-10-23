@@ -29,7 +29,7 @@ const ScrollExpandPreview = import.meta.env.DEV && /^\/__preview\/scroll-expand(
   ? React.lazy(() => import("./preview/ScrollExpandPreview"))
   : null;
 
-const ScrollJourneyPreview = import.meta.env.DEV && /^\/__preview\/scroll-journey\/?$/.test(window.location.pathname)
+const ScrollJourneyPreview = import.meta.env.DEV && /^\/__preview\/(?:scroll-journey|globe-story)\/?$/.test(window.location.pathname)
   ? React.lazy(() => import("./preview/ScrollJourneyPreview"))
   : null;
 

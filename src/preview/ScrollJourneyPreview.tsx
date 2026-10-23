@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import App from "../App";
 import { OrbitCursor } from "../components/OrbitCursor";
-import ScrollJourney from "./scroll-journey/ScrollJourney";
+import GlobeStory from "./globe-story/GlobeStory";
 import "./ScrollJourneyPreview.css";
 
 export default function ScrollJourneyPreview() {
@@ -12,7 +12,7 @@ export default function ScrollJourneyPreview() {
     const section = root.current?.querySelector("#sobre");
     if (!section) return;
     const previousTitle = document.title;
-    document.title = "Órbita → construção · Estudo local | Guiler";
+    document.title = "Globo → conexões → engenharia · Estudo local | Guiler";
     const slot = document.createElement("div");
     slot.id = "journey-study";
     section.before(slot);
@@ -26,18 +26,18 @@ export default function ScrollJourneyPreview() {
     void document.fonts.ready.then(() => {
       if (cancelled) return;
       frame = requestAnimationFrame(() => {
-        frame = requestAnimationFrame(() => target.scrollIntoView({ behavior: "instant", block: "start" }));
+        frame = requestAnimationFrame(() => window.scrollTo({ top: window.scrollY + target.getBoundingClientRect().top, behavior: "instant" }));
       });
     });
     return () => { cancelled = true; cancelAnimationFrame(frame); };
   }, [target]);
   return <div ref={root} className="journey-preview">
     <aside className="journey-preview-toolbar" aria-label="Estudo local de transição">
-      <span>GUI / ESTUDO LOCAL · ÓRBITA → CONSTRUÇÃO</span>
+      <span>GUI / ESTUDO LOCAL · GLOBO → CONEXÕES → ENGENHARIA</span>
       <a href="/__preview/scroll-expand/a">Comparar com a versão A ↗</a>
     </aside>
     <App />
-    {target && createPortal(<ScrollJourney />, target)}
+    {target && createPortal(<GlobeStory />, target)}
     <OrbitCursor />
   </div>;
 }
