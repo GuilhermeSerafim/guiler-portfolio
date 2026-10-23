@@ -35,19 +35,21 @@ function PhotoExperiment({ variant, toolbarHeight }: { variant: Variant; toolbar
     return () => { observer.disconnect(); window.removeEventListener("resize", measure); };
   }, []);
   const stageHeight = Math.round(variant === "a"
-    ? Math.max(260, Math.min((size.viewportHeight - toolbarHeight - 24) * .8, size.width * .64, 720))
+    ? size.viewportHeight
     : Math.max(220, Math.min(size.width / 1.45, size.viewportHeight - toolbarHeight - 48, 480)));
-  const sizes = variant === "a" ? "100vw" : "(max-width: 700px) 90vw, 50vw";
+  const sizes = variant === "a"
+    ? staticMode ? "100vw" : `${Math.ceil(Math.max(size.width, stageHeight * 1600 / 1068))}px`
+    : "(max-width: 700px) 90vw, 50vw";
   return <section ref={root} className={`scroll-photo-experiment scroll-photo-experiment--${variant}`} aria-label="Guiler construindo no computador" data-static={staticMode}>
     {variant === "a" && <div className="scroll-photo-intro container"><span className="eyebrow">DO LADO DE CÁ DO CÓDIGO</span><h2>Entre ideias e versões.</h2></div>}
     {staticMode || !size.width ? <figure className="scroll-photo-static">
       <img src={notebook960} srcSet={sourceSet} sizes={sizes} alt={photoAlt} width={1600} height={1068} loading="lazy" decoding="async" />
     </figure> : <ScrollExpand
       src={notebook1600} srcSet={sourceSet} sizes={sizes} alt={photoAlt} width={1600} height={1068}
-      stageHeight={stageHeight} stickyTop={toolbarHeight + 12}
+      stageHeight={stageHeight} stickyTop={variant === "a" ? 0 : toolbarHeight + 12}
       startWidth={variant === "a" ? 74 : 88} startHeight={98}
       startRadius={variant === "a" ? 28 : 18} endRadius={variant === "a" ? 0 : 6}
-      mediaZoom={1} objectPosition="60% 0%" scrollDistance={variant === "a" ? .65 : .45} holdDistance={0} smoothing={.08}
+      mediaZoom={1} objectPosition="60% 0%" scrollDistance={variant === "a" ? .65 : .45} holdDistance={variant === "a" ? .18 : 0} smoothing={.08}
     />}
     <p className="scroll-photo-caption">Construindo, aprendendo, repetindo.</p>
   </section>;
@@ -85,7 +87,7 @@ export default function ScrollExpandPreview() {
       frame = requestAnimationFrame(() => {
         frame = requestAnimationFrame(() => {
           const anchor = variant === "a" ? target : root.current?.querySelector("#sobre");
-          if (anchor) window.scrollTo({ top: window.scrollY + anchor.getBoundingClientRect().top - (toolbar.current?.offsetHeight ?? 80) - 28, behavior: "instant" });
+          if (anchor) window.scrollTo({ top: window.scrollY + anchor.getBoundingClientRect().top - (variant === "a" ? 0 : toolbar.current?.offsetHeight ?? 80) - 28, behavior: "instant" });
         });
       });
     });
@@ -94,17 +96,17 @@ export default function ScrollExpandPreview() {
   const seeExperiment = () => {
     if (!target) return;
     const anchor = variant === "a" ? target : root.current?.querySelector("#sobre");
-    if (anchor) window.scrollTo({ top: window.scrollY + anchor.getBoundingClientRect().top - toolbarHeight - 28, behavior: "instant" });
+    if (anchor) window.scrollTo({ top: window.scrollY + anchor.getBoundingClientRect().top - (variant === "a" ? 0 : toolbarHeight) - 28, behavior: "instant" });
   };
   return <div ref={root} className={`scroll-lab scroll-lab--${variant}`} style={{ "--scroll-lab-toolbar-height": `${toolbarHeight}px` } as React.CSSProperties}>
     <aside ref={toolbar} className="scroll-lab-toolbar" aria-label="Experimento local Scroll Expand">
-      <div><span className="scroll-lab-label">GUI / ESTUDO LOCAL</span><strong>{variant === "a" ? "A — Transição ampla" : "B — Foto integrada"}</strong></div>
+      <div><span className="scroll-lab-label">GUI / ESTUDO LOCAL</span><strong>{variant === "a" ? "A — Tela inteira" : "B — Foto integrada"}</strong></div>
       <nav aria-label="Comparar posições do Scroll Expand">
         <a href="/__preview/scroll-expand/a" aria-current={variant === "a" ? "page" : undefined}>A · Transição</a>
         <a href="/__preview/scroll-expand/b" aria-current={variant === "b" ? "page" : undefined}>B · Integrado</a>
         <button type="button" onClick={seeExperiment}>Ver efeito ↓</button>
       </nav>
-      <p>{variant === "a" ? "A foto se amplia antes de Além do editor." : "A expansão ocupa o lugar das fotos em Além do editor."} No celular e com movimento reduzido, a foto fica estática.</p>
+      <p>{variant === "a" ? "A foto se amplia até ocupar toda a tela, antes de Além do editor." : "A expansão ocupa o lugar das fotos em Além do editor."} No celular e com movimento reduzido, a foto fica estática.</p>
     </aside>
     <App />
     {target && createPortal(<PhotoExperiment variant={variant} toolbarHeight={toolbarHeight} />, target)}

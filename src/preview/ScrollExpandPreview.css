@@ -1,5 +1,6 @@
 .scroll-lab { padding-top: var(--scroll-lab-toolbar-height, 100px); }
 .scroll-lab-toolbar { position: fixed; z-index: 110; inset: 0 0 auto; padding: 12px max(20px, calc((100vw - 1320px) / 2)); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 28px; background: var(--ink); color: var(--paper); border-bottom: 1px solid #ffffff30; }
+.scroll-lab--a .scroll-lab-toolbar { position: absolute; }
 .scroll-lab-toolbar > div { display: flex; align-items: center; gap: 18px; }
 .scroll-lab-label { font: 10px var(--mono); letter-spacing: .08em; color: #b6b9b0; }
 .scroll-lab-toolbar strong { font-size: 14px; font-weight: 500; }
@@ -15,13 +16,13 @@
 .scroll-photo-intro h2 { font-size: clamp(26px, 3.4vw, 48px); letter-spacing: -.05em; }
 .scroll-photo-static { width: 100%; margin: 0; }
 .scroll-photo-static img { width: 100%; height: auto; aspect-ratio: 1600 / 1068; object-fit: contain; border-radius: 6px; }
-.scroll-photo-experiment--a .scroll-photo-static { width: min(1320px, calc(100% - 112px)); margin-inline: auto; }
+.scroll-photo-experiment--a .scroll-photo-static { width: 100%; }
+.scroll-photo-experiment--a .scroll-photo-static img { border-radius: 0; }
 .scroll-photo-caption { margin: 16px 0 0; text-align: center; color: var(--muted); font: 10px/1.6 var(--mono); }
 .scroll-lab--b .about-photos > .photo-scene { display: none; }
 .scroll-lab--b .about-photos { padding-bottom: 112px; }
 .scroll-lab--b .about-photos > .curiosity-sketch--davinci { bottom: 0; }
 @media (max-width: 960px) {
-  .scroll-photo-experiment--a .scroll-photo-static { width: calc(100% - 56px); }
   .scroll-photo-intro { align-items: flex-start; flex-direction: column; gap: 14px; }
 }
 @media (max-width: 700px) {
@@ -31,7 +32,6 @@
   .scroll-lab-toolbar nav { width: 100%; }
   .scroll-lab-toolbar :is(a, button) { padding-inline: 10px; font-size: 11px; }
   .scroll-lab-toolbar p { font-size: 11px; }
-  .scroll-photo-experiment--a .scroll-photo-static { width: calc(100% - 40px); }
   .scroll-photo-caption { padding-inline: 20px; font-size: 9px; }
   .scroll-lab--b .about-photos { padding-bottom: 88px; }
 }
