@@ -15,11 +15,11 @@
 
 ## Tarefas e responsáveis
 
-- [ ] Acesso ao projeto — agente: `ProjectDialog.tsx` e CSS específico. Mover ação para perto do título/estágio, distinguir demo/site, preservar avisos específicos e repositórios. Root verifica posição em 390/320, foco/escape, URLs e evento único por clique.
-- [ ] Consentimento compacto — agente: `AnalyticsPreferences.tsx/.css`. Texto curto; aceitar/recusar em linha quando couber; preservar adiar, detalhes, retirada e persistência. Root verifica altura menor que 190 px em 390, alvos de 44 px e fluxo de consentimento com requests externos bloqueados na QA.
-- [ ] Hero e prêmio — root: `App.tsx`, `styles.css`, `analytics/events.ts` e testes do catálogo/eventos. Texto aprovado; botão nomeado abre GeoRisk e registra `project_open` com localização fixa `hero_award`, sem valores livres.
-- [ ] Tablet — root: `styles.css`. Resumos/introdução em 15 px, currículo 14 px e tags 10 px no intervalo até 960 px; manter mobile 16 px onde já aplicado. Conferir 320, 390, 768, 960, 1440 e ampliação.
-- [ ] Integração: build, suite existente, QA visual/funcional e revisão independente. Commits convencionais separados por mudança.
+- [x] Acesso ao projeto — agente: `ProjectDialog.tsx` e CSS específico. Mover ação para perto do título/estágio, distinguir demo/site, preservar avisos específicos e repositórios. Root verifica posição em 390/320, foco/escape, URLs e evento único por clique.
+- [x] Consentimento compacto — agente: `AnalyticsPreferences.tsx/.css`. Texto curto; aceitar/recusar em linha quando couber; preservar adiar, detalhes, retirada e persistência. Root verifica altura menor que 190 px em 390, alvos de 44 px e fluxo de consentimento com requests externos bloqueados na QA.
+- [x] Hero e prêmio — root: `App.tsx`, `styles.css`, `analytics/events.ts` e testes do catálogo/eventos. Texto aprovado; botão nomeado abre GeoRisk e registra `project_open` com localização fixa `hero_award`, sem valores livres.
+- [x] Tablet — root: `styles.css`. Resumos/introdução em 15 px, currículo 14 px e tags 10 px no intervalo até 960 px; manter mobile 16 px onde já aplicado. Conferir 320, 390, 768, 960, 1440 e ampliação.
+- [x] Integração: build, suite existente, QA visual/funcional e revisão independente. Commits convencionais separados por mudança.
 
 ## Focos da revisão
 
@@ -40,4 +40,4 @@ não coberto por overlays. A busca inicial de consentimento retornou chips e foi
 
 ## Evidências
 
-Pendentes de implementação e validação.
+Concluído localmente. Evidências e limites em `docs/ux-refinements-qa-2026-10-23.md`. Nenhum push ou deploy nesta etapa.
