@@ -25,14 +25,14 @@ afterEach(()=>vi.unstubAllGlobals());
 
 describe("portfolio action controls", () => {
   it("opens the GeoRisk award case with one dedicated event", () => {
-    const award = elements(App()).find(n => n.props["aria-label"] === "Conhecer o GeoRisk, vencedor do Hackathon OpenAI");
+    const award = elements(App({})).find(n => n.props["aria-label"] === "Conhecer o GeoRisk, vencedor do Hackathon OpenAI");
     expect(award).toBeDefined();
     expect(award!.type).toBe("button");
     award!.props.onClick();
     expect(recorded.mock.calls).toEqual([[{ name: "project_open", params: { project_id: "georisk", ui_location: "hero_award" } }]]);
   });
   it("records each of the three project open controls with the preserved project ID", () => {
-    const nodes=elements(App());
+    const nodes=elements(App({}));
     for(const project of projects) {
       const controls = [
         nodes.find(n=>n.props["aria-label"]===`Conhecer o projeto ${project.name}`),
@@ -54,7 +54,7 @@ describe("portfolio action controls", () => {
     }
   });
   it("measures both resume CTAs and leaves the header anchor alone", () => {
-    const nodes=elements(App());
+    const nodes=elements(App({}));
     for(const [index,element] of nodes.filter(n=>n.type==="a"&&n.props.download!==undefined).entries()) {
       recorded.mockClear(); element.props.onClick();
       expect(recorded.mock.calls).toEqual([[{name:"resume_download",params:{asset_id:"resume_fullstack",ui_location:index===0?"hero":"contact"}}]]);
@@ -63,7 +63,7 @@ describe("portfolio action controls", () => {
     expect(nodes.find(n=>n.props.className==="header-contact")!.props.onClick).toBeUndefined();
   });
   it("records email opening but records copying only after the clipboard resolves", async () => {
-    const nodes=elements(App());
+    const nodes=elements(App({}));
     nodes.filter(n=>n.type==="a"&&String(n.props.href).startsWith("mailto:")).forEach((element,index)=>{
       recorded.mockClear(); element.props.onClick();
       expect(recorded.mock.calls).toEqual([[{name:"contact_intent",params:{contact_method:"email_open",ui_location:index===0?"contact_arrow":"contact_email"}}]]);
@@ -75,7 +75,7 @@ describe("portfolio action controls", () => {
     recorded.mockClear(); writeText.mockRejectedValue(Error("denied")); await copy.props.onClick(); expect(recorded).not.toHaveBeenCalled();
   });
   it("identifies the social links", () => {
-    const nodes=elements(App());
+    const nodes=elements(App({}));
     const expectations = [
       ["https://github.com/GuilhermeSerafim", "github", "github_profile", ["projects_footer","contact"]],
       ["https://www.linkedin.com/in/guiserafim/", "linkedin", "linkedin_profile", ["about","contact"]],
