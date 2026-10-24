@@ -50,7 +50,7 @@ export function AnalyticsPreferences() {
       <dialog ref={dialog} className="analytics-dialog" aria-labelledby="analytics-preferences-title" onClose={() => setOpen(false)} onClick={event => { if (event.target === event.currentTarget) setOpen(false); }}>
         <div className="analytics-dialog-heading">
           <h2 id="analytics-preferences-title">Preferências de privacidade</h2>
-          <button type="button" autoFocus onClick={() => setOpen(false)} aria-label="Fechar preferências">Fechar</button>
+          <button type="button" onClick={() => setOpen(false)} aria-label="Fechar preferências">Fechar</button>
         </div>
         <p role="status">{!configured ? "Estatísticas desativadas neste ambiente" : consent === "granted" ? "Você permitiu estatísticas. Retirar a autorização recarrega a página." : consent === "denied" ? "Você recusou estatísticas." : "Estatísticas aguardam sua escolha."}</p>
         {!configured && consent === "granted" && <p>Há uma autorização salva neste navegador. Você pode retirá-la mesmo com a coleta indisponível nesta página.</p>}
