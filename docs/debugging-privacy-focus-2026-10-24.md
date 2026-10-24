@@ -1,5 +1,7 @@
 # Foco inicial e performance — investigação de 23–24/10/2026
 
+> Atualização de interpretação: o [PageSpeed desktop](https://pagespeed.web.dev/analysis/https-guiler-vercel-app/pll8qb9bfq?hl=pt-br&form_factor=desktop) e o [mobile](https://pagespeed.web.dev/analysis/https-guiler-vercel-app/pll8qb9bfq?hl=pt-br&form_factor=mobile), de 24/10 às 10:52 BRT, confirmaram **100 / 95**, TBT **26 / 113 ms**, nos mesmos assets de `2933060`. A correção abaixo não foi publicada e não causou esses resultados. O ambiente PSI usa Lighthouse 13.5/Chromium153; o local usou Lighthouse12.8/Chrome155, com CPU mobile4× versus1,2× no preset remoto calibrado para a infraestrutura Google. Hardware e medições diferem; não converter os tempos por essa razão. As notas locais não sustentam sozinhas uma alegação de gargalo grave em produção. A reconciliação completa está em `output/performance/2026-10-24-psi-reconciliation/` na raiz do workspace.
+
 ## Problema e hipótese
 
 O Lighthouse local contra a versão publicada `2933060` atribuiu o maior reflow síncrono ao `focus()` de `ReactDOM.commitMount`. `AnalyticsPreferences` montava um botão com `autoFocus` dentro de um diálogo fechado. Isso ocorre desde `d472953`, anterior à versão Swarm B.
