@@ -9,8 +9,11 @@ import { OrbitCursor } from "./components/OrbitCursor";
 import "./styles.css";
 import { initializeAnalytics } from "./analytics/client";
 import { publicConfig } from "./analytics/config";
+import { getLocaleFromPath, LocaleProvider } from "./i18n";
 
 initializeAnalytics(publicConfig);
+const locale = getLocaleFromPath(window.location.pathname);
+document.documentElement.lang = locale;
 
 // Local design comparison only; excluded from production by Vite.
 const CursorPreview = import.meta.env.DEV && /^\/__preview\/cursor\/[abc]\/?$/.test(window.location.pathname)
@@ -39,6 +42,7 @@ const SwarmPreview = import.meta.env.DEV && /^\/__preview\/swarm\/[ab]\/?$/.test
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <LocaleProvider locale={locale}>
     <MotionConfig reducedMotion="user">
       {SwarmPreview ? (
         <React.Suspense fallback={null}>
@@ -66,5 +70,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </React.Suspense>
       ) : <><App /><OrbitCursor /></>}
     </MotionConfig>
+    </LocaleProvider>
   </React.StrictMode>,
 );

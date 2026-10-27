@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "../data";
 import { track } from "../analytics/client";
+import { useTranslation } from "../i18n";
 import { ProjectResult } from "./ProjectResult";
 import "./ProjectDialog.css";
 
@@ -12,6 +13,7 @@ export function ProjectDialog({
   project: Project | null;
   onClose: () => void;
 }) {
+  const { t } = useTranslation();
   const dialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -40,12 +42,12 @@ export function ProjectDialog({
       {project && (
         <>
           <div className="case-top">
-            <span className="eyebrow">POR DENTRO DO PROJETO</span>
+            <span className="eyebrow">{t("POR DENTRO DO PROJETO", "INSIDE THE PROJECT")}</span>
             <button
               autoFocus
               className="icon-button"
               onClick={onClose}
-              aria-label="Fechar projeto"
+              aria-label={t("Fechar projeto", "Close project")}
             >
               <X size={22} />
             </button>
@@ -59,10 +61,10 @@ export function ProjectDialog({
             <p className="case-lead">{project.title}</p>
             <p className="case-stage">{project.stage}</p>
             <div className="case-access">
-              <h3>Acesso ao projeto</h3>
+              <h3>{t("Acesso ao projeto", "Explore the project")}</h3>
               {project.demoNotice && (
                 <p className="case-access-summary">
-                  Explore os principais fluxos deste projeto em uma demonstração interativa.
+                  {t("Explore os principais fluxos deste projeto em uma demonstração interativa.", "Explore this project's main workflows in an interactive demonstration.")}
                 </p>
               )}
               <div className="case-links">
@@ -74,13 +76,13 @@ export function ProjectDialog({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {project.demoNotice ? "Explorar demonstração" : "Visitar site"} <ArrowUpRight size={18} />
+                  {project.demoNotice ? t("Explorar demonstração", "Explore demo") : t("Visitar site", "Visit website")} <ArrowUpRight size={18} />
                 </a>
                 {project.github && (
                   <div className="case-repositories">
                     {[
                       ...(project.frontendGithub ? [{ label: "Frontend", url: project.frontendGithub }] : []),
-                      { label: project.frontendGithub ? "Backend" : "Ver código", url: project.github },
+                      { label: project.frontendGithub ? "Backend" : t("Ver código", "View code"), url: project.github },
                     ].map((repository) => (
                       <a
                         key={repository.url}
@@ -113,19 +115,19 @@ export function ProjectDialog({
                   loading="lazy"
                   decoding="async"
                 />
-                <figcaption>Captura da página publicada</figcaption>
+                <figcaption>{t("Captura da página publicada", "Screenshot of the published page")}</figcaption>
               </figure>
             )}
             <section>
-              <h3>O problema</h3>
+              <h3>{t("O problema", "The problem")}</h3>
               <p>{project.problem}</p>
             </section>
             <section>
-              <h3>Minha contribuição</h3>
+              <h3>{t("Minha contribuição", "My contribution")}</h3>
               <p>{project.approach}</p>
             </section>
             <section>
-              <h3>Decisões de engenharia</h3>
+              <h3>{t("Decisões de engenharia", "Engineering decisions")}</h3>
               <ul>
                 {project.decisions.map((decision) => (
                   <li key={decision}>{decision}</li>
@@ -133,7 +135,7 @@ export function ProjectDialog({
               </ul>
             </section>
             <section>
-              <h3>O resultado</h3>
+              <h3>{t("O resultado", "The outcome")}</h3>
               <ProjectResult project={project} />
               <p>{project.outcome}</p>
             </section>

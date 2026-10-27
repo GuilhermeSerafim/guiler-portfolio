@@ -1,3 +1,5 @@
+import { useTranslation } from "../../i18n";
+
 /** Original architectural drawing for the local globe → software study. */
 type SystemPlaneProps = { className?: string };
 
@@ -9,13 +11,14 @@ const routes = [
 ];
 
 const modules = [
-  { name: "interface", x: 82, y: 154, width: 230, height: 142 },
-  { name: "api", x: 428, y: 154, width: 244, height: 142 },
-  { name: "dados", x: 428, y: 435, width: 244, height: 116 },
-  { name: "ia", x: 780, y: 334, width: 150, height: 126 },
+  { name: "interface", nameEn: "interface", x: 82, y: 154, width: 230, height: 142 },
+  { name: "api", nameEn: "api", x: 428, y: 154, width: 244, height: 142 },
+  { name: "dados", nameEn: "data", x: 428, y: 435, width: 244, height: 116 },
+  { name: "ia", nameEn: "ai", x: 780, y: 334, width: 150, height: 126 },
 ];
 
 export default function SystemPlane({ className = "" }: SystemPlaneProps) {
+  const { t } = useTranslation();
   return <svg
     className={`globe-system-art ${className}`.trim()}
     viewBox="0 0 1000 700"
@@ -54,7 +57,7 @@ export default function SystemPlane({ className = "" }: SystemPlaneProps) {
           fontFamily="var(--mono, monospace)"
           fontSize="13"
           letterSpacing="1.2"
-        >{module.name}</text>
+        >{t(module.name, module.nameEn)}</text>
         <path
           d={`M${module.x} ${module.y + 14}V${module.y}H${module.x + 14}M${module.x + module.width - 14} ${module.y + module.height}H${module.x + module.width}V${module.y + module.height - 14}`}
           stroke="var(--globe-story-accent, var(--blue, #2546ef))"

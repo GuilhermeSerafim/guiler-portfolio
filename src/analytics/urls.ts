@@ -1,4 +1,4 @@
-import { SITE_HOSTS, type SiteId } from "./config";
+import { SITE_HOSTS, SITE_TITLES, type SiteId } from "./config";
 
 const campaigns = [
   ["instagram", "social", "bio"],
@@ -16,10 +16,18 @@ function campaign(url: URL): readonly string[] | undefined {
 export function sanitizePageUrl(site: SiteId, input: string): string {
   const result = new URL(`https://${SITE_HOSTS[site]}/`);
   try {
-    const values = campaign(new URL(input));
+    const url = new URL(input);
+    if (site === "portfolio" && url.origin === result.origin && ["/en", "/en/"].includes(url.pathname)) result.pathname = "/en/";
+    const values = campaign(url);
     values?.forEach((value, index) => result.searchParams.set(keys[index], value));
   } catch { /* Use the canonical URL. */ }
   return result.href;
+}
+
+export function getPageTitle(site: SiteId, input: string): string {
+  return site === "portfolio" && new URL(sanitizePageUrl(site, input)).pathname === "/en/"
+    ? "Guiler | Portfolio"
+    : SITE_TITLES[site];
 }
 
 export function sanitizeReferrer(input: string): string {
@@ -34,7 +42,8 @@ export function sanitizeReferrer(input: string): string {
 export function isSafeAnalyticsEntry(site: SiteId, input: string): boolean {
   try {
     const url = new URL(input);
-    if (url.origin !== `https://${SITE_HOSTS[site]}` || url.pathname !== "/" || url.username || url.password || !hashes[site].includes(url.hash)) return false;
+    const allowedPaths = site === "portfolio" ? ["/", "/en", "/en/"] : ["/"];
+    if (url.origin !== `https://${SITE_HOSTS[site]}` || !allowedPaths.includes(url.pathname) || url.username || url.password || !hashes[site].includes(url.hash)) return false;
     for (const key of url.searchParams.keys()) if (![...keys, "_gl"].includes(key)) return false;
     if (url.searchParams.getAll("_gl").length > 1) return false;
     const linker = url.searchParams.get("_gl");

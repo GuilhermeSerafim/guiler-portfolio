@@ -1,3 +1,6 @@
+import type { Locale } from "./i18n/locale";
+import { englishExperience, englishProjectContent } from "./data.en";
+
 export type Project = {
   id: "georisk" | "seven-tools" | "playsenac" | "mesa";
   name: string;
@@ -154,7 +157,18 @@ export const projects: Project[] = [
   },
 ];
 
-export const experience = [
+export type Experience = {
+  company: string;
+  role: string;
+  period: string;
+  field: string;
+  number: string;
+  description: string;
+  contributions: string[];
+  stack: string;
+};
+
+export const experience: Experience[] = [
   {
     company: "Naka&Co",
     role: "Desenvolvedor Full Stack",
@@ -201,3 +215,16 @@ export const experience = [
     stack: "C# / .NET / React / SQL Server",
   },
 ];
+
+const projectsInEnglish: Project[] = projects.map((project) => ({
+  ...project,
+  ...englishProjectContent[project.id],
+}));
+
+export function getProjects(locale: Locale): Project[] {
+  return locale === "en" ? projectsInEnglish : projects;
+}
+
+export function getExperience(locale: Locale): Experience[] {
+  return locale === "en" ? englishExperience : experience;
+}

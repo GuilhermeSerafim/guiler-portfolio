@@ -159,6 +159,36 @@ describe("tracking parameters at entry", () => {
   });
 });
 
+describe("English page integration", () => {
+  it("waits for consent, sanitizes English context and sends only one page view", async () => {
+    const env = browser({ href: "https://guiler.vercel.app/en/?utm_source=instagram&utm_medium=social&utm_campaign=bio&igsh=fake-private#projetos" });
+    const client = await import("../../src/analytics/client");
+    client.initializeAnalytics(config);
+    expect(client.isAnalyticsConfigured()).toBe(true);
+    expect(env.scripts).toHaveLength(0);
+    client.setConsent("denied");
+    expect(env.scripts).toHaveLength(0);
+    expect(env.win.location.href).toContain("igsh=fake-private");
+    client.setConsent("granted");
+    expect(env.scripts).toHaveLength(1);
+    expect(env.scriptEntries[0]).toBe("https://guiler.vercel.app/en/?utm_source=instagram&utm_medium=social&utm_campaign=bio#projetos");
+    env.scripts[0].onload?.(); env.scripts[0].onload?.();
+    const safe = { page_location: "https://guiler.vercel.app/en/?utm_source=instagram&utm_medium=social&utm_campaign=bio", page_title: "Guiler | Portfolio", site_id: "portfolio" };
+    expect(env.commands().find(c => c[0] === "config")?.[2]).toMatchObject({ ...safe, campaign_source: "instagram", campaign_medium: "social", campaign_name: "bio" });
+    const views = env.commands().filter(c => c[0] === "event" && c[1] === "page_view");
+    expect(views).toHaveLength(1); expect(views[0][2]).toMatchObject(safe);
+    client.track(action); env.fire("visibilitychange");
+    expect(env.commands().at(-1)).toEqual(["event", "resume_download", { site_id: "portfolio", schema_version: 1, asset_id: "resume_fullstack", ui_location: "hero" }]);
+    expect(JSON.stringify(env.commands())).not.toMatch(/fake-private|igsh|#projetos|secret/);
+  });
+  it.each(["/en/admin", "/en/?email=private", "/en/?utm_source=instagram", "/en/#private"])("does not initialize Google for an unreviewed English entry: %s", async path => {
+    const env = browser({ href: `https://guiler.vercel.app${path}`, raw: JSON.stringify({ version: 1, analytics: "granted", updatedAt: Date.now() }) });
+    const client = await import("../../src/analytics/client"); client.initializeAnalytics(config);
+    expect(client.isAnalyticsConfigured()).toBe(false);
+    expect(env.scripts).toHaveLength(0); expect(env.commands()).toEqual([]);
+  });
+});
+
 describe("withdrawal and persistence failures", () => {
   it("clears existing GA cookies when a stored grant is withdrawn on a blocked entry", async () => {
     const env=browser({href:"https://guiler.vercel.app/?email=unreviewed",raw:JSON.stringify({version:1,analytics:"granted",updatedAt:Date.now()})});

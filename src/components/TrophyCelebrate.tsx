@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from 'react';
 import { createScope, createTimeline } from 'animejs';
+import { useTranslation } from '../i18n';
 import './TrophyCelebrate.css';
 
 const sparks = [
@@ -14,6 +15,7 @@ const sparks = [
 const cupPath = 'M18 16h16v7a8 8 0 0 1-16 0Z';
 
 export function TrophyCelebrate({ replayToken = 0 }: { replayToken?: number }) {
+  const { t } = useTranslation();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const playRef = useRef<() => void>(() => {});
   const previousReplayToken = useRef(replayToken);
@@ -174,7 +176,7 @@ export function TrophyCelebrate({ replayToken = 0 }: { replayToken?: number }) {
       ref={buttonRef}
       className="trophy-celebrate"
       type="button"
-      aria-label="Animar troféu: Conquista"
+      aria-label={t('Animar troféu: Conquista', 'Animate achievement trophy')}
       onClick={() => playRef.current()}
       onPointerEnter={(event) => {
         if (event.pointerType === 'mouse') playRef.current();

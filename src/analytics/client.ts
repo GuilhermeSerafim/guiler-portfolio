@@ -1,7 +1,7 @@
-import { canCollect, SITE_HOSTS, SITE_TITLES, type AnalyticsConfig } from "./config";
+import { canCollect, SITE_HOSTS, type AnalyticsConfig } from "./config";
 import { CONSENT_KEY, CONSENT_MAX_AGE, parseConsent, type ConsentRecord, type ConsentState } from "./consent";
 import { serializeEvent, type AnalyticsEvent } from "./events";
-import { isSafeAnalyticsEntry, prepareAnalyticsEntry, sanitizePageUrl, sanitizeReferrer } from "./urls";
+import { getPageTitle, isSafeAnalyticsEntry, prepareAnalyticsEntry, sanitizePageUrl, sanitizeReferrer } from "./urls";
 
 type GoogleWindow = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void; [key: `ga-disable-${string}`]: boolean };
 let config: AnalyticsConfig | undefined;
@@ -113,7 +113,7 @@ function start(): void {
       schema_version: 1,
       page_location: pageLocation,
       page_referrer: sanitizeReferrer(document.referrer),
-      page_title: SITE_TITLES[settings.siteId],
+      page_title: getPageTitle(settings.siteId, pageLocation),
       campaign_source: campaign.get("utm_source") ?? "",
       campaign_medium: campaign.get("utm_medium") ?? "",
       campaign_name: campaign.get("utm_campaign") ?? "",

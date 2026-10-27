@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { CuriositySketch } from "./CuriositySketch";
+import { useTranslation } from "../i18n";
 import "./TechnologyCatalog.css";
 
 type Technology = { name: string; icon: string };
@@ -8,7 +9,9 @@ type Technology = { name: string; icon: string };
 const areas = [
   {
     name: "Interface",
+    nameEn: "Interface",
     note: "Da ideia à interação.",
+    noteEn: "From idea to interaction.",
     items: [
       { name: "React", icon: "react" },
       { name: "Next.js", icon: "nextjs" },
@@ -18,7 +21,9 @@ const areas = [
   },
   {
     name: "Sistemas",
+    nameEn: "Systems",
     note: "Estrutura para crescer.",
+    noteEn: "Built to grow.",
     items: [
       { name: "Java", icon: "java" },
       { name: "Spring Boot", icon: "spring" },
@@ -28,7 +33,9 @@ const areas = [
   },
   {
     name: "Dados & IA",
+    nameEn: "Data & AI",
     note: "Informação vira aplicação.",
+    noteEn: "From data to applications.",
     items: [
       { name: "Python", icon: "python" },
       { name: "FastAPI", icon: "fastapi" },
@@ -67,6 +74,7 @@ function CatalogRow({
   index: number;
   reducedMotion: boolean;
 }) {
+  const { t } = useTranslation();
   const row = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: row,
@@ -83,8 +91,8 @@ function CatalogRow({
       <div className="tech-area-label">
         <span className="tech-area-number">0{index + 1}</span>
         <div>
-          <h4>{area.name}</h4>
-          <p>{area.note}</p>
+          <h4>{t(area.name, area.nameEn)}</h4>
+          <p>{t(area.note, area.noteEn)}</p>
         </div>
       </div>
       <motion.ul
@@ -102,6 +110,7 @@ function CatalogRow({
 }
 
 export function TechnologyCatalog() {
+  const { t } = useTranslation();
   const reducedMotion = Boolean(useReducedMotion());
 
   return (
@@ -113,7 +122,7 @@ export function TechnologyCatalog() {
     >
       <header className="technology-catalog-header">
         <div>
-          <h3 id="catalog-title">Minha caixa de ferramentas.</h3>
+          <h3 id="catalog-title">{t("Minha caixa de ferramentas.", "My toolbox.")}</h3>
         </div>
         <div className="technology-catalog-aside">
           <CuriositySketch subject="einstein" />

@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { isValidElement, type ReactElement } from "react";
 const { state, choose, effects, refs } = vi.hoisted(() => ({ state:{consent:"granted",configured:false,open:false}, choose:vi.fn(), effects:[] as Array<()=>void|(()=>void)>, refs:[] as Array<{focus:ReturnType<typeof vi.fn>}> }));
 vi.mock("../../src/analytics/client", () => ({getConsent:()=>state.consent,isAnalyticsConfigured:()=>state.configured,setConsent:choose,subscribeConsent:()=>()=>{}}));
-vi.mock("react",async original=>({...await original<typeof import("react")>(),useState:(value:unknown)=>[typeof value==="boolean"?state.open:value,vi.fn()],useRef:()=>{const current={showModal:vi.fn(),close:vi.fn(),focus:vi.fn()};refs.push(current);return{current};},useEffect:(effect:()=>void|(()=>void))=>effects.push(effect),useSyncExternalStore:(_subscribe:unknown,getSnapshot:()=>unknown)=>getSnapshot()}));
+vi.mock("react",async original=>({...await original<typeof import("react")>(),useContext:()=>"pt-BR",useState:(value:unknown)=>[typeof value==="boolean"?state.open:value,vi.fn()],useRef:()=>{const current={showModal:vi.fn(),close:vi.fn(),focus:vi.fn()};refs.push(current);return{current};},useEffect:(effect:()=>void|(()=>void))=>effects.push(effect),useSyncExternalStore:(_subscribe:unknown,getSnapshot:()=>unknown)=>getSnapshot()}));
 import { AnalyticsPreferences } from "../../src/components/AnalyticsPreferences";
 type Element=ReactElement<Record<string,any>>;
 function elements(tree:unknown):Element[] {

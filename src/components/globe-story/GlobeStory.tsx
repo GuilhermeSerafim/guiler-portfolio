@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from 
 import GlobeField from "./GlobeField";
 import SystemPlane from "./SystemPlane";
 import EngineeringExamples from "./EngineeringExamples";
+import { useTranslation } from "../../i18n";
 import "./GlobeStory.css";
 
 const GlobeSwarm = lazy(() => import("./swarm/GlobeSwarm"));
@@ -15,6 +16,7 @@ const smooth = (from: number, to: number, progress: number) => {
 };
 /** A continuous field connecting curiosity to interactive engineering examples. */
 export default function GlobeStory({ swarm = true }: { swarm?: boolean }) {
+  const { t } = useTranslation();
   const root = useRef<HTMLElement>(null);
   const [stage, setStage] = useState<HTMLDivElement | null>(null);
   const progress = useRef(0);
@@ -109,16 +111,16 @@ export default function GlobeStory({ swarm = true }: { swarm?: boolean }) {
       {!reduced && <GlobeField active={active} progressRef={progress} />}
       <div className="globe-scene-shade" aria-hidden="true" />
       <div className="globe-story-intro">
-        <span className="globe-eyebrow">CURIOSIDADE</span>
-        <h2 id="globe-story-heading">Olhar além.<br />Entender por dentro<span>.</span></h2>
-        <p>O que conecta uma ideia a algo que funciona?</p>
+        <span className="globe-eyebrow">{t("CURIOSIDADE", "CURIOSITY")}</span>
+        <h2 id="globe-story-heading">{t("Olhar além.", "Look beyond.")}<br />{t("Entender por dentro", "See how it works")}<span>.</span></h2>
+        <p>{t("O que conecta uma ideia a algo que funciona?", "What connects an idea to something that works?")}</p>
       </div>
-      <div className="globe-story-bridge" aria-hidden="true"><span className="globe-eyebrow">CONEXÕES</span><p>Chegar perto.<br />Encontrar as conexões.</p></div>
+      <div className="globe-story-bridge" aria-hidden="true"><span className="globe-eyebrow">{t("CONEXÕES", "CONNECTIONS")}</span><p>{t("Chegar perto.", "Look closer.")}<br />{t("Encontrar as conexões.", "Find the connections.")}</p></div>
       <div className="globe-system-plane" aria-hidden="true"><SystemPlane /></div>
       <div className="globe-end-veil" aria-hidden="true" />
-      <div className="globe-story-end"><span className="globe-eyebrow">PRINCÍPIOS EM AÇÃO</span><p>Dar estrutura.<br />Gerar resultado<span>.</span></p><span className="globe-end-note">Demonstrações interativas.</span></div>
+      <div className="globe-story-end"><span className="globe-eyebrow">{t("PRINCÍPIOS EM AÇÃO", "PRINCIPLES IN ACTION")}</span><p>{t("Dar estrutura.", "Create structure.")}<br />{t("Gerar resultado", "Deliver results")}<span>.</span></p><span className="globe-end-note">{t("Demonstrações interativas.", "Interactive demonstrations.")}</span></div>
       <EngineeringExamples visible={reduced || examplesVisible} />
-      <span className="globe-story-hint" aria-hidden="true">CONTINUE PARA EXPLORAR <b>↓</b></span>
+      <span className="globe-story-hint" aria-hidden="true">{t("CONTINUE PARA EXPLORAR", "KEEP SCROLLING TO EXPLORE")} <b>↓</b></span>
       {swarm && active && !reduced && finePointer && stage && <Suspense fallback={null}><GlobeSwarm stage={stage} /></Suspense>}
     </div>
   </section>;

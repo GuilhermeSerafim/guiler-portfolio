@@ -1,3 +1,5 @@
+import { useTranslation } from "../../i18n";
+
 type IntegrationDiagramProps = {
   provider: "a" | "b";
   pulseKey: number;
@@ -14,6 +16,7 @@ const backupRoute = "M32 47H78Q86 47 86 55V70H151";
 
 /** A stable product and contract, with an interchangeable service behind them. */
 export function IntegrationDiagram({ provider, pulseKey }: IntegrationDiagramProps) {
+  const { t } = useTranslation();
   return <svg
     className="demo-diagram demo-diagram--integration"
     viewBox="0 0 240 94"
@@ -30,7 +33,7 @@ export function IntegrationDiagram({ provider, pulseKey }: IntegrationDiagramPro
     <g className="demo-product">
       <rect x="8" y="25" width="69" height="44" rx="5" />
       <path d="M15 34H25" opacity=".45" />
-      <text x="42.5" y="53" fill="currentColor" stroke="none" textAnchor="middle" fontFamily="var(--mono, monospace)" fontSize="13">produto</text>
+      <text x="42.5" y="53" fill="currentColor" stroke="none" textAnchor="middle" fontFamily="var(--mono, monospace)" fontSize="13">{t("produto", "product")}</text>
     </g>
 
     <g className="demo-contract" stroke={accent}>

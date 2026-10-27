@@ -1,5 +1,6 @@
 import { useId } from "react";
 import type { Project } from "../data";
+import { useTranslation } from "../i18n";
 import { SevenToolsVisual } from "./SevenToolsVisual";
 import "./ProjectVisual.css";
 
@@ -11,6 +12,7 @@ const contour =
   "M-155 340C-147 203-43 179 30 205S132 289 198 253 219 114 159 58 169-63 284-70";
 
 function GeoRiskVisual() {
+  const { t } = useTranslation();
   const id = useId().replace(/:/g, "");
 
   return (
@@ -155,7 +157,7 @@ function GeoRiskVisual() {
                 fontSize="9"
                 letterSpacing="1.2"
               >
-                ÁREA 0{index + 1}
+                {t("ÁREA", "AREA")} 0{index + 1}
               </text>
             </g>
           ))}
@@ -201,33 +203,34 @@ function GeoRiskVisual() {
 
       <div className="pv-report">
         <div className="pv-report-kicker">
-          <span className="pv-status-dot" /> INTELIGÊNCIA TERRITORIAL
+          <span className="pv-status-dot" /> {t("INTELIGÊNCIA TERRITORIAL", "GEOSPATIAL INTELLIGENCE")}
         </div>
         <h3>
-          Análise
+          {t("Análise", "Geospatial")}
           <br />
-          geoespacial<span>.</span>
+          {t("geoespacial", "analysis")}<span>.</span>
         </h3>
-        <p>IA + dados reais</p>
+        <p>{t("IA + dados reais", "AI + real data")}</p>
         <div className="pv-report-line" />
         <div className="pv-report-footer">
           <span className="pv-report-symbol">◎</span>
           <span>
-            Uma nova perspectiva
+            {t("Uma nova perspectiva", "A new perspective")}
             <br />
-            sobre o território.
+            {t("sobre o território.", "on the landscape.")}
           </span>
         </div>
       </div>
       <div className="pv-caption pv-caption--geo">
-        <span className="pv-caption-square" /> VISUAL CONCEITUAL
+        <span className="pv-caption-square" /> {t("VISUAL CONCEITUAL", "CONCEPT VISUAL")}
       </div>
-      <div className="pv-coordinate">TERRITÓRIO → INTELIGÊNCIA</div>
+      <div className="pv-coordinate">{t("TERRITÓRIO → INTELIGÊNCIA", "GEOSPATIAL DATA → INSIGHT")}</div>
     </div>
   );
 }
 
 function PlaySenacVisual() {
+  const { t } = useTranslation();
   return (
     <div className="pv-cover pv-cover--play" aria-hidden="true">
       <svg
@@ -327,16 +330,16 @@ function PlaySenacVisual() {
 
       <div className="pv-schedule">
         <div className="pv-schedule-top">
-          <span>ESPORTE NO CAMPUS</span>
+          <span>{t("ESPORTE NO CAMPUS", "SPORT ON CAMPUS")}</span>
           <span className="pv-schedule-mark">↗</span>
         </div>
         <h3>
-          Sua próxima
+          {t("Sua próxima", "Your next")}
           <br />
-          partida<span>.</span>
+          {t("partida", "game")}<span>.</span>
         </h3>
         <div className="pv-schedule-day">
-          <span>QUADRA POLIESPORTIVA</span>
+          <span>{t("QUADRA POLIESPORTIVA", "MULTISPORT COURT")}</span>
           <span>◷</span>
         </div>
         <div className="pv-time-row">
@@ -358,18 +361,19 @@ function PlaySenacVisual() {
           <span>19:00</span>
         </div>
         <div className="pv-schedule-note">
-          <span className="pv-status-dot" /> MAIS JOGO. MENOS ESPERA.
+          <span className="pv-status-dot" /> {t("MAIS JOGO. MENOS ESPERA.", "MORE PLAY. LESS WAITING.")}
         </div>
       </div>
       <div className="pv-caption pv-caption--play">
-        <span className="pv-caption-square" /> VISUAL CONCEITUAL
+        <span className="pv-caption-square" /> {t("VISUAL CONCEITUAL", "CONCEPT VISUAL")}
       </div>
-      <div className="pv-play-edition">ENCONTRE SEU JOGO.</div>
+      <div className="pv-play-edition">{t("ENCONTRE SEU JOGO.", "FIND YOUR GAME.")}</div>
     </div>
   );
 }
 
 function MesaVisual() {
+  const { t } = useTranslation();
   const id = useId().replace(/:/g, "");
 
   return (
@@ -496,38 +500,39 @@ function MesaVisual() {
         <span className="pv-mesa-brand-main">Mesa</span>
         <span className="pv-mesa-brand-sub">de Negócios<span>.</span></span>
       </div>
-      <div className="pv-mesa-topline">PERSPECTIVAS QUE SE ENCONTRAM</div>
+      <div className="pv-mesa-topline">{t("PERSPECTIVAS QUE SE ENCONTRAM", "WHERE PERSPECTIVES MEET")}</div>
 
       <div className="pv-mesa-paper">
         <div className="pv-mesa-paper-kicker">
-          <span className="pv-status-dot" /> CONVERSA ESTRATÉGICA
+          <span className="pv-status-dot" /> {t("CONVERSA ESTRATÉGICA", "STRATEGIC CONVERSATION")}
         </div>
         <h3>
-          Decisões<br />
-          começam<br />
-          à mesa<span>.</span>
+          {t("Decisões", "Decisions")}<br />
+          {t("começam", "start at")}<br />
+          {t("à mesa", "the table")}<span>.</span>
         </h3>
         <div className="pv-mesa-method">
-          <span>METODOLOGIA</span>
-          <p>Contexto. Direção. Ação.</p>
+          <span>{t("METODOLOGIA", "METHODOLOGY")}</span>
+          <p>{t("Contexto. Direção. Ação.", "Context. Direction. Action.")}</p>
         </div>
         <div className="pv-mesa-application">
           <svg viewBox="0 0 24 24" fill="none">
             <rect x="4" y="3" width="16" height="18" rx="1" stroke="currentColor" strokeWidth="1.2" />
             <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" strokeWidth="1.2" />
           </svg>
-          <span>Solicitação de vaga</span>
+          <span>{t("Solicitação de vaga", "Apply for a place")}</span>
         </div>
       </div>
 
       <div className="pv-caption pv-caption--mesa">
-        <span className="pv-caption-square" /> VISUAL CONCEITUAL
+        <span className="pv-caption-square" /> {t("VISUAL CONCEITUAL", "CONCEPT VISUAL")}
       </div>
     </div>
   );
 }
 
 export function ProjectVisual({ project }: ProjectVisualProps) {
+  const { t } = useTranslation();
   if (project.id === "seven-tools") return <SevenToolsVisual />;
   if (project.id === "mesa") return <MesaVisual />;
 
@@ -555,7 +560,7 @@ export function ProjectVisual({ project }: ProjectVisualProps) {
           />
         </div>
         <div className="pv-caption pv-caption--website">
-          <span className="pv-caption-square" /> INTERFACE PUBLICADA
+          <span className="pv-caption-square" /> {t("INTERFACE PUBLICADA", "PUBLISHED INTERFACE")}
         </div>
       </div>
     );

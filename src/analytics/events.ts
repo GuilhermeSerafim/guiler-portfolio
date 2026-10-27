@@ -1,5 +1,5 @@
-import { SITE_HOSTS, SITE_TITLES, type SiteId } from "./config";
-import { sanitizePageUrl, sanitizeReferrer } from "./urls";
+import { SITE_HOSTS, type SiteId } from "./config";
+import { getPageTitle, sanitizePageUrl, sanitizeReferrer } from "./urls";
 
 export type ProjectId = "georisk" | "seven-tools" | "playsenac" | "mesa";
 export type ProjectOpenLocation = "project_cover" | "project_title" | "project_details" | "hero_award";
@@ -45,7 +45,7 @@ export function serializeEvent(event: AnalyticsEvent, site: SiteId): Record<stri
     switch (event.name) {
       case "page_view":
         if (location !== "page" || typeof p.page_location !== "string" || typeof p.page_referrer !== "string") return null;
-        return { ...result, page_location: sanitizePageUrl(site, p.page_location), page_referrer: sanitizeReferrer(p.page_referrer), page_title: SITE_TITLES[site] };
+        return { ...result, page_location: sanitizePageUrl(site, p.page_location), page_referrer: sanitizeReferrer(p.page_referrer), page_title: getPageTitle(site, p.page_location) };
       case "project_open":
       case "project_visit":
         if (!projects.includes(p.project_id as string) || !(event.name === "project_open" ? ["project_cover", "project_title", "project_details", "hero_award"] : ["project_dialog"]).includes(location)) return null;

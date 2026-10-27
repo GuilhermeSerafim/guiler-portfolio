@@ -20,7 +20,7 @@ import {
   Trophy,
   X,
 } from "lucide-react";
-import { projects, experience, type Project } from "./data";
+import { getProjects, getExperience, type Project } from "./data";
 import { Magnetic, Reveal, TiltedPortrait } from "./components/Interactions";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { ProjectDialog } from "./components/ProjectDialog";
@@ -32,14 +32,15 @@ import { TechText } from "./components/TechText";
 import { TrajectoryMark } from "./components/TrajectoryMark";
 import { AnalyticsPreferences } from "./components/AnalyticsPreferences";
 import { ResumeDownloadLink } from "./components/ResumeDownloadLink";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { PhotoDepth } from "./components/photos/PhotoDepth";
 import { TrophyCelebrate } from "./components/TrophyCelebrate";
 import GlobeStory from "./components/globe-story/GlobeStory";
 import { track } from "./analytics/client";
 import type { ProjectOpenLocation } from "./analytics/events";
+import { useTranslation } from "./i18n";
 
 const email = "guilerstudies@gmail.com";
-const hackathonProject = projects.find(project => project.id === "georisk");
 const filters = [
   "Todos",
   "IA aplicada",
@@ -66,10 +67,14 @@ function Asterisk({ className = "" }: { className?: string }) {
 }
 
 function ExpertiseStrip() {
-  const specialties = ["Full Stack", "Arquitetura", "IA aplicada", "Produto"];
+  const { t } = useTranslation();
+  const specialties = t(
+    ["Full Stack", "Arquitetura", "IA aplicada", "Produto"],
+    ["Full Stack", "Architecture", "Applied AI", "Product"],
+  );
 
   return (
-    <section className="expertise-strip" aria-label="Especialidades">
+    <section className="expertise-strip" aria-label={t("Especialidades", "Specialties")}>
       <div className="expertise-window">
         <div className="expertise-track">
           {[0, 1].map((copy) => (
@@ -93,6 +98,16 @@ function ExpertiseStrip() {
 }
 
 function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
+  const { t, locale } = useTranslation();
+  const projects = getProjects(locale);
+  const experience = getExperience(locale);
+  const hackathonProject = projects.find(project => project.id === "georisk");
+  const filterLabels: Record<Filter, string> = {
+    "Todos": t("Todos", "All"),
+    "IA aplicada": t("IA aplicada", "Applied AI"),
+    "Produto web": t("Produto web", "Web product"),
+    "Landing page": "Landing page",
+  };
   const { heroRef, entry } = useHeroEntry();
   const [showMeteorField] = useState(
     () => new URLSearchParams(window.location.search).get("visual") !== "original",
@@ -192,7 +207,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
   return (
     <>
       <a href="#conteudo" className="skip-link">
-        Pular para o conteúdo
+        {t("Pular para o conteúdo", "Skip to content")}
       </a>
       {!reducedMotion && (
         <motion.div
@@ -202,22 +217,23 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
         />
       )}
       <header className="site-header container">
-        <a className="wordmark" href="#inicio" aria-label="Guiler, início">
+        <a className="wordmark" href="#inicio" aria-label={t("Guiler, início", "Guiler, home")}>
           guiler<span>.</span>
         </a>
-        <span className="header-note eyebrow">DESENVOLVEDOR FULL STACK</span>
-        <nav className="desktop-nav" aria-label="Navegação principal">
-          <a href="#projetos">Projetos</a>
-          <a href="#trajetoria">Trajetória</a>
-          <a href="#sobre">Sobre</a>
+        <span className="header-note eyebrow">{t("DESENVOLVEDOR FULL STACK", "FULL STACK DEVELOPER")}</span>
+        <nav className="desktop-nav" aria-label={t("Navegação principal", "Main navigation")}>
+          <a href="#projetos">{t("Projetos", "Projects")}</a>
+          <a href="#trajetoria">{t("Trajetória", "Experience")}</a>
+          <a href="#sobre">{t("Sobre", "About")}</a>
         </nav>
         <a className="header-contact" href="#contato">
-          Vamos conversar <ArrowUpRight size={17} />
+          {t("Vamos conversar", "Let's talk")} <ArrowUpRight size={17} />
         </a>
+        <LanguageSwitcher />
         <button
           ref={menuToggle}
           className="menu-toggle icon-button"
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-label={menuOpen ? t("Fechar menu", "Close menu") : t("Abrir menu", "Open menu")}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -228,13 +244,13 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
           <nav
             id="mobile-menu"
             className="mobile-nav"
-            aria-label="Navegação móvel"
+            aria-label={t("Navegação móvel", "Mobile navigation")}
           >
             {[
-              ["Projetos", "#projetos"],
-              ["Trajetória", "#trajetoria"],
-              ["Sobre", "#sobre"],
-              ["Contato", "#contato"],
+              [t("Projetos", "Projects"), "#projetos"],
+              [t("Trajetória", "Experience"), "#trajetoria"],
+              [t("Sobre", "About"), "#sobre"],
+              [t("Contato", "Contact"), "#contato"],
             ].map(([label, href]) => (
               <a key={href} href={href} onClick={() => setMenuOpen(false)}>
                 {label}
@@ -262,12 +278,12 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
             </div>
             <div>
               <h1 id="hero-title">
-                <span className="entry-title-line">Código que</span>
+                <span className="entry-title-line">{t("Código que", "Code that")}</span>
                 <br />
                 <span className="entry-title-line">
-                  vira{" "}
+                  {t("vira", "drives")}{" "}
                   <span className="impact-word">
-                    impacto
+                    {t("impacto", "impact")}
                     <svg
                       viewBox="0 0 440 24"
                       preserveAspectRatio="none"
@@ -301,9 +317,14 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                   ↳
                 </span>
                 <p>
-                  Sou Guiler, desenvolvedor <strong>Full Stack</strong>.<br />
-                  Construo interfaces, APIs e produtos com IA, com experiência
-                  em seguros, serviços públicos e ferramentas comerciais.
+                  {t(
+                    <>Sou Guiler, desenvolvedor <strong>Full Stack</strong>.</>,
+                    <>I'm Guiler, a <strong>Full Stack</strong> developer.</>,
+                  )}<br />
+                  {t(
+                    "Construo interfaces, APIs e produtos com IA, com experiência em seguros, serviços públicos e ferramentas comerciais.",
+                    "I build interfaces, APIs and AI-powered products, with experience in insurance, public services and business tools.",
+                  )}
                 </p>
               </div>
             </div>
@@ -311,7 +332,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
               <div className="hero-actions">
                 <Magnetic>
                   <a className="button button-blue button-trajectory" href="#projetos">
-                    Explorar projetos <TrajectoryMark />
+                    {t("Explorar projetos", "Explore projects")} <TrajectoryMark />
                   </a>
                 </Magnetic>
                 <ResumeDownloadLink location="hero" />
@@ -327,18 +348,18 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                     <button
                       type="button"
                       className="hero-award-link"
-                      aria-label="Conhecer o GeoRisk, vencedor do Hackathon OpenAI"
+                      aria-label={t("Conhecer o GeoRisk, vencedor do Hackathon OpenAI", "Explore GeoRisk, winner of the OpenAI Hackathon")}
                       onClick={() => openProject(hackathonProject, "hero_award")}
                     >
-                      <span>Ideias testadas. Trabalho reconhecido.</span>
+                      <span>{t("Ideias testadas. Trabalho reconhecido.", "Ideas tested. Work recognized.")}</span>
                       <strong>
-                        Vencedor do Hackathon OpenAI <ArrowUpRight size={13} aria-hidden="true" />
+                        {t("Vencedor do Hackathon OpenAI", "OpenAI Hackathon winner")} <ArrowUpRight size={13} aria-hidden="true" />
                       </strong>
                     </button>
                   ) : (
                     <>
-                      <span>Ideias testadas. Trabalho reconhecido.</span>
-                      <strong>Vencedor do Hackathon OpenAI</strong>
+                      <span>{t("Ideias testadas. Trabalho reconhecido.", "Ideas tested. Work recognized.")}</span>
+                      <strong>{t("Vencedor do Hackathon OpenAI", "OpenAI Hackathon winner")}</strong>
                     </>
                   )}
                 </div>
@@ -348,12 +369,12 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
           <div className="hero-visual">
             <EntryStroke />
             <div className="portrait-topline eyebrow">
-              <span>UM BUILDER, DE PONTA A PONTA.</span>
+              <span>{t("UM BUILDER, DE PONTA A PONTA.", "A BUILDER, FROM START TO FINISH.")}</span>
               <Plus size={14} />
             </div>
             <TiltedPortrait
               src="/images/portrait.webp"
-              alt="Guilherme Serafim, desenvolvedor Full Stack, de camiseta preta e braços cruzados"
+              alt={t("Guilherme Serafim, desenvolvedor Full Stack, de camiseta preta e braços cruzados", "Guilherme Serafim, Full Stack developer, wearing a black T-shirt with his arms crossed")}
             >
               <div className="portrait-caption">
                 <span>
@@ -364,12 +385,12 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                 <ArrowUpRight size={32} strokeWidth={1.3} />
               </div>
             </TiltedPortrait>
-            <div className="builder-seal" aria-label="Da ideia ao deploy">
+            <div className="builder-seal" aria-label={t("Da ideia ao deploy", "From idea to deployment")}>
               <Code2 size={32} strokeWidth={1.5} />
               <span>
-                DA IDEIA
+                {t("DA IDEIA", "FROM IDEA")}
                 <br />
-                AO DEPLOY
+                {t("AO DEPLOY", "TO DEPLOY")}
               </span>
             </div>
             <div className="portrait-bottomline eyebrow">
@@ -378,9 +399,9 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
             </div>
           </div>
           <div className="hero-bottom eyebrow">
-            <span>BOAS IDEIAS MERECEM SAIR DO PAPEL.</span>
+            <span>{t("BOAS IDEIAS MERECEM SAIR DO PAPEL.", "GOOD IDEAS DESERVE TO COME TO LIFE.")}</span>
             <a href="#projetos">
-              ROLE PARA EXPLORAR <ArrowDown size={14} />
+              {t("ROLE PARA EXPLORAR", "SCROLL TO EXPLORE")} <ArrowDown size={14} />
             </a>
           </div>
         </section>
@@ -394,23 +415,23 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
         >
           <CuriositySketch subject="cosmos" />
           <div className="section-top">
-            <span className="eyebrow">01 / TRABALHOS SELECIONADOS</span>
-            <span className="eyebrow muted">IDEIA → CÓDIGO → PRODUTO</span>
+            <span className="eyebrow">{t("01 / TRABALHOS SELECIONADOS", "01 / SELECTED WORK")}</span>
+            <span className="eyebrow muted">{t("IDEIA → CÓDIGO → PRODUTO", "IDEA → CODE → PRODUCT")}</span>
           </div>
           <div className="section-heading">
             <h2 id="work-title">
-              <TechText>Construir.</TechText>
+              <TechText>{t("Construir.", "Build.")}</TechText>
               <br />
-              <span className="muted">Fazer acontecer.</span>
+              <span className="muted">{t("Fazer acontecer.", "Make it happen.")}</span>
             </h2>
             <div className="work-heading-side">
               <p>
-                Problemas diferentes. <br />O mesmo cuidado em cada entrega.
+                {t("Problemas diferentes.", "Different challenges.")} <br />{t("O mesmo cuidado em cada entrega.", "The same care in every delivery.")}
               </p>
               <div
                 className="project-filters"
                 role="group"
-                aria-label="Filtrar projetos"
+                aria-label={t("Filtrar projetos", "Filter projects")}
               >
                 {filters.map((item) => (
                   <button
@@ -419,7 +440,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                     aria-pressed={filter === item}
                     onClick={() => setFilter(item)}
                   >
-                    {item}
+                    {filterLabels[item]}
                     {item === "Todos" && (
                       <span>{String(projects.length).padStart(2, "0")}</span>
                     )}
@@ -451,7 +472,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                   <button
                     className="project-cover"
                     onClick={() => openProject(project, "project_cover")}
-                    aria-label={`Conhecer o projeto ${project.name}`}
+                    aria-label={t(`Conhecer o projeto ${project.name}`, `Explore the ${project.name} project`)}
                     onPointerEnter={(event) => {
                       if (reducedMotion || event.pointerType !== "mouse")
                         return;
@@ -483,7 +504,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                       <span className="eyebrow">{project.eyebrow}</span>
                       {project.id === "georisk" ? (
                         <span className="project-recognition">
-                          <Trophy size={11} /> HACKATHON OPENAI
+                          <Trophy size={11} /> {t("HACKATHON OPENAI", "OPENAI HACKATHON")}
                         </span>
                       ) : (
                         <span className="eyebrow muted">
@@ -504,7 +525,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                       <button
                         className="project-details"
                         onClick={() => openProject(project, "project_details")}
-                        aria-label={`Ver detalhes de ${project.name}`}
+                        aria-label={t(`Ver detalhes de ${project.name}`, `View details of ${project.name}`)}
                       >
                         <ArrowUpRight size={25} strokeWidth={1.5} />
                       </button>
@@ -523,7 +544,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
             </AnimatePresence>
           </div>
           <div className="work-footer work-footer--with-newton">
-            <p>Outras ideias, experimentos e código aberto.</p>
+            <p>{t("Outras ideias, experimentos e código aberto.", "More ideas, experiments and open-source code.")}</p>
             <CuriositySketch subject="newton" />
             <a
               className="text-link"
@@ -532,7 +553,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
               target="_blank"
               rel="noreferrer"
             >
-              Explore meu GitHub <ArrowUpRight size={18} />
+              {t("Explore meu GitHub", "Explore my GitHub")} <ArrowUpRight size={18} />
             </a>
           </div>
         </section>
@@ -544,24 +565,25 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
         >
           <div className="container section-space">
             <div className="section-top">
-              <span className="eyebrow">02 / EXPERIÊNCIA EM PRODUÇÃO</span>
+              <span className="eyebrow">{t("02 / EXPERIÊNCIA EM PRODUÇÃO", "02 / PRODUCTION EXPERIENCE")}</span>
               <span className="experience-status eyebrow">
-                <span className="status-dot" /> SISTEMAS REAIS. RESPONSABILIDADE
-                REAL.
+                <span className="status-dot" /> {t("SISTEMAS REAIS. RESPONSABILIDADE REAL.", "REAL SYSTEMS. REAL RESPONSIBILITY.")}
               </span>
             </div>
             <div className="experience-layout">
               <div className="experience-intro">
                 <Reveal>
                   <h2 id="experience-title">
-                    Onde o código
+                    {t("Onde o código", "Where code")}
                     <br />
-                    encontra o <br />
-                    <span>mundo real.</span>
+                    {t("encontra o", "meets the")} <br />
+                    <span>{t("mundo real.", "real world.")}</span>
                   </h2>
                   <p>
-                    Da cobrança de seguros ao atendimento público. Engenharia
-                    para operações que precisam funcionar.
+                    {t(
+                      "Da cobrança de seguros ao atendimento público. Engenharia para operações que precisam funcionar.",
+                      "From insurance billing to public services. Engineering for operations that need to work.",
+                    )}
                   </p>
                   <CuriositySketch subject="tesla" />
                 </Reveal>
@@ -604,8 +626,8 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
           aria-labelledby="about-title"
         >
           <div className="section-top">
-            <span className="eyebrow">03 / ALÉM DO EDITOR</span>
-            <span className="eyebrow muted">PESSOAS ANTES DE PIXELS.</span>
+            <span className="eyebrow">{t("03 / ALÉM DO EDITOR", "03 / BEYOND THE EDITOR")}</span>
+            <span className="eyebrow muted">{t("PESSOAS ANTES DE PIXELS.", "PEOPLE BEFORE PIXELS.")}</span>
           </div>
           <div className="about-layout">
             <Reveal className="about-photos">
@@ -614,23 +636,25 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
             </Reveal>
             <Reveal className="about-copy">
               <h2 id="about-title">
-                Curioso por natureza.
+                {t("Curioso por natureza.", "Curious by nature.")}
                 <br />
-                <span className="muted"><TechText>Builder</TechText> por escolha.</span>
+                <span className="muted"><TechText>Builder</TechText> {t("por escolha.", "by choice.")}</span>
               </h2>
               <p>
-                Sou Guilherme Serafim. Pode me chamar de <strong>Guiler</strong>
+                {t("Sou Guilherme Serafim. Pode me chamar de", "I'm Guilherme Serafim. You can call me")} <strong>Guiler</strong>
                 .
               </p>
               <p>
-                Gosto de entender o problema antes de abrir o editor. De
-                questionar a arquitetura, encontrar o gargalo e cuidar da
-                experiência de quem está do outro lado da tela.
+                {t(
+                  "Gosto de entender o problema antes de abrir o editor. De questionar a arquitetura, encontrar o gargalo e cuidar da experiência de quem está do outro lado da tela.",
+                  "I like to understand the problem before opening the editor. I question the architecture, find bottlenecks and focus on the experience of the person on the other side of the screen.",
+                )}
               </p>
               <p>
-                Hoje, meu foco está em conectar engenharia de software e IA
-                aplicada. Construo, experimento e compartilho o que aprendo pelo
-                caminho.
+                {t(
+                  "Hoje, meu foco está em conectar engenharia de software e IA aplicada. Construo, experimento e compartilho o que aprendo pelo caminho.",
+                  "Today, I focus on connecting software engineering with applied AI. I build, experiment and share what I learn along the way.",
+                )}
               </p>
               <a
                 href="https://www.linkedin.com/in/guiserafim/"
@@ -639,7 +663,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                Me acompanhe no LinkedIn <ArrowUpRight size={18} />
+                {t("Me acompanhe no LinkedIn", "Follow me on LinkedIn")} <ArrowUpRight size={18} />
               </a>
             </Reveal>
           </div>
@@ -653,22 +677,22 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
         >
           <div className="container">
             <div className="section-top">
-              <span className="eyebrow">04 / A PRÓXIMA CONVERSA</span>
-              <span className="eyebrow">SÃO PAULO, BRASIL ↗ MUNDO</span>
+              <span className="eyebrow">{t("04 / A PRÓXIMA CONVERSA", "04 / THE NEXT CONVERSATION")}</span>
+              <span className="eyebrow">{t("SÃO PAULO, BRASIL ↗ MUNDO", "SÃO PAULO, BRAZIL ↗ WORLD")}</span>
             </div>
             <Reveal>
               <div className="contact-heading">
                 <h2 id="contact-title">
-                  Tem um desafio?
+                  {t("Tem um desafio?", "Have a challenge?")}
                   <br />
-                  <span>Vamos <TechText>construir.</TechText></span>
+                  <span>{t("Vamos", "Let's")} <TechText>{t("construir.", "build.")}</TechText></span>
                 </h2>
                 <Magnetic className="contact-arrow-wrap">
                   <a
                     className="contact-arrow"
                     href={`mailto:${email}`}
                     onClick={() => track({ name: "contact_intent", params: { contact_method: "email_open", ui_location: "contact_arrow" } })}
-                    aria-label="Enviar um e-mail para Guilherme"
+                    aria-label={t("Enviar um e-mail para Guilherme", "Send Guilherme an email")}
                   >
                     <ArrowUpRight strokeWidth={1} />
                   </a>
@@ -678,9 +702,9 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
             <div className="contact-bottom">
               <div>
                 <p>
-                  Um produto, um sistema complexo ou uma boa ideia.
+                  {t("Um produto, um sistema complexo ou uma boa ideia.", "A product, a complex system or a good idea.")}
                   <br />
-                  Quero ouvir o que você está construindo.
+                  {t("Quero ouvir o que você está construindo.", "I'd love to hear what you're building.")}
                 </p>
                 <div className="email-row">
                   <a href={`mailto:${email}`} onClick={() => track({ name: "contact_intent", params: { contact_method: "email_open", ui_location: "contact_email" } })}>{email}</a>
@@ -689,8 +713,8 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                     onClick={copyEmail}
                     aria-label={
                       copyStatus === "copied"
-                        ? "E-mail copiado"
-                        : "Copiar e-mail"
+                        ? t("E-mail copiado", "Email copied")
+                        : t("Copiar e-mail", "Copy email")
                     }
                   >
                     {copyStatus === "copied" ? (
@@ -702,9 +726,9 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                 </div>
                 <p className="copy-status" role="status">
                   {copyStatus === "copied"
-                    ? "E-mail copiado!"
+                    ? t("E-mail copiado!", "Email copied!")
                     : copyStatus === "error"
-                      ? "Selecione o endereço para copiar ou clique para enviar um e-mail."
+                      ? t("Selecione o endereço para copiar ou clique para enviar um e-mail.", "Select the address to copy it, or click to send an email.")
                       : "\u00a0"}
                 </p>
               </div>
@@ -737,7 +761,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                 © {new Date().getFullYear()} GUILHERME SERAFIM
               </span>
               <a className="eyebrow" href="#inicio">
-                DE VOLTA AO TOPO <ArrowRight size={15} className="up-arrow" />
+                {t("DE VOLTA AO TOPO", "BACK TO TOP")} <ArrowRight size={15} className="up-arrow" />
               </a>
             </footer>
             <AnalyticsPreferences />
@@ -745,7 +769,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
         </section>
       </main>
       <ProjectDialog
-        project={selectedProject}
+        project={selectedProject ? projects.find(project => project.id === selectedProject.id) ?? selectedProject : null}
         onClose={() => setSelectedProject(null)}
       />
     </>

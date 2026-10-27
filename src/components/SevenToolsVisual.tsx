@@ -1,13 +1,15 @@
+import { useTranslation } from "../i18n";
 import "./SevenToolsVisual.css";
 
 export function SevenToolsVisual() {
+  const { t } = useTranslation();
   return (
     <div className="pv-cover pv-cover--seven" aria-hidden="true">
       <div className="pv-seven-brand">
         <span>SEVEN</span>
         <span className="pv-seven-brand-tools">Tools<span>.</span></span>
       </div>
-      <div className="pv-seven-edition">HUB DE<br />NEGÓCIOS</div>
+      <div className="pv-seven-edition">{t("HUB DE", "BUSINESS")}<br />{t("NEGÓCIOS", "HUB")}</div>
 
       <div className="pv-seven-system">
         <svg
@@ -32,7 +34,7 @@ export function SevenToolsVisual() {
             </svg>
             <span>01</span>
           </div>
-          <span className="pv-seven-tool-label">Propostas</span>
+          <span className="pv-seven-tool-label">{t("Propostas", "Proposals")}</span>
         </div>
 
         <div className="pv-seven-tool pv-seven-tool--diagnosis">
@@ -44,7 +46,7 @@ export function SevenToolsVisual() {
             </svg>
             <span>02</span>
           </div>
-          <span className="pv-seven-tool-label">Diagnóstico</span>
+          <span className="pv-seven-tool-label">{t("Diagnóstico", "Diagnostics")}</span>
         </div>
 
         <div className="pv-seven-hub">
@@ -54,7 +56,7 @@ export function SevenToolsVisual() {
               <path d="M9 8h39v8L28 48H15l20-29H9V8Z" fill="currentColor" />
               <path d="M9 27h14" stroke="#ff8800" strokeWidth="4" />
             </svg>
-            <span className="pv-seven-hub-foot">INTELIGÊNCIA APLICADA</span>
+            <span className="pv-seven-hub-foot">{t("INTELIGÊNCIA APLICADA", "APPLIED INTELLIGENCE")}</span>
           </div>
         </div>
 
@@ -71,7 +73,7 @@ export function SevenToolsVisual() {
       </div>
 
       <div className="pv-caption pv-caption--seven">
-        <span className="pv-caption-square" /> VISUAL CONCEITUAL
+        <span className="pv-caption-square" /> {t("VISUAL CONCEITUAL", "CONCEPT VISUAL")}
       </div>
     </div>
   );

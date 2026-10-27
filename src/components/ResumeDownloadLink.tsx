@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { track } from "../analytics/client";
+import { useTranslation } from "../i18n";
 import "./ResumeDownloadLink.css";
 
 export function ResumeDownloadLink({ location }: { location: "hero" | "contact" }) {
+  const { t, isEnglish } = useTranslation();
   const [requested, setRequested] = useState(false);
   const [pulse, setPulse] = useState(0);
   const resetTimer = useRef<ReturnType<typeof setTimeout>>();
-  const label = location === "hero" ? "Baixar currículo" : "Currículo";
+  const label = location === "hero" ? t("Baixar currículo", "Résumé (PT)") : t("Currículo", "Résumé (PT)");
 
   useEffect(() => () => clearTimeout(resetTimer.current), []);
 
@@ -32,7 +34,9 @@ export function ResumeDownloadLink({ location }: { location: "hero" | "contact" 
       className={`resume-download${location === "hero" ? " resume-link" : ""}`}
       href="/GuilhermeSerafim_Fullstack.pdf"
       download="Guilherme_Serafim_Fullstack.pdf"
-      aria-label={requested ? "Download solicitado. Baixar currículo novamente" : "Baixar currículo"}
+      aria-label={requested ? t("Download solicitado. Baixar currículo novamente", "Download requested. Download Portuguese résumé again") : t("Baixar currículo", "Download résumé in Portuguese (PDF)")}
+      title={isEnglish ? "PDF in Portuguese" : undefined}
+      hrefLang="pt-BR"
       data-feedback-state={requested ? "requested" : "idle"}
       data-resume-location={location}
       onClick={handleClick}
@@ -40,10 +44,10 @@ export function ResumeDownloadLink({ location }: { location: "hero" | "contact" 
       {location === "contact" && icon}
       <span className="resume-download-label" aria-hidden="true">
         <span className="resume-download-label-default">{label}</span>
-        <span className="resume-download-label-requested">Download solicitado</span>
+        <span className="resume-download-label-requested">{t("Download solicitado", "Download requested")}</span>
       </span>
       {location === "hero" ? icon : <ArrowDown size={16} aria-hidden="true" />}
     </a>
-    <span className="resume-feedback-sr" role="status" aria-atomic="true">{requested ? "Download do currículo solicitado." : ""}</span>
+    <span className="resume-feedback-sr" role="status" aria-atomic="true">{requested ? t("Download do currículo solicitado.", "Résumé download requested. The PDF is in Portuguese.") : ""}</span>
   </>;
 }

@@ -8,6 +8,14 @@ Copie `.env.example` para uma configuração local se necessário. `VITE_ANALYTI
 
 A inicialização ocorre uma vez em `main.tsx`, fora dos efeitos React. A página e os links funcionam sem configuração, sem consentimento, com storage negado ou bloqueador. Ações antes do aceite e durante o carregamento são descartadas. A Google tag só é inserida depois do aceite; nenhum ping de modo avançado é usado.
 
+### Versão em inglês
+
+O portfólio também permite coleta em `/en` e `/en/`. Ambos usam a URL canônica sanitizada `/en/` e o título fixo `Guiler | Portfolio`; a raiz mantém `Guiler | Portfólio`. Não há nova dimensão nem ampliação dos catálogos de campanhas, hashes ou eventos. `site_id=portfolio`, os IDs dos projetos e dos controles permanecem iguais nos dois idiomas.
+
+A troca PT/EN navega para outro documento no mesmo domínio, preservando seção e campanha; portanto há uma `page_view` por documento após autorização e a escolha de privacidade é compartilhada. Os eventos podem ser separados pelo caminho da página no Analytics. O hub continua com consentimento independente. `/en/index.html` renderiza inglês, mas não ativa coleta: somente as URLs canônicas revisadas entram na política.
+
+A validação local de 27/10/2026 carregou o SDK real do Google e interceptou todas as requisições de coleta, sem enviá-las à propriedade. Confirmou recusa sem Google, limpeza de ruído social antes da tag, uma visualização EN e uma PT, campanha `instagram/social/bio`, títulos e `site_id` corretos, sem restaurar parâmetros descartados ao trocar o idioma. Isso valida o cliente local; não é uma nova confirmação de recebimento em produção. Veja [a revisão bilíngue](validation-english-2026-10-27.md).
+
 ## Contrato v1
 
 Todo evento usa `site_id=portfolio`, `schema_version=1` e `ui_location` de enumeração fixa. O serializador rejeita valores inesperados e descarta propriedades extras, inclusive PII. Não derivar IDs de títulos, índices ou hrefs. Uma ativação gera somente seu evento semântico.

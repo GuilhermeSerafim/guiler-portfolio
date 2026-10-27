@@ -3,7 +3,7 @@ import { isValidElement, type ReactElement } from "react";
 
 const { recorded, writeText } = vi.hoisted(() => ({ recorded: vi.fn(), writeText: vi.fn() }));
 vi.mock("../../src/analytics/client", () => ({track:recorded, getConsent:()=>"unknown", subscribeConsent:()=>()=>{}, isAnalyticsConfigured:()=>false}));
-vi.mock("react", async original => ({...await original<typeof import("react")>(), useState:(value:unknown)=>[typeof value==="function"?value():value,vi.fn()], useRef:()=>({current:null}), useEffect:()=>{}}));
+vi.mock("react", async original => ({...await original<typeof import("react")>(),useContext:()=>"pt-BR", useState:(value:unknown)=>[typeof value==="function"?value():value,vi.fn()], useRef:()=>({current:null}), useEffect:()=>{}}));
 vi.mock("motion/react", () => ({motion:new Proxy({}, {get:(_target,key)=>String(key)}), AnimatePresence:"div", useReducedMotion:()=>true, useScroll:()=>({scrollYProgress:0}),useSpring:()=>0}));
 import App from "../../src/App";
 import { ProjectDialog } from "../../src/components/ProjectDialog";
