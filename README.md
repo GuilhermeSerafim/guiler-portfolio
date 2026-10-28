@@ -1,27 +1,60 @@
-# Guiler — portfólio Full Stack
+# guiler-portfolio
 
-Portfólio de Guilherme Serafim em React, TypeScript e Vite, com projetos de IA aplicada, arquitetura de software e desenvolvimento Full Stack.
+Meu portfólio de engenharia de software, com cases que explicam problemas, contribuição pessoal, decisões e limites. Além da apresentação em português e inglês, o projeto implementa leitura de um feed de saúde das demos e analytics condicionado a consentimento.
 
-**Site:** https://guiler.vercel.app/
+## Demonstração e imagens
 
-**Código:** https://github.com/GuilhermeSerafim/guiler-portfolio
+[Abrir o portfólio](https://guiler.vercel.app) · [Hub pessoal](https://iamguiler.vercel.app). Os cases distinguem aplicações originais e demonstrações sintéticas.
 
-## Executar
+## Minha contribuição e autoria
 
-Requer Node.js 22 e npm.
+Desenvolvo a apresentação e a implementação deste portfólio. Em cada case, separo minha contribuição do trabalho realizado em equipe. Os cases comerciais não implicam abertura de seus códigos-fonte.
 
-```sh
-git clone https://github.com/GuilhermeSerafim/guiler-portfolio.git
-cd guiler-portfolio
+## Arquitetura e implementação
+
+O conteúdo dos cases fica separado da interface em `src/data.ts`. O monitor de saúde aplica limite de payload, timeout, cancelamento e validação; observações expiradas produzem estado desconhecido. O analytics depende de habilitação, domínio esperado, identificador válido e consentimento.
+
+Veja o [monitor](src/project-health/monitor.ts) e seus [testes](tests/project-health/monitor.test.ts).
+
+## Instalação e configuração
+
+Requer Node.js 22 e npm. Consulte `.env.example` para a configuração local e mantenha `VITE_ANALYTICS_ENABLED=false` durante a avaliação. O contrato e a configuração de analytics estão em [docs/analytics.md](docs/analytics.md).
+
+Os blocos abaixo partem da raiz do repositório. Use as versões e variáveis indicadas; não coloque credenciais no código ou no README.
+
+```text
 npm ci
 npm run dev
 ```
 
-`npm run build` verifica TypeScript e gera o site estático em `dist/`. `npm run preview` serve esse build localmente.
+Para conferir a versão de produção, em outro terminal na raiz:
 
-O hero usa uma malha magnética de pontos que reage ao cursor e fica estática em dispositivos de toque ou com movimento reduzido. O parâmetro `?visual=original` permite comparar o layout sem o efeito. Detalhes em [docs/magnetic-field.md](docs/magnetic-field.md).
+```text
+npm run build
+npm run preview
+```
 
-## Editar
+## Testes e verificações
+
+Os comandos abaixo documentam a suíte existente; não representam uma execução nova nem um resultado de aprovação.
+
+```text
+npm run test:analytics
+npx vitest run tests/project-health tests/i18n --maxWorkers=1
+```
+
+O comando Vitest é derivado da configuração/dependência existente; não é um script agregado do package.json.
+
+## Limites atuais
+
+- O script test:analytics não agrega os testes de health e i18n; execute-os separadamente.
+- Uma demo sintética permite explorar interfaces e decisões, mas não comprova operação do produto original.
+- Resultados quantitativos de cases precisam conservar data, contexto e evidências; não são resultados garantidos.
+
+<details>
+<summary>Referência de uso e documentação complementar</summary>
+
+## Mapa de edição e referências
 
 - `src/data.ts`: projetos, tecnologias, links e experiências. `tags` destaca tecnologias principais no cartão; `technologies` permite exibir a lista completa no modal.
 - `src/App.tsx`: seções, navegação, filtros e contato.
@@ -35,26 +68,16 @@ O hero usa uma malha magnética de pontos que reage ao cursor e fica estática e
 
 `library-research.txt` documenta a pesquisa das cinco bibliotecas, componentes escolhidos, adaptações, inspirações e dependências. `THIRD-PARTY-NOTICES.txt` preserva a licença do React Bits. R3F foi pesquisado e não integra o runtime desta versão.
 
-`content-review.txt` contém feedback do currículo e versões sugeridas para a headline e o Sobre do LinkedIn. O conteúdo do site não apresenta percentuais sem contexto nem cargo de designer.
+O hero usa uma malha magnética de pontos que reage ao cursor e fica estática em dispositivos de toque ou com movimento reduzido. O parâmetro `?visual=original` permite comparar o layout sem o efeito. Detalhes em [docs/magnetic-field.md](docs/magnetic-field.md).
 
-## Hospedagem
+## Build e configuração versionada
 
-Produção: https://guiler.vercel.app/. Projeto `guiler`, na conta `guilhermeserafims-projects`.
+`npm run build` verifica TypeScript e gera o site estático em `dist/`. `npm run preview` serve esse build localmente.
 
-O projeto está configurado para Vercel em `vercel.json`: framework Vite, build `npm run build` e saída `dist/`. A raiz deste repositório é a Root Directory do projeto.
+A configuração versionada em `vercel.json` declara framework Vite, build `npm run build` e saída `dist/`. Consulte também `.vercelignore` antes de preparar uma publicação.
 
-Depois de autenticar a conta e vincular esta pasta ao projeto correto, `npx vercel --prod --scope guilhermeserafims-projects` publica em produção. `.vercel/` e `.env*` ficam fora do Git e do upload; `.vercelignore` também exclui configurações do Sites e documentos de revisão. Canonical e Open Graph em `index.html` usam o domínio de produção.
+</details>
 
-A configuração anterior do Sites permanece em `.openai/hosting.json`, com audiência inicial privada.
+## Avisos de terceiros
 
-## Verificação
-
-Build TypeScript + Vite e navegação real com Playwright. Foram verificados filtros, detalhes dos projetos, fechamento por Escape, restauração de foco, navegação móvel, cópia do e-mail, download do PDF, carregamento das fotos, movimento reduzido e ausência de overflow horizontal em 320, 390, 768, 1024 e 1440 px. O case Mesa de Negócios também teve sua capa conceitual, link público e navegação por teclado conferidos. Capturas em `../output/playwright/`.
-
-A revisão mobile com a skill UI/UX Pro Max prioriza texto principal de 16px, alvos de toque de pelo menos 44px, filtros em duas colunas e legendas das capas visíveis. O modal reinicia a rolagem a cada abertura e mantém o fechamento acessível. A validação usa emulação de toque no Chromium, incluindo orientação horizontal, movimento reduzido e ampliação do texto; não substitui testes em aparelhos físicos.
-
-## Analytics opcional
-
-A preparação local de analytics mantém a coleta desativada: `.env.example` tem ID vazio e `VITE_ANALYTICS_ENABLED=false`. Sem ID válido, habilitação explícita, hostname de produção e aceite, nenhuma Google tag é carregada. Preferências de privacidade estão sempre disponíveis no rodapé.
-
-O [contrato e runbook de analytics](docs/analytics.md) documenta eventos, sanitização, expiração/retirada, testes e ativação futura. `npm run test:analytics` executa os testes com transporte fake. Eles não comprovam coleta real, continuidade entre domínios ou relatórios GA; essas verificações exigem o ID do usuário e publicação autorizada. Vitest 4.1.11 é usado somente em desenvolvimento, mantendo React/Vite existentes.
+Consulte [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt) para os avisos de componentes de terceiros.
