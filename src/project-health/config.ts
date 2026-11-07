@@ -1,12 +1,12 @@
 import { projects } from "../data";
 import type { HealthTargets } from "./contract";
 
-// Only destinations confirmed by the demo release owner are monitored.
+// Match health evidence only to the official destinations shown in the portfolio.
 // The feed never supplies navigation URLs.
 export const healthTargets: HealthTargets = {
-  georisk: { url: projects.find(project => project.id === "georisk")!.demo, role: "demo", coverage: "http-content" },
-  "seven-tools": { url: projects.find(project => project.id === "seven-tools")!.demo, role: "demo", coverage: "http-content" },
-  playsenac: { url: projects.find(project => project.id === "playsenac")!.demo, role: "demo", coverage: "http-content" },
+  georisk: { url: projects.find(project => project.id === "georisk")!.demo, role: "original", coverage: "http-content" },
+  "seven-tools": { url: projects.find(project => project.id === "seven-tools")!.demo, role: "original", coverage: "http-content" },
+  playsenac: { url: projects.find(project => project.id === "playsenac")!.demo, role: "original", coverage: "http-content" },
   mesa: { url: projects.find(project => project.id === "mesa")!.demo, role: "original", coverage: "http-content" },
 };
 

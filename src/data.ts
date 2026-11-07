@@ -46,7 +46,7 @@ export const projects: Project[] = [
     problem:
       "Analisar risco de alagamento exige reunir informações de fontes diferentes e tornar o raciocínio compreensível para quem precisa decidir.",
     approach:
-      "Desenvolvi o fluxo que parte de uma área no mapa, reúne dados do território, calcula os componentes do risco e apresenta a classificação com uma explicação. Next.js conecta a interface à API FastAPI e ao PostGIS. OrbTalus é a demonstração pública desse fluxo.",
+      "Desenvolvi o fluxo que parte de uma área no mapa, reúne dados do território, calcula os componentes do risco e apresenta a classificação com uma explicação. Next.js conecta a interface à API FastAPI e ao PostGIS.",
     decisions: [
       "Calcular um índice heurístico: regras em Python combinam topografia, frequência histórica de água e permeabilidade com pesos fixos.",
       "Separar o cálculo de risco da explicação: LangChain e OpenAI apresentam o contexto dos resultados calculados.",
@@ -54,9 +54,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Estruturei a análise em três componentes rastreáveis — topografia, frequência histórica de água e permeabilidade —, combinando consultas espaciais, regras em Python e explicações com LangChain/OpenAI. Projeto vencedor do Hackathon OpenAI. As classificações não substituem uma avaliação técnica do território.",
-    demo: "https://orbtalus-demo.guiler.chatgpt.site/",
-    demoNotice:
-      "OrbTalus é uma demonstração interativa com dados sintéticos e processamento local. Ela apresenta o fluxo da solução; não executa a análise geoespacial e a IA do produto original.",
+    demo: "https://geo-risk-front.vercel.app/vc",
   },
   {
     id: "seven-tools",
@@ -96,9 +94,7 @@ export const projects: Project[] = [
       label: "chamadas de sessão",
       context: "Usuário e empresa no início da sessão autenticada.",
     },
-    demo: "https://seven-tools-demo.guiler.chatgpt.site/",
-    demoNotice:
-      "Esta demonstração usa cenários e dados de exemplo, separados das contas e dos dados do produto original.",
+    demo: "https://seven-tools.vercel.app/",
   },
   {
     id: "playsenac",
@@ -121,9 +117,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Integrei as operações de gestão de reservas ao frontend Angular, conectando a API a formulários validados e à atualização reativa das listas. O sistema da equipe reúne reservas, administração de quadras e bloqueios de horários.",
-    demo: "https://play-senac-demo.guiler.chatgpt.site/",
-    demoNotice:
-      "Demonstração com quadras e reservas sintéticas para explorar as regras de agendamento. As operações são locais e não criam reservas reais.",
+    demo: "https://play-senac.vercel.app/home",
     github: "https://github.com/GuilhermeSerafim/play-senac-api",
     frontendGithub: "https://github.com/GuilhermeSerafim/play-senac",
   },

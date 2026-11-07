@@ -25,7 +25,7 @@ export const englishProjectContent: Record<Project["id"], ProjectContent> = {
     problem:
       "Analyzing flood risk requires bringing together information from different sources and making the reasoning clear to the people making decisions.",
     approach:
-      "I developed the workflow that starts with an area on a map, gathers geospatial data, calculates the risk components, and presents a classification with an explanation. Next.js connects the interface to the FastAPI API and PostGIS. OrbTalus is the public demonstration of this workflow.",
+      "I developed the workflow that starts with an area on a map, gathers geospatial data, calculates the risk components, and presents a classification with an explanation. Next.js connects the interface to the FastAPI API and PostGIS.",
     decisions: [
       "Calculate a heuristic index: Python rules combine topography, historical water frequency, and permeability using fixed weights.",
       "Separate risk calculation from explanation: LangChain and OpenAI provide context for the calculated results.",
@@ -33,8 +33,6 @@ export const englishProjectContent: Record<Project["id"], ProjectContent> = {
     ],
     outcome:
       "I structured the analysis around three traceable components — topography, historical water frequency, and permeability — combining spatial queries, Python rules, and explanations with LangChain/OpenAI. The project won the OpenAI Hackathon. Its classifications do not replace a technical assessment of the area.",
-    demoNotice:
-      "OrbTalus is an interactive demonstration with synthetic data and local processing. It illustrates the solution's workflow; it does not run the original product's geospatial analysis or AI.",
   },
   "seven-tools": {
     eyebrow: "FULL STACK / BUSINESS TOOLS",
@@ -59,8 +57,6 @@ export const englishProjectContent: Record<Project["id"], ProjectContent> = {
       label: "session API calls",
       context: "User and company loaded at authenticated session startup.",
     },
-    demoNotice:
-      "This demonstration uses sample scenarios and data, separate from the original product's accounts and data.",
   },
   playsenac: {
     eyebrow: "WEB PRODUCT / SCHEDULING",
@@ -79,8 +75,6 @@ export const englishProjectContent: Record<Project["id"], ProjectContent> = {
     ],
     outcome:
       "I integrated booking management operations into the Angular frontend, connecting the API to validated forms and reactive list updates. The team's system brings together bookings, court administration, and blocked time slots.",
-    demoNotice:
-      "A demonstration with synthetic courts and bookings for exploring the scheduling rules. Operations run locally and do not create real reservations.",
   },
   mesa: {
     eyebrow: "FRONTEND / SALES EXPERIENCE",
