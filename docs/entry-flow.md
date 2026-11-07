@@ -22,7 +22,7 @@ A animação permanece pausada até a área azul entrar na tela, para não ser c
 
 ## Ciclo de vida
 
-`useHeroEntry` só habilita movimento na raiz `/`, sem hash, fora de navegação `back_forward`, e com preferência de movimento normal. Nenhum efeito aguarda recursos de rede.
+`useHeroEntry` habilita movimento nas entradas `/`, `/en`, `/en/` e `/en/index.html`, sem hash, fora de navegação `back_forward`, e com preferência de movimento normal. As duas versões de idioma usam a mesma transição. Nenhum efeito aguarda recursos de rede.
 
 Mudança para movimento reduzido, navegação por hash, histórico e `pagehide` finalizam os efeitos. `pageshow` persistido mantém a composição final, para que retorno pelo cache de navegação não reproduza a entrada. A regra CSS de movimento reduzido também garante o estado final imediatamente, sem depender da entrega do evento React.
 

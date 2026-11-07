@@ -8,7 +8,7 @@ function canAnimateEntry() {
     | undefined;
 
   return (
-    window.location.pathname === "/" &&
+    ["/", "/en", "/en/", "/en/index.html"].includes(window.location.pathname) &&
     !window.location.hash &&
     navigation?.type !== "back_forward" &&
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches
