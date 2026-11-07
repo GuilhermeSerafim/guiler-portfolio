@@ -96,6 +96,8 @@ export const projects: Project[] = [
       context: "Usuário e empresa no início da sessão autenticada.",
     },
     demo: "https://seven-tools.vercel.app/",
+    frontendGithub: "https://github.com/GuilhermeSerafim/seven-tools-frontend",
+    github: "https://github.com/GuilhermeSerafim/seven-tools-api",
   },
   {
     id: "playsenac",
@@ -149,6 +151,7 @@ export const projects: Project[] = [
       context: "540,93 → 257,50 kB entre dois builds de 15/05/2026.",
     },
     demo: "https://dennisnakamura.com/mesa-de-negocios",
+    github: "https://github.com/GuilhermeSerafim/mesa-de-negocios",
   },
 ];
 
