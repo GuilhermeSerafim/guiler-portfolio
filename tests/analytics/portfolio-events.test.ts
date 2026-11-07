@@ -24,8 +24,8 @@ beforeEach(() => {
 afterEach(()=>vi.unstubAllGlobals());
 
 describe("portfolio action controls", () => {
-  it("opens the GeoRisk award case with one dedicated event", () => {
-    const award = elements(App({})).find(n => n.props["aria-label"] === "Conhecer o GeoRisk, vencedor do Hackathon OpenAI");
+  it("opens the OrbTalus award case with one dedicated event", () => {
+    const award = elements(App({})).find(n => n.props["aria-label"] === "Conhecer o OrbTalus, vencedor do Hackathon OpenAI");
     expect(award).toBeDefined();
     expect(award!.type).toBe("button");
     award!.props.onClick();
@@ -50,7 +50,7 @@ describe("portfolio action controls", () => {
       const nodes=elements(ProjectDialog({project,onClose:()=>{}}));
       recorded.mockClear(); nodes.find(n=>n.type==="a" && n.props.href===project.demo)!.props.onClick();
       expect(recorded.mock.calls).toEqual([[{name:"project_visit",params:{project_id:project.id,ui_location:"project_dialog"}}]]);
-      if(project.github) { recorded.mockClear(); nodes.find(n=>n.props.href===project.github)!.props.onClick(); expect(recorded.mock.calls).toEqual([[{name:"link_click",params:{link_id:"project_code",destination_id:"project_repository",project_id:"playsenac",ui_location:"project_dialog"}}]]); }
+      if(project.github) { recorded.mockClear(); nodes.find(n=>n.props.href===project.github)!.props.onClick(); expect(recorded.mock.calls).toEqual([[{name:"link_click",params:{link_id:"project_code",destination_id:"project_repository",project_id:project.id,ui_location:"project_dialog"}}]]); }
     }
   });
   it("measures both resume CTAs and leaves the header anchor alone", () => {

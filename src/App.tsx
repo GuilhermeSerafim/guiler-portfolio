@@ -348,7 +348,7 @@ function App({ globeSwarm = true }: { globeSwarm?: boolean }) {
                     <button
                       type="button"
                       className="hero-award-link"
-                      aria-label={t("Conhecer o GeoRisk, vencedor do Hackathon OpenAI", "Explore GeoRisk, winner of the OpenAI Hackathon")}
+                      aria-label={t("Conhecer o OrbTalus, vencedor do Hackathon OpenAI", "Explore OrbTalus, winner of the OpenAI Hackathon")}
                       onClick={() => openProject(hackathonProject, "hero_award")}
                     >
                       <span>{t("Ideias testadas. Trabalho reconhecido.", "Ideas tested. Work recognized.")}</span>

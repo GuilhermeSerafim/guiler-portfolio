@@ -11,7 +11,7 @@ type ProjectVisualProps = {
 const contour =
   "M-155 340C-147 203-43 179 30 205S132 289 198 253 219 114 159 58 169-63 284-70";
 
-function GeoRiskVisual() {
+function OrbTalusVisual() {
   const { t } = useTranslation();
   const id = useId().replace(/:/g, "");
 
@@ -197,7 +197,7 @@ function GeoRiskVisual() {
           />
         </svg>
         <span>
-          GeoRisk<span className="pv-brand-dot">.</span>
+          OrbTalus<span className="pv-brand-dot">.</span>
         </span>
       </div>
 
@@ -565,5 +565,5 @@ export function ProjectVisual({ project }: ProjectVisualProps) {
       </div>
     );
   }
-  return project.id === "georisk" ? <GeoRiskVisual /> : <PlaySenacVisual />;
+  return project.id === "georisk" ? <OrbTalusVisual /> : <PlaySenacVisual />;
 }

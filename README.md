@@ -60,7 +60,7 @@ O comando Vitest é derivado da configuração/dependência existente; não é u
 - `src/App.tsx`: seções, navegação, filtros e contato.
 - `src/styles.css`: identidade visual e layouts responsivos.
 - `src/components/Interactions.tsx`: retrato Tilted Card e CTA Magnetic adaptados do React Bits; Reveal próprio.
-- `src/components/ProjectVisual.tsx`: ilustrações vetoriais de GeoRisk, Play Senac e Mesa de Negócios, identificadas como visuais conceituais.
+- `src/components/ProjectVisual.tsx`: ilustrações vetoriais de OrbTalus, Play Senac e Mesa de Negócios, identificadas como visuais conceituais.
 - `src/components/SevenToolsVisual.tsx`: capa conceitual do SEVEN Tools, com as ferramentas de propostas, diagnóstico comercial e qualificação de leads conectadas ao hub.
 - `src/components/ProjectDialog.tsx`: detalhes em diálogo nativo, com cabeçalho fixo durante a rolagem, navegação por teclado e leitura em tela cheia no celular.
 - `public/images/`: fotos fornecidas e captura da landing page publicada, otimizadas para WebP.
