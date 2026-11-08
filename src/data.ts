@@ -55,7 +55,8 @@ export const projects: Project[] = [
     outcome:
       "Estruturei a análise em três componentes rastreáveis — topografia, frequência histórica de água e permeabilidade —, combinando consultas espaciais, regras em Python e explicações com LangChain/OpenAI. Projeto vencedor do Hackathon OpenAI. As classificações não substituem uma avaliação técnica do território.",
     demo: "https://geo-risk-front.vercel.app/",
-    github: "https://github.com/GuilhermeSerafim/orbtalus",
+    frontendGithub: "https://github.com/GuilhermeSerafim/orbtalus",
+    github: "https://github.com/GuilhermeSerafim/orbtalus-api/",
   },
   {
     id: "seven-tools",
