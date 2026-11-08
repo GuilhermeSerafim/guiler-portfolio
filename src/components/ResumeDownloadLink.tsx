@@ -9,7 +9,7 @@ export function ResumeDownloadLink({ location }: { location: "hero" | "contact" 
   const [requested, setRequested] = useState(false);
   const [pulse, setPulse] = useState(0);
   const resetTimer = useRef<ReturnType<typeof setTimeout>>();
-  const label = location === "hero" ? t("Baixar currículo", "Résumé (PT)") : t("Currículo", "Résumé (PT)");
+  const label = location === "hero" ? t("Baixar currículo", "Download résumé") : t("Currículo", "Résumé");
 
   useEffect(() => () => clearTimeout(resetTimer.current), []);
 
@@ -32,11 +32,11 @@ export function ResumeDownloadLink({ location }: { location: "hero" | "contact" 
   return <>
     <a
       className={`resume-download${location === "hero" ? " resume-link" : ""}`}
-      href="/GuilhermeSerafim_Fullstack.pdf"
-      download="Guilherme_Serafim_Fullstack.pdf"
-      aria-label={requested ? t("Download solicitado. Baixar currículo novamente", "Download requested. Download Portuguese résumé again") : t("Baixar currículo", "Download résumé in Portuguese (PDF)")}
-      title={isEnglish ? "PDF in Portuguese" : undefined}
-      hrefLang="pt-BR"
+      href={isEnglish ? "/GuilhermeSerafim_Fullstack_EN.pdf" : "/GuilhermeSerafim_Fullstack.pdf"}
+      download={isEnglish ? "Guilherme_Serafim_Fullstack_EN.pdf" : "Guilherme_Serafim_Fullstack.pdf"}
+      aria-label={requested ? t("Download solicitado. Baixar currículo novamente", "Download requested. Download résumé again") : t("Baixar currículo", "Download résumé (PDF)")}
+      title={isEnglish ? "PDF in English" : undefined}
+      hrefLang={isEnglish ? "en" : "pt-BR"}
       data-feedback-state={requested ? "requested" : "idle"}
       data-resume-location={location}
       onClick={handleClick}
@@ -48,6 +48,6 @@ export function ResumeDownloadLink({ location }: { location: "hero" | "contact" 
       </span>
       {location === "hero" ? icon : <ArrowDown size={16} aria-hidden="true" />}
     </a>
-    <span className="resume-feedback-sr" role="status" aria-atomic="true">{requested ? t("Download do currículo solicitado.", "Résumé download requested. The PDF is in Portuguese.") : ""}</span>
+    <span className="resume-feedback-sr" role="status" aria-atomic="true">{requested ? t("Download do currículo solicitado.", "Résumé download requested.") : ""}</span>
   </>;
 }

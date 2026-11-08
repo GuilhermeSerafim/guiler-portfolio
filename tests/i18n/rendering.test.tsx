@@ -22,11 +22,15 @@ describe("bilingual content integration", () => {
     expect(getExperience("en").map(item => [item.company, item.number, item.stack])).toEqual(experience.map(item => [item.company, item.number, item.stack]));
   });
 
-  it("renders privacy and résumé in English without mislabelling the Portuguese PDF", () => {
-    const html = renderToStaticMarkup(<LocaleProvider locale="en"><PrivacyNotice /><ResumeDownloadLink location="hero" /></LocaleProvider>);
+  it("offers the English résumé from both English download controls", () => {
+    const html = renderToStaticMarkup(<LocaleProvider locale="en"><PrivacyNotice /><ResumeDownloadLink location="hero" /><ResumeDownloadLink location="contact" /></LocaleProvider>);
     expect(html).toContain("this measurement is not anonymous");
-    expect(html).toContain("Download résumé in Portuguese (PDF)");
-    expect(html).toContain('href="/GuilhermeSerafim_Fullstack.pdf"');
+    expect(html).toContain("Download résumé (PDF)");
+    expect(html.match(/href="\/GuilhermeSerafim_Fullstack_EN\.pdf"/g)).toHaveLength(2);
+    expect(html.match(/hrefLang="en"/g)).toHaveLength(2);
+    expect(html).toContain('download="Guilherme_Serafim_Fullstack_EN.pdf"');
+    expect(html).not.toContain("Portuguese");
+    expect(html).not.toContain("Résumé (PT)");
     expect(html).not.toContain("Baixar currículo");
   });
 
@@ -37,7 +41,10 @@ describe("bilingual content integration", () => {
     expect(html).toContain('href="/en/?utm_source=linkedin#projetos"');
     expect(html).toContain('lang="en" aria-label="EN — English" aria-current="page"');
     expect(html).toContain('aria-label="PT — Português"');
-    const portuguese = renderToStaticMarkup(<LocaleProvider locale="pt-BR"><ResumeDownloadLink location="hero" /></LocaleProvider>);
+    const portuguese = renderToStaticMarkup(<LocaleProvider locale="pt-BR"><ResumeDownloadLink location="hero" /><ResumeDownloadLink location="contact" /></LocaleProvider>);
     expect(portuguese).toContain("Baixar currículo");
+    expect(portuguese.match(/href="\/GuilhermeSerafim_Fullstack\.pdf"/g)).toHaveLength(2);
+    expect(portuguese.match(/hrefLang="pt-BR"/g)).toHaveLength(2);
+    expect(portuguese).not.toContain("Fullstack_EN.pdf");
   });
 });
