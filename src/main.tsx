@@ -15,6 +15,10 @@ initializeAnalytics(publicConfig);
 const locale = getLocaleFromPath(window.location.pathname);
 document.documentElement.lang = locale;
 
+const PalettePreview = import.meta.env.DEV && /^\/__preview\/palette\/?$/.test(window.location.pathname)
+  ? React.lazy(() => import("./preview/PalettePreview"))
+  : null;
+
 // Local design comparison only; excluded from production by Vite.
 const CursorPreview = import.meta.env.DEV && /^\/__preview\/cursor\/[abc]\/?$/.test(window.location.pathname)
   ? React.lazy(() => import("./preview/CursorPreview"))
@@ -44,7 +48,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <LocaleProvider locale={locale}>
     <MotionConfig reducedMotion="user">
-      {SwarmPreview ? (
+      {PalettePreview ? (
+        <React.Suspense fallback={null}><PalettePreview /></React.Suspense>
+      ) : SwarmPreview ? (
         <React.Suspense fallback={null}>
           <SwarmPreview />
         </React.Suspense>
